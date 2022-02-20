@@ -2,30 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class GridGenerator : MonoBehaviour
 {
-    [SerializeField] GridTiles[,] gridTiles;
-    [SerializeField] int raws, columns;
+    public GridTiles[,] grid;
+    public int raws, columns;
     
-    void Start()
+    void Awake()
     {
 
         GridTiles[] list = FindObjectsOfType<GridTiles>();
-        gridTiles = new GridTiles[raws, columns];
+        grid = new GridTiles[raws, columns];
         for (int i = 0; i < list.Length; i++)
         {
             int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
             int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
-            gridTiles[x, y] = list[i];
-            gridTiles[x, y].name = "tiles " + x + " "+ y;
+            grid[x, y] = list[i];
+            grid[x, y].name = "tiles " + x + " "+ y;
         }
         
-    }
-
-
-    void Update()
-    {
-
     }
 }
 
