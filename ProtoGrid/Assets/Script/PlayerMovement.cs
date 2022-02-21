@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
             if (distance > 0f)
             {
-                Vector3 moveDir = (highlightedTiles[currentPathIndex].transform.position - player.position).normalized;
+                Vector3 moveDir = (new Vector3(highlightedTiles[currentPathIndex].transform.position.x, 1.5f + highlightedTiles[currentPathIndex].transform.position.y, highlightedTiles[currentPathIndex].transform.position.z) - player.position).normalized;
                 player.position = player.position + moveDir * moveSpeed * Time.deltaTime;
                 
                 if (distance < 0.1f)
