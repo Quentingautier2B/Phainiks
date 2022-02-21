@@ -7,14 +7,7 @@ public class Player : MonoBehaviour
     [TextArea]
     [SerializeField] string Notes = "Comment Here.";
 
-    void Start()
-    {
-        
-    }
+    public List<string> Inventory;
 
-   
-    void Update()
-    {
-        
-    }
+
 }

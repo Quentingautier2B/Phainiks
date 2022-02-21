@@ -11,15 +11,18 @@ public class StepAssignement : MonoBehaviour
     GridTiles[,] grid;
     [SerializeField] GridGenerator gridGenerator;
     [SerializeField] Transform player;
+    Player playerS;
     #endregion
 
     private void Awake()
     {
         gridGenerator = GetComponent<GridGenerator>();
-        player = FindObjectOfType<Player>().transform;        
+        player = FindObjectOfType<Player>().transform;
+        playerS = player.GetComponent<Player>();
         grid = gridGenerator.grid;
         row = gridGenerator.raws;
         columns = gridGenerator.columns;
+
     }
     
     public void Initialisation()
@@ -81,6 +84,24 @@ public class StepAssignement : MonoBehaviour
                 }
                 else
                 {
+                    if (y + 1 < row)
+                    {
+
+                    if(grid[x, y + 1].door)
+                    {
+                        foreach(string obj in playerS.Inventory)
+                        {
+                            if (obj == "key" + grid[x, y + 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                            {
+                                grid[   x, y + 1].door = false;
+                                grid[x, y + 1].walkable = true;
+                                return true;
+                            }
+                        }
+                        
+                    }
+                    }
+                        
                     return false;
                 }     
             case 2:
@@ -90,6 +111,23 @@ public class StepAssignement : MonoBehaviour
                 }
                 else
                 {
+                    if(x + 1 < columns)
+                    {
+                        if (grid[x + 1, y].door)
+                        {
+                            foreach (string obj in playerS.Inventory)
+                            {
+                                if (obj == "key" + grid[x + 1, y].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                                {
+                                    grid[x + 1, y].door = false;
+                                    grid[x + 1, y].walkable = true;
+                                    return true;
+                                }
+                            }
+
+                        }
+                    }
+                
                     return false;
                 }     
             case 3:
@@ -99,6 +137,23 @@ public class StepAssignement : MonoBehaviour
                 }
                 else
                 {
+                    if (y - 1 > -1)
+                    {
+
+                    if (grid[x, y - 1].door)
+                    {
+                        foreach (string obj in playerS.Inventory)
+                        {
+                            if (obj == "key" + grid[x, y - 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                            {
+                                grid[x, y - 1].door = false;
+                                grid[x, y - 1].walkable = true;
+                                return true;
+                            }
+                        }
+
+                    }
+                    }
                     return false;
                 }     
             case 4:
@@ -108,6 +163,23 @@ public class StepAssignement : MonoBehaviour
                 }
                 else
                 {
+                    if (x - 1 > -1)
+                    {
+
+                    if (grid[x-1, y].door)
+                    {
+                        foreach (string obj in playerS.Inventory)
+                        {
+                            if (obj == "key" + grid[x-1, y].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                            {
+                                grid[x-1, y].door = false;
+                                grid[x-1, y].walkable = true;
+                                return true;
+                            }
+                        }
+
+                    }
+                    }
                     return false;
                 }
         }

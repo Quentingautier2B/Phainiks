@@ -9,6 +9,7 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] bool camMode;
     Transform playerPos;
     [SerializeField] float camMoveSpeed;
+    [SerializeField] float camZoomSpeed;
     Rigidbody rb;
     #endregion
 
@@ -33,6 +34,8 @@ public class CameraBehavior : MonoBehaviour
                 camMode = true;
         }
             
+        
+
         if (camMode)
         {
             LockedCamMode();
@@ -41,6 +44,8 @@ public class CameraBehavior : MonoBehaviour
         {
             FreeHandleCamMode();
         }
+
+        ZoomCam();
     }
 
     void LockedCamMode()
@@ -58,5 +63,10 @@ public class CameraBehavior : MonoBehaviour
 
         if (Input.GetAxisRaw("Vertical") != 0)
             transform.Translate(VcamMove);
+    }
+
+    void ZoomCam()
+    {
+        camBehavior.orthographicSize = Mathf.Lerp(camBehavior.orthographicSize,(Mathf.Clamp(camBehavior.orthographicSize - Mathf.Clamp(Input.mouseScrollDelta.y, -1, 1), 1f, 10)),Mathf.Clamp(camZoomSpeed/10,0,1));
     }
 }

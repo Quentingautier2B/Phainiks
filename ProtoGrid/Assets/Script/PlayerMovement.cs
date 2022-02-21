@@ -88,10 +88,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+
+        if (highlightedTiles[0].transform.Find("Door"))
+        {
+            Destroy(highlightedTiles[0].transform.Find("Door").gameObject);
+        }
         player.gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(highlightedTiles[0].transform.position.x, 1.5f + highlightedTiles[0].transform.position.y , highlightedTiles[0].transform.position.z));
         if (player.position.x == highlightedTiles[0].transform.position.x && player.position.z == highlightedTiles[0].transform.position.z)
         {
             highlightedTiles[0].highLight = false;
+            if (highlightedTiles[0].key)
+            {
+                KeyBehavior();
+                
+            }
             highlightedTiles.RemoveAt(0);
             reset.resetTimer -= 1;
         }
@@ -101,5 +111,12 @@ public class PlayerMovement : MonoBehaviour
             moveState = false;
             stepAssignement.Initialisation();
         }
+    }
+
+    void KeyBehavior()
+    {
+        highlightedTiles[0].key = false;
+        highlightedTiles[0].transform.Find("Key").gameObject.SetActive(false);
+        player.GetComponent<Player>().Inventory.Add("key" + highlightedTiles[0].transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }
 }

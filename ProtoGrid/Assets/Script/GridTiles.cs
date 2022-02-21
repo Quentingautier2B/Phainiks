@@ -15,14 +15,19 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     public bool highLight;
     public bool originalPosition;
+    public bool levelEnd;
+    bool endLevel;
+    public bool key; 
+    public bool door;
     public int height;
+    [SerializeField] bool errorPause;
 
     [Space]
-    [Header("Accessible Values")]
+    [Header("Components")]
     GameObject gameManager;
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
-    PlayerMovement playerMovement;
+    PlayerMovement playerMovement;  
     #endregion
 
     private void Awake()
@@ -31,7 +36,27 @@ public class GridTiles : MonoBehaviour
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();
         pathHighlighter = gameManager.GetComponent<PathHighlighter>();
-        playerMovement = gameManager.GetComponent<PlayerMovement>();       
+        playerMovement = gameManager.GetComponent<PlayerMovement>();
+
+        if (key)
+        {
+            if (!transform.Find("Key"))
+            {
+                print("Key Bloc with no Key" + this.name);  
+                Time.timeScale = 0;
+                errorPause = true;
+            }
+        }
+        if(door)
+        {
+            if (!transform.Find("Door"))
+            {
+                print("Door Bloc with no Door" + this.name);
+                Time.timeScale = 0;
+                errorPause = true;
+            }
+        }
+
     }
 
     void Start()
@@ -51,6 +76,7 @@ public class GridTiles : MonoBehaviour
             Highlight();
         if (!highLight)
             UnHighlight();
+
     }
 
     private void OnMouseOver()
@@ -79,11 +105,11 @@ public class GridTiles : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!walkable)
+        if (!walkable&&!door)
         {
             GetComponent<MeshRenderer>().enabled = false;
         }
-        if (walkable)
+        if (walkable || door)
         {
             GetComponent<MeshRenderer>().enabled = true;
         }
