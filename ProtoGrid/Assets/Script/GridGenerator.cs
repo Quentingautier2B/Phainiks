@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class GridGenerator : MonoBehaviour
 {
+    [TextArea]
+    [SerializeField] string Notes = "Comment Here.";
+    #region variables
     public GridTiles[,] grid;
-    public int raws, columns;
     
+    [Header("Input Values")]
+    
+    public int raws;
+    public int columns;
+
+    #endregion
     void Awake()
     {
 

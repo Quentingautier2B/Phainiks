@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class StepAssignement : MonoBehaviour
 {
+    [TextArea]
+    [SerializeField] string Notes = "Comment Here.";
+    #region variables
     int startPosX, startPosY, row, columns;
     GridTiles[,] grid;
     [SerializeField] GridGenerator gridGenerator;
     [SerializeField] Transform player;
+    #endregion
+
     private void Awake()
     {
         gridGenerator = GetComponent<GridGenerator>();
@@ -17,7 +22,6 @@ public class StepAssignement : MonoBehaviour
         columns = gridGenerator.columns;
     }
     
-
     public void Initialisation()
     {
         startPosX = (int)player.position.x;

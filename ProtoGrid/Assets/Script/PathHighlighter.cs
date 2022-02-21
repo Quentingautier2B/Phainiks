@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PathHighlighter : MonoBehaviour
 {
+    [TextArea]
+    [SerializeField] string Notes = "Comment Here.";
+    #region variables
     GridGenerator gridGenerator;
     GridTiles[,] grid;
     StepAssignement stepAssignement;
-
+    #endregion
 
     private void Awake()
     {
@@ -15,8 +18,6 @@ public class PathHighlighter : MonoBehaviour
         grid = gridGenerator.grid;
         stepAssignement = GetComponent<StepAssignement>();      
     }
-
-
 
     public void PathAssignment(int x, int y,int step)
     {
