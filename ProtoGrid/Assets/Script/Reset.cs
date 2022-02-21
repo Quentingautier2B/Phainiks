@@ -10,6 +10,7 @@ public class Reset : MonoBehaviour
     Transform player;
     PlayerMovement pMovement;
     StepAssignement sAssignement;
+    GridGenerator gridGenerator;
 
     [Header("Input Values")]
     [Space]
@@ -19,6 +20,7 @@ public class Reset : MonoBehaviour
 
     private void Awake()
     {
+        gridGenerator = FindObjectOfType<GridGenerator>();
         player = FindObjectOfType<Player>().transform;
         sAssignement = FindObjectOfType<StepAssignement>();
         pMovement = FindObjectOfType<PlayerMovement>();
@@ -38,7 +40,7 @@ public class Reset : MonoBehaviour
 
     void ResetEffect()
     {
-        
+        ResObjects();
         ResPlayerPos();
         ResHighLight();
         sAssignement.Initialisation();
@@ -60,5 +62,18 @@ public class Reset : MonoBehaviour
         pMovement.moveState = false;
         pMovement.currentPathIndex = 0;
         player.position = pMovement.ogPos;
+    }
+
+    void ResObjects()
+    {
+        foreach(GridTiles obj in gridGenerator.grid)
+        {
+            Transform objT = obj.transform;
+            if (objT.Find("Timer+"))
+            {
+                obj.timerChangeValue = obj.timerChangeInputValue;
+                objT.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystem>().Play();
+            }
+        }
     }
 }
