@@ -96,14 +96,7 @@ public class PlayerMovement : MonoBehaviour
         player.gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(highlightedTiles[0].transform.position.x, 1.5f + highlightedTiles[0].transform.position.y , highlightedTiles[0].transform.position.z));
         if (player.position.x == highlightedTiles[0].transform.position.x && player.position.z == highlightedTiles[0].transform.position.z)
         {
-            highlightedTiles[0].highLight = false;
-            if (highlightedTiles[0].key)
-            {
-                KeyBehavior();
-                
-            }
-            highlightedTiles.RemoveAt(0);
-            reset.resetTimer -= 1;
+            TileEffectOnMove();
         }
 
         if (highlightedTiles.Count == 0)
@@ -113,10 +106,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void TileEffectOnMove()
+    {
+        highlightedTiles[0].highLight = false;
+        if (highlightedTiles[0].key)       
+            KeyBehavior();
+      
+        if (highlightedTiles[0].levelEnd)        
+            EndBehavior();
+        
+        highlightedTiles.RemoveAt(0);
+        reset.resetTimer -= 1;
+    }
+
     void KeyBehavior()
     {
         highlightedTiles[0].key = false;
         highlightedTiles[0].transform.Find("Key").gameObject.SetActive(false);
         player.GetComponent<Player>().Inventory.Add("key" + highlightedTiles[0].transform.Find("Key").GetComponent<KeyScript>().keyIndex);
+    }
+
+    void EndBehavior()
+    {
+        print("end level");
     }
 }
