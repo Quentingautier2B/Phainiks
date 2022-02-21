@@ -58,8 +58,7 @@ public class Reset : MonoBehaviour
     void ResPlayerPos()
     {
         pMovement.moveState = false;
-        player.gameObject.GetComponent<NavMeshAgent>().SetDestination(pMovement.ogPos);
-
+        pMovement.currentPathIndex = 0;
         player.position = pMovement.ogPos;
     }
 }

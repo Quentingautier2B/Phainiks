@@ -2825,8 +2825,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Notes: Makes the player move on the highlighted tiles.
-  moveSpeed: 1
+  moveSpeed: 5
   ogPos: {x: 0, y: 0, z: 0}
+  currentPathIndex: 0
   stepAssignement: {fileID: 0}
   moveFlag: 0
   moveState: 0
@@ -3855,7 +3856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalPosition.z

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Input Values")]
     [SerializeField] float moveSpeed;
     public Vector3 ogPos;
+    public int currentPathIndex = 0;
 
     [Space]
     [Header("Components")]
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FindHighlighted()
     {
-       
+        //highlightedTiles = new List<GridTiles>();
         foreach(GridTiles obj in grid)
         {
 
@@ -88,18 +89,47 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        player.gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(highlightedTiles[0].transform.position.x, 1.5f + highlightedTiles[0].transform.position.y , highlightedTiles[0].transform.position.z));
-        if (player.position.x == highlightedTiles[0].transform.position.x && player.position.z == highlightedTiles[0].transform.position.z)
+         
+        //player.position = Vector3.LerpUnclamped(player.transform.position, new Vector3(highlightedTiles[0].transform.position.x , 1.5f + highlightedTiles[0].transform.position.y, highlightedTiles[0].transform.position.z), 1f);
+        if (highlightedTiles != null)
+        {
+            float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
+            if (distance > 0f)
+            {
+                Vector3 moveDir = (highlightedTiles[currentPathIndex].transform.position - player.position).normalized;
+                player.position = player.position + moveDir * moveSpeed * Time.deltaTime;
+                
+                if (distance < 0.1f)
+                {
+                    player.position = new Vector3(highlightedTiles[currentPathIndex].transform.position.x, 1.5f + highlightedTiles[currentPathIndex].transform.position.y, highlightedTiles[currentPathIndex].transform.position.z);
+                }
+            }
+            else
+            {
+                highlightedTiles[currentPathIndex].highLight = false;
+                currentPathIndex++;
+                if (currentPathIndex >= highlightedTiles.Count)
+                {
+                    highlightedTiles.Clear();
+                    currentPathIndex = 0;
+                }
+                reset.resetTimer -= 1;
+            }
+
+        }
+        /*if (player.position.x == highlightedTiles[0].transform.position.x && player.position.z == highlightedTiles[0].transform.position.z)
         {
             highlightedTiles[0].highLight = false;
             highlightedTiles.RemoveAt(0);
             reset.resetTimer -= 1;
-        }
+        }*/
 
-        if (highlightedTiles.Count == 0)
+        if (highlightedTiles.Count <= 0)
         {
             moveState = false;
             stepAssignement.Initialisation();
         }
     }
+
+    
 }
