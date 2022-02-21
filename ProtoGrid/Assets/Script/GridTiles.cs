@@ -15,11 +15,10 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     public bool highLight;
     public bool originalPosition;
-    public bool levelEnd;
-    bool endLevel;
     public bool key; 
     public bool door;
     public bool crumble;
+    public int levelTransiIndex;
     public int timerChangeInputValue;
     [HideInInspector] public int timerChangeValue;
     public int height;
@@ -27,12 +26,15 @@ public class GridTiles : MonoBehaviour
 
     [Space]
     [Header("Components")]
+    
+    public GameObject originalPositionItem;
     GameObject gameManager;
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
     PlayerMovement playerMovement;
     public Material crumbleMat;
     public Material normalMat;
+    public Material disabledMat;
     #endregion
 
     private void Awake()
@@ -130,19 +132,26 @@ public class GridTiles : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!walkable&&!door)        
-            GetComponent<MeshRenderer>().enabled = false;
-        
-        if (walkable || door)       
-            GetComponent<MeshRenderer>().enabled = true;
+        if (!walkable && !door)
+        {
+            GetComponent<Renderer>().material = disabledMat;
+        }
+
+        if(walkable && !crumble)
+        {
+            GetComponent<Renderer>().material = normalMat;
+        }
         
 
         if (crumble)
+        {
             GetComponent<Renderer>().material = crumbleMat;
+        }
 
-        if (!crumble)
-            GetComponent<Renderer>().material = normalMat;
+   
 
+        CreateDestroyOgPosGizmo();
+        
 
         Vector3 snapToGrid = new Vector3(
             Mathf.Floor(transform.position.x),
@@ -150,6 +159,21 @@ public class GridTiles : MonoBehaviour
             Mathf.Floor(transform.position.z)
             );
         transform.position = snapToGrid;
+    }
+
+    void CreateDestroyOgPosGizmo()
+    {
+        if (originalPosition && !transform.Find("OriginalPos"))
+        {
+            var inst = Instantiate(originalPositionItem, new Vector3(transform.position.x, transform.position.y + 0.53f, transform.position.z), Quaternion.identity);
+            inst.transform.parent = this.transform;
+            inst.name = "OriginalPos";
+        }
+        if (!originalPosition && transform.Find("OriginalPos"))
+        {
+            var inst = transform.Find("OriginalPos").gameObject;
+            DestroyImmediate(inst);
+        }
     }
 
     void Highlight()
