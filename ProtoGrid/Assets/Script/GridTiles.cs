@@ -19,7 +19,9 @@ public class GridTiles : MonoBehaviour
     bool endLevel;
     public bool key; 
     public bool door;
-    public int timerPlusValue;
+    public bool crumble;
+    public int timerChangeInputValue;
+    [HideInInspector] public int timerChangeValue;
     public int height;
     [SerializeField] bool errorPause;
 
@@ -28,17 +30,26 @@ public class GridTiles : MonoBehaviour
     GameObject gameManager;
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
-    PlayerMovement playerMovement;  
+    PlayerMovement playerMovement;
+    public Material crumbleMat;
+    public Material normalMat;
     #endregion
 
     private void Awake()
     {
-        if(timerPlusValue < 0)
+        if (crumble)
+            GetComponent<Renderer>().material = crumbleMat;
+
+
+        timerChangeValue = timerChangeInputValue;
+        if(timerChangeValue < 0)
         {
             transform.Find("Timer+").GetComponent<Renderer>().material.color = Color.red;
           
             transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
         }
+
+
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();
@@ -51,6 +62,8 @@ public class GridTiles : MonoBehaviour
             {
                 print("Key Bloc with no Key" + this.name);  
                 Time.timeScale = 0;
+
+                //ErrorPause ne fait rien
                 errorPause = true;
             }
         }
@@ -60,6 +73,8 @@ public class GridTiles : MonoBehaviour
             {
                 print("Door Bloc with no Door" + this.name);
                 Time.timeScale = 0;
+
+                //ErrorPause ne fait rien
                 errorPause = true;
             }
         }
@@ -68,7 +83,7 @@ public class GridTiles : MonoBehaviour
 
     void Start()
     {
-        if (!walkable&&!door)
+        if (!walkable && !door)
         {
             GetComponent<MeshRenderer>().enabled = false;
         }
@@ -109,22 +124,24 @@ public class GridTiles : MonoBehaviour
     {
         if (walkable && step>-1)
         {
-
-        playerMovement.moveFlag = true;
+            playerMovement.moveFlag = true;
         }
     }
 
     private void OnDrawGizmos()
     {
-        if (!walkable&&!door)
-        {
+        if (!walkable&&!door)        
             GetComponent<MeshRenderer>().enabled = false;
-        }
-        if (walkable || door)
-        {
+        
+        if (walkable || door)       
             GetComponent<MeshRenderer>().enabled = true;
-        }
+        
 
+        if (crumble)
+            GetComponent<Renderer>().material = crumbleMat;
+
+        if (!crumble)
+            GetComponent<Renderer>().material = normalMat;
 
 
         Vector3 snapToGrid = new Vector3(

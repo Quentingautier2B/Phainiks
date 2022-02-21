@@ -133,20 +133,23 @@ public class PlayerMovement : MonoBehaviour
     }   
     void TileEffectOnMove()
     {
-       // highlightedTiles[currentPathIndex].highLight = false;
         if (highlightedTiles[currentPathIndex].key)       
             KeyBehavior(highlightedTiles[currentPathIndex]);
       
         if (highlightedTiles[currentPathIndex].levelEnd)        
             EndBehavior(highlightedTiles[currentPathIndex]);
 
-        if (highlightedTiles[currentPathIndex].timerPlusValue > 0)
+        if(currentPathIndex < highlightedTiles.Count - 1)
+        {
+            if (highlightedTiles[currentPathIndex].crumble && highlightedTiles[currentPathIndex].walkable)        
+                CrumbleBehavior(highlightedTiles[currentPathIndex]);
+        }
+
+        if (highlightedTiles[currentPathIndex].timerChangeValue > 0)
             TimerPlusBehavior(highlightedTiles[currentPathIndex]);
 
-        if (highlightedTiles[currentPathIndex].timerPlusValue < 0)
+        if (highlightedTiles[currentPathIndex].timerChangeValue < 0)
             TimerMinusBehavior(highlightedTiles[currentPathIndex]);
-
-        // reset.resetTimer -= 1;
     }
 
     void KeyBehavior(GridTiles tile)
@@ -155,26 +158,31 @@ public class PlayerMovement : MonoBehaviour
         tile.transform.Find("Key").gameObject.SetActive(false);
         player.GetComponent<Player>().Inventory.Add("key" + tile.transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }
-
+        
     void EndBehavior(GridTiles tile)
     {
         print("end level");
+    } 
+    
+    void CrumbleBehavior(GridTiles tile)
+    {  
+        tile.walkable = false;
     }
 
     void TimerPlusBehavior(GridTiles tile)
     {
         tile.transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystem>().Stop();
-        FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "+" + tile.timerPlusValue;
+        FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "+" + tile.timerChangeValue;
         tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
-        reset.resetTimer += tile.timerPlusValue;
-        tile.timerPlusValue = 0;
+        reset.resetTimer += tile.timerChangeValue;
+        tile.timerChangeValue = 0;
     } 
     
     void TimerMinusBehavior(GridTiles tile)
     {
         
-        FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "" + tile.timerPlusValue;
+        FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "" + tile.timerChangeValue;
         tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
-        reset.resetTimer += tile.timerPlusValue;
+        reset.resetTimer += tile.timerChangeValue;
     }
 }
