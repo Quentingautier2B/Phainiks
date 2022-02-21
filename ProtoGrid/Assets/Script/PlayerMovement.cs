@@ -100,8 +100,8 @@ public class PlayerMovement : MonoBehaviour
             float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
             if (distance > 0f)
             {
-                Vector3 moveDir = (highlightedTiles[currentPathIndex].transform.position - player.position).normalized;
-                player.position = player.position + moveDir * moveSpeed * Time.deltaTime;
+                Vector3 moveDir = (new Vector3(highlightedTiles[currentPathIndex].transform.position.x, 1.5f + highlightedTiles[currentPathIndex].transform.position.y, highlightedTiles[currentPathIndex].transform.position.z) - player.position).normalized;
+                player.position += moveDir * moveSpeed * Time.deltaTime;
                 
                 if (distance < 0.1f)
                 {
@@ -111,8 +111,8 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 highlightedTiles[currentPathIndex].highLight = false;
-                currentPathIndex++;
                 TileEffectOnMove();
+                currentPathIndex++;
                 if (currentPathIndex >= highlightedTiles.Count)
                 {
                     highlightedTiles.Clear();
@@ -130,22 +130,22 @@ public class PlayerMovement : MonoBehaviour
     }   
     void TileEffectOnMove()
     {
-        highlightedTiles[currentPathIndex].highLight = false;
+       // highlightedTiles[currentPathIndex].highLight = false;
         if (highlightedTiles[currentPathIndex].key)       
             KeyBehavior();
       
         if (highlightedTiles[currentPathIndex].levelEnd)        
             EndBehavior();
         
-        highlightedTiles.RemoveAt(0);
-        reset.resetTimer -= 1;
+        
+       // reset.resetTimer -= 1;
     }
 
     void KeyBehavior()
     {
         highlightedTiles[currentPathIndex].key = false;
         highlightedTiles[currentPathIndex].transform.Find("Key").gameObject.SetActive(false);
-        player.GetComponent<Player>().Inventory.Add("key" + highlightedTiles[0].transform.Find("Key").GetComponent<KeyScript>().keyIndex);
+        player.GetComponent<Player>().Inventory.Add("key" + highlightedTiles[currentPathIndex].transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }
 
     void EndBehavior()

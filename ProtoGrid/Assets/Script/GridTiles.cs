@@ -61,7 +61,7 @@ public class GridTiles : MonoBehaviour
 
     void Start()
     {
-        if (!walkable)
+        if (!walkable&&!door)
         {
             GetComponent<MeshRenderer>().enabled = false;
         }
