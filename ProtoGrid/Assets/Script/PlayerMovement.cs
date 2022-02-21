@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Input Values")]
     [SerializeField] float moveSpeed;
     public Vector3 ogPos;
+    public int currentPathIndex = 0;
 
     [Space]
     [Header("Components")]
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FindHighlighted()
     {
-       
+        //highlightedTiles = new List<GridTiles>();
         foreach(GridTiles obj in grid)
         {
 
@@ -89,30 +90,51 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
 
-        if (highlightedTiles[0].transform.Find("Door"))
-        {
-            Destroy(highlightedTiles[0].transform.Find("Door").gameObject);
-        }
-        player.gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(highlightedTiles[0].transform.position.x, 1.5f + highlightedTiles[0].transform.position.y , highlightedTiles[0].transform.position.z));
-        if (player.position.x == highlightedTiles[0].transform.position.x && player.position.z == highlightedTiles[0].transform.position.z)
-        {
-            TileEffectOnMove();
-        }
 
-        if (highlightedTiles.Count == 0)
+        if (highlightedTiles[currentPathIndex].transform.Find("Door"))
+        {
+            Destroy(highlightedTiles[currentPathIndex].transform.Find("Door").gameObject);
+        }
+        if (highlightedTiles != null)
+        {
+            float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
+            if (distance > 0f)
+            {
+                Vector3 moveDir = (highlightedTiles[currentPathIndex].transform.position - player.position).normalized;
+                player.position = player.position + moveDir * moveSpeed * Time.deltaTime;
+                
+                if (distance < 0.1f)
+                {
+                    player.position = new Vector3(highlightedTiles[currentPathIndex].transform.position.x, 1.5f + highlightedTiles[currentPathIndex].transform.position.y, highlightedTiles[currentPathIndex].transform.position.z);
+                }
+            }
+            else
+            {
+                highlightedTiles[currentPathIndex].highLight = false;
+                currentPathIndex++;
+                TileEffectOnMove();
+                if (currentPathIndex >= highlightedTiles.Count)
+                {
+                    highlightedTiles.Clear();
+                    currentPathIndex = 0;
+                }
+                reset.resetTimer -= 1;
+            }
+
+        }
+        if (highlightedTiles.Count <= 0)
         {
             moveState = false;
             stepAssignement.Initialisation();
         }
-    }
-
+    }   
     void TileEffectOnMove()
     {
-        highlightedTiles[0].highLight = false;
-        if (highlightedTiles[0].key)       
+        highlightedTiles[currentPathIndex].highLight = false;
+        if (highlightedTiles[currentPathIndex].key)       
             KeyBehavior();
       
-        if (highlightedTiles[0].levelEnd)        
+        if (highlightedTiles[currentPathIndex].levelEnd)        
             EndBehavior();
         
         highlightedTiles.RemoveAt(0);
@@ -121,8 +143,8 @@ public class PlayerMovement : MonoBehaviour
 
     void KeyBehavior()
     {
-        highlightedTiles[0].key = false;
-        highlightedTiles[0].transform.Find("Key").gameObject.SetActive(false);
+        highlightedTiles[currentPathIndex].key = false;
+        highlightedTiles[currentPathIndex].transform.Find("Key").gameObject.SetActive(false);
         player.GetComponent<Player>().Inventory.Add("key" + highlightedTiles[0].transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }
 
