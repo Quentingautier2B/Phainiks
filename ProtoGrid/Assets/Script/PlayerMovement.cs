@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        player.gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(highlightedTiles[0].transform.position.x, player.position.y, highlightedTiles[0].transform.position.z));
+        player.gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(highlightedTiles[0].transform.position.x, 1.5f + highlightedTiles[0].transform.position.y , highlightedTiles[0].transform.position.z));
         if (player.position.x == highlightedTiles[0].transform.position.x && player.position.z == highlightedTiles[0].transform.position.z)
         {
             highlightedTiles[0].highLight = false;

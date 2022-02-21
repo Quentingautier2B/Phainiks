@@ -15,6 +15,7 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     public bool highLight;
     public bool originalPosition;
+    public int height;
 
     [Space]
     [Header("Accessible Values")]
@@ -26,6 +27,7 @@ public class GridTiles : MonoBehaviour
 
     private void Awake()
     {
+        height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();
         pathHighlighter = gameManager.GetComponent<PathHighlighter>();
@@ -42,6 +44,9 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        if (height != (int)transform.position.y)
+            height = (int)transform.position.y;
+
         if (highLight)
             Highlight();
         if (!highLight)
@@ -51,8 +56,8 @@ public class GridTiles : MonoBehaviour
     private void OnMouseOver()
     {
      
-        if(step>-2 && !playerMovement.moveState && step != 0) 
-            pathHighlighter.PathAssignment((int)transform.position.x, (int)transform.position.z, step);
+        if(step>-1 && !playerMovement.moveState && step != 0) 
+            pathHighlighter.PathAssignment((int)transform.position.x, (int)transform.position.z, (int)height, step);
 
     }
 
