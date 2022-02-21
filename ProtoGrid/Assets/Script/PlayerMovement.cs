@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
+using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [TextArea]
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] StepAssignement stepAssignement;
     Reset reset;
     Transform player;
+    
 
     [Space]
     [Header("Booleans")]
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Lists")]
     public List<GridTiles> highlightedTiles;
     GridTiles[,] grid;
+
     
 
 
@@ -132,24 +135,46 @@ public class PlayerMovement : MonoBehaviour
     {
        // highlightedTiles[currentPathIndex].highLight = false;
         if (highlightedTiles[currentPathIndex].key)       
-            KeyBehavior();
+            KeyBehavior(highlightedTiles[currentPathIndex]);
       
         if (highlightedTiles[currentPathIndex].levelEnd)        
-            EndBehavior();
-        
-        
-       // reset.resetTimer -= 1;
+            EndBehavior(highlightedTiles[currentPathIndex]);
+
+        if (highlightedTiles[currentPathIndex].timerPlusValue > 0)
+            TimerPlusBehavior(highlightedTiles[currentPathIndex]);
+
+        if (highlightedTiles[currentPathIndex].timerPlusValue < 0)
+            TimerMinusBehavior(highlightedTiles[currentPathIndex]);
+
+        // reset.resetTimer -= 1;
     }
 
-    void KeyBehavior()
+    void KeyBehavior(GridTiles tile)
     {
-        highlightedTiles[currentPathIndex].key = false;
-        highlightedTiles[currentPathIndex].transform.Find("Key").gameObject.SetActive(false);
-        player.GetComponent<Player>().Inventory.Add("key" + highlightedTiles[currentPathIndex].transform.Find("Key").GetComponent<KeyScript>().keyIndex);
+        tile.key = false;
+        tile.transform.Find("Key").gameObject.SetActive(false);
+        player.GetComponent<Player>().Inventory.Add("key" + tile.transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }
 
-    void EndBehavior()
+    void EndBehavior(GridTiles tile)
     {
         print("end level");
+    }
+
+    void TimerPlusBehavior(GridTiles tile)
+    {
+        tile.transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystem>().Stop();
+        FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "+" + tile.timerPlusValue;
+        tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
+        reset.resetTimer += tile.timerPlusValue;
+        tile.timerPlusValue = 0;
+    } 
+    
+    void TimerMinusBehavior(GridTiles tile)
+    {
+        
+        FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "" + tile.timerPlusValue;
+        tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
+        reset.resetTimer += tile.timerPlusValue;
     }
 }

@@ -29,4 +29,25 @@ public class DoorScript : MonoBehaviour
         }
        
     }
+
+    private void OnDrawGizmos()
+    {
+        if (doorIndex == 1)
+        {
+            mesh = Color.red;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (doorIndex == 2)
+        {
+            mesh = Color.blue;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (doorIndex == 3)
+        {
+            mesh = Color.black;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+    }
 }
