@@ -19,6 +19,7 @@ public class GridTiles : MonoBehaviour
     bool endLevel;
     public bool key; 
     public bool door;
+    public int timerPlusValue;
     public int height;
     [SerializeField] bool errorPause;
 
@@ -32,6 +33,12 @@ public class GridTiles : MonoBehaviour
 
     private void Awake()
     {
+        if(timerPlusValue < 0)
+        {
+            transform.Find("Timer+").GetComponent<Renderer>().material.color = Color.red;
+          
+            transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
+        }
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();
@@ -100,7 +107,11 @@ public class GridTiles : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (walkable && step>-1)
+        {
+
         playerMovement.moveFlag = true;
+        }
     }
 
     private void OnDrawGizmos()
@@ -113,6 +124,15 @@ public class GridTiles : MonoBehaviour
         {
             GetComponent<MeshRenderer>().enabled = true;
         }
+
+
+
+        Vector3 snapToGrid = new Vector3(
+            Mathf.Floor(transform.position.x),
+            Mathf.Floor(transform.position.y),
+            Mathf.Floor(transform.position.z)
+            );
+        transform.position = snapToGrid;
     }
 
     void Highlight()

@@ -27,4 +27,25 @@ public class KeyScript : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        if (keyIndex == 1)
+        {
+            mesh = Color.red;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (keyIndex == 2)
+        {
+            mesh = Color.blue;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (keyIndex == 3)
+        {
+            mesh = Color.black;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+    }
+
 }
