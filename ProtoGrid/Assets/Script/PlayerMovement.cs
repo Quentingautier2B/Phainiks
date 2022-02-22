@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Input Values")]
     [SerializeField] float moveSpeed;
-    public Vector3 ogPos;
+    [HideInInspector] public Vector3 ogPos;
     public int currentPathIndex = 0;
 
     [Space]
@@ -33,11 +33,9 @@ public class PlayerMovement : MonoBehaviour
     public List<GridTiles> highlightedTiles;
     GridTiles[,] grid;
 
-    
-
-
     #endregion
 
+    #region callMethods
     private void Awake()
     {
         reset = GetComponent<Reset>();
@@ -71,7 +69,9 @@ public class PlayerMovement : MonoBehaviour
             Move();
         }
     }
+    #endregion
 
+    #region moveMethods
     void FindHighlighted()
     {
         //highlightedTiles = new List<GridTiles>();
@@ -157,7 +157,9 @@ public class PlayerMovement : MonoBehaviour
         if (highlightedTiles[currentPathIndex].timerChangeValue < 0)
             TimerMinusBehavior(highlightedTiles[currentPathIndex]);
     }
+    #endregion
 
+    #region TileBehavior
     void KeyBehavior(GridTiles tile)
     {
         tile.key = false;
@@ -205,4 +207,5 @@ public class PlayerMovement : MonoBehaviour
         tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
         reset.resetTimer += tile.timerChangeValue;
     }
+    #endregion
 }
