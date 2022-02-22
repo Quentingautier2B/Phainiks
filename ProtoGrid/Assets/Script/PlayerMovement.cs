@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [TextArea]
     [SerializeField] string Notes = "Comment Here.";
+
     #region variables
 
     [Header("Input Values")]
@@ -132,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
             stepAssignement.Initialisation();
         }
     }   
+
     void TileEffectOnMove()
     {
         if (highlightedTiles[currentPathIndex].key)       

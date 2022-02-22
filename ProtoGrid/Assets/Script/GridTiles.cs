@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 public class GridTiles : MonoBehaviour
 {
@@ -94,6 +94,8 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        var text = step.ToString();
+        transform.Find("Step").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = text;
         if (height != (int)transform.position.y)
             height = (int)transform.position.y;
 

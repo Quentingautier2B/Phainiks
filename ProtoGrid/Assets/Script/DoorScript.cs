@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    #region variable
     public int doorIndex;
     Color mesh;
+    #endregion
 
     private void Awake()
     {
