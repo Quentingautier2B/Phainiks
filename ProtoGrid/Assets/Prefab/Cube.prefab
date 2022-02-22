@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 963485817208866335}
   - component: {fileID: 963485817208866332}
   - component: {fileID: 963485817208866328}
+  - component: {fileID: 735905787984830351}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -110,7 +111,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3f6529455fc3749a57282acacd3f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: Class that contains Tile properties.
+  Notes: "-Walkable decides weither the player can walk on the tile or not.\n\n-If
+    original Position is true the player's will spawn and respawn on this tile.\n\n-Key
+    means there is a Key on this tile.\n\n-Door means there is a door on this tile
+    and makes the tile unwalkable.\n\n-Crumble means the tile will disappear until
+    next reset when the player walks on it.\n\n-Level transi -1 means the Hub scene
+    is loaded when player walks on tile.\n  Level transi 0 means nothing happens
+    when player walks on tile.\n  Level transi > 0 means the player will load the
+    scene of this index when he walks on tile.\n\n-TimerChangeInputValue Adds or
+    substract the Timer by its value when the player walks\n   on it. Only works
+    one time by reset if  >0. "
   step: 0
   walkable: 1
   highLight: 0
@@ -120,13 +130,38 @@ MonoBehaviour:
   crumble: 0
   levelTransiIndex: 0
   timerChangeInputValue: 0
+  tempoTile: 0
   timerChangeValue: 0
   height: 0
-  errorPause: 0
-  originalPositionItem: {fileID: 7825203435587043538, guid: 2aa05ed043117734daccda0561ae677e, type: 3}
-  crumbleMat: {fileID: 2100000, guid: 0f35795f064e02447997748002b7fccb, type: 2}
+--- !u!114 &735905787984830351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963485817208866333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843272594f471c04a89cbc2041fb28ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Notes: 'Disabled Mat is the material displayed in Editor on unwalkabled Tiles.
+
+
+    Normal
+    Mat is the material displayed in Editor on walkable Tiles with no special effects.
+
+
+    Crumble
+    Mat is the material displayed in Editor on Tiles that crumble when walked onto.'
+  disabledMat: {fileID: 2100000, guid: 77ffbd6bf85bd244ba25de01a8d27ccc, type: 2}
   normalMat: {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
-  disabledMat: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
+  crumbleMat: {fileID: 2100000, guid: 0f35795f064e02447997748002b7fccb, type: 2}
+  DoorItem: {fileID: 5040694192882191631, guid: fe2aac85868288d4c8a552d50d524616, type: 3}
+  KeyItem: {fileID: 2239755094156513774, guid: 46081f84d17e2cf4190b8aacce68708d, type: 3}
+  originalPositionItem: {fileID: 7825203435587043538, guid: 2aa05ed043117734daccda0561ae677e, type: 3}
+  TimerItem: {fileID: 6409185897952528890, guid: 09684c61948e2784e9847af68cd189e5, type: 3}
+  LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
 --- !u!1 &5648960202016864675
 GameObject:
   m_ObjectHideFlags: 0
