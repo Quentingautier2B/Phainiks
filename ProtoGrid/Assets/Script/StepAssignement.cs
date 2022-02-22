@@ -7,7 +7,7 @@ public class StepAssignement : MonoBehaviour
     [TextArea]
     [SerializeField] string Notes = "Comment Here.";
     #region variables
-    int startPosX, startPosY, row, columns;
+    [HideInInspector] public int startPosX, startPosY, row, columns;
     GridTiles[,] grid;
     [SerializeField] GridGenerator gridGenerator;
     [SerializeField] Transform player;
@@ -78,40 +78,40 @@ public class StepAssignement : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if(y+1<row && grid[x,y+1] && grid[x,y+1].step == step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1)
+                if(y+1<columns && grid[x,y+1] && grid[x,y+1].step == step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1)
                 {
                     return true;
                 }
                 else
                 {
-                    if (y + 1 < row)
+                    if (y + 1 < columns)
                     {
 
-                    if(grid[x, y + 1].door)
-                    {
-                        foreach(string obj in playerS.Inventory)
+                        if(grid[x, y + 1].door)
                         {
-                            if (obj == "key" + grid[x, y + 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                            foreach(string obj in playerS.Inventory)
                             {
-                                grid[   x, y + 1].door = false;
-                                grid[x, y + 1].walkable = true;
-                                return true;
+                                    if (obj == "key" + grid[x, y + 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                                    {
+                                          grid[x, y + 1].door = false;
+                                          grid[x, y + 1].walkable = true;
+                                          return true;
+                                    }
                             }
-                        }
                         
-                    }
+                        }
                     }
                         
                     return false;
                 }     
             case 2:
-                if(x+1<columns && grid[x+1,y] && grid[x+1,y].step == step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1)
+                if(x+1<row && grid[x+1,y] && grid[x+1,y].step == step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1)
                 {
                     return true;
                 }
                 else
                 {
-                    if(x + 1 < columns)
+                    if(x + 1 < row)
                     {
                         if (grid[x + 1, y].door)
                         {

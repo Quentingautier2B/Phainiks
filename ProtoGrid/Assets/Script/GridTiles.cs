@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 public class GridTiles : MonoBehaviour
 {
@@ -15,23 +15,44 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     public bool highLight;
     public bool originalPosition;
-    public bool levelEnd;
-    bool endLevel;
     public bool key; 
     public bool door;
+    public bool crumble;
+    public int levelTransiIndex;
+    public int timerChangeInputValue;
+    [HideInInspector] public int timerChangeValue;
     public int height;
     [SerializeField] bool errorPause;
 
     [Space]
     [Header("Components")]
+    Renderer rend;
+    public GameObject originalPositionItem;
     GameObject gameManager;
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
-    PlayerMovement playerMovement;  
+    PlayerMovement playerMovement;
+    public Material crumbleMat;
+    public Material normalMat;
+    public Material disabledMat;
     #endregion
 
     private void Awake()
     {
+        rend = GetComponent<Renderer>();
+        if (crumble)
+            rend.material = crumbleMat;
+
+
+        timerChangeValue = timerChangeInputValue;
+        if(timerChangeValue < 0)
+        {
+            transform.Find("Timer+").GetComponent<Renderer>().material.color = Color.red;
+          
+            transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
+        }
+
+
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();
@@ -44,6 +65,8 @@ public class GridTiles : MonoBehaviour
             {
                 print("Key Bloc with no Key" + this.name);  
                 Time.timeScale = 0;
+
+                //ErrorPause ne fait rien
                 errorPause = true;
             }
         }
@@ -53,6 +76,8 @@ public class GridTiles : MonoBehaviour
             {
                 print("Door Bloc with no Door" + this.name);
                 Time.timeScale = 0;
+
+                //ErrorPause ne fait rien
                 errorPause = true;
             }
         }
@@ -61,14 +86,16 @@ public class GridTiles : MonoBehaviour
 
     void Start()
     {
-        if (!walkable)
+        if (!walkable && !door)
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            rend.enabled = false;
         }
     }
 
     void Update()
     {
+        var text = step.ToString();
+        transform.Find("Step").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = text;
         if (height != (int)transform.position.y)
             height = (int)transform.position.y;
 
@@ -77,6 +104,16 @@ public class GridTiles : MonoBehaviour
         if (!highLight)
             UnHighlight();
 
+        if (walkable && !rend.enabled)
+        {
+            rend.enabled = true;
+        }
+
+
+        if (!walkable && rend.enabled && !door)
+        {
+            rend.enabled = false;
+        }
     }
 
     private void OnMouseOver()
@@ -100,18 +137,55 @@ public class GridTiles : MonoBehaviour
 
     private void OnMouseDown()
     {
-        playerMovement.moveFlag = true;
+        if (walkable && step>-1)
+        {
+            playerMovement.moveFlag = true;
+        }
     }
 
     private void OnDrawGizmos()
     {
-        if (!walkable&&!door)
+        if (!walkable && !door)
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Renderer>().material = disabledMat;
         }
-        if (walkable || door)
+
+        if(walkable && !crumble)
         {
-            GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<Renderer>().material = normalMat;
+        }
+        
+
+        if (crumble)
+        {
+            GetComponent<Renderer>().material = crumbleMat;
+        }
+
+   
+
+        CreateDestroyOgPosGizmo();
+        
+
+        Vector3 snapToGrid = new Vector3(
+            Mathf.Floor(transform.position.x),
+            Mathf.Floor(transform.position.y),
+            Mathf.Floor(transform.position.z)
+            );
+        transform.position = snapToGrid;
+    }
+
+    void CreateDestroyOgPosGizmo()
+    {
+        if (originalPosition && !transform.Find("OriginalPos"))
+        {
+            var inst = Instantiate(originalPositionItem, new Vector3(transform.position.x, transform.position.y + 0.53f, transform.position.z), Quaternion.identity);
+            inst.transform.parent = this.transform;
+            inst.name = "OriginalPos";
+        }
+        if (!originalPosition && transform.Find("OriginalPos"))
+        {
+            var inst = transform.Find("OriginalPos").gameObject;
+            DestroyImmediate(inst);
         }
     }
 

@@ -11,6 +11,9 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] float camMoveSpeed;
     [SerializeField] float camZoomSpeed;
     Rigidbody rb;
+    [SerializeField]float smoothTime;
+    Vector3 velocity = Vector3.zero;
+    public BoxCollider boundsRef;
     #endregion
 
     private void Awake()
@@ -50,7 +53,8 @@ public class CameraBehavior : MonoBehaviour
 
     void LockedCamMode()
     {
-        transform.position = new Vector3(playerPos.position.x-5.5f,7.3f,playerPos.position.z-7.5f);        
+        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(playerPos.position.x - 3.5f, playerPos.position.y + 5f, playerPos.position.z - 4f), ref velocity, smoothTime);
+        //transform.position = new Vector3(playerPos.position.x-5.5f,7.3f,playerPos.position.z-7.5f);        
     }
 
     void FreeHandleCamMode()

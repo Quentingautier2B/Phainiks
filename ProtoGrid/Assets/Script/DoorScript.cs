@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    #region variable
     public int doorIndex;
     Color mesh;
+    #endregion
 
     private void Awake()
     {
@@ -28,5 +30,26 @@ public class DoorScript : MonoBehaviour
             GetComponent<MeshRenderer>().material.color = mesh;
         }
        
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (doorIndex == 1)
+        {
+            mesh = Color.red;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (doorIndex == 2)
+        {
+            mesh = Color.blue;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (doorIndex == 3)
+        {
+            mesh = Color.black;
+            GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
     }
 }
