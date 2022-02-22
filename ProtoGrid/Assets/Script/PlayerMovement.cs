@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 highlightedTiles[currentPathIndex].highLight = false;
                 TileEffectOnMove();
+                FirstCrumble();
                 currentPathIndex++;
                 if (currentPathIndex >= highlightedTiles.Count)
                 {
@@ -136,10 +137,13 @@ public class PlayerMovement : MonoBehaviour
         if (highlightedTiles[currentPathIndex].key)       
             KeyBehavior(highlightedTiles[currentPathIndex]);
       
-        if (highlightedTiles[currentPathIndex].levelEnd)        
+        if (highlightedTiles[currentPathIndex].levelTransiIndex>0)        
             EndBehavior(highlightedTiles[currentPathIndex]);
 
-        if(currentPathIndex < highlightedTiles.Count - 1)
+        else if(highlightedTiles[currentPathIndex].levelTransiIndex == -1)
+            EndBehaviorToHub(highlightedTiles[currentPathIndex]);
+
+        if (currentPathIndex < highlightedTiles.Count -1)
         {
             if (highlightedTiles[currentPathIndex].crumble && highlightedTiles[currentPathIndex].walkable)        
                 CrumbleBehavior(highlightedTiles[currentPathIndex]);
@@ -162,10 +166,24 @@ public class PlayerMovement : MonoBehaviour
     void EndBehavior(GridTiles tile)
     {
         print("end level");
+        SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Additive);
     } 
     
+    void EndBehaviorToHub(GridTiles tile)
+    {
+        print("end Chapter");
+        SceneManager.LoadScene("Hub", LoadSceneMode.Single);
+    }
+
+    void FirstCrumble()
+    {
+        var firstCrumble = grid[stepAssignement.startPosX, stepAssignement.startPosY];
+        if (firstCrumble.walkable && firstCrumble.crumble)
+            firstCrumble.walkable = false;
+    }
+
     void CrumbleBehavior(GridTiles tile)
-    {  
+    {
         tile.walkable = false;
     }
 
