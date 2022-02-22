@@ -7,7 +7,7 @@ public class StepAssignement : MonoBehaviour
     [TextArea]
     [SerializeField] string Notes = "Comment Here.";
     #region variables
-    int startPosX, startPosY, row, columns;
+    [HideInInspector] public int startPosX, startPosY, row, columns;
     GridTiles[,] grid;
     [SerializeField] GridGenerator gridGenerator;
     [SerializeField] Transform player;

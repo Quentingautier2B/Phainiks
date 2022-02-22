@@ -26,7 +26,7 @@ public class GridTiles : MonoBehaviour
 
     [Space]
     [Header("Components")]
-    
+    Renderer rend;
     public GameObject originalPositionItem;
     GameObject gameManager;
     PathHighlighter pathHighlighter;
@@ -39,8 +39,9 @@ public class GridTiles : MonoBehaviour
 
     private void Awake()
     {
+        rend = GetComponent<Renderer>();
         if (crumble)
-            GetComponent<Renderer>().material = crumbleMat;
+            rend.material = crumbleMat;
 
 
         timerChangeValue = timerChangeInputValue;
@@ -87,7 +88,7 @@ public class GridTiles : MonoBehaviour
     {
         if (!walkable && !door)
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            rend.enabled = false;
         }
     }
 
@@ -101,6 +102,16 @@ public class GridTiles : MonoBehaviour
         if (!highLight)
             UnHighlight();
 
+        if (walkable && !rend.enabled)
+        {
+            rend.enabled = true;
+        }
+
+
+        if (!walkable && rend.enabled && !door)
+        {
+            rend.enabled = false;
+        }
     }
 
     private void OnMouseOver()

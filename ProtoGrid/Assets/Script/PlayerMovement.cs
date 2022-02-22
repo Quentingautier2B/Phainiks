@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 highlightedTiles[currentPathIndex].highLight = false;
                 TileEffectOnMove();
+                FirstCrumble();
                 currentPathIndex++;
                 if (currentPathIndex >= highlightedTiles.Count)
                 {
@@ -142,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         else if(highlightedTiles[currentPathIndex].levelTransiIndex == -1)
             EndBehaviorToHub(highlightedTiles[currentPathIndex]);
 
-        if (currentPathIndex < highlightedTiles.Count - 1)
+        if (currentPathIndex < highlightedTiles.Count -1)
         {
             if (highlightedTiles[currentPathIndex].crumble && highlightedTiles[currentPathIndex].walkable)        
                 CrumbleBehavior(highlightedTiles[currentPathIndex]);
@@ -172,10 +173,17 @@ public class PlayerMovement : MonoBehaviour
     {
         print("end Chapter");
         SceneManager.LoadScene("Hub", LoadSceneMode.Single);
-    } 
-    
+    }
+
+    void FirstCrumble()
+    {
+        var firstCrumble = grid[stepAssignement.startPosX, stepAssignement.startPosY];
+        if (firstCrumble.walkable && firstCrumble.crumble)
+            firstCrumble.walkable = false;
+    }
+
     void CrumbleBehavior(GridTiles tile)
-    {  
+    {
         tile.walkable = false;
     }
 
