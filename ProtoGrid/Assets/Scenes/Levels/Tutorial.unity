@@ -5490,6 +5490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridManager
       objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258450, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: resetTimerValue
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 691397173153258454, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
       propertyPath: raws
       value: 12
@@ -5540,6 +5544,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303156830519498291, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: resetTimer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8814,7 +8822,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraContainer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
 --- !u!1001 &5040694191229355101
 PrefabInstance:

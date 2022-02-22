@@ -90,17 +90,10 @@ public class PlayerMovement : MonoBehaviour
         moveFlag = false;
         moveState = true;
     }
-    void DestroyDoor()
-    {
-        if (highlightedTiles[currentPathIndex].transform.Find("Door"))
-        {
-            Destroy(highlightedTiles[currentPathIndex].transform.Find("Door").gameObject);
-        }
-    }
     private void Move()
     {
         DestroyDoor();
-       
+        
         if (highlightedTiles != null)
         {
             float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
@@ -138,14 +131,16 @@ public class PlayerMovement : MonoBehaviour
 
     void TileEffectOnMove()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
+
         if (highlightedTiles[currentPathIndex].key != 0)       
             KeyBehavior(highlightedTiles[currentPathIndex]);
       
         if (highlightedTiles[currentPathIndex].levelTransiIndex>0)        
-            EndBehavior(highlightedTiles[currentPathIndex]);
+            StartCoroutine(EndBehavior(highlightedTiles[currentPathIndex]));
 
         else if(highlightedTiles[currentPathIndex].levelTransiIndex == -1)
-            EndBehaviorToHub(highlightedTiles[currentPathIndex]);
+            StartCoroutine(EndBehaviorToHub(highlightedTiles[currentPathIndex]));
 
         if (currentPathIndex < highlightedTiles.Count -1)
         {
@@ -164,20 +159,34 @@ public class PlayerMovement : MonoBehaviour
     #region TileBehavior
     void KeyBehavior(GridTiles tile)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/PickupItem");
         player.GetComponent<Player>().Inventory.Add("key" + tile.key);
         tile.key = 0;
         tile.transform.Find("Key").gameObject.SetActive(false);
     }
         
-    void EndBehavior(GridTiles tile)
+    void DestroyDoor()
+    {
+        if (highlightedTiles[currentPathIndex].transform.Find("Door"))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/World/DoorOpen");
+            Destroy(highlightedTiles[currentPathIndex].transform.Find("Door").gameObject);
+        }
+    }
+   
+    IEnumerator EndBehavior(GridTiles tile)
     {
         print("end level");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Additive);
     } 
     
-    void EndBehaviorToHub(GridTiles tile)
+    IEnumerator EndBehaviorToHub(GridTiles tile)
     {
         print("end Chapter");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Hub", LoadSceneMode.Single);
     }
 

@@ -40,6 +40,7 @@ public class Reset : MonoBehaviour
 
     void ResetEffect()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Reboot/Respawn");
         ResObjects();
         ResPlayerPos();
         ResHighLight();
@@ -47,7 +48,7 @@ public class Reset : MonoBehaviour
     }
 
     void ResHighLight()
-    {
+    {   
 
         foreach (GridTiles obj in pMovement.highlightedTiles)
         {

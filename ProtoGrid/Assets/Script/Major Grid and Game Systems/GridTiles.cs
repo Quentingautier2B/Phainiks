@@ -82,6 +82,7 @@ public class GridTiles : MonoBehaviour
         if (walkable && step>-1)
         {
             playerMovement.moveFlag = true;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Click");
         }
     }
     #endregion
