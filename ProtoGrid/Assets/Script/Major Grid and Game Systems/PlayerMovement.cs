@@ -90,15 +90,17 @@ public class PlayerMovement : MonoBehaviour
         moveFlag = false;
         moveState = true;
     }
-
-    private void Move()
+    void DestroyDoor()
     {
-
-
         if (highlightedTiles[currentPathIndex].transform.Find("Door"))
         {
             Destroy(highlightedTiles[currentPathIndex].transform.Find("Door").gameObject);
         }
+    }
+    private void Move()
+    {
+        DestroyDoor();
+       
         if (highlightedTiles != null)
         {
             float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
@@ -162,9 +164,9 @@ public class PlayerMovement : MonoBehaviour
     #region TileBehavior
     void KeyBehavior(GridTiles tile)
     {
+        player.GetComponent<Player>().Inventory.Add("key" + tile.key);
         tile.key = 0;
         tile.transform.Find("Key").gameObject.SetActive(false);
-        player.GetComponent<Player>().Inventory.Add("key" + tile.transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }
         
     void EndBehavior(GridTiles tile)

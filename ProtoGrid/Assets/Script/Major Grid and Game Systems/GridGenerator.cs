@@ -13,6 +13,7 @@ public class GridGenerator : MonoBehaviour
     
     public int raws;
     public int columns;
+    
 
     #endregion
     void Awake()

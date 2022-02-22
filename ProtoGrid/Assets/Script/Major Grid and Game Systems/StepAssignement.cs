@@ -77,6 +77,7 @@ public class StepAssignement : MonoBehaviour
     {
         switch (direction)
         {
+            #region case 1
             case 1:
                 if(y+1<columns && grid[x,y+1] && grid[x,y+1].step == step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1 && grid[x, y + 1].walkable)
                 {
@@ -91,7 +92,7 @@ public class StepAssignement : MonoBehaviour
                         {
                             foreach(string obj in playerS.Inventory)
                             {
-                                    if (obj == "key" + grid[x, y + 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                                    if (obj == "key" + grid[x, y + 1].door)
                                     {
                                           grid[x, y + 1].door = 0;
                                           grid[x, y + 1].walkable = true;
@@ -103,7 +104,9 @@ public class StepAssignement : MonoBehaviour
                     }
                         
                     return false;
-                }     
+                }
+            #endregion
+            #region case 2
             case 2:
                 if(x+1<row && grid[x+1,y] && grid[x+1,y].step == step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1 && grid[x+1, y].walkable)
                 {
@@ -117,7 +120,7 @@ public class StepAssignement : MonoBehaviour
                         {
                             foreach (string obj in playerS.Inventory)
                             {
-                                if (obj == "key" + grid[x + 1, y].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                                if (obj == "key" + grid[x + 1, y].door)
                                 {
                                     grid[x + 1, y].door = 0;
                                     grid[x + 1, y].walkable = true;
@@ -129,7 +132,9 @@ public class StepAssignement : MonoBehaviour
                     }
                 
                     return false;
-                }     
+                }
+            #endregion
+            #region case 3
             case 3:
                 if(y-1>-1 && grid[x,y-1] && grid[x,y-1].step == step && grid[x, y - 1].height <= grid[x, y].height + 1 && grid[x, y - 1].height >= grid[x, y].height - 1 && grid[x, y - 1].walkable)
                 {
@@ -144,7 +149,7 @@ public class StepAssignement : MonoBehaviour
                     {
                         foreach (string obj in playerS.Inventory)
                         {
-                            if (obj == "key" + grid[x, y - 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                            if (obj == "key" + grid[x, y - 1].door)
                             {
                                 grid[x, y - 1].door = 0;
                                 grid[x, y - 1].walkable = true;
@@ -155,7 +160,9 @@ public class StepAssignement : MonoBehaviour
                     }
                     }
                     return false;
-                }     
+                }
+            #endregion
+            #region case 4
             case 4:
                 if(x-1>-1 && grid[x-1,y] && grid[x-1,y].step == step && grid[x-1, y].height <= grid[x, y].height + 1 && grid[x-1, y].height >= grid[x, y].height - 1 && grid[x-1, y].walkable)
                 {
@@ -170,7 +177,7 @@ public class StepAssignement : MonoBehaviour
                     {
                         foreach (string obj in playerS.Inventory)
                         {
-                            if (obj == "key" + grid[x-1, y].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
+                            if (obj == "key" + grid[x-1, y].door)
                             {
                                 grid[x-1, y].door = 0;
                                 grid[x-1, y].walkable = true;
@@ -185,7 +192,7 @@ public class StepAssignement : MonoBehaviour
         }
         return false;
     }
-
+    #endregion
     void SetVisited(int x, int y, int step)
     {
         if(grid[x, y])

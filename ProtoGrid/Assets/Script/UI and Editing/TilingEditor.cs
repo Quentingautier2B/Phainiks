@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TilingEditor : MonoBehaviour
 {
+    [TextArea(minLines: 0, maxLines: 20)]
+    [SerializeField] string Notes = "Comment Here.";
 
     #region Variables
     GridTiles tile;
@@ -15,9 +17,15 @@ public class TilingEditor : MonoBehaviour
     int key;
     int timerChangeInputValue;
     int levelTransiIndex;
+
+    [Header("Materials for CubeTypes")]
+    [Space]
     [SerializeField] Material disabledMat;
     [SerializeField] Material normalMat;
     [SerializeField] Material crumbleMat;
+
+    [Header("GameObjects to Instantiate on Tiles")]
+    [Space]
     [SerializeField] GameObject DoorItem;
     [SerializeField] GameObject KeyItem;
     [SerializeField] GameObject originalPositionItem;
@@ -25,17 +33,15 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject LevelTransitionItem;
     #endregion
 
-    
-    
-
     private void OnDrawGizmos()
     {
         GetVariablesValue();
         EditorBlocRenderering();
         CreateDestroyMethodsHub();
         EditorBlocSnapping();
+        ItemColoring();
     }
-
+   
     void GetVariablesValue()
     {   
         if (flag)
@@ -71,6 +77,7 @@ public class TilingEditor : MonoBehaviour
         }
     }
 
+    #region CreateDestroyMethods
     void CreateDestroyMethodsHub()
     {
         CreateDestroyOgPosGizmo();
@@ -173,4 +180,55 @@ public class TilingEditor : MonoBehaviour
             DestroyImmediate(inst);
         }
     }
+    #endregion
+
+    #region ItemColoration
+    void ItemColoring()
+    {
+        DoorColoration();
+        KeyColoration();
+    }
+
+    void DoorColoration()
+    {
+        if (door == 1)
+        {
+            var mesh = Color.red;
+            transform.Find("Door").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (door == 2)
+        {
+            var mesh = Color.blue;
+            transform.Find("Door").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (door == 3)
+        {
+            var mesh = Color.black;
+            transform.Find("Door").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+    }
+
+    void KeyColoration()
+    {
+        if (key == 1)
+        {
+            var mesh = Color.red;
+            transform.Find("Key").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (key == 2)
+        {
+            var mesh = Color.blue;
+            transform.Find("Key").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+
+        if (key == 3)
+        {
+            var mesh = Color.black;
+            transform.Find("Key").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+        }
+    }
+    #endregion
 }

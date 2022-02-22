@@ -13,7 +13,7 @@ public class LoopCycle : MonoBehaviour
     public int reverseResetTempo = 0;
     public int tempoIndex;
     public int maxIndex;
-    public int index = 1;
+    public int index =0;
 
     private void Awake()
     {
@@ -48,6 +48,10 @@ public class LoopCycle : MonoBehaviour
 
     void TempoChanger()
     {
+        if(tempoChangeValue == 0)
+        {
+            tempoChangeValue = 1;
+        }
         tempoIndex = (index) / tempoChangeValue;
         if (index < reverseResetTempo)
         {

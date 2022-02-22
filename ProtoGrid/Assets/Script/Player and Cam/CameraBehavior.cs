@@ -13,12 +13,13 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] float camRotateSpeed;
     [SerializeField]float smoothTime;
     Vector3 velocity = Vector3.zero;
-    public Transform target;
+    Transform target;
     bool flag;
     #endregion
 
     private void Awake()
     {
+        target = FindObjectOfType<Target>().transform;
         camMode = true;
         camBehavior = transform.Find("Main Camera").GetComponent<Camera>();
         playerPos = FindObjectOfType<Player>().transform;
@@ -38,16 +39,14 @@ public class CameraBehavior : MonoBehaviour
             
         if (camMode)
         {
-            if (flag)
-            {
-                flag = false;
-                LockedCamMode();
-            }
+
+            LockedCamMode();
+
         }
         else if (!camMode)
         {
             FreeHandleCamMode();
-            flag = true;
+            
         }
 
         ZoomCam();
@@ -56,7 +55,7 @@ public class CameraBehavior : MonoBehaviour
 
     void LockedCamMode()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(playerPos.position.x - 3.5f, playerPos.position.y + 5f, playerPos.position.z - 4f), ref velocity, smoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, playerPos.position, ref velocity, smoothTime);
         
         //transform.position = new Vector3(playerPos.position.x-5.5f,7.3f,playerPos.position.z-7.5f);
     }
@@ -82,11 +81,11 @@ public class CameraBehavior : MonoBehaviour
     {        
         if (Input.GetKey(KeyCode.A))
         {
-            transform.RotateAround(target.position, target.up, Time.deltaTime * -camRotateSpeed);
+            transform.Rotate(0, Time.deltaTime * -camRotateSpeed, 0, Space.World);
         }
         if (Input.GetKey(KeyCode.E))
         {
-            transform.RotateAround(target.position, target.up, Time.deltaTime * camRotateSpeed);
+            transform.Rotate(0, Time.deltaTime * camRotateSpeed,0,Space.World);
         }      
     }
 }
