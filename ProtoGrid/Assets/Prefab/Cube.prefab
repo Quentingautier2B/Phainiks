@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,9 +109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3f6529455fc3749a57282acacd3f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Notes: Class that contains Tile properties.
   step: 0
   walkable: 1
   highLight: 0
+  originalPosition: 0
+  height: 0
 --- !u!1 &5648960202016864675
 GameObject:
   m_ObjectHideFlags: 0
