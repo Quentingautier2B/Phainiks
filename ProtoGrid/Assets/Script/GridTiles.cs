@@ -6,42 +6,40 @@ using TMPro;
 public class GridTiles : MonoBehaviour
 {
     
-    [TextArea]
+    [TextArea(minLines: 0, maxLines: 20)]
     [SerializeField] string Notes = "Comment Here.";
 
     #region variables
     [Header("Accessible Values")]
-    public int step;
+    [HideInInspector]public int step;
     public bool walkable;
-    public bool highLight;
+    [HideInInspector] public bool highLight;
     public bool originalPosition;
-    public bool key; 
-    public bool door;
+    public int key; 
+    public int door;
     public bool crumble;
     public int levelTransiIndex;
     public int timerChangeInputValue;
+    public int tempoTile;
     [HideInInspector] public int timerChangeValue;
-    public int height;
+    [HideInInspector] public int height;
     [SerializeField] bool errorPause;
 
     [Space]
     [Header("Components")]
     Renderer rend;
-    public GameObject originalPositionItem;
     GameObject gameManager;
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
     PlayerMovement playerMovement;
-    public Material crumbleMat;
-    public Material normalMat;
-    public Material disabledMat;
+    LoopCycle loopCycle;
+
+
     #endregion
 
     private void Awake()
     {
         rend = GetComponent<Renderer>();
-        if (crumble)
-            rend.material = crumbleMat;
 
 
         timerChangeValue = timerChangeInputValue;
@@ -58,8 +56,9 @@ public class GridTiles : MonoBehaviour
         gridGenerator = gameManager.GetComponent<GridGenerator>();
         pathHighlighter = gameManager.GetComponent<PathHighlighter>();
         playerMovement = gameManager.GetComponent<PlayerMovement>();
+        loopCycle = gameManager.GetComponent<LoopCycle>();
 
-        if (key)
+        if (key!=0)
         {
             if (!transform.Find("Key"))
             {
@@ -70,25 +69,40 @@ public class GridTiles : MonoBehaviour
                 errorPause = true;
             }
         }
-        if(door)
+        if(door!=0)
         {
             if (!transform.Find("Door"))
             {
-                print("Door Bloc with no Door" + this.name);
-                Time.timeScale = 0;
-
-                //ErrorPause ne fait rien
-                errorPause = true;
+                Error("Door Bloc with no Door" + this.name);
             }
         }
 
+        if (!errorPause)
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    void Error(string errorText)
+    {
+        print(errorText);
+        Time.timeScale = 0;
+
+        //ErrorPause ne fait rien
+        errorPause = true;
     }
 
     void Start()
     {
-        if (!walkable && !door)
+/*        if (!walkable && door == 0)
         {
+            transform.Find("Step").Find("Text(TMP)").gameObject.SetActive(false);
             rend.enabled = false;
+        }*/
+
+        if(transform.position.x < 0 || transform.position.z < 0)
+        {
+            Error("Cube in negative position" + this.name);
         }
     }
 
@@ -104,16 +118,20 @@ public class GridTiles : MonoBehaviour
         if (!highLight)
             UnHighlight();
 
-        if (walkable && !rend.enabled)
+        if (walkable && !rend.enabled )
         {
             rend.enabled = true;
+            transform.Find("Step").Find("Text (TMP)").gameObject.SetActive(true);
         }
 
 
-        if (!walkable && rend.enabled && !door)
+        if (!walkable && rend.enabled && door == 0 )
         {
+            transform.Find("Step").Find("Text (TMP)").gameObject.SetActive(false);  
             rend.enabled = false;
         }
+
+        tempoChange();
     }
 
     private void OnMouseOver()
@@ -143,51 +161,7 @@ public class GridTiles : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if (!walkable && !door)
-        {
-            GetComponent<Renderer>().material = disabledMat;
-        }
 
-        if(walkable && !crumble)
-        {
-            GetComponent<Renderer>().material = normalMat;
-        }
-        
-
-        if (crumble)
-        {
-            GetComponent<Renderer>().material = crumbleMat;
-        }
-
-   
-
-        CreateDestroyOgPosGizmo();
-        
-
-        Vector3 snapToGrid = new Vector3(
-            Mathf.Floor(transform.position.x),
-            Mathf.Floor(transform.position.y),
-            Mathf.Floor(transform.position.z)
-            );
-        transform.position = snapToGrid;
-    }
-
-    void CreateDestroyOgPosGizmo()
-    {
-        if (originalPosition && !transform.Find("OriginalPos"))
-        {
-            var inst = Instantiate(originalPositionItem, new Vector3(transform.position.x, transform.position.y + 0.53f, transform.position.z), Quaternion.identity);
-            inst.transform.parent = this.transform;
-            inst.name = "OriginalPos";
-        }
-        if (!originalPosition && transform.Find("OriginalPos"))
-        {
-            var inst = transform.Find("OriginalPos").gameObject;
-            DestroyImmediate(inst);
-        }
-    }
 
     void Highlight()
     {
@@ -200,5 +174,15 @@ public class GridTiles : MonoBehaviour
         
     }
 
+    void tempoChange()
+    {
+        if(loopCycle.tempoIndex == tempoTile && tempoTile!=0)
+        {
+            walkable = true;
+        }      
+        
 
+        if (loopCycle.tempoIndex != tempoTile && tempoTile != 0)
+            walkable = false;
+    }
 }
