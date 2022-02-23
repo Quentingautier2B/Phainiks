@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
     void TileEffectOnMove()
     {
-        if (highlightedTiles[currentPathIndex].key)       
+        if (highlightedTiles[currentPathIndex].key != 0)       
             KeyBehavior(highlightedTiles[currentPathIndex]);
       
         if (highlightedTiles[currentPathIndex].levelTransiIndex>0)        
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
     #region TileBehavior
     void KeyBehavior(GridTiles tile)
     {
-        tile.key = false;
+        tile.key = 0;
         tile.transform.Find("Key").gameObject.SetActive(false);
         player.GetComponent<Player>().Inventory.Add("key" + tile.transform.Find("Key").GetComponent<KeyScript>().keyIndex);
     }

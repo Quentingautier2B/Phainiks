@@ -78,7 +78,7 @@ public class StepAssignement : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if(y+1<columns && grid[x,y+1] && grid[x,y+1].step == step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1)
+                if(y+1<columns && grid[x,y+1] && grid[x,y+1].step == step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1 && grid[x, y + 1].walkable)
                 {
                     return true;
                 }
@@ -87,13 +87,13 @@ public class StepAssignement : MonoBehaviour
                     if (y + 1 < columns)
                     {
 
-                        if(grid[x, y + 1].door)
+                        if(grid[x, y + 1].door != 0)
                         {
                             foreach(string obj in playerS.Inventory)
                             {
                                     if (obj == "key" + grid[x, y + 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
                                     {
-                                          grid[x, y + 1].door = false;
+                                          grid[x, y + 1].door = 0;
                                           grid[x, y + 1].walkable = true;
                                           return true;
                                     }
@@ -105,7 +105,7 @@ public class StepAssignement : MonoBehaviour
                     return false;
                 }     
             case 2:
-                if(x+1<row && grid[x+1,y] && grid[x+1,y].step == step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1)
+                if(x+1<row && grid[x+1,y] && grid[x+1,y].step == step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1 && grid[x+1, y].walkable)
                 {
                     return true;
                 }
@@ -113,13 +113,13 @@ public class StepAssignement : MonoBehaviour
                 {
                     if(x + 1 < row)
                     {
-                        if (grid[x + 1, y].door)
+                        if (grid[x + 1, y].door != 0)
                         {
                             foreach (string obj in playerS.Inventory)
                             {
                                 if (obj == "key" + grid[x + 1, y].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
                                 {
-                                    grid[x + 1, y].door = false;
+                                    grid[x + 1, y].door = 0;
                                     grid[x + 1, y].walkable = true;
                                     return true;
                                 }
@@ -131,7 +131,7 @@ public class StepAssignement : MonoBehaviour
                     return false;
                 }     
             case 3:
-                if(y-1>-1 && grid[x,y-1] && grid[x,y-1].step == step && grid[x, y - 1].height <= grid[x, y].height + 1 && grid[x, y - 1].height >= grid[x, y].height - 1)
+                if(y-1>-1 && grid[x,y-1] && grid[x,y-1].step == step && grid[x, y - 1].height <= grid[x, y].height + 1 && grid[x, y - 1].height >= grid[x, y].height - 1 && grid[x, y - 1].walkable)
                 {
                     return true;
                 }
@@ -140,13 +140,13 @@ public class StepAssignement : MonoBehaviour
                     if (y - 1 > -1)
                     {
 
-                    if (grid[x, y - 1].door)
+                    if (grid[x, y - 1].door != 0)
                     {
                         foreach (string obj in playerS.Inventory)
                         {
                             if (obj == "key" + grid[x, y - 1].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
                             {
-                                grid[x, y - 1].door = false;
+                                grid[x, y - 1].door = 0;
                                 grid[x, y - 1].walkable = true;
                                 return true;
                             }
@@ -157,7 +157,7 @@ public class StepAssignement : MonoBehaviour
                     return false;
                 }     
             case 4:
-                if(x-1>-1 && grid[x-1,y] && grid[x-1,y].step == step && grid[x-1, y].height <= grid[x, y].height + 1 && grid[x-1, y].height >= grid[x, y].height - 1)
+                if(x-1>-1 && grid[x-1,y] && grid[x-1,y].step == step && grid[x-1, y].height <= grid[x, y].height + 1 && grid[x-1, y].height >= grid[x, y].height - 1 && grid[x-1, y].walkable)
                 {
                     return true;
                 }
@@ -166,13 +166,13 @@ public class StepAssignement : MonoBehaviour
                     if (x - 1 > -1)
                     {
 
-                    if (grid[x-1, y].door)
+                    if (grid[x-1, y].door != 0)
                     {
                         foreach (string obj in playerS.Inventory)
                         {
                             if (obj == "key" + grid[x-1, y].transform.Find("Door").GetComponent<DoorScript>().doorIndex)
                             {
-                                grid[x-1, y].door = false;
+                                grid[x-1, y].door = 0;
                                 grid[x-1, y].walkable = true;
                                 return true;
                             }
