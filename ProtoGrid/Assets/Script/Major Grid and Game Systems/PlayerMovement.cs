@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
         print("end level");
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Additive);
+        SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Single);
     } 
     
     IEnumerator EndBehaviorToHub(GridTiles tile)
