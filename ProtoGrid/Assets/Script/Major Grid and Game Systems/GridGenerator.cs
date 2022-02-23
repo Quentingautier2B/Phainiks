@@ -63,7 +63,6 @@ public class GridGenerator : MonoBehaviour
             instantiateGrid = false;
             print(grid.Length);
         }
-
     }
 }
 
