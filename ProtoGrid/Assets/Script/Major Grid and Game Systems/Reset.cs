@@ -11,6 +11,7 @@ public class Reset : MonoBehaviour
     PlayerMovement pMovement;
     StepAssignement sAssignement;
     GridGenerator gridGenerator;
+    LoopCycle loopCycle;
 
     [Header("Input Values")]
     [Space]
@@ -24,6 +25,7 @@ public class Reset : MonoBehaviour
         player = FindObjectOfType<Player>().transform;
         sAssignement = FindObjectOfType<StepAssignement>();
         pMovement = FindObjectOfType<PlayerMovement>();
+        loopCycle = FindObjectOfType<LoopCycle>();
         resetTimer = resetTimerValue;    
     }
 
@@ -63,6 +65,7 @@ public class Reset : MonoBehaviour
         pMovement.moveState = false;
         pMovement.currentPathIndex = 0;
         player.position = pMovement.ogPos;
+        loopCycle.tempoIndexValue = 0;
     }
 
     void ResObjects()

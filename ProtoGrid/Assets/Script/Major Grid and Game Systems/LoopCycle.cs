@@ -4,64 +4,118 @@ using UnityEngine;
 
 public class LoopCycle : MonoBehaviour
 {
+    public int tempoValue;
     GridTiles[,] grid;
+    StepAssignement sAss;
+    PlayerMovement pMov;
     Reset reset;
-    public int resetTimer;
-    public int timerStart;
-    public List<GridTiles> tempoTiles;
-    public int tempoChangeValue;
-    public int reverseResetTempo = 0;
-    public int tempoIndex;
-    public int maxIndex;
-    public int index =0;
+    int resetTimer;
+    int inverseResetTimer;
+    int resetStart;
+    [HideInInspector] public int tempoIndexValue;
+    bool flag = true;
+    int maxIndexValue = 0;
+    Transform Player;
+    
 
     private void Awake()
     {
         reset = GetComponent<Reset>();
-        timerStart = reset.resetTimerValue;
+        resetStart = reset.resetTimerValue;
+        sAss = GetComponent<StepAssignement>();
+        pMov = GetComponent<PlayerMovement>();
+        
         grid = GetComponent<GridGenerator>().grid;
-        maxIndex = 0;
-        CreateTempoTilesList();
-        TempoChanger();
-
+        Player = FindObjectOfType<Player>().transform;
+        foreach(GridTiles obj in grid)
+        {
+            if(obj.tempoTile > maxIndexValue)
+            {
+                maxIndexValue = obj.tempoTile;
+            }
+        }
 
     }
+
     private void Update()
     {
         resetTimer = reset.resetTimer;
-        reverseResetTempo = timerStart - resetTimer;
+        inverseResetTimer = resetStart - resetTimer;
+        if (maxIndexValue > 1)
+        {
 
-        TempoChanger();
+            if (flag)
+        {
+            if(inverseResetTimer % tempoValue >= tempoValue - 1)
+            {
+                tempoIndexValue++;
+                pMov.highlightedTiles.Clear();
+                StartCoroutine(InvokeIni());
+                
+                flag = false;
+            }
+        }
+
+        if (inverseResetTimer % tempoValue < tempoValue - 1)
+        {
+            flag = true;
+        }
+      
+        tempoIndexValue %= maxIndexValue;        
     }
 
-    void CreateTempoTilesList()
+    IEnumerator InvokeIni()
     {
-        foreach (GridTiles obj in grid)
-        {
-            if (obj.tempoTile > 0)
-                tempoTiles.Add(obj);
-
-            if (obj.tempoTile > maxIndex)
-                maxIndex = obj.tempoTile;
-        }
+        yield return new WaitForSeconds(.1f);
+        sAss.Initialisation();
+        Player.position = new Vector3(Player.position.x, grid[(int)Player.position.x, (int)Player.position.z].transform.position.y + 1.5f, Player.position.z);
     }
-
-    void TempoChanger()
-    {
-        if(tempoChangeValue == 0)
-        {
-            tempoChangeValue = 1;
-        }
-        tempoIndex = (index) / tempoChangeValue;
-        if (index < reverseResetTempo)
-        {
-            index += tempoChangeValue;
         }
 
-        if(tempoIndex >= maxIndex)
+
+
+
+
+
+
+
+
+    /*    private void Update()
         {
-            index = 1;
-            timerStart = resetTimer;
+            resetTimer = reset.resetTimer;
+            reverseResetTempo = timerStart - resetTimer;
+
+            TempoChanger();
         }
-    }
+
+        void CreateTempoTilesList()
+        {
+            foreach (GridTiles obj in grid)
+            {
+                if (obj.tempoTile > 0)
+                    tempoTiles.Add(obj);
+
+                if (obj.tempoTile > maxIndex)
+                    maxIndex = obj.tempoTile;
+            }
+        }
+
+        void TempoChanger()
+        {
+            if(tempoChangeValue == 0)
+            {
+                tempoChangeValue = 1;
+            }
+            tempoIndex = (index) / tempoChangeValue;
+            if (index < reverseResetTempo)
+            {
+                index += tempoChangeValue;
+            }
+
+            if(tempoIndex >= maxIndex)
+            {
+                index = 1;
+                timerStart = resetTimer;
+            }
+        }*/
 }

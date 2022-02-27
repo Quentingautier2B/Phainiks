@@ -12,11 +12,14 @@ public class TilingEditor : MonoBehaviour
     bool flag = true;
     bool walkable;
     int door;
+    public bool doorRotation;
     bool crumble;
     bool originalPosition;
     int key;
     int timerChangeInputValue;
     int levelTransiIndex;
+    int tempoValue;
+
 
     [Header("Materials for CubeTypes")]
     [Space]
@@ -31,6 +34,13 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject originalPositionItem;
     [SerializeField] GameObject TimerItem;
     [SerializeField] GameObject LevelTransitionItem;
+
+    public Material redM;
+    public Material blueM;
+    public Material greenM;
+    public Material tileRedM;
+    public Material tileBlueM;
+    public Material tileGreenM;
     #endregion
 
     private void OnDrawGizmos()
@@ -56,6 +66,8 @@ public class TilingEditor : MonoBehaviour
         originalPosition = tile.originalPosition;
         timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;
+        tempoValue = tile.tempoTile;
+       // doorRotation = tile.doorRotation;
     }
 
     void EditorBlocRenderering()
@@ -80,11 +92,11 @@ public class TilingEditor : MonoBehaviour
     #region CreateDestroyMethods
     void CreateDestroyMethodsHub()
     {
-        CreateDestroyOgPosGizmo();
-        CreateDestroyMoveChangeTileGizmo();
-        CreateDestroyDoorTileGizmo();
-        CreateDestroyKeyTileGizmo();
-        CreateDestroyLevelTransitionTileGizmo();
+        CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.53f);
+        CreateDestroyObjectIndex(timerChangeInputValue, "Timer+", TimerItem, 0.5f);
+        CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
+        CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
+        CreateDestroyObjectIndex(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
     }
 
     void EditorBlocSnapping()
@@ -106,77 +118,32 @@ public class TilingEditor : MonoBehaviour
         transform.position = snapToGrid;
     }
 
-    void CreateDestroyOgPosGizmo()
+    void CreateDestroyObjectIndex(int localInt, string itemTypeName, GameObject itemType, float itemHeight)
     {
-        if (originalPosition && !transform.Find("OriginalPos"))
+        if (localInt != 0 && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(originalPositionItem, new Vector3(transform.position.x, transform.position.y + 0.53f, transform.position.z), Quaternion.identity);
+            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
             inst.transform.parent = this.transform;
-            inst.name = "OriginalPos";
+            inst.name = itemTypeName;
         }
-        if (!originalPosition && transform.Find("OriginalPos"))
+        if (localInt == 0 && transform.Find(itemTypeName))
         {
-            var inst = transform.Find("OriginalPos").gameObject;
+            var inst = transform.Find(itemTypeName).gameObject;
             DestroyImmediate(inst);
         }
-    }
-
-    void CreateDestroyMoveChangeTileGizmo()
+    }    
+    
+    void CreateDestroyObjectBoolean(bool localBool, string itemTypeName, GameObject itemType, float itemHeight)
     {
-        if (timerChangeInputValue != 0 && !transform.Find("Timer+"))
+        if (localBool && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(TimerItem, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
             inst.transform.parent = this.transform;
-            inst.name = "Timer+";
+            inst.name = itemTypeName;
         }
-        if (timerChangeInputValue == 0 && transform.Find("Timer+"))
+        if (!localBool && transform.Find(itemTypeName))
         {
-            var inst = transform.Find("Timer+").gameObject;
-            DestroyImmediate(inst);
-        }
-    }
-
-    void CreateDestroyKeyTileGizmo()
-    {
-        if (key != 0 && !transform.Find("Key"))
-        {
-            var inst = Instantiate(KeyItem, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.identity);
-            inst.transform.parent = this.transform;
-            inst.name = "Key";
-        }
-        if (key == 0 && transform.Find("Key"))
-        {
-            var inst = transform.Find("Key").gameObject;
-            DestroyImmediate(inst);
-        }
-    }
-
-    void CreateDestroyDoorTileGizmo()
-    {
-        if (door != 0 && !transform.Find("Door"))
-        {
-            var inst = Instantiate(DoorItem, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-            inst.transform.parent = this.transform;
-            inst.name = "Door";
-        }
-        if (door == 0 && transform.Find("Door"))
-        {
-            var inst = transform.Find("Door").gameObject;
-            DestroyImmediate(inst);
-        }
-    }
-
-    void CreateDestroyLevelTransitionTileGizmo()
-    {
-        if (levelTransiIndex != 0 && !transform.Find("LevelTransi"))
-        {
-            var inst = Instantiate(LevelTransitionItem, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-            inst.transform.parent = this.transform;
-            inst.name = "LevelTransi";
-        }
-        if (levelTransiIndex == 0 && transform.Find("LevelTransi"))
-        {
-            var inst = transform.Find("LevelTransi").gameObject;
+            var inst = transform.Find(itemTypeName).gameObject;
             DestroyImmediate(inst);
         }
     }
@@ -187,6 +154,7 @@ public class TilingEditor : MonoBehaviour
     {
         DoorColoration();
         KeyColoration();
+        TempoTileColoration();
     }
 
     void DoorColoration()
@@ -194,19 +162,25 @@ public class TilingEditor : MonoBehaviour
         if (door == 1)
         {
             var mesh = Color.red;
-            transform.Find("Door").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+            transform.Find("Door").GetComponent<MeshRenderer>().material = redM;
         }
 
         if (door == 2)
         {
             var mesh = Color.blue;
-            transform.Find("Door").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+            transform.Find("Door").GetComponent<MeshRenderer>().material = blueM;
         }
 
         if (door == 3)
         {
             var mesh = Color.black;
-            transform.Find("Door").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+            transform.Find("Door").GetComponent<MeshRenderer>().material = greenM;
+        }
+
+        if (doorRotation && door!=0)
+        {
+            transform.Find("Door").Rotate(0, 90, 0);
+            doorRotation = false;           
         }
     }
 
@@ -215,19 +189,40 @@ public class TilingEditor : MonoBehaviour
         if (key == 1)
         {
             var mesh = Color.red;
-            transform.Find("Key").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+            transform.Find("Key").GetComponent<MeshRenderer>().material = redM;
         }
 
         if (key == 2)
         {
             var mesh = Color.blue;
-            transform.Find("Key").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+            transform.Find("Key").GetComponent<MeshRenderer>().material = blueM;
         }
 
         if (key == 3)
         {
             var mesh = Color.black;
-            transform.Find("Key").GetComponent<MeshRenderer>().sharedMaterial.color = mesh;
+            transform.Find("Key").GetComponent<MeshRenderer>().material = greenM;
+        }
+    }
+
+    void TempoTileColoration()
+    {
+        if (tempoValue == 1)
+        {
+            var mesh = Color.red;
+            GetComponent<MeshRenderer>().material = tileRedM;
+        }
+
+        if (tempoValue == 2)
+        {
+            var mesh = Color.blue;
+            GetComponent<MeshRenderer>().material = tileBlueM;
+        }
+
+        if (tempoValue== 3)
+        {
+            var mesh = Color.black;
+            GetComponent<MeshRenderer>().material = tileGreenM;
         }
     }
     #endregion
