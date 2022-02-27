@@ -61,16 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-/*        if(highlightedTiles.Count == 0 && stopFlag)
-        {
-            stepAssignement.Initialisation();
-            stopFlag = false;
-        }
-        if(highlightedTiles.Count != 0 && !stopFlag)
-        {
-            stopFlag = true;
-        }*/
-
         if (moveFlag)
         {
             FindHighlighted();       
@@ -193,7 +183,6 @@ public class PlayerMovement : MonoBehaviour
    
     IEnumerator EndBehavior(GridTiles tile)
     {
-        print("end level");
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Single);
