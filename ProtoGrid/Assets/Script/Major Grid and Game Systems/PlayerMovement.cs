@@ -140,11 +140,10 @@ public class PlayerMovement : MonoBehaviour
         if (highlightedTiles[currentPathIndex].key != 0)       
             KeyBehavior(highlightedTiles[currentPathIndex]);
       
-        if (highlightedTiles[currentPathIndex].levelTransiIndex>0)        
+        if (highlightedTiles[currentPathIndex].levelTransiIndex != 0)        
             StartCoroutine(EndBehavior(highlightedTiles[currentPathIndex]));
 
-        else if(highlightedTiles[currentPathIndex].levelTransiIndex == -1)
-            StartCoroutine(EndBehaviorToHub(highlightedTiles[currentPathIndex]));
+
 
         if (currentPathIndex < highlightedTiles.Count -1)
         {
@@ -185,16 +184,10 @@ public class PlayerMovement : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Single);
+        SceneManager.LoadScene("Lvl_" + tile.levelTransiIndex, LoadSceneMode.Single);
     } 
     
-    IEnumerator EndBehaviorToHub(GridTiles tile)
-    {
-     
-        FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Hub", LoadSceneMode.Single);
-    }
+
 
     void FirstCrumble()
     {
