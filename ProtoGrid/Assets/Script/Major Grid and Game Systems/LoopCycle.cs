@@ -4,64 +4,92 @@ using UnityEngine;
 
 public class LoopCycle : MonoBehaviour
 {
+    #region Variables
+
+    [Header("Input Values")]
+    [Space]
+    public int tempoValue;
+
+    [Header("Components")]
+    [Space]
     GridTiles[,] grid;
+    StepAssignement sAss;
+    PlayerMovement pMov;
     Reset reset;
-    public int resetTimer;
-    public int timerStart;
-    public List<GridTiles> tempoTiles;
-    public int tempoChangeValue;
-    public int reverseResetTempo = 0;
-    public int tempoIndex;
-    public int maxIndex;
-    public int index =0;
+    Transform Player;
+
+    [Header("Hidden Values")]
+    [Space]
+    int resetTimer;
+    int inverseResetTimer;
+    int resetStart;
+    [HideInInspector] public int tempoIndexValue;
+    bool flag = true;
+    int maxIndexValue = 0;
+    #endregion
 
     private void Awake()
     {
         reset = GetComponent<Reset>();
-        timerStart = reset.resetTimerValue;
+        resetStart = reset.resetTimerValue;
+        sAss = GetComponent<StepAssignement>();
+        pMov = GetComponent<PlayerMovement>();
+        
         grid = GetComponent<GridGenerator>().grid;
-        maxIndex = 0;
-        CreateTempoTilesList();
-        TempoChanger();
-
+        Player = FindObjectOfType<Player>().transform;
+        foreach(GridTiles obj in grid)
+        {
+            if(obj.tempoTile > maxIndexValue)
+            {
+                maxIndexValue = obj.tempoTile;
+            }
+        }
 
     }
+
     private void Update()
     {
+        inverseResetTimerValueSet();
+
+        if (maxIndexValue > 1)
+        {
+            tempoTileCycleIncr();
+        }
+
+    }
+
+    void inverseResetTimerValueSet()
+    {
         resetTimer = reset.resetTimer;
-        reverseResetTempo = timerStart - resetTimer;
-
-        TempoChanger();
+        inverseResetTimer = resetStart - resetTimer;
     }
 
-    void CreateTempoTilesList()
+    void tempoTileCycleIncr()
     {
-        foreach (GridTiles obj in grid)
+        if (flag)
         {
-            if (obj.tempoTile > 0)
-                tempoTiles.Add(obj);
-
-            if (obj.tempoTile > maxIndex)
-                maxIndex = obj.tempoTile;
+            if (inverseResetTimer % tempoValue >= tempoValue - 1)
+            {
+                tempoIndexValue++;
+                pMov.highlightedTiles.Clear();
+                pMov.currentPathIndex = 0;
+                StartCoroutine(InvokeIni());
+                flag = false;
+            }
         }
+
+        if (inverseResetTimer % tempoValue < tempoValue - 1)
+        {
+            flag = true;
+        }
+        tempoIndexValue %= maxIndexValue;
     }
 
-    void TempoChanger()
+    IEnumerator InvokeIni()
     {
-        if(tempoChangeValue == 0)
-        {
-            tempoChangeValue = 1;
-        }
-        tempoIndex = (index) / tempoChangeValue;
-        if (index < reverseResetTempo)
-        {
-            index += tempoChangeValue;
-        }
-
-        if(tempoIndex >= maxIndex)
-        {
-            index = 1;
-            timerStart = resetTimer;
-        }
+        yield return new WaitForSeconds(.1f);
+        sAss.Initialisation();
+        Player.position = new Vector3(Player.position.x, grid[(int)Player.position.x, (int)Player.position.z].transform.position.y + 1.5f, Player.position.z);
     }
+
 }

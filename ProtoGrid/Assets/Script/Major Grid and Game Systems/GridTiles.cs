@@ -15,11 +15,11 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     [HideInInspector] public bool highLight;
     public bool originalPosition;
-    public int key; 
-    public int door;
+    [Range(0, 5)]public int key;
+    [Range(0, 5)] public int door;
     public bool crumble;
-    public int levelTransiIndex;
-    public int timerChangeInputValue;
+    [Range(-2, 10)] public int levelTransiIndex;
+    [Range(-100, 100)] public int timerChangeInputValue;
     [Header("Work in progress don't use")]
     public int tempoTile;
     
@@ -34,8 +34,11 @@ public class GridTiles : MonoBehaviour
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
     PlayerMovement playerMovement;
+    StepAssignement stepAssignement;
     LoopCycle loopCycle;
 
+
+    bool flager1 = true;   
 
     #endregion
 
@@ -43,8 +46,19 @@ public class GridTiles : MonoBehaviour
     private void Awake()
     {
         DebugHub();
+
         TimerValueSetUp();
+
         SetUpComponents();
+    }
+
+    private void Start()
+    {
+        if(door != 0)
+        {
+            walkable = false;
+        }
+
     }
 
     void Update()
@@ -79,7 +93,7 @@ public class GridTiles : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (walkable && step>-1)
+        if (walkable && step>-1 && playerMovement.highlightedTiles.Count == 0)
         {
             playerMovement.moveFlag = true;
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Click");
@@ -96,6 +110,7 @@ public class GridTiles : MonoBehaviour
         pathHighlighter = gameManager.GetComponent<PathHighlighter>();
         playerMovement = gameManager.GetComponent<PlayerMovement>();
         loopCycle = gameManager.GetComponent<LoopCycle>();
+        stepAssignement = gameManager.GetComponent<StepAssignement>();
     }
 
     void HeightToInt()
@@ -161,14 +176,25 @@ public class GridTiles : MonoBehaviour
     }
     void tempoChange()
     {
-        if(loopCycle.tempoIndex == tempoTile && tempoTile!=0)
+       
+        if (loopCycle.tempoIndexValue == tempoTile - 1 && tempoTile != 0 && flager1)
         {
-            walkable = true;
-        }      
-        
+            var heights = transform.position;
+            heights.y += 1;
+            transform.position = heights;
 
-        if (loopCycle.tempoIndex != tempoTile && tempoTile != 0)
-            walkable = false;
+            flager1 = false;
+        }
+
+
+        if (loopCycle.tempoIndexValue != tempoTile - 1 && tempoTile != 0 && !flager1)
+        {
+            var heights = transform.position;
+            heights.y -= 1;
+            transform.position = heights;
+           //stepAssignement.Initialisation();
+            flager1 = true;
+        }
     }
 
     #endregion
