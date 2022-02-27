@@ -192,7 +192,7 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y -= 1;
             transform.position = heights;
-           stepAssignement.Initialisation();
+           //stepAssignement.Initialisation();
             flager1 = true;
         }
     }

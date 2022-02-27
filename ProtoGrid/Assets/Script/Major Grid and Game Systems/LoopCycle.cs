@@ -50,8 +50,8 @@ public class LoopCycle : MonoBehaviour
             {
                 tempoIndexValue++;
                 pMov.highlightedTiles.Clear();
-                StartCoroutine(InvokeIni());
-                
+                pMov.currentPathIndex = 0;
+                StartCoroutine(InvokeIni());                
                 flag = false;
             }
         }
@@ -66,7 +66,7 @@ public class LoopCycle : MonoBehaviour
 
     IEnumerator InvokeIni()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.001f);
         sAss.Initialisation();
         Player.position = new Vector3(Player.position.x, grid[(int)Player.position.x, (int)Player.position.z].transform.position.y + 1.5f, Player.position.z);
     }
