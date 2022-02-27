@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Booleans")]
     public bool moveFlag;
     public bool moveState = false;
+    bool stopFlag = true;
 
     [Space]
     [Header("Lists")]
@@ -60,6 +61,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+/*        if(highlightedTiles.Count == 0 && stopFlag)
+        {
+            stepAssignement.Initialisation();
+            stopFlag = false;
+        }
+        if(highlightedTiles.Count != 0 && !stopFlag)
+        {
+            stopFlag = true;
+        }*/
+
         if (moveFlag)
         {
             FindHighlighted();       
@@ -85,8 +96,11 @@ public class PlayerMovement : MonoBehaviour
             
         }
         highlightedTiles = highlightedTiles.OrderBy(x => x.step).ToList();
-        highlightedTiles[0].highLight = false;
-        highlightedTiles.RemoveAt(0);
+        if (highlightedTiles.Count != 0)
+        {
+            highlightedTiles[0].highLight = false;
+            highlightedTiles.RemoveAt(0);
+        }
         moveFlag = false;
         moveState = true;
     }
@@ -94,10 +108,10 @@ public class PlayerMovement : MonoBehaviour
     {
         DestroyDoor();
         
-        if (highlightedTiles != null)
+        if (highlightedTiles.Count != 0)
         {
             float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
-            if (distance > 0f)
+            if (distance > 0f && highlightedTiles[currentPathIndex].walkable)
             {
                 Vector3 moveDir = (new Vector3(highlightedTiles[currentPathIndex].transform.position.x, 1.5f + highlightedTiles[currentPathIndex].transform.position.y, highlightedTiles[currentPathIndex].transform.position.z) - player.position).normalized;
                 player.position += moveDir * moveSpeed * Time.deltaTime;
@@ -167,10 +181,13 @@ public class PlayerMovement : MonoBehaviour
         
     void DestroyDoor()
     {
-        if (highlightedTiles[currentPathIndex].transform.Find("Door"))
+        if(highlightedTiles.Count != 0)
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/World/DoorOpen");
-            Destroy(highlightedTiles[currentPathIndex].transform.Find("Door").gameObject);
+            if (highlightedTiles[currentPathIndex].transform.Find("Door"))
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/World/DoorOpen");
+                Destroy(highlightedTiles[currentPathIndex].transform.Find("Door").gameObject);
+            }
         }
     }
    
@@ -184,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
     
     IEnumerator EndBehaviorToHub(GridTiles tile)
     {
-        print("end Chapter");
+     
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Hub", LoadSceneMode.Single);

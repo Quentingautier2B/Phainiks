@@ -38,7 +38,6 @@ public class StepAssignement : MonoBehaviour
                 obj.step = -2;
             }
         }
-
         grid[startPosX, startPosY].step = 0;
 
         AssignationChecker();
@@ -102,7 +101,7 @@ public class StepAssignement : MonoBehaviour
                         
                         }
                     }
-                        
+                    
                     return false;
                 }
             #endregion
@@ -189,15 +188,17 @@ public class StepAssignement : MonoBehaviour
                     }
                     return false;
                 }
+    #endregion
         }
         return false;
     }
-    #endregion
+
     void SetVisited(int x, int y, int step)
     {
         if(grid[x, y])
         {
             grid[x,y].step = step;
         }
+
     }
 }
