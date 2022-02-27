@@ -85,6 +85,8 @@ public class LoopCycle : MonoBehaviour
         tempoIndexValue %= maxIndexValue;
     }
 
+
+    //Rubberband fix to change later
     IEnumerator InvokeIni()
     {
         yield return new WaitForSeconds(.1f);
