@@ -18,7 +18,7 @@ public class GridTiles : MonoBehaviour
     [Range(0, 5)]public int key;
     [Range(0, 5)] public int door;
     public bool crumble;
-    [Range(-2, 10)] public int levelTransiIndex;
+    [Range(0, 8)] public float levelTransiIndex;
     [Range(-100, 100)] public int timerChangeInputValue;
     [Header("Work in progress don't use")]
     public int tempoTile;
