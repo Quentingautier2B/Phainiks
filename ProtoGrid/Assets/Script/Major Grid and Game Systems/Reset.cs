@@ -16,7 +16,7 @@ public class Reset : MonoBehaviour
     [Header("Input Values")]
     [Space]
     public int resetTimer;
-    public int resetTimerValue;
+    int resetTimerValue = 0;
     #endregion
 
     private void Awake()
@@ -32,12 +32,14 @@ public class Reset : MonoBehaviour
 
     private void Update()
     {
-        if(resetTimer <= 0)
+
+
+        /*if(resetTimer <= 0)
         {
             
             ResetEffect();
             resetTimer = resetTimerValue;
-        }
+        }*/
     }
 
     void ResetEffect()

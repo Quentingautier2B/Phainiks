@@ -8,7 +8,7 @@ public class LoopCycle : MonoBehaviour
 
     [Header("Input Values")]
     [Space]
-    public int tempoValue;
+    [HideInInspector] public int tempoValue;
 
     [Header("Components")]
     [Space]
@@ -28,44 +28,120 @@ public class LoopCycle : MonoBehaviour
     int maxIndexValue = 0;
     #endregion
 
+
+     public int redTimer = 0;
+    [HideInInspector] public int redOffValue = 2;
+    [HideInInspector] public bool redFlag = false;
+
+     public int blueTimer = 0;
+    [HideInInspector] public int blueOffValue = 3;
+    [HideInInspector] public bool blueFlag = false;
+
+     public int greenTimer = 0;
+    [HideInInspector] public int greenOffValue = 4;
+    [HideInInspector] public bool greenFlag = true;
+
+
     private void Awake()
     {
-        reset = GetComponent<Reset>();
-        resetStart = reset.resetTimerValue;
+        reset = GetComponent<Reset>();  
         sAss = GetComponent<StepAssignement>();
         pMov = GetComponent<PlayerMovement>();
         
         grid = GetComponent<GridGenerator>().grid;
         Player = FindObjectOfType<Player>().transform;
-        foreach(GridTiles obj in grid)
+        
+        
+        //resetStart = reset.resetTimerValue;
+        /*foreach(GridTiles obj in grid)
         {
             if(obj.tempoTile > maxIndexValue)
             {
                 maxIndexValue = obj.tempoTile;
             }
-        }
+        }*/
 
     }
 
     private void Update()
     {
-        inverseResetTimerValueSet();
+        /*inverseResetTimerValueSet();
 
         if (maxIndexValue > 1)
         {
             tempoTileCycleIncr();
-        }
+        }*/
+
+        NewTempoTile(redOffValue,redTimer,redFlag);
+
 
     }
 
-    void inverseResetTimerValueSet()
+
+
+
+    void NewTempoTile(int offTime, int timerd, bool flagd)
+    {
+        if (redFlag && pMov.moveFlag)
+            redTimer--;
+
+        if (!redFlag && pMov.moveFlag)
+            redTimer++;
+
+        if (redTimer <= 0)
+            redFlag = false;
+
+        if (redTimer >= redOffValue)
+            redFlag = true;
+
+
+
+        if (blueFlag && pMov.moveFlag)
+            blueTimer--;
+
+        if (!blueFlag && pMov.moveFlag)
+            blueTimer++;
+
+        if (blueTimer <= 0)
+            blueFlag = false;
+
+        if (blueTimer >= blueOffValue)
+            blueFlag = true;
+
+
+
+        if (greenFlag && pMov.moveFlag)
+            greenTimer--;
+
+        if (!greenFlag && pMov.moveFlag)
+            greenTimer++;
+
+        if(greenTimer <= 0)
+            greenFlag = false;
+
+        if (greenTimer >= greenOffValue)
+            greenFlag = true;
+    }
+
+
+
+
+
+
+
+
+
+   /* void inverseResetTimerValueSet()
     {
         resetTimer = reset.resetTimer;
         inverseResetTimer = resetStart - resetTimer;
-    }
+    }*/
 
-    void tempoTileCycleIncr()
+    /*void tempoTileCycleIncr()
     {
+
+        
+
         if (flag)
         {
             if (inverseResetTimer % tempoValue >= tempoValue - 1)
@@ -83,15 +159,16 @@ public class LoopCycle : MonoBehaviour
             flag = true;
         }
         tempoIndexValue %= maxIndexValue;
-    }
+    }*/
 
 
     //Rubberband fix to change later
-    IEnumerator InvokeIni()
+/*    IEnumerator InvokeIni()
     {
         yield return new WaitForSeconds(.1f);
         sAss.Initialisation();
         Player.position = new Vector3(Player.position.x, grid[(int)Player.position.x, (int)Player.position.z].transform.position.y + 1.5f, Player.position.z);
-    }
+    }*/
+
 
 }

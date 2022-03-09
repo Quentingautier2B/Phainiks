@@ -22,6 +22,10 @@ public class GridTiles : MonoBehaviour
     [Range(-100, 100)] public int timerChangeInputValue;
     [Header("Work in progress don't use")]
     public int tempoTile;
+
+    bool redTile;
+    bool blueTile;
+    bool greenTile;
     
     [HideInInspector] public int timerChangeValue;
     [HideInInspector] public int height;
@@ -63,6 +67,15 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        if (tempoTile == 1)
+            redTile = true;
+
+        if (tempoTile == 2)
+            blueTile = true;
+
+        if (tempoTile == 3)
+            greenTile = true;
+
         SetUpDebugStepValue();
 
         HeightToInt();
@@ -177,24 +190,66 @@ public class GridTiles : MonoBehaviour
     void tempoChange()
     {
        
-        if (loopCycle.tempoIndexValue == tempoTile - 1 && tempoTile != 0 && flager1)
+        if (redTile && loopCycle.redFlag && flager1)
         {
             var heights = transform.position;
-            heights.y += 1;
+            heights.y += 2;
             transform.position = heights;
 
             flager1 = false;
         }
 
 
-        if (loopCycle.tempoIndexValue != tempoTile - 1 && tempoTile != 0 && !flager1)
+        if (redTile && !loopCycle.redFlag && !flager1)
         {
             var heights = transform.position;
-            heights.y -= 1;
+            heights.y -= 2;
             transform.position = heights;
            //stepAssignement.Initialisation();
             flager1 = true;
         }
+
+
+        if (blueTile && loopCycle.blueFlag && flager1)
+        {
+            var heights = transform.position;
+            heights.y += 2;
+            transform.position = heights;
+
+            flager1 = false;
+        }
+
+
+        if (blueTile && !loopCycle.blueFlag && !flager1)
+        {
+            var heights = transform.position;
+            heights.y -= 2;
+            transform.position = heights;
+            //stepAssignement.Initialisation();
+            flager1 = true;
+        }
+
+
+                if (greenTile && loopCycle.greenFlag && flager1)
+        {
+            var heights = transform.position;
+            heights.y += 2;
+            transform.position = heights;
+
+            flager1 = false;
+        }
+
+
+        if (greenTile && !loopCycle.greenFlag && !flager1)
+        {
+            var heights = transform.position;
+            heights.y -= 2;
+            transform.position = heights;
+           //stepAssignement.Initialisation();
+            flager1 = true;
+        }
+
+
     }
 
     #endregion
