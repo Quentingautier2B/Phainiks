@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] StepAssignement stepAssignement;
     Reset reset;
     Transform player;
+    LoopCycle lC;
+    GridGenerator gG;
     
 
     [Space]
@@ -39,8 +41,10 @@ public class PlayerMovement : MonoBehaviour
     #region callMethods
     private void Awake()
     {
+        gG = GetComponent<GridGenerator>();
         reset = GetComponent<Reset>();
         stepAssignement = GetComponent<StepAssignement>();
+        lC = GetComponent<LoopCycle>();
         grid = FindObjectOfType<GridGenerator>().grid;
         player = FindObjectOfType<Player>().transform;
     }
@@ -94,6 +98,9 @@ public class PlayerMovement : MonoBehaviour
         moveFlag = false;
         moveState = true;
     }
+
+
+
     private void Move()
     {
         DestroyDoor();
@@ -122,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
                     highlightedTiles.Clear();
                     currentPathIndex = 0;
                 }
-                reset.resetTimer -= 1;
+                reset.resetTimer += 1;
             }
 
         }
@@ -140,11 +147,10 @@ public class PlayerMovement : MonoBehaviour
         if (highlightedTiles[currentPathIndex].key != 0)       
             KeyBehavior(highlightedTiles[currentPathIndex]);
       
-        if (highlightedTiles[currentPathIndex].levelTransiIndex>0)        
+        if (highlightedTiles[currentPathIndex].levelTransiIndex != 0)        
             StartCoroutine(EndBehavior(highlightedTiles[currentPathIndex]));
 
-        else if(highlightedTiles[currentPathIndex].levelTransiIndex == -1)
-            StartCoroutine(EndBehaviorToHub(highlightedTiles[currentPathIndex]));
+
 
         if (currentPathIndex < highlightedTiles.Count -1)
         {
@@ -185,16 +191,10 @@ public class PlayerMovement : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Lvl" + tile.levelTransiIndex, LoadSceneMode.Single);
+        SceneManager.LoadScene("Lvl_" + tile.levelTransiIndex, LoadSceneMode.Single);
     } 
     
-    IEnumerator EndBehaviorToHub(GridTiles tile)
-    {
-     
-        FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Hub", LoadSceneMode.Single);
-    }
+
 
     void FirstCrumble()
     {
@@ -214,8 +214,147 @@ public class PlayerMovement : MonoBehaviour
         FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "+" + tile.timerChangeValue;
         tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
         reset.resetTimer += tile.timerChangeValue;
-        tile.timerChangeValue = 0;
-    } 
+        //tile.timerChangeValue = 0;
+        
+
+        foreach(GridTiles tiled in gG.grid)
+        {
+            if (tiled.tempoTile == 1)
+            {
+
+                if (!lC.redFlag)
+                {
+                    lC.redTimer++;
+                    if(lC.redTimer > lC.redOffValue)
+                    {
+                        lC.redTimer = lC.redOffValue - (lC.redTimer - lC.redOffValue);
+                    }
+                    /*lC.redTimer--;
+                                        if (((((tile.timerChangeValue + lC.redTimer) % lC.redOffValue) - tile.timerChangeValue - lC.redTimer) / lC.redOffValue) % 2 == 0)
+                                        {
+
+                                            lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = true;
+                                        }
+                                        else
+                                        {
+
+                                            lC.redTimer = lC.redOffValue - (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = false;
+                                        }*/
+                }
+
+                if (lC.redFlag)
+                {
+                    lC.redTimer--;
+                    if (lC.redTimer < 0)
+                    {
+                        lC.redTimer *= -1;
+                    }
+                    /*                    if (((((tile.timerChangeValue + lC.redTimer) % lC.redOffValue) - tile.timerChangeValue - lC.redTimer) / lC.redOffValue) % 2 == 0)
+                                        {
+
+                                            lC.redTimer = lC.redOffValue-(tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = false;
+                                        }
+                                        else
+                                        {
+
+                                            lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = true;
+                                        }*/
+                }
+            }
+
+
+            if (tiled.tempoTile == 2)
+            {
+
+                if (!lC.blueFlag)
+                {
+                    lC.blueTimer++;
+                    if (lC.blueTimer > lC.blueOffValue)
+                    {
+                        lC.blueTimer = lC.blueOffValue - (lC.blueTimer - lC.blueOffValue);
+                    }
+                    /* if (((((tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue) - tile.timerChangeValue - lC.blueTimer) / lC.blueOffValue) % 2 == 0)
+                     {
+
+                         lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
+                         lC.blueFlag = true;
+                     }
+                     else
+                     {
+
+                         lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
+                         lC.blueFlag = false;
+                     }*/
+                }
+
+                if (lC.blueFlag)
+                {
+                    lC.blueTimer--;
+                    if (lC.blueTimer < 0)
+                    {
+                        lC.blueTimer *=-1;
+                    }
+                    /*if (((((tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue) - tile.timerChangeValue - lC.blueTimer) / lC.blueOffValue) % 2 == 0)
+                    {
+
+                        lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
+                        lC.blueFlag = false;
+                    }
+                    else
+                    {
+
+                        lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
+                        lC.blueFlag = true;
+                    }*/
+                }
+            }
+
+            if (tiled.tempoTile == 3)
+            {
+
+                if (lC.greenFlag)
+                {
+
+                    if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
+                    {
+
+                        lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                        lC.greenFlag = true;
+                    }
+                    else
+                    {
+
+                        lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                        lC.greenFlag = false;
+                    }
+                }
+
+                if (!lC.greenFlag)
+                {
+
+                    if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
+                    {
+
+                        lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                        lC.greenFlag = false;
+                    }
+                    else
+                    {
+
+                        lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                        lC.greenFlag = true;
+                    }
+                }
+            }
+        }
+    }
+
+
+    
     
     void TimerMinusBehavior(GridTiles tile)
     {
@@ -223,6 +362,52 @@ public class PlayerMovement : MonoBehaviour
         FindObjectOfType<BoxCollider2D>().GetComponent<TextMeshProUGUI>().text = "" + tile.timerChangeValue;
         tile.transform.Find("Timer+").Find("TimerGoOver").GetComponent<ParticleSystem>().Play();
         reset.resetTimer += tile.timerChangeValue;
+        print("a");
+        if(tile.tempoTile == 3)
+        {
+            print("b");
+            if (!lC.greenFlag)
+            {
+                lC.greenTimer++;
+                
+                if (lC.greenTimer > lC.greenOffValue)
+                {
+                    lC.greenTimer = lC.greenOffValue - (lC.greenTimer - lC.greenOffValue);
+                }
+                /*print("c");
+                if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
+                {
+                    lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                    lC.greenFlag = true;
+                }
+                else
+                {
+                    lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                    lC.greenFlag = false;
+                }*/
+            }
+
+            if (lC.greenFlag)
+            {
+                lC.greenTimer--;
+                
+                if (lC.greenTimer <0)
+                {
+                    lC.greenTimer *=-1;
+                }
+                /*              print("d");
+                              if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
+                              {
+                                  lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                                  lC.greenFlag = false;
+                              }
+                              else
+                              {
+                                  lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                                  lC.greenFlag = true;
+                              }*/
+            }
+        }
     }
     #endregion
 }

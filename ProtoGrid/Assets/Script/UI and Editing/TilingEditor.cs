@@ -17,7 +17,7 @@ public class TilingEditor : MonoBehaviour
     bool originalPosition;
     int key;
     int timerChangeInputValue;
-    int levelTransiIndex;
+    float levelTransiIndex;
     int tempoValue;
 
 
@@ -96,7 +96,7 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectIndex(timerChangeInputValue, "Timer+", TimerItem, 0.5f);
         CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
         CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
-        CreateDestroyObjectIndex(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
+        CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
     }
 
     void EditorBlocSnapping()
@@ -131,8 +131,23 @@ public class TilingEditor : MonoBehaviour
             var inst = transform.Find(itemTypeName).gameObject;
             DestroyImmediate(inst);
         }
-    }    
-    
+    }
+
+    void CreateDestroyObjectFloat(float localInt, string itemTypeName, GameObject itemType, float itemHeight)
+    {
+        if (localInt != 0 && !transform.Find(itemTypeName))
+        {
+            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            inst.transform.parent = this.transform;
+            inst.name = itemTypeName;
+        }
+        if (localInt == 0 && transform.Find(itemTypeName))
+        {
+            var inst = transform.Find(itemTypeName).gameObject;
+            DestroyImmediate(inst);
+        }
+    }
+
     void CreateDestroyObjectBoolean(bool localBool, string itemTypeName, GameObject itemType, float itemHeight)
     {
         if (localBool && !transform.Find(itemTypeName))
