@@ -31,7 +31,7 @@ public class LoopCycle : MonoBehaviour
 
      public int redTimer = 0;
     [HideInInspector] public int redOffValue = 2;
-    [HideInInspector] public bool redFlag = false;
+     public bool redFlag = false;
 
      public int blueTimer = 0;
     [HideInInspector] public int blueOffValue = 3;

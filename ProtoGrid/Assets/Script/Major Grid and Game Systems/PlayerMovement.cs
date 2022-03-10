@@ -222,38 +222,47 @@ public class PlayerMovement : MonoBehaviour
             if (tiled.tempoTile == 1)
             {
 
-                if (lC.redFlag)
-                {
-
-                    if (((((tile.timerChangeValue + lC.redTimer) % lC.redOffValue) - tile.timerChangeValue - lC.redTimer) / lC.redOffValue) % 2 == 0)
-                    {
-
-                        lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
-                        lC.redFlag = true;
-                    }
-                    else
-                    {
-
-                        lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
-                        lC.redFlag = false;
-                    }
-                }
-
                 if (!lC.redFlag)
                 {
-
-                    if (((((tile.timerChangeValue + lC.redTimer) % lC.redOffValue) - tile.timerChangeValue - lC.redTimer) / lC.redOffValue) % 2 == 0)
+                    lC.redTimer++;
+                    if(lC.redTimer > lC.redOffValue)
                     {
-
-                        lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
-                        lC.redFlag = false;
+                        lC.redTimer = lC.redOffValue - (lC.redTimer - lC.redOffValue);
                     }
-                    else
+                    /*lC.redTimer--;
+                                        if (((((tile.timerChangeValue + lC.redTimer) % lC.redOffValue) - tile.timerChangeValue - lC.redTimer) / lC.redOffValue) % 2 == 0)
+                                        {
+
+                                            lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = true;
+                                        }
+                                        else
+                                        {
+
+                                            lC.redTimer = lC.redOffValue - (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = false;
+                                        }*/
+                }
+
+                if (lC.redFlag)
+                {
+                    lC.redTimer--;
+                    if (lC.redTimer < 0)
                     {
-
-                        lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
-                        lC.redFlag = true;
+                        lC.redTimer *= -1;
                     }
+                    /*                    if (((((tile.timerChangeValue + lC.redTimer) % lC.redOffValue) - tile.timerChangeValue - lC.redTimer) / lC.redOffValue) % 2 == 0)
+                                        {
+
+                                            lC.redTimer = lC.redOffValue-(tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = false;
+                                        }
+                                        else
+                                        {
+
+                                            lC.redTimer = (tile.timerChangeValue + lC.redTimer) % lC.redOffValue;
+                                            lC.redFlag = true;
+                                        }*/
                 }
             }
 
@@ -261,27 +270,35 @@ public class PlayerMovement : MonoBehaviour
             if (tiled.tempoTile == 2)
             {
 
-                if (lC.blueFlag)
-                {
-
-                    if (((((tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue) - tile.timerChangeValue - lC.blueTimer) / lC.blueOffValue) % 2 == 0)
-                    {
-
-                        lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
-                        lC.blueFlag = true;
-                    }
-                    else
-                    {
-
-                        lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
-                        lC.blueFlag = false;
-                    }
-                }
-
                 if (!lC.blueFlag)
                 {
+                    lC.blueTimer++;
+                    if (lC.blueTimer > lC.blueOffValue)
+                    {
+                        lC.blueTimer = lC.blueOffValue - (lC.blueTimer - lC.blueOffValue);
+                    }
+                    /* if (((((tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue) - tile.timerChangeValue - lC.blueTimer) / lC.blueOffValue) % 2 == 0)
+                     {
 
-                    if (((((tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue) - tile.timerChangeValue - lC.blueTimer) / lC.blueOffValue) % 2 == 0)
+                         lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
+                         lC.blueFlag = true;
+                     }
+                     else
+                     {
+
+                         lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
+                         lC.blueFlag = false;
+                     }*/
+                }
+
+                if (lC.blueFlag)
+                {
+                    lC.blueTimer--;
+                    if (lC.blueTimer < 0)
+                    {
+                        lC.blueTimer *=-1;
+                    }
+                    /*if (((((tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue) - tile.timerChangeValue - lC.blueTimer) / lC.blueOffValue) % 2 == 0)
                     {
 
                         lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
@@ -292,7 +309,7 @@ public class PlayerMovement : MonoBehaviour
 
                         lC.blueTimer = (tile.timerChangeValue + lC.blueTimer) % lC.blueOffValue;
                         lC.blueFlag = true;
-                    }
+                    }*/
                 }
             }
 
@@ -349,34 +366,46 @@ public class PlayerMovement : MonoBehaviour
         if(tile.tempoTile == 3)
         {
             print("b");
-            if (lC.greenFlag)
-            {
-                print("c");
-                if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
-                {
-                    lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
-                    lC.greenFlag = true;
-                }
-                else
-                {
-                    lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
-                    lC.greenFlag = false;
-                }
-            }
-
             if (!lC.greenFlag)
             {
-                print("d");
-                if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
+                lC.greenTimer++;
+                
+                if (lC.greenTimer > lC.greenOffValue)
                 {
-                    lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
-                    lC.greenFlag = false;
+                    lC.greenTimer = lC.greenOffValue - (lC.greenTimer - lC.greenOffValue);
                 }
-                else
+                /*print("c");
+                if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
                 {
                     lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
                     lC.greenFlag = true;
                 }
+                else
+                {
+                    lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                    lC.greenFlag = false;
+                }*/
+            }
+
+            if (lC.greenFlag)
+            {
+                lC.greenTimer--;
+                
+                if (lC.greenTimer <0)
+                {
+                    lC.greenTimer *=-1;
+                }
+                /*              print("d");
+                              if (((((tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue) - tile.timerChangeValue - lC.greenTimer) / lC.greenOffValue) % 2 == 0)
+                              {
+                                  lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                                  lC.greenFlag = false;
+                              }
+                              else
+                              {
+                                  lC.greenTimer = (tile.timerChangeValue + lC.greenTimer) % lC.greenOffValue;
+                                  lC.greenFlag = true;
+                              }*/
             }
         }
     }
