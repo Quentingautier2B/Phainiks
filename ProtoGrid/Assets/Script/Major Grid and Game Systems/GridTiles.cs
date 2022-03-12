@@ -47,7 +47,24 @@ public class GridTiles : MonoBehaviour
     #region CallMethods
     private void Awake()
     {
+        if (tempoTile == 1)
+        {
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystemRenderer>().material.color = Color.blue;
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystemRenderer>().material.color = Color.blue;
+        }        
         
+        if (tempoTile == 2)
+        {
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystemRenderer>().material.color = Color.green;
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystemRenderer>().material.color = Color.green;
+        }        
+        
+        if (tempoTile == 3)
+        {
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystemRenderer>().material.color = Color.red;
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystemRenderer>().material.color = Color.red;
+        }
+
 
         TimerValueSetUp();
 
@@ -147,7 +164,8 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y += 2;
             transform.position = heights;
-
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play ();
             flager1 = false;
         }
 
@@ -157,7 +175,9 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y -= 2;
             transform.position = heights;
-           //stepAssignement.Initialisation();
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
+            //stepAssignement.Initialisation();
             flager1 = true;
         }
 
@@ -167,7 +187,8 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y += 2;
             transform.position = heights;
-
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
             flager1 = false;
         }
 
@@ -177,6 +198,8 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y -= 2;
             transform.position = heights;
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
             //stepAssignement.Initialisation();
             flager1 = true;
         }
@@ -187,7 +210,8 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y += 2;
             transform.position = heights;
-
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
             flager1 = false;
         }
 
@@ -197,7 +221,9 @@ public class GridTiles : MonoBehaviour
             var heights = transform.position;
             heights.y -= 2;
             transform.position = heights;
-           //stepAssignement.Initialisation();
+            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
+            //stepAssignement.Initialisation();
             flager1 = true;
         }
 
