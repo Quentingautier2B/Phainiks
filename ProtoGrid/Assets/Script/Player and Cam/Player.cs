@@ -5,8 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [TextArea]
-    [SerializeField] string Notes = "Comment Here.";
-    Reset reset;
+    [SerializeField] string Notes = "Comment Here.";    
     GridGenerator gridG;
 
 
@@ -14,14 +13,12 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        reset = FindObjectOfType<Reset>();
-        gridG = FindObjectOfType<GridGenerator>();
-        
+        gridG = FindObjectOfType<GridGenerator>();       
     }
     private void Update()
     {
         var yPos = transform.position;
-        yPos.y = gridG.grid[(int)transform.position.x, (int)transform.position.z].transform.position.y + 1.5f ;
+        yPos.y = gridG.grid[(int)transform.position.x, (int)transform.position.z].transform.position.y + 1.5f;
         transform.position = yPos;      
     }
 

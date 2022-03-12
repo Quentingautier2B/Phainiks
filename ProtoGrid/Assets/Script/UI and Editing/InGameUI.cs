@@ -8,25 +8,21 @@ public class InGameUI : MonoBehaviour
 {
     #region variables
     public TextMeshProUGUI resetText;
-    Reset resetScript;
-    int resetValue;
+    PlayerMovement pMov;
     #endregion
 
-    void Start()
+    private void Awake()
     {
-        resetScript = FindObjectOfType<Reset>();
-        
-    }
-    
-    void Update()
-    {
-        
-        ResetTimerText();
+        pMov = FindObjectOfType<PlayerMovement>();
     }
 
-    void ResetTimerText()
+    void Update()
+    {       
+       TimerText();
+    }
+
+    void TimerText()
     {
-        resetValue = resetScript.resetTimer;
-        resetText.text = resetValue.ToString();
+        resetText.text = pMov.timerValue.ToString();
     }
 }
