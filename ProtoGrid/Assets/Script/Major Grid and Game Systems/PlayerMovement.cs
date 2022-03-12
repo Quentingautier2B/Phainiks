@@ -141,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
             stepAssignement.Initialisation();
         }*/
 
-        print(grid[x, y].name);
+        
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
         if (distance > 0f && grid[x, y].walkable)
         {
@@ -156,7 +156,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //TileEffectOnMove();
-            swipe.movestate = false;
+            swipe.StateMachine.SetBool("OntoTempoTile", false);
+            swipe.StateMachine.SetBool("OntonormalTile", false);
+            // swipe.movestate = false;
         }
     }
     void TileEffectOnMove()

@@ -128,6 +128,8 @@ public class GridTiles : MonoBehaviour
 
     void HeightToInt()
     {
+        
+        
         if (height != (int)transform.position.y)
             height = (int)transform.position.y;
     }
