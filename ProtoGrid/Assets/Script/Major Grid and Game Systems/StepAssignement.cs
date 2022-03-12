@@ -78,7 +78,7 @@ public class StepAssignement : MonoBehaviour
         {
             #region case 1
             case 1:
-                if(y+1<columns && grid[x,y+1] && grid[x,y+1].step == step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1 && grid[x, y + 1].walkable)
+                if(y+1<columns && grid[x,y+1] && grid[x,y+1].step <= step && grid[x,y+1].height <= grid[x,y].height+1 && grid[x, y + 1].height >= grid[x, y].height - 1 && grid[x, y + 1].walkable)
                 {
                     return true;
                 }
@@ -107,7 +107,7 @@ public class StepAssignement : MonoBehaviour
             #endregion
             #region case 2
             case 2:
-                if(x+1<row && grid[x+1,y] && grid[x+1,y].step == step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1 && grid[x+1, y].walkable)
+                if(x+1<row && grid[x+1,y] && grid[x+1,y].step <= step && grid[x+1, y].height <= grid[x, y].height + 1 && grid[x+1, y].height >= grid[x, y].height - 1 && grid[x+1, y].walkable)
                 {
                     return true;
                 }
@@ -135,7 +135,7 @@ public class StepAssignement : MonoBehaviour
             #endregion
             #region case 3
             case 3:
-                if(y-1>-1 && grid[x,y-1] && grid[x,y-1].step == step && grid[x, y - 1].height <= grid[x, y].height + 1 && grid[x, y - 1].height >= grid[x, y].height - 1 && grid[x, y - 1].walkable)
+                if(y-1>-1 && grid[x,y-1] && grid[x,y-1].step <= step && grid[x, y - 1].height <= grid[x, y].height + 1 && grid[x, y - 1].height >= grid[x, y].height - 1 && grid[x, y - 1].walkable)
                 {
                     return true;
                 }
@@ -163,7 +163,7 @@ public class StepAssignement : MonoBehaviour
             #endregion
             #region case 4
             case 4:
-                if(x-1>-1 && grid[x-1,y] && grid[x-1,y].step == step && grid[x-1, y].height <= grid[x, y].height + 1 && grid[x-1, y].height >= grid[x, y].height - 1 && grid[x-1, y].walkable)
+                if(x-1>-1 && grid[x-1,y] && grid[x-1,y].step <= step && grid[x-1, y].height <= grid[x, y].height + 1 && grid[x-1, y].height >= grid[x, y].height - 1 && grid[x-1, y].walkable)
                 {
                     return true;
                 }

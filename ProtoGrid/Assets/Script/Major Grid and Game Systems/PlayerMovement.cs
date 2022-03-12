@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")]
     [SerializeField] StepAssignement stepAssignement;
     Reset reset;
+    Swipe swipe;
     Transform player;
     LoopCycle lC;
     GridGenerator gG;
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         gG = GetComponent<GridGenerator>();
         reset = GetComponent<Reset>();
+        swipe = GetComponent<Swipe>();
         stepAssignement = GetComponent<StepAssignement>();
         lC = GetComponent<LoopCycle>();
         grid = FindObjectOfType<GridGenerator>().grid;
@@ -71,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (moveState)
         {
-            Move();
+            //Move();
         }
     }
     #endregion
@@ -101,11 +103,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    private void Move()
+    public void Move(int x, int y)
     {
-        DestroyDoor();
-        
-        if (highlightedTiles.Count != 0)
+        //DestroyDoor();
+
+        /*if (highlightedTiles.Count != 0)
         {
             float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(highlightedTiles[currentPathIndex].transform.position.x, highlightedTiles[currentPathIndex].transform.position.z));
             if (distance > 0f && highlightedTiles[currentPathIndex].walkable)
@@ -137,9 +139,26 @@ public class PlayerMovement : MonoBehaviour
         {
             moveState = false;
             stepAssignement.Initialisation();
-        }
-    }   
+        }*/
 
+        print(grid[x, y].name);
+        float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
+        if (distance > 0f && grid[x, y].walkable)
+        {
+            Vector3 moveDir = (new Vector3(x, 1.5f + grid[x, y].transform.position.y, y) - player.position).normalized;
+            player.position += moveDir * moveSpeed * Time.deltaTime;
+
+            if (distance < 0.1f)
+            {
+                player.position = new Vector3(x, 1.5f + grid[x, y].transform.position.y, y);
+            }
+        }
+        else
+        {
+            //TileEffectOnMove();
+            swipe.movestate = false;
+        }
+    }
     void TileEffectOnMove()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");

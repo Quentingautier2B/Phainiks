@@ -87,7 +87,7 @@ public class GridTiles : MonoBehaviour
         tempoChange();
     }
 
-    private void OnMouseOver()
+   /* private void OnMouseOver()
     {     
         if(step>-1 && !playerMovement.moveState && step != 0) 
             pathHighlighter.PathAssignment((int)transform.position.x, (int)transform.position.z, (int)height, step);
@@ -111,7 +111,7 @@ public class GridTiles : MonoBehaviour
             playerMovement.moveFlag = true;
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Click");
         }
-    }
+    }*/
     #endregion
 
     #region Methods

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 691397173153258451}
   - component: {fileID: 691397173153258450}
   - component: {fileID: 1303156830519498291}
+  - component: {fileID: 4043845528694502321}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -126,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetTimer: 0
-  resetTimerValue: 300
 --- !u!114 &1303156830519498291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,11 +139,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089178c31ad2b5d4399a56884c8684e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTimer: 0
-  timerStart: 0
-  tempoTiles: []
-  tempoChangeValue: 0
-  reverseResetTempo: 0
-  tempoIndex: 0
-  maxIndex: 0
-  index: 0
+  tempoValue: 0
+  tempoIndexValue: 0
+  redTimer: 0
+  redOffValue: 2
+  redFlag: 0
+  blueTimer: 0
+  blueOffValue: 3
+  blueFlag: 0
+  greenTimer: 0
+  greenOffValue: 4
+  greenFlag: 1
+--- !u!114 &4043845528694502321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691397173153258445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4dd78d4185036b4389d31bb57f04761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadZoneDiameter: 50
+  movestate: 0
