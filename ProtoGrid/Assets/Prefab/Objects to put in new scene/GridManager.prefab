@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 691397173153258455}
   - component: {fileID: 691397173153258454}
   - component: {fileID: 691397173153258449}
-  - component: {fileID: 691397173153258448}
-  - component: {fileID: 691397173153258451}
-  - component: {fileID: 691397173153258450}
   - component: {fileID: 1303156830519498291}
   - component: {fileID: 4043845528694502321}
   m_Layer: 0
@@ -75,58 +72,10 @@ MonoBehaviour:
   Notes: Makes the player move on the highlighted tiles.
   moveSpeed: 5
   ogPos: {x: 0, y: 0, z: 0}
-  currentPathIndex: 0
-  stepAssignement: {fileID: 0}
+  timerValue: 0
   moveFlag: 0
   moveState: 0
   highlightedTiles: []
---- !u!114 &691397173153258448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691397173153258445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c96881e245dc514ca3e0ba02721b73f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Notes: Set a variables on each tile in the scene that is equal to the number of
-    movement necessary for the player to reach it.
-  startPosX: 0
-  startPosY: 0
-  row: 0
-  columns: 0
-  gridGenerator: {fileID: 0}
-  player: {fileID: 0}
---- !u!114 &691397173153258451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691397173153258445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d67cc1d85b7fff41b16eb355ea61fac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Notes: Highlighs the shortest path from the player to the tiles hovered by the
-    mouse.
---- !u!114 &691397173153258450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691397173153258445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99de7d142737fcb41a707918b64fb16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resetTimer: 0
 --- !u!114 &1303156830519498291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,16 +88,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089178c31ad2b5d4399a56884c8684e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempoValue: 0
-  tempoIndexValue: 0
   redTimer: 0
-  redOffValue: 2
+  redOffValue: 1
   redFlag: 0
   blueTimer: 0
-  blueOffValue: 3
+  blueOffValue: 2
   blueFlag: 0
   greenTimer: 0
-  greenOffValue: 4
+  greenOffValue: 3
   greenFlag: 1
 --- !u!114 &4043845528694502321
 MonoBehaviour:
@@ -164,3 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadZoneDiameter: 50
   movestate: 0
+  StateMachine: {fileID: 0}
