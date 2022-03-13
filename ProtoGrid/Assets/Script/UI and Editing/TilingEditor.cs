@@ -19,7 +19,6 @@ public class TilingEditor : MonoBehaviour
     int timerChangeInputValue;
     float levelTransiIndex;
     int tempoValue;
-    DebugTools debugTools;
     Renderer rend;
 
     [Header("Materials for CubeTypes")]
@@ -48,7 +47,6 @@ public class TilingEditor : MonoBehaviour
 
     private void Awake()
     {       
-        DebugHub();
     }
 
     private void OnDrawGizmos()
@@ -94,22 +92,6 @@ public class TilingEditor : MonoBehaviour
         if (crumble)
         {
             GetComponent<Renderer>().material = crumbleMat;
-        }
-    }
-
-    void DebugHub()
-    {
-        debugTools = FindObjectOfType<DebugTools>();
-
-        rend = GetComponent<Renderer>();
-        if (debugTools.debugModOn && !transform.Find("Step").gameObject.activeSelf)
-        {
-            transform.Find("Step").gameObject.SetActive(true);
-        }
-
-        if (!debugTools.debugModOn && transform.Find("Step").gameObject.activeSelf)
-        {
-            transform.Find("Step").gameObject.SetActive(false);
         }
     }
 

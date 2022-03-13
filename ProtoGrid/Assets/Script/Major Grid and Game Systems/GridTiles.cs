@@ -77,8 +77,6 @@ public class GridTiles : MonoBehaviour
         if (tempoTile == 3)
             greenTile = true;
 
-        SetUpDebugStepValue();
-
         HeightToInt();
 
         VisibleOrInvisibleTile();
@@ -115,12 +113,6 @@ public class GridTiles : MonoBehaviour
         }
     }
 
-    void SetUpDebugStepValue()
-    {
-        var text = step.ToString();
-        transform.Find("Step").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = text;
-    }
-
     void Error(string errorText)
     {
         print(errorText);
@@ -132,13 +124,11 @@ public class GridTiles : MonoBehaviour
         if (walkable && !rend.enabled)
         {
             rend.enabled = true;
-            transform.Find("Step").Find("Text (TMP)").gameObject.SetActive(true);
         }
 
 
         if (!walkable && rend.enabled && door == 0)
         {
-            transform.Find("Step").Find("Text (TMP)").gameObject.SetActive(false);
             rend.enabled = false;
         }
     }
