@@ -330,6 +330,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &52022959
@@ -5858,6 +5859,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &198638864
@@ -6163,6 +6165,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &254348708
@@ -11451,6 +11454,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &344445385
@@ -12337,6 +12341,7 @@ MonoBehaviour:
   levelTransiIndex: 1
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &555256102
@@ -12833,6 +12838,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &622379804
@@ -18156,6 +18162,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &714675936
@@ -18461,6 +18468,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &869830651
@@ -19296,6 +19304,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1006268033
@@ -29918,6 +29927,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 3
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1182399263
@@ -35386,6 +35396,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1276604799
@@ -36077,6 +36088,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 1
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1467789973
@@ -47050,6 +47062,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1937028167
@@ -47518,6 +47531,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 1
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1979385377
@@ -48290,6 +48304,7 @@ GameObject:
   - component: {fileID: 2104190747}
   - component: {fileID: 2104190746}
   - component: {fileID: 2104190745}
+  - component: {fileID: 2104190749}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -48389,6 +48404,25 @@ MonoBehaviour:
   Tile: {fileID: 963485817208866333, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
   raws: 5
   columns: 3
+--- !u!95 &2104190749
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104190743}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c6aaa52c08a888041a3254923d31afff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2119475473
 GameObject:
   m_ObjectHideFlags: 0
@@ -48498,6 +48532,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 2
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &2119475477
