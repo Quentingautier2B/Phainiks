@@ -35,6 +35,8 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject originalPositionItem;
     [SerializeField] GameObject TimerItem;
     [SerializeField] GameObject LevelTransitionItem;
+    [SerializeField] GameObject PSysTTU;
+    [SerializeField] GameObject PSysTTD;
 
     public Material redM;
     public Material blueM;
@@ -45,8 +47,7 @@ public class TilingEditor : MonoBehaviour
     #endregion
 
     private void Awake()
-    {
-        
+    {       
         DebugHub();
     }
 
@@ -262,6 +263,10 @@ public class TilingEditor : MonoBehaviour
             var mesh = Color.black;
             GetComponent<MeshRenderer>().material = tileGreenM;
         }
+
+        CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
+        CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
+
     }
     #endregion
 }
