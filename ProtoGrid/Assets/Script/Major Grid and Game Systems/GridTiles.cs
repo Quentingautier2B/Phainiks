@@ -159,6 +159,8 @@ public class GridTiles : MonoBehaviour
             if (transform.position.y >= target -0.01f)
             {
                 transform.position = new Vector3 (transform.position.x, target, transform.position.z);
+                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                 tempoTileFlag = true;
                 flager1 = false;
             }
@@ -178,6 +180,8 @@ public class GridTiles : MonoBehaviour
             if (transform.position.y <= target + 0.01f)
             {
                 transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                 tempoTileFlag = true;
                 flager1 = true;
 
@@ -197,6 +201,8 @@ public class GridTiles : MonoBehaviour
             if (transform.position.y >= target - 0.01f)
             {
                 transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                 tempoTileFlag = true;
                 flager1 = false;
 
@@ -217,6 +223,8 @@ public class GridTiles : MonoBehaviour
             if (transform.position.y <= target + 0.01f)
             {
                 transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                 tempoTileFlag = true;
                 flager1 = true;
 
@@ -237,6 +245,8 @@ public class GridTiles : MonoBehaviour
             if (transform.position.y >= target - 0.01f)
             {
                 transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                 tempoTileFlag = true;
                 flager1 = false;
 
@@ -257,6 +267,8 @@ public class GridTiles : MonoBehaviour
             if (transform.position.y <= target + 0.01f)
             {
                 transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                 tempoTileFlag = true;
                 flager1 = true;
 
