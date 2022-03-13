@@ -22,6 +22,9 @@ public class GridTiles : MonoBehaviour
     [Range(-100, 100)] public int timerChangeInputValue;
     [Header("Work in progress don't use")]
     public int tempoTile;
+    public float tempoTileSpeed;
+    float target;
+    bool tempoTileFlag = true;
 
     bool redTile;
     bool blueTile;
@@ -141,64 +144,123 @@ public class GridTiles : MonoBehaviour
     }
     void tempoChange()
     {
-       
+
         if (redTile && loopCycle.redFlag && flager1)
         {
-            var heights = transform.position;
-            heights.y += 2;
-            transform.position = heights;
 
-            flager1 = false;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y + 2;
+                tempoTileFlag = false;
+            }
+            
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed/10), transform.position.z);
+       
+            if (transform.position.y >= target -0.01f)
+            {
+                transform.position = new Vector3 (transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = false;
+            }
+
         }
-
-
         if (redTile && !loopCycle.redFlag && !flager1)
         {
-            var heights = transform.position;
-            heights.y -= 2;
-            transform.position = heights;
-           //stepAssignement.Initialisation();
-            flager1 = true;
-        }
 
+            if (tempoTileFlag)
+            {
+                target = transform.position.y - 2;
+                tempoTileFlag = false;
+            }
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y <= target + 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = true;
+
+            }
+        }
 
         if (blueTile && loopCycle.blueFlag && flager1)
         {
-            var heights = transform.position;
-            heights.y += 2;
-            transform.position = heights;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y + 2;
+                tempoTileFlag = false;
+            }
 
-            flager1 = false;
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y >= target - 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = false;
+
+            }
         }
 
 
         if (blueTile && !loopCycle.blueFlag && !flager1)
         {
-            var heights = transform.position;
-            heights.y -= 2;
-            transform.position = heights;
-            //stepAssignement.Initialisation();
-            flager1 = true;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y - 2;
+                tempoTileFlag = false;
+            }
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y <= target + 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = true;
+
+            }
         }
 
 
-                if (greenTile && loopCycle.greenFlag && flager1)
+        if (greenTile && loopCycle.greenFlag && flager1)
         {
-            var heights = transform.position;
-            heights.y += 2;
-            transform.position = heights;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y + 2;
+                tempoTileFlag = false;
+            }
 
-            flager1 = false;
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y >= target - 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = false;
+
+            }
         }
 
 
         if (greenTile && !loopCycle.greenFlag && !flager1)
         {
-            var heights = transform.position;
-            heights.y -= 2;
-            transform.position = heights;
-           //stepAssignement.Initialisation();
-            flager1 = true;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y - 2;
+                tempoTileFlag = false;
+            }
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y <= target + 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = true;
+
+            }
         }
 
 

@@ -27,7 +27,7 @@ public class LoopCycle : MonoBehaviour
     }
 
     public void tempoTileIncr()
-        {
+    {
         if (redFlag)
             redTimer--;
 
