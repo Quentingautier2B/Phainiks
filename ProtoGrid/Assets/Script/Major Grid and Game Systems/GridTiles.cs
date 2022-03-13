@@ -22,6 +22,9 @@ public class GridTiles : MonoBehaviour
     [Range(-100, 100)] public int timerChangeInputValue;
     [Header("Work in progress don't use")]
     public int tempoTile;
+    public float tempoTileSpeed;
+    float target;
+    bool tempoTileFlag = true;
 
     bool redTile;
     bool blueTile;
@@ -34,11 +37,9 @@ public class GridTiles : MonoBehaviour
     [Header("Components")]
     Renderer rend;
     GameObject gameManager;
-    DebugTools debugTools;
-    PathHighlighter pathHighlighter;
+       
     GridGenerator gridGenerator;
-    PlayerMovement playerMovement;
-    StepAssignement stepAssignement;
+    PlayerMovement playerMovement;    
     LoopCycle loopCycle;
 
 
@@ -49,7 +50,7 @@ public class GridTiles : MonoBehaviour
     #region CallMethods
     private void Awake()
     {
-        DebugHub();
+        
 
         TimerValueSetUp();
 
@@ -80,74 +81,29 @@ public class GridTiles : MonoBehaviour
 
         HeightToInt();
 
-        HighlightingHub();
-
         VisibleOrInvisibleTile();
 
         tempoChange();
-    }
-
-    private void OnMouseOver()
-    {     
-        if(step>-1 && !playerMovement.moveState && step != 0) 
-            pathHighlighter.PathAssignment((int)transform.position.x, (int)transform.position.z, (int)height, step);
-    }
-
-    private void OnMouseExit()
-    {
-        if (!playerMovement.moveState)
-        {
-            foreach (GridTiles obj in gridGenerator.grid)
-            {
-                obj.highLight = false;
-            }
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        if (walkable && step>-1 && playerMovement.highlightedTiles.Count == 0)
-        {
-            playerMovement.moveFlag = true;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Click");
-        }
     }
     #endregion
 
     #region Methods
     void SetUpComponents()
     {
+        rend = GetComponent<Renderer>();
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
-        gridGenerator = gameManager.GetComponent<GridGenerator>();
-        pathHighlighter = gameManager.GetComponent<PathHighlighter>();
+        gridGenerator = gameManager.GetComponent<GridGenerator>();       
         playerMovement = gameManager.GetComponent<PlayerMovement>();
         loopCycle = gameManager.GetComponent<LoopCycle>();
-        stepAssignement = gameManager.GetComponent<StepAssignement>();
     }
 
     void HeightToInt()
-    {
+    {   
         if (height != (int)transform.position.y)
             height = (int)transform.position.y;
     }
    
-    void DebugHub()
-    {
-        debugTools = FindObjectOfType<DebugTools>();
-
-        rend = GetComponent<Renderer>();
-        if (debugTools.debugModOn && !transform.Find("Step").gameObject.activeSelf)
-        {
-            transform.Find("Step").gameObject.SetActive(true);
-        }
-
-        if (!debugTools.debugModOn && transform.Find("Step").gameObject.activeSelf)
-        {
-            transform.Find("Step").gameObject.SetActive(false);
-        }
-    }
-
     void TimerValueSetUp()
     {
         timerChangeValue = timerChangeInputValue;
@@ -158,7 +114,6 @@ public class GridTiles : MonoBehaviour
             transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
         }
     }
-
 
     void SetUpDebugStepValue()
     {
@@ -189,91 +144,127 @@ public class GridTiles : MonoBehaviour
     }
     void tempoChange()
     {
-       
+
         if (redTile && loopCycle.redFlag && flager1)
         {
-            var heights = transform.position;
-            heights.y += 2;
-            transform.position = heights;
 
-            flager1 = false;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y + 2;
+                tempoTileFlag = false;
+            }
+            
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed/10), transform.position.z);
+       
+            if (transform.position.y >= target -0.01f)
+            {
+                transform.position = new Vector3 (transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = false;
+            }
+
         }
-
-
         if (redTile && !loopCycle.redFlag && !flager1)
         {
-            var heights = transform.position;
-            heights.y -= 2;
-            transform.position = heights;
-           //stepAssignement.Initialisation();
-            flager1 = true;
-        }
 
+            if (tempoTileFlag)
+            {
+                target = transform.position.y - 2;
+                tempoTileFlag = false;
+            }
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y <= target + 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = true;
+
+            }
+        }
 
         if (blueTile && loopCycle.blueFlag && flager1)
         {
-            var heights = transform.position;
-            heights.y += 2;
-            transform.position = heights;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y + 2;
+                tempoTileFlag = false;
+            }
 
-            flager1 = false;
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y >= target - 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = false;
+
+            }
         }
 
 
         if (blueTile && !loopCycle.blueFlag && !flager1)
         {
-            var heights = transform.position;
-            heights.y -= 2;
-            transform.position = heights;
-            //stepAssignement.Initialisation();
-            flager1 = true;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y - 2;
+                tempoTileFlag = false;
+            }
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y <= target + 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = true;
+
+            }
         }
 
 
-                if (greenTile && loopCycle.greenFlag && flager1)
+        if (greenTile && loopCycle.greenFlag && flager1)
         {
-            var heights = transform.position;
-            heights.y += 2;
-            transform.position = heights;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y + 2;
+                tempoTileFlag = false;
+            }
 
-            flager1 = false;
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y >= target - 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = false;
+
+            }
         }
 
 
         if (greenTile && !loopCycle.greenFlag && !flager1)
         {
-            var heights = transform.position;
-            heights.y -= 2;
-            transform.position = heights;
-           //stepAssignement.Initialisation();
-            flager1 = true;
+            if (tempoTileFlag)
+            {
+                target = transform.position.y - 2;
+                tempoTileFlag = false;
+            }
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
+
+            if (transform.position.y <= target + 0.01f)
+            {
+                transform.position = new Vector3(transform.position.x, target, transform.position.z);
+                tempoTileFlag = true;
+                flager1 = true;
+
+            }
         }
 
 
     }
 
     #endregion
-
-    #region HighlightMethods
-    void HighlightingHub()
-    {
-        if (highLight)
-            Highlight();
-
-        if (!highLight)
-            UnHighlight();
-    }
-
-    void Highlight()
-    {
-        transform.Find("highlight").gameObject.SetActive(true);
-    }
-
-    void UnHighlight()
-    {
-        transform.Find("highlight").gameObject.SetActive(false);
-        
-    }
-    #endregion 
-
 }

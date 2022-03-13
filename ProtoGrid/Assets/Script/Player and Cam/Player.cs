@@ -5,20 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [TextArea]
-    [SerializeField] string Notes = "Comment Here.";
-    Reset reset;
+    [SerializeField] string Notes = "Comment Here.";    
+    GridGenerator gridG;
+
 
     public List<string> Inventory;
 
     private void Awake()
     {
-        reset = FindObjectOfType<Reset>();
-        
+        gridG = FindObjectOfType<GridGenerator>();       
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            reset.resetTimer = 0;
+        var yPos = transform.position;
+        yPos.y = gridG.grid[(int)transform.position.x, (int)transform.position.z].transform.position.y + 1.5f;
+        transform.position = yPos;      
     }
 
 }
