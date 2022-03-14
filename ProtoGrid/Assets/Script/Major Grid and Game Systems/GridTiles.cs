@@ -20,11 +20,13 @@ public class GridTiles : MonoBehaviour
     public bool crumble;
     [Range(0, 8)] public float levelTransiIndex;
     [Range(-100, 100)] public int timerChangeInputValue;
-    [Header("Work in progress don't use")]
     public int tempoTile;
     public float tempoTileSpeed;
     float target;
     bool tempoTileFlag = true;
+    [Header("Work in progress don't use")]
+    [Range(0, 6)] public int Teleporter;
+    public int TeleporterTarget;
 
     bool redTile;
     bool blueTile;

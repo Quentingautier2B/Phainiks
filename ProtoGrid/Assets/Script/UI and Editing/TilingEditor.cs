@@ -19,6 +19,7 @@ public class TilingEditor : MonoBehaviour
     int timerChangeInputValue;
     float levelTransiIndex;
     int tempoValue;
+    int tpValue;
     Renderer rend;
 
     [Header("Materials for CubeTypes")]
@@ -36,6 +37,7 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject LevelTransitionItem;
     [SerializeField] GameObject PSysTTU;
     [SerializeField] GameObject PSysTTD;
+    [SerializeField] GameObject TpItem;
 
     public Material redM;
     public Material blueM;
@@ -73,6 +75,8 @@ public class TilingEditor : MonoBehaviour
         timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;
         tempoValue = tile.tempoTile;
+        tpValue = tile.Teleporter;
+        
        // doorRotation = tile.doorRotation;
     }
 
@@ -103,6 +107,7 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
         CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
+        CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
     }
 
     void EditorBlocSnapping()
