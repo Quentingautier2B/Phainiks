@@ -9,17 +9,19 @@ public class GridGenerator : MonoBehaviour
     #region variables
     public GridTiles[,] grid;
     [SerializeField] bool instantiateGrid = false;
-    public GameObject Tile;   
+    public GameObject Tile;
+    Transform player;
     [Header("Input Values")]
     
     public int raws;
     public int columns;
-    
+    [HideInInspector] public Vector3 ogPos;
+
 
     #endregion
     void Awake()
     {
-        
+        player = FindObjectOfType<Player>().transform;
         GridTiles[] list = FindObjectsOfType<GridTiles>();
         grid = new GridTiles[raws, columns];
         for (int i = 0; i < list.Length; i++)
@@ -30,6 +32,17 @@ public class GridGenerator : MonoBehaviour
             grid[x, y].name = "tiles " + x + " "+ y;
         }
         
+    }
+    private void Start()
+    {
+        foreach (GridTiles obj in grid)
+        {
+            if (obj.originalPosition)
+            {
+                ogPos = new Vector3(obj.transform.position.x, player.position.y, obj.transform.position.z);
+                player.position = ogPos;
+            }
+        }
     }
 
     private void OnDrawGizmos()

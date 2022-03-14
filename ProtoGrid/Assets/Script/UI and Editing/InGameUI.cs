@@ -7,15 +7,15 @@ using TMPro;
 public class InGameUI : MonoBehaviour
 {
     #region variables
-    public TextMeshProUGUI resetText;
-    PlayerMovement pMov;
+    TextMeshProUGUI timerText;
+    [HideInInspector]public int timerValue;
     #endregion
+
 
     private void Awake()
     {
-        pMov = FindObjectOfType<PlayerMovement>();
+        timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
     }
-
     void Update()
     {       
        TimerText();
@@ -23,6 +23,6 @@ public class InGameUI : MonoBehaviour
 
     void TimerText()
     {
-        resetText.text = pMov.timerValue.ToString();
+       timerText.text = timerValue.ToString();
     }
 }
