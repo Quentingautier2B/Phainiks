@@ -20,13 +20,11 @@ public class GridTiles : MonoBehaviour
     public bool crumble;
     [Range(0, 8)] public float levelTransiIndex;
     [Range(-100, 100)] public int timerChangeInputValue;
+    [Header("Work in progress don't use")]
     public int tempoTile;
     public float tempoTileSpeed;
     float target;
     bool tempoTileFlag = true;
-    [Header("Work in progress don't use")]
-    [Range(0, 6)] public int Teleporter;
-    public int TeleporterTarget;
 
     bool redTile;
     bool blueTile;
@@ -41,8 +39,7 @@ public class GridTiles : MonoBehaviour
     GameObject gameManager;
        
     GridGenerator gridGenerator;
-    PlayerMovement playerMovement;    
-    LoopCycle loopCycle;
+
 
 
     bool flager1 = true;   
@@ -70,20 +67,13 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
-        if (tempoTile == 1)
-            redTile = true;
 
-        if (tempoTile == 2)
-            blueTile = true;
-
-        if (tempoTile == 3)
-            greenTile = true;
 
         HeightToInt();
 
         VisibleOrInvisibleTile();
 
-        tempoChange();
+        //tempoChange();
     }
     #endregion
 
@@ -93,9 +83,7 @@ public class GridTiles : MonoBehaviour
         rend = GetComponent<Renderer>();
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
-        gridGenerator = gameManager.GetComponent<GridGenerator>();       
-        playerMovement = gameManager.GetComponent<PlayerMovement>();
-        loopCycle = gameManager.GetComponent<LoopCycle>();
+        gridGenerator = gameManager.GetComponent<GridGenerator>();             
     }
 
     void HeightToInt()
@@ -115,12 +103,6 @@ public class GridTiles : MonoBehaviour
         }
     }
 
-    void Error(string errorText)
-    {
-        print(errorText);
-        Time.timeScale = 0;
-    }
-
     void VisibleOrInvisibleTile()
     {
         if (walkable && !rend.enabled)
@@ -134,141 +116,5 @@ public class GridTiles : MonoBehaviour
             rend.enabled = false;
         }
     }
-    void tempoChange()
-    {
-
-        if (redTile && loopCycle.redFlag && flager1)
-        {
-
-            if (tempoTileFlag)
-            {
-                target = transform.position.y + 2;
-                tempoTileFlag = false;
-            }
-            
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed/10), transform.position.z);
-       
-            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-            if (transform.position.y >= target -0.01f)
-            {
-                transform.position = new Vector3 (transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = false;
-            }
-
-        }
-        if (redTile && !loopCycle.redFlag && !flager1)
-        {
-
-            if (tempoTileFlag)
-            {
-                target = transform.position.y - 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-            transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-            if (transform.position.y <= target + 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = true;
-
-            }
-        }
-
-        if (blueTile && loopCycle.blueFlag && flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y + 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y >= target - 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                tempoTileFlag = true;
-                flager1 = false;
-
-            }
-        }
-
-
-        if (blueTile && !loopCycle.blueFlag && !flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y - 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y <= target + 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                tempoTileFlag = true;
-                flager1 = true;
-
-            }
-        }
-
-
-        if (greenTile && loopCycle.greenFlag && flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y + 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y >= target - 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                tempoTileFlag = true;
-                flager1 = false;
-
-            }
-        }
-
-
-        if (greenTile && !loopCycle.greenFlag && !flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y - 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y <= target + 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                tempoTileFlag = true;
-                flager1 = true;
-
-            }
-        }
-
-
-    }
-
     #endregion
 }

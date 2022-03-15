@@ -381,7 +381,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -420,9 +419,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &11193886
@@ -555,7 +552,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -594,9 +590,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &17486024
@@ -826,7 +820,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -865,9 +858,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &47219981
@@ -1184,7 +1175,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -1223,9 +1213,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &122566692
@@ -1385,56 +1373,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135255201}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &140864897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 140864898}
-  - component: {fileID: 140864899}
-  m_Layer: 0
-  m_Name: StateMachine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &140864898
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140864897}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.618761, y: -12.1579, z: -30.08648}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 468739373}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &140864899
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140864897}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c6aaa52c08a888041a3254923d31afff, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &147307727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1731,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -1832,9 +1769,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &226096815
@@ -1967,7 +1902,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -2006,9 +1940,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &232879899
@@ -2236,7 +2168,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -2275,9 +2206,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &313487105
@@ -2458,7 +2387,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -2497,9 +2425,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 2
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 0.5
   timerChangeValue: 0
   height: 0
 --- !u!65 &368843037
@@ -2632,7 +2558,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -2671,9 +2596,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &386302864
@@ -3134,7 +3057,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -3173,9 +3095,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &454094230
@@ -3269,8 +3189,8 @@ Transform:
   m_Children:
   - {fileID: 2044201618}
   - {fileID: 353113875}
-  - {fileID: 722017592}
-  - {fileID: 140864898}
+  - {fileID: 885761644}
+  - {fileID: 1446926853}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3323,7 +3243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f049d31a90266144397c01edfde3439e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetText: {fileID: 1695618339}
+  timerValue: 0
 --- !u!1 &473582580
 GameObject:
   m_ObjectHideFlags: 0
@@ -3772,7 +3692,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -3811,9 +3730,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &550766641
@@ -4231,7 +4148,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -4270,9 +4186,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &616149409
@@ -4550,7 +4464,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -4589,9 +4502,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &707205530
@@ -4724,7 +4635,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -4763,9 +4673,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &710205902
@@ -4898,7 +4806,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -4937,9 +4844,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &715039810
@@ -5004,118 +4909,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715039806}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &722017591
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 722017592}
-  - component: {fileID: 722017596}
-  - component: {fileID: 722017595}
-  - component: {fileID: 722017594}
-  - component: {fileID: 722017593}
-  m_Layer: 0
-  m_Name: GridManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &722017592
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722017591}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.618761, y: -12.1579, z: -30.08648}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 468739373}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &722017593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722017591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4dd78d4185036b4389d31bb57f04761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deadZoneDiameter: 50
-  movestate: 0
-  StateMachine: {fileID: 0}
---- !u!114 &722017594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722017591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089178c31ad2b5d4399a56884c8684e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  redTimer: 0
-  redOffValue: 1
-  redFlag: 0
-  blueTimer: 0
-  blueOffValue: 2
-  blueFlag: 0
-  greenTimer: 0
-  greenOffValue: 3
-  greenFlag: 1
---- !u!114 &722017595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722017591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18fcbb481feee34ca4d3280e5ab7270, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Notes: Makes the player move on the highlighted tiles.
-  moveSpeed: 5
-  ogPos: {x: 0, y: 0, z: 0}
-  timerValue: 0
-  moveFlag: 0
-  moveState: 0
-  highlightedTiles: []
---- !u!114 &722017596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722017591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9598e595b93a50c4c8035fea68c6026a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Notes: 'Finds the tiles in the scene and put them in a 2 dimensional array named
-    "grid".
-
-    Enter Raws for Max ''x'' value in the grid.
-
-    Enter Columns for
-    Max ''y'' value in the grid.'
-  instantiateGrid: 0
-  Tile: {fileID: 963485817208866333, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
-  raws: 10
-  columns: 5
 --- !u!1 &740197005
 GameObject:
   m_ObjectHideFlags: 0
@@ -5184,7 +4977,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -5223,9 +5015,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &740197009
@@ -5453,7 +5243,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -5492,9 +5281,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &771428099
@@ -5912,7 +5699,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -5951,9 +5737,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &801650770
@@ -10908,7 +10692,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -10947,9 +10730,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &822351555
@@ -11177,7 +10958,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -11216,9 +10996,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &849662941
@@ -11351,7 +11129,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -11390,9 +11167,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &863190239
@@ -11457,6 +11232,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863190235}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &885761644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+  m_PrefabInstance: {fileID: 1624949462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &917444065
 GameObject:
   m_ObjectHideFlags: 0
@@ -11525,7 +11305,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -11564,9 +11343,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &917444069
@@ -11701,7 +11478,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -11740,9 +11516,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 2
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 0.5
   timerChangeValue: 0
   height: 0
 --- !u!65 &935260893
@@ -11875,7 +11649,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -11914,9 +11687,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &940469722
@@ -12505,7 +12276,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -12544,9 +12314,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1092853184
@@ -17501,7 +17269,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -17540,9 +17307,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1117788618
@@ -17675,7 +17440,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -17714,9 +17478,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1130502387
@@ -18039,7 +17801,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -18078,9 +17839,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1152069291
@@ -27952,7 +27711,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -27991,9 +27749,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1201870827
@@ -28373,7 +28129,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -28412,9 +28167,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1242095021
@@ -28642,7 +28395,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -28681,9 +28433,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1320474697
@@ -28816,7 +28566,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -28855,9 +28604,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1326280149
@@ -33907,7 +33654,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -33946,9 +33692,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1412349089
@@ -34177,7 +33921,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -34216,9 +33959,7 @@ MonoBehaviour:
   levelTransiIndex: 0.6
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1423627697
@@ -34351,7 +34092,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -34390,9 +34130,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1428225306
@@ -34481,15 +34219,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446926852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08436251, y: 0.27022696, z: -0.9996352}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1891861760}
   - {fileID: 2085951793}
   - {fileID: 2094468080}
   - {fileID: 215010506}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 468739373}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1463395466
 GameObject:
@@ -34846,7 +34584,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -34885,9 +34622,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 1
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 0.5
   timerChangeValue: 0
   height: 0
 --- !u!65 &1523766073
@@ -35020,7 +34755,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -35059,9 +34793,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1534412677
@@ -35194,7 +34926,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -35233,9 +34964,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1561454955
@@ -35463,7 +35192,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -35502,9 +35230,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1618408384
@@ -35637,7 +35363,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -35676,9 +35401,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1622818271
@@ -35743,6 +35466,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622818267}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1624949462
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 468739373}
+    m_Modifications:
+    - target: {fileID: 691397173153258445, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_Name
+      value: GridManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258454, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: raws
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258454, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: columns
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 27.703123
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.887672
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -31.086115
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691397173153258455, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
 --- !u!1 &1642315957
 GameObject:
   m_ObjectHideFlags: 0
@@ -35811,7 +35599,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -35850,9 +35637,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1642315961
@@ -36024,7 +35809,7 @@ GameObject:
   - component: {fileID: 1695618340}
   - component: {fileID: 1695618339}
   m_Layer: 5
-  m_Name: ResetCurrentValue
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36594,7 +36379,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -36633,9 +36417,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1809548277
@@ -36768,7 +36550,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -36807,9 +36588,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1813287999
@@ -36969,6 +36748,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816759904}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1838726821
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 27.618761
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.1579
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.08648
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943152722358956397, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: m_Name
+      value: StateMachine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
 --- !u!1 &1840240963
 GameObject:
   m_ObjectHideFlags: 0
@@ -37484,7 +37320,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -37523,9 +37358,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1912551739
@@ -37833,7 +37666,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -37872,9 +37704,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1914487590
@@ -38102,7 +37932,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -38141,9 +37970,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &1970684435
@@ -43098,7 +42925,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -43137,9 +42963,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &2013859158
@@ -43272,7 +43096,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -43311,9 +43134,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &2014505938
@@ -43831,7 +43652,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -43870,9 +43690,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &2056366109
@@ -44335,7 +44153,6 @@ MonoBehaviour:
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
-  TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
@@ -44374,9 +44191,7 @@ MonoBehaviour:
   levelTransiIndex: 0
   timerChangeInputValue: 0
   tempoTile: 0
-  tempoTileSpeed: 3
-  Teleporter: 0
-  TeleporterTarget: 0
+  tempoTileSpeed: 1
   timerChangeValue: 0
   height: 0
 --- !u!65 &2108859874

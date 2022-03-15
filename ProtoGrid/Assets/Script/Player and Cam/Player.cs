@@ -6,19 +6,19 @@ public class Player : MonoBehaviour
 {
     [TextArea]
     [SerializeField] string Notes = "Comment Here.";    
-    GridGenerator gridG;
+    GridTiles[,] grid;
 
 
     public List<string> Inventory;
 
     private void Awake()
     {
-        gridG = FindObjectOfType<GridGenerator>();       
+        grid = FindObjectOfType<GridGenerator>().grid;       
     }
     private void Update()
     {
         var yPos = transform.position;
-        yPos.y = gridG.grid[(int)transform.position.x, (int)transform.position.z].transform.position.y + 1.5f;
+        yPos.y = grid[(int)transform.position.x, (int)transform.position.z].transform.position.y + 1.5f;
         transform.position = yPos;      
     }
 
