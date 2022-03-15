@@ -14,8 +14,9 @@ public class SwipeInput : StateMachineBehaviour
     Transform player;
     GridGenerator gridG;
     GridTiles[,] grid;
-    TempoBehavior temp;
+    TileVariables temp;
     bool awake = true;
+    [HideInInspector]public Vector2 roundingDirectionalYPosition;
   
     
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,7 +26,7 @@ public class SwipeInput : StateMachineBehaviour
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
             grid = gridG.grid;
-            temp = FindObjectOfType<Animator>().GetBehaviour<TempoBehavior>();
+            temp = FindObjectOfType<TileVariables>();
             awake = false;
         }
      
@@ -74,11 +75,12 @@ public class SwipeInput : StateMachineBehaviour
         if (directionSwipe.x > 0 && directionSwipe.y > 0)
         {
             if (TestDirection(pPosX, pPosY, 1))
-                {                    
+                {
+                roundingDirectionalYPosition = new Vector2(0, 0);
                 anim.SetInteger("TargetInfoX", pPosX + 1);
                 anim.SetInteger("TargetInfoY", pPosY);
-                anim.SetBool("OntoTempoTile", true);
-                /*if ((grid[pPosX + 1, pPosY].tempoTile == 1) ||
+                //anim.SetBool("OntoTempoTile", true);
+                if ((grid[pPosX + 1, pPosY].tempoTile == 1) ||
                    (grid[pPosX + 1, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX + 1, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
                    (grid[pPosX + 1, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
@@ -89,11 +91,11 @@ public class SwipeInput : StateMachineBehaviour
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
-                else if (grid[pPosX + 1, pPosY].tempoTile == 0)
+                else 
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
-                }*/
+                }
             }
                 
         }
@@ -102,10 +104,11 @@ public class SwipeInput : StateMachineBehaviour
         {
             if (TestDirection(pPosX, pPosY, 2))
             {
+                roundingDirectionalYPosition = new Vector2(0, 1);
                 anim.SetInteger("TargetInfoX", pPosX);
                 anim.SetInteger("TargetInfoY", pPosY - 1);
-                anim.SetBool("OntoTempoTile", true);
-                /*if ((grid[pPosX, pPosY - 1].tempoTile == 1) ||
+                //anim.SetBool("OntoTempoTile", true);
+                if ((grid[pPosX, pPosY - 1].tempoTile == 1) ||
                    (grid[pPosX, pPosY - 1].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX, pPosY - 1].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
                    (grid[pPosX, pPosY - 1].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
@@ -116,11 +119,11 @@ public class SwipeInput : StateMachineBehaviour
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
-                else if (grid[pPosX, pPosY - 1].tempoTile == 0)
+                else
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
-                }*/
+                }
             }
         }
 
@@ -128,10 +131,11 @@ public class SwipeInput : StateMachineBehaviour
         {
             if (TestDirection(pPosX, pPosY, 3))
             {
+                roundingDirectionalYPosition = new Vector2(1, 0);
                 anim.SetInteger("TargetInfoX", pPosX);
                 anim.SetInteger("TargetInfoY", pPosY + 1);
-                anim.SetBool("OntoTempoTile", true);
-                /*if ((grid[pPosX, pPosY + 1].tempoTile == 1) ||
+                //anim.SetBool("OntoTempoTile", true);
+                if ((grid[pPosX, pPosY + 1].tempoTile == 1) ||
                    (grid[pPosX, pPosY + 1].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX, pPosY + 1].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
                    (grid[pPosX, pPosY + 1].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
@@ -142,11 +146,11 @@ public class SwipeInput : StateMachineBehaviour
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
-                else if (grid[pPosX, pPosY + 1].tempoTile == 0)
+                else 
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
-                }*/
+                }
 
 
             }
@@ -156,10 +160,11 @@ public class SwipeInput : StateMachineBehaviour
         {
             if (TestDirection(pPosX, pPosY, 4))
             {
+                roundingDirectionalYPosition = new Vector2(1, 1);
                 anim.SetInteger("TargetInfoX", pPosX - 1);
                 anim.SetInteger("TargetInfoY", pPosY);
-                anim.SetBool("OntoTempoTile", true);
-            /*    if ((grid[pPosX - 1, pPosY].tempoTile == 1) || 
+                //anim.SetBool("OntoTempoTile", true);
+                if ((grid[pPosX - 1, pPosY].tempoTile == 1) || 
                    (grid[pPosX - 1, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX - 1, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
                    (grid[pPosX - 1, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) || 
@@ -170,11 +175,11 @@ public class SwipeInput : StateMachineBehaviour
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
-                else if (grid[pPosX - 1, pPosY].tempoTile == 0)
+                else 
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
-                }*/
+                }
             }
         }
     }

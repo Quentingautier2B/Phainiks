@@ -48,12 +48,12 @@ public class MoveBehavior : StateMachineBehaviour
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
         if (distance > 0f && grid[x, y].walkable)
         {
-            Vector3 moveDir = (new Vector3(x, 1.5f + grid[x, y].transform.position.y, y) - player.position).normalized;
+            Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
             player.position += moveDir * moveSpeed * Time.deltaTime;
 
             if (distance < 0.1f)
             {
-                player.position = new Vector3(x, 1.5f + grid[x, y].transform.position.y, y);
+                player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
             }
         }
         else
@@ -76,6 +76,7 @@ public class MoveBehavior : StateMachineBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         timerValue++;
+
 
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
