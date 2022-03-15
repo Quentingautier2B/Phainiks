@@ -20,16 +20,16 @@ public class GridTiles : MonoBehaviour
     public bool crumble;
     [Range(0, 8)] public float levelTransiIndex;
     [Range(-100, 100)] public int timerChangeInputValue;
-    [Header("Work in progress don't use")]
     public int tempoTile;
     public float tempoTileSpeed;
-    float target;
-    bool tempoTileFlag = true;
 
-    bool redTile;
-    bool blueTile;
-    bool greenTile;
-    
+    [Header("Work in progress don't use")]
+    [Range(0, 5)] public int teleporter;
+    public int tpTargetIndex;
+    [HideInInspector] public GridTiles TpTarget;
+
+
+
     [HideInInspector] public int timerChangeValue;
     [HideInInspector] public int height;
 
@@ -42,8 +42,7 @@ public class GridTiles : MonoBehaviour
 
 
 
-    bool flager1 = true;   
-
+    
     #endregion
 
     #region CallMethods
@@ -61,6 +60,25 @@ public class GridTiles : MonoBehaviour
         if(door != 0)
         {
             walkable = false;
+        }
+
+        if (teleporter != 0)
+        {
+            foreach (GridTiles obj in gridGenerator.grid)
+            {
+                if (obj.teleporter == tpTargetIndex)
+                {
+                    if (TpTarget != null)
+                        Debug.LogError("2 same targetTP");
+                    if (obj == this)
+                    {
+                        Debug.LogError("Tp Can't have himself as target");
+                        return;
+                    }
+                        
+                    TpTarget = obj;
+                }
+            }
         }
 
     }
@@ -115,6 +133,11 @@ public class GridTiles : MonoBehaviour
         {
             rend.enabled = false;
         }
+    }
+
+    void RecupTargetTeleporter()
+    {
+
     }
     #endregion
 }

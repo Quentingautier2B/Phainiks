@@ -75,7 +75,7 @@ public class TilingEditor : MonoBehaviour
         timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;
         tempoValue = tile.tempoTile;
-        tpValue = tile.Teleporter;
+        tpValue = tile.teleporter;
         
        // doorRotation = tile.doorRotation;
     }
