@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class TempoBehavior : StateMachineBehaviour
 {
-    public int redTimer = 0;
+    //public int redTimer = 0;
     int redOffValue = 1;
-    public bool redFlag;
+    //public bool redFlag;
 
-   public int blueTimer = 0;
+   //public int blueTimer = 0;
    int blueOffValue = 2;
-   public bool blueFlag;
+   //public bool blueFlag;
 
-   public int greenTimer = 0;
+   //public int greenTimer = 0;
     int greenOffValue = 3;
-   public bool greenFlag;
+   //public bool greenFlag;
+
+    TileVariables t;
 
 
     [SerializeField] bool redFlager,blueFlager,greenFlager;
@@ -32,6 +34,7 @@ public class TempoBehavior : StateMachineBehaviour
         if (awake)
         {
             grid = FindObjectOfType<GridGenerator>().grid;
+            t = FindObjectOfType<TileVariables>();
             awake = false;
             
         }
@@ -84,15 +87,15 @@ public class TempoBehavior : StateMachineBehaviour
     {
         if (redTest)
         {
-            if (redTimer <= 0)
+            if (t.redTimer <= 0)
             {
-                redFlag = false;
+                t.redFlag = false;
                 redFlager = true;
             }
 
-            if (redTimer >= redOffValue)
+            if (t.redTimer >= redOffValue)
             {
-                redFlag = true;
+                t.redFlag = true;
                 redFlager = true;
             }
         }
@@ -100,15 +103,15 @@ public class TempoBehavior : StateMachineBehaviour
 
         if (blueTest)
         {
-            if (blueTimer <= 0 )
+            if (t.blueTimer <= 0 )
             {
-                blueFlag = false;
+                t.blueFlag = false;
                 blueFlager = true;
             }
 
-            if (blueTimer >= blueOffValue)
+            if (t.blueTimer >= blueOffValue)
             {
-                blueFlag = true;
+                t.blueFlag = true;
                 blueFlager = true;
             }
 
@@ -118,15 +121,15 @@ public class TempoBehavior : StateMachineBehaviour
 
         if (greenTest)
         {
-            if (greenTimer <= 0)
+            if (t.greenTimer <= 0)
             {
-                greenFlag = false;
+                t.greenFlag = false;
                 greenFlager = true;
             }
 
-            if (greenTimer >= greenOffValue)
+            if (t.greenTimer >= greenOffValue)
             {
-                greenFlag = true;
+                t.greenFlag = true;
                 greenFlager = true;
             }
         }
@@ -135,29 +138,29 @@ public class TempoBehavior : StateMachineBehaviour
 
     void TempoTileIncr()
     {
-        if (redFlag)
-            redTimer--;
+        if (t.redFlag)
+            t.redTimer--;
 
-        if (!redFlag)
-            redTimer++;
-
-
-
-
-        if (blueFlag)
-            blueTimer--;
-
-        if (!blueFlag)
-            blueTimer++;
+        if (!t.redFlag)
+            t.redTimer++;
 
 
 
 
-        if (greenFlag)
-            greenTimer--;
+        if (t.blueFlag)
+            t.blueTimer--;
 
-        if (!greenFlag)
-            greenTimer++;
+        if (!t.blueFlag)
+            t.blueTimer++;
+
+
+
+
+        if (t.greenFlag)
+            t.greenTimer--;
+
+        if (!t.greenFlag)
+            t.greenTimer++;
     }
 
     void tempoChange()
@@ -167,7 +170,7 @@ public class TempoBehavior : StateMachineBehaviour
         {
             foreach (GridTiles tile in grid)
             {
-                if (tile.tempoTile == 1 && redFlag)
+                if (tile.tempoTile == 1 && t.redFlag)
                 {
                     
                     if (redTempoTileFlag)
@@ -189,7 +192,7 @@ public class TempoBehavior : StateMachineBehaviour
                     }
                 }
 
-                if (tile.tempoTile == 1 && !redFlag)
+                if (tile.tempoTile == 1 && !t.redFlag)
                 {
                     
                     if (redTempoTileFlag)
@@ -198,8 +201,8 @@ public class TempoBehavior : StateMachineBehaviour
                         redTempoTileFlag = false;
                     }
                     tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, redTarget, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
+                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= redTarget + 0.01f)
                     {
                         tile.transform.position = new Vector3(tile.transform.position.x, redTarget, tile.transform.position.z);
@@ -217,7 +220,7 @@ public class TempoBehavior : StateMachineBehaviour
         {
             foreach (GridTiles tile in grid)
             {
-                if (tile.tempoTile == 2 && blueFlag)
+                if (tile.tempoTile == 2 && t.blueFlag)
                 {
                     if (blueTempoTileFlag)
                     {
@@ -235,7 +238,7 @@ public class TempoBehavior : StateMachineBehaviour
                     }
                 }
 
-                if (tile.tempoTile == 2 && !blueFlag)
+                if (tile.tempoTile == 2 && !t.blueFlag)
                 {
                     if (blueTempoTileFlag)
                     {
@@ -243,8 +246,8 @@ public class TempoBehavior : StateMachineBehaviour
                         blueTempoTileFlag = false;
                     }
                     tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, blueTarget, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
+                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= blueTarget + 0.01f)
                     {
                         tile.transform.position = new Vector3(tile.transform.position.x, blueTarget, tile.transform.position.z);
@@ -262,7 +265,7 @@ public class TempoBehavior : StateMachineBehaviour
         {
             foreach (GridTiles tile in grid)
             {
-                if (tile.tempoTile == 3 && greenFlag)
+                if (tile.tempoTile == 3 && t.greenFlag)
                 {
                     if (greenTempoTileFlag)
                     {
@@ -280,7 +283,7 @@ public class TempoBehavior : StateMachineBehaviour
                     }
                 }
 
-                if (tile.tempoTile == 3 && !greenFlag)
+                if (tile.tempoTile == 3 && !t.greenFlag)
                 {
                     if (greenTempoTileFlag)
                     {
@@ -288,8 +291,8 @@ public class TempoBehavior : StateMachineBehaviour
                         greenTempoTileFlag = false;
                     }
                     tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, greenTarget, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
+                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= greenTarget + 0.01f)
                     {
                         tile.transform.position = new Vector3(tile.transform.position.x, greenTarget, tile.transform.position.z);
