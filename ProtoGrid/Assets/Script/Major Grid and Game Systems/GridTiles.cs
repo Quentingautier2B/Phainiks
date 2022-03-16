@@ -80,7 +80,7 @@ public class GridTiles : MonoBehaviour
     #region Methods
     void SetUpComponents()
     {
-        rend = GetComponent<Renderer>();
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();             

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class GridGenerator : MonoBehaviour
 {
     [TextArea]
@@ -66,7 +66,10 @@ public class GridGenerator : MonoBehaviour
                 {
                     if (!grid[x, y])
                     {
-                        var inst = Instantiate(Tile, new Vector3(x, 0, y), Quaternion.identity);
+                        Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
+                        var inst = Selection.activeObject as GameObject;
+                        inst.transform.position = new Vector3(x, 0, y);
+                        inst.transform.Find("Renderer").Rotate(90 * Random.Range(0, 5), 90 * Random.Range(0, 5), 90 * Random.Range(0, 5));
                         grid[x, y] = inst.GetComponent<GridTiles>();
                         grid[x, y].transform.parent = GameObject.FindGameObjectWithTag("Terrain").transform;
                         grid[x, y].name = "tiles " + x + " " + y;

@@ -20,7 +20,9 @@ public class TilingEditor : MonoBehaviour
     float levelTransiIndex;
     int tempoValue;
     Renderer rend;
+    
 
+    
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
@@ -46,11 +48,19 @@ public class TilingEditor : MonoBehaviour
     #endregion
 
     private void Awake()
-    {       
+    {
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
     }
 
     private void OnDrawGizmos()
     {
+        if (Input.GetKeyDown(KeyCode.N) && !walkable)
+            walkable = true;
+
+        if (Input.GetKeyDown(KeyCode.B) && walkable)
+            walkable = false;
+
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
         GetVariablesValue();
         EditorBlocRenderering();
         CreateDestroyMethodsHub();
@@ -80,18 +90,18 @@ public class TilingEditor : MonoBehaviour
     {
         if (!walkable && door == 0)
         {
-            GetComponent<Renderer>().material = disabledMat;
+            rend.GetComponent<Renderer>().material = disabledMat;
         }
 
         if (walkable && !crumble)
         {
-            GetComponent<Renderer>().material = normalMat;
+            rend.GetComponent<Renderer>().material = normalMat;
         }
 
 
         if (crumble)
         {
-            GetComponent<Renderer>().material = crumbleMat;
+            rend.GetComponent<Renderer>().material = crumbleMat;
         }
     }
 
@@ -231,19 +241,19 @@ public class TilingEditor : MonoBehaviour
         if (tempoValue == 1)
         {
             var mesh = Color.red;
-            GetComponent<MeshRenderer>().material = tileRedM;
+            rend.GetComponent<MeshRenderer>().material = tileRedM;
         }
 
         if (tempoValue == 2)
         {
             var mesh = Color.blue;
-            GetComponent<MeshRenderer>().material = tileBlueM;
+            rend.GetComponent<MeshRenderer>().material = tileBlueM;
         }
 
         if (tempoValue== 3)
         {
             var mesh = Color.black;
-            GetComponent<MeshRenderer>().material = tileGreenM;
+            rend.GetComponent<MeshRenderer>().material = tileGreenM;
         }
 
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);

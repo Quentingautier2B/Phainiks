@@ -77,7 +77,7 @@ public class MoveBehavior : StateMachineBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         timerValue++;
 
-
+        Debug.Log(grid[x, y].name);
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
 

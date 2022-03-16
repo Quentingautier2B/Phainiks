@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class DebugTools : MonoBehaviour
 {
     public bool debugModOn;
@@ -14,12 +14,12 @@ public class DebugTools : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!SceneLoaded)
+        if (!SceneLoaded && !FindObjectOfType<GridGenerator>())
         {
-        Instantiater(System);
-        Instantiater(SecondarySystem);
-        Instantiater(Player);
-        Instantiater(Terrain);
+        PrefabUtility.InstantiatePrefab(System);
+        PrefabUtility.InstantiatePrefab(SecondarySystem);
+        PrefabUtility.InstantiatePrefab(Player);
+        PrefabUtility.InstantiatePrefab(Terrain);
         SceneLoaded = true;
         }
 
