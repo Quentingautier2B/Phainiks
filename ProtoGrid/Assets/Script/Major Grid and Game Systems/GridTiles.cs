@@ -24,7 +24,7 @@ public class GridTiles : MonoBehaviour
     public float tempoTileSpeed;
 
     [Header("Work in progress don't use")]
-    [Range(0, 5)] public int teleporter;
+    [Range(0, 20)] public int teleporter;
     public int tpTargetIndex;
     [HideInInspector] public GridTiles TpTarget;
 
@@ -133,11 +133,6 @@ public class GridTiles : MonoBehaviour
         {
             rend.enabled = false;
         }
-    }
-
-    void RecupTargetTeleporter()
-    {
-
     }
     #endregion
 }

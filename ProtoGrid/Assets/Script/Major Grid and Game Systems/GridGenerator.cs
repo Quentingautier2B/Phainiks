@@ -50,6 +50,17 @@ public class GridGenerator : MonoBehaviour
         
         if (instantiateGrid)
         {
+            if (grid != null)
+            {
+                foreach (GridTiles obj in grid)
+                {
+                    DestroyImmediate(obj.gameObject);
+                }
+            
+            }
+
+
+
             GridTiles[] list = FindObjectsOfType<GridTiles>();
             grid = new GridTiles[raws, columns];
             for (int i = 0; i < list.Length; i++)
