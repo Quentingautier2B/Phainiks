@@ -81,6 +81,12 @@ public class MoveBehavior : StateMachineBehaviour
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
 
+        if (grid[x, y].teleporter != 0)
+        {
+            player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
+        }
+
+
         /*if (grid[x, y].key != 0)       
             KeyBehavior(grid[x, y]);*/
 
