@@ -69,7 +69,7 @@ public class TilingEditor : MonoBehaviour
         EditorBlocSnapping();
         ItemColoring();
     }
-   
+
     void GetVariablesValue()
     {   
         if (flag)

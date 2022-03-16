@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        print("TestPrint");
+        
         sInput = FindObjectOfType<Animator>().GetBehaviour<SwipeInput>();
         grid = FindObjectOfType<GridGenerator>().grid;       
     }
