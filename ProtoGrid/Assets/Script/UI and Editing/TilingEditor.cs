@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class TilingEditor : MonoBehaviour
 {
-    [TextArea(minLines: 0, maxLines: 20)]
-    [SerializeField] string Notes = "Comment Here.";
+
 
     #region Variables
     GridTiles tile;
@@ -78,11 +77,11 @@ public class TilingEditor : MonoBehaviour
             flag = false;
         }
         walkable = tile.walkable;
-        door = tile.door;
-        key = tile.key;
-        crumble = tile.crumble;
+        //door = tile.door;
+        //key = tile.key;
+        //crumble = tile.crumble;
         originalPosition = tile.originalPosition;
-        timerChangeInputValue = tile.timerChangeInputValue;
+        //timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;
         tempoValue = tile.tempoTile;
         tpValue = tile.teleporter;
@@ -143,7 +142,7 @@ public class TilingEditor : MonoBehaviour
     {
         if (localInt != 0 && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            var inst = InstantiatePrefab(itemType, itemHeight);
             inst.transform.parent = this.transform;
             inst.name = itemTypeName;
         }
@@ -158,7 +157,7 @@ public class TilingEditor : MonoBehaviour
     {
         if (localInt != 0 && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            var inst = InstantiatePrefab(itemType, itemHeight);
             inst.transform.parent = this.transform;
             inst.name = itemTypeName;
         }
@@ -173,7 +172,7 @@ public class TilingEditor : MonoBehaviour
     {
         if (localBool && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            var inst = InstantiatePrefab(itemType, itemHeight);
             inst.transform.parent = this.transform;
             inst.name = itemTypeName;
         }
@@ -184,6 +183,21 @@ public class TilingEditor : MonoBehaviour
         }
     }
     #endregion
+
+    GameObject InstantiatePrefab(GameObject itemType, float itemHeight)
+    {
+        #if UNITY_EDITOR
+            Selection.activeObject = PrefabUtility.InstantiatePrefab(itemType);
+            var inst = Selection.activeObject as GameObject;
+            inst.transform.position = new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z);
+        #endif
+
+        #if !UNITY_EDITOR
+            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+        #endif
+
+        return inst;
+    } 
 
     #region ItemColoration
     void ItemColoring()
