@@ -2,20 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GridTiles : MonoBehaviour
 {
+    
+    [TextArea]
+    [SerializeField] string Notes = "Comment Here.";
+
+    #region variables
+    [Header("Accessible Values")]
     public int step;
     public bool walkable;
     public bool highLight;
+    public bool originalPosition;
+    public int height;
+
+    [Space]
+    [Header("Accessible Values")]
     GameObject gameManager;
     PathHighlighter pathHighlighter;
     GridGenerator gridGenerator;
     PlayerMovement playerMovement;
-    
-    
+    #endregion
 
     private void Awake()
     {
+        height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
         gridGenerator = gameManager.GetComponent<GridGenerator>();
         pathHighlighter = gameManager.GetComponent<PathHighlighter>();
@@ -30,9 +42,11 @@ public class GridTiles : MonoBehaviour
         }
     }
 
-   
     void Update()
     {
+        if (height != (int)transform.position.y)
+            height = (int)transform.position.y;
+
         if (highLight)
             Highlight();
         if (!highLight)
@@ -42,17 +56,25 @@ public class GridTiles : MonoBehaviour
     private void OnMouseOver()
     {
      
-        
-        pathHighlighter.PathAssignment((int)transform.position.x, (int)transform.position.z, step);
+        if(step>-1 && !playerMovement.moveState && step != 0) 
+            pathHighlighter.PathAssignment((int)transform.position.x, (int)transform.position.z, (int)height, step);
 
     }
 
     private void OnMouseExit()
     {
-        foreach (GridTiles obj in gridGenerator.grid)
+        if (!playerMovement.moveState)
         {
-            obj.highLight = false;
+            foreach (GridTiles obj in gridGenerator.grid)
+            {
+                obj.highLight = false;
+            }
         }
+    }
+
+    private void OnMouseDown()
+    {
+        playerMovement.moveFlag = true;
     }
 
     private void OnDrawGizmos()
@@ -70,11 +92,6 @@ public class GridTiles : MonoBehaviour
     void Highlight()
     {
         transform.Find("highlight").gameObject.SetActive(true);
-    }
-
-    private void OnMouseDown()
-    {
-        playerMovement.moveFlag = true;
     }
 
     void UnHighlight()
