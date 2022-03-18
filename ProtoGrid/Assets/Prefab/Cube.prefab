@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 963485817208866335}
   - component: {fileID: 963485817208866332}
   - component: {fileID: 963485817208866328}
+  - component: {fileID: 735905787984830351}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8217503897423771506}
+  - {fileID: 2893382859828333036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,12 +111,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3f6529455fc3749a57282acacd3f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: Class that contains Tile properties.
+  Notes: "-Walkable decides weither the player can walk on the tile or not.\n\n-If
+    original Position is true the player's will spawn and respawn on this tile.\n\n-Key
+    means there is a Key on this tile.\n\n-Door means there is a door on this tile
+    and makes the tile unwalkable.\n\n-Crumble means the tile will disappear until
+    next reset when the player walks on it.\n\n-Level transi -1 means the Hub scene
+    is loaded when player walks on tile.\n  Level transi 0 means nothing happens
+    when player walks on tile.\n  Level transi > 0 means the player will load the
+    scene of this index when he walks on tile.\n\n-TimerChangeInputValue Adds or
+    substract the Timer by its value when the player walks\n   on it. Only works
+    one time by reset if  >0. "
   step: 0
   walkable: 1
   highLight: 0
   originalPosition: 0
+  key: 0
+  door: 0
+  crumble: 0
+  levelTransiIndex: 0
+  timerChangeInputValue: 0
+  tempoTile: 0
+  timerChangeValue: 0
   height: 0
+--- !u!114 &735905787984830351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963485817208866333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843272594f471c04a89cbc2041fb28ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Notes: 'Disabled Mat is the material displayed in Editor on unwalkabled Tiles.
+
+
+    Normal
+    Mat is the material displayed in Editor on walkable Tiles with no special effects.
+
+
+    Crumble
+    Mat is the material displayed in Editor on Tiles that crumble when walked onto.'
+  doorRotation: 0
+  disabledMat: {fileID: 2100000, guid: 77ffbd6bf85bd244ba25de01a8d27ccc, type: 2}
+  normalMat: {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
+  crumbleMat: {fileID: 2100000, guid: 0f35795f064e02447997748002b7fccb, type: 2}
+  DoorItem: {fileID: 5040694192882191631, guid: fe2aac85868288d4c8a552d50d524616, type: 3}
+  KeyItem: {fileID: 2239755094156513774, guid: 46081f84d17e2cf4190b8aacce68708d, type: 3}
+  originalPositionItem: {fileID: 7825203435587043538, guid: 2aa05ed043117734daccda0561ae677e, type: 3}
+  TimerItem: {fileID: 6409185897952528890, guid: 09684c61948e2784e9847af68cd189e5, type: 3}
+  LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
+  redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
+  blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
+  greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
+  tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
+  tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
+  tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
 --- !u!1 &5648960202016864675
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,3 +264,105 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &3418383099597838380
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 963485817208866329}
+    m_Modifications:
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893949150814131250, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+      propertyPath: m_Name
+      value: Step
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+--- !u!224 &2893382859828333036 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 529125886646014400, guid: aed279402618fb54e80046c3f7b6f0d7, type: 3}
+  m_PrefabInstance: {fileID: 3418383099597838380}
+  m_PrefabAsset: {fileID: 0}
