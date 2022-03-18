@@ -6,38 +6,34 @@ using TMPro;
 public class GridTiles : MonoBehaviour
 {
     
-    [TextArea(minLines: 0, maxLines: 20)]
-    [SerializeField] string Notes = "Comment Here.";
+
 
     #region variables
-    [Header("Accessible Values")]
-    [HideInInspector]public int step;
+    [Header("TempoTilesEffect")]
+    [HideInInspector] public int step;
     public bool walkable;
-    [HideInInspector] public bool highLight;
     public bool originalPosition;
-    [Range(0, 5)]public int key;
-    [Range(0, 5)] public int door;
-    public bool crumble;
+    //[Range(0, 5)]public int key;
+    //[Range(0, 5)] public int door;
+    //public bool crumble;
     [Range(0, 8)] public float levelTransiIndex;
-    [Range(-100, 100)] public int timerChangeInputValue;
-    public int tempoTile;
-    public float tempoTileSpeed;
+    //[Range(-100, 100)] public int timerChangeInputValue;
+    [Range(0, 3)] public int tempoTile;
 
-    [Header("Work in progress don't use")]
+    [Header("Teleporter")]
     [Range(0, 20)] public int teleporter;
-    public int tpTargetIndex;
+    [Range(0, 20)] public int tpTargetIndex;
     [HideInInspector] public GridTiles TpTarget;
 
-
-
-    [HideInInspector] public int timerChangeValue;
+    [Space]
+    [Header("Modifier")]
+    public float tempoTileSpeed;
+    //[HideInInspector] public int timerChangeValue;
     [HideInInspector] public int height;
 
-    [Space]
-    [Header("Components")]
+
     Renderer rend;
-    GameObject gameManager;
-       
+    GameObject gameManager;      
     GridGenerator gridGenerator;
 
 
@@ -50,17 +46,17 @@ public class GridTiles : MonoBehaviour
     {
         
 
-        TimerValueSetUp();
+        //TimerValueSetUp();
 
         SetUpComponents();
     }
 
     private void Start()
     {
-        if(door != 0)
+/*        if(door != 0)
         {
             walkable = false;
-        }
+        }*/
 
         if (teleporter != 0)
         {
@@ -110,7 +106,7 @@ public class GridTiles : MonoBehaviour
             height = (int)transform.position.y;
     }
    
-    void TimerValueSetUp()
+    /*void TimerValueSetUp()
     {
         timerChangeValue = timerChangeInputValue;
         if (timerChangeValue < 0)
@@ -119,7 +115,7 @@ public class GridTiles : MonoBehaviour
 
             transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
         }
-    }
+    }*/
 
     void VisibleOrInvisibleTile()
     {
@@ -129,7 +125,7 @@ public class GridTiles : MonoBehaviour
         }
 
 
-        if (!walkable && rend.enabled && door == 0)
+        if (!walkable && rend.enabled /*&& door == 0*/)
         {
             rend.enabled = false;
         }
