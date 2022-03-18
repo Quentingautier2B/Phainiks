@@ -7,26 +7,22 @@ using TMPro;
 public class InGameUI : MonoBehaviour
 {
     #region variables
-    public TextMeshProUGUI resetText;
-    Reset resetScript;
-    int resetValue;
+    TextMeshProUGUI timerText;
+    [HideInInspector]public int timerValue;
     #endregion
 
-    void Start()
+
+    private void Awake()
     {
-        resetScript = FindObjectOfType<Reset>();
-        
+        timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
     }
-    
     void Update()
-    {
-        
-        ResetTimerText();
+    {       
+       TimerText();
     }
 
-    void ResetTimerText()
+    void TimerText()
     {
-        resetValue = resetScript.resetTimer;
-        resetText.text = resetValue.ToString();
+       timerText.text = timerValue.ToString();
     }
 }

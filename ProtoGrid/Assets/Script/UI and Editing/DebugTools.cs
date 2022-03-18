@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class DebugTools : MonoBehaviour
 {
     public bool debugModOn;
@@ -12,16 +11,20 @@ public class DebugTools : MonoBehaviour
     public GameObject Terrain;
     bool SceneLoaded;
 
+    
     private void OnDrawGizmos()
     {
-        if (!SceneLoaded)
+        
+        if (!SceneLoaded && !FindObjectOfType<GridGenerator>())
         {
-        Instantiater(System);
-        Instantiater(SecondarySystem);
-        Instantiater(Player);
-        Instantiater(Terrain);
-        SceneLoaded = true;
+
+            Instantiater(System);
+            Instantiater(SecondarySystem);
+            Instantiater(Player);
+            Instantiater(Terrain);
+            SceneLoaded = true;
         }
+        
 
     }
 

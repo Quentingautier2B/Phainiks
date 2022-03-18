@@ -17,10 +17,13 @@ public class TilingEditor : MonoBehaviour
     bool originalPosition;
     int key;
     int timerChangeInputValue;
-    int levelTransiIndex;
+    float levelTransiIndex;
     int tempoValue;
+    int tpValue;
+    Renderer rend;
+    
 
-
+    
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
@@ -34,6 +37,9 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject originalPositionItem;
     [SerializeField] GameObject TimerItem;
     [SerializeField] GameObject LevelTransitionItem;
+    [SerializeField] GameObject PSysTTU;
+    [SerializeField] GameObject PSysTTD;
+    [SerializeField] GameObject TpItem;
 
     public Material redM;
     public Material blueM;
@@ -43,15 +49,27 @@ public class TilingEditor : MonoBehaviour
     public Material tileGreenM;
     #endregion
 
+    private void Awake()
+    {
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
+    }
+
     private void OnDrawGizmos()
     {
+        if (Input.GetKeyDown(KeyCode.N) && !walkable)
+            walkable = true;
+
+        if (Input.GetKeyDown(KeyCode.B) && walkable)
+            walkable = false;
+
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
         GetVariablesValue();
         EditorBlocRenderering();
         CreateDestroyMethodsHub();
         EditorBlocSnapping();
         ItemColoring();
     }
-   
+
     void GetVariablesValue()
     {   
         if (flag)
@@ -67,6 +85,8 @@ public class TilingEditor : MonoBehaviour
         timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;
         tempoValue = tile.tempoTile;
+        tpValue = tile.teleporter;
+        
        // doorRotation = tile.doorRotation;
     }
 
@@ -74,18 +94,18 @@ public class TilingEditor : MonoBehaviour
     {
         if (!walkable && door == 0)
         {
-            GetComponent<Renderer>().material = disabledMat;
+            rend.GetComponent<Renderer>().material = disabledMat;
         }
 
         if (walkable && !crumble)
         {
-            GetComponent<Renderer>().material = normalMat;
+            rend.GetComponent<Renderer>().material = normalMat;
         }
 
 
         if (crumble)
         {
-            GetComponent<Renderer>().material = crumbleMat;
+            rend.GetComponent<Renderer>().material = crumbleMat;
         }
     }
 
@@ -96,7 +116,8 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectIndex(timerChangeInputValue, "Timer+", TimerItem, 0.5f);
         CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
         CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
-        CreateDestroyObjectIndex(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
+        CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
+        CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
     }
 
     void EditorBlocSnapping()
@@ -131,8 +152,23 @@ public class TilingEditor : MonoBehaviour
             var inst = transform.Find(itemTypeName).gameObject;
             DestroyImmediate(inst);
         }
-    }    
-    
+    }
+
+    void CreateDestroyObjectFloat(float localInt, string itemTypeName, GameObject itemType, float itemHeight)
+    {
+        if (localInt != 0 && !transform.Find(itemTypeName))
+        {
+            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            inst.transform.parent = this.transform;
+            inst.name = itemTypeName;
+        }
+        if (localInt == 0 && transform.Find(itemTypeName))
+        {
+            var inst = transform.Find(itemTypeName).gameObject;
+            DestroyImmediate(inst);
+        }
+    }
+
     void CreateDestroyObjectBoolean(bool localBool, string itemTypeName, GameObject itemType, float itemHeight)
     {
         if (localBool && !transform.Find(itemTypeName))
@@ -210,20 +246,24 @@ public class TilingEditor : MonoBehaviour
         if (tempoValue == 1)
         {
             var mesh = Color.red;
-            GetComponent<MeshRenderer>().material = tileRedM;
+            rend.GetComponent<MeshRenderer>().material = tileRedM;
         }
 
         if (tempoValue == 2)
         {
             var mesh = Color.blue;
-            GetComponent<MeshRenderer>().material = tileBlueM;
+            rend.GetComponent<MeshRenderer>().material = tileBlueM;
         }
 
         if (tempoValue== 3)
         {
             var mesh = Color.black;
-            GetComponent<MeshRenderer>().material = tileGreenM;
+            rend.GetComponent<MeshRenderer>().material = tileGreenM;
         }
+
+        CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
+        CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
+
     }
     #endregion
 }
