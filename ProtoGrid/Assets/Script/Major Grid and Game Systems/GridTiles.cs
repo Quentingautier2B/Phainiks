@@ -6,45 +6,39 @@ using TMPro;
 public class GridTiles : MonoBehaviour
 {
     
-    [TextArea(minLines: 0, maxLines: 20)]
-    [SerializeField] string Notes = "Comment Here.";
+
 
     #region variables
-    [Header("Accessible Values")]
-    [HideInInspector]public int step;
+    [Header("TempoTilesEffect")]
+    [HideInInspector] public int step;
     public bool walkable;
-    [HideInInspector] public bool highLight;
     public bool originalPosition;
-    [Range(0, 5)]public int key;
-    [Range(0, 5)] public int door;
-    public bool crumble;
+    //[Range(0, 5)]public int key;
+    //[Range(0, 5)] public int door;
+    //public bool crumble;
     [Range(0, 8)] public float levelTransiIndex;
-    [Range(-100, 100)] public int timerChangeInputValue;
-    [Header("Work in progress don't use")]
-    public int tempoTile;
-    public float tempoTileSpeed;
-    float target;
-    bool tempoTileFlag = true;
+    //[Range(-100, 100)] public int timerChangeInputValue;
+    [Range(0, 3)] public int tempoTile;
 
-    bool redTile;
-    bool blueTile;
-    bool greenTile;
-    
-    [HideInInspector] public int timerChangeValue;
-    [HideInInspector] public int height;
+    [Header("Teleporter")]
+    [Range(0, 20)] public int teleporter;
+    [Range(0, 20)] public int tpTargetIndex;
+    [HideInInspector] public GridTiles TpTarget;
 
     [Space]
-    [Header("Components")]
+    [Header("Modifier")]
+    public float tempoTileSpeed;
+    //[HideInInspector] public int timerChangeValue;
+    [HideInInspector] public int height;
+
+
     Renderer rend;
-    GameObject gameManager;
-       
+    GameObject gameManager;      
     GridGenerator gridGenerator;
-    PlayerMovement playerMovement;    
-    LoopCycle loopCycle;
 
 
-    bool flager1 = true;   
 
+    
     #endregion
 
     #region CallMethods
@@ -52,48 +46,58 @@ public class GridTiles : MonoBehaviour
     {
         
 
-        TimerValueSetUp();
+        //TimerValueSetUp();
 
         SetUpComponents();
     }
 
     private void Start()
     {
-        if(door != 0)
+/*        if(door != 0)
         {
             walkable = false;
+        }*/
+
+        if (teleporter != 0)
+        {
+            foreach (GridTiles obj in gridGenerator.grid)
+            {
+                if (obj.teleporter == tpTargetIndex)
+                {
+                    if (TpTarget != null)
+                        Debug.LogError("2 same targetTP");
+                    if (obj == this)
+                    {
+                        Debug.LogError("Tp Can't have himself as target");
+                        return;
+                    }
+                        
+                    TpTarget = obj;
+                }
+            }
         }
 
     }
 
     void Update()
     {
-        if (tempoTile == 1)
-            redTile = true;
 
-        if (tempoTile == 2)
-            blueTile = true;
-
-        if (tempoTile == 3)
-            greenTile = true;
 
         HeightToInt();
 
         VisibleOrInvisibleTile();
 
-        tempoChange();
+        //tempoChange();
     }
     #endregion
 
     #region Methods
     void SetUpComponents()
     {
-        rend = GetComponent<Renderer>();
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
-        gridGenerator = gameManager.GetComponent<GridGenerator>();       
-        playerMovement = gameManager.GetComponent<PlayerMovement>();
-        loopCycle = gameManager.GetComponent<LoopCycle>();
+        gridGenerator = gameManager.GetComponent<GridGenerator>();             
     }
 
     void HeightToInt()
@@ -102,7 +106,7 @@ public class GridTiles : MonoBehaviour
             height = (int)transform.position.y;
     }
    
-    void TimerValueSetUp()
+    /*void TimerValueSetUp()
     {
         timerChangeValue = timerChangeInputValue;
         if (timerChangeValue < 0)
@@ -111,13 +115,7 @@ public class GridTiles : MonoBehaviour
 
             transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
         }
-    }
-
-    void Error(string errorText)
-    {
-        print(errorText);
-        Time.timeScale = 0;
-    }
+    }*/
 
     void VisibleOrInvisibleTile()
     {
@@ -127,134 +125,10 @@ public class GridTiles : MonoBehaviour
         }
 
 
-        if (!walkable && rend.enabled && door == 0)
+        if (!walkable && rend.enabled /*&& door == 0*/)
         {
             rend.enabled = false;
         }
     }
-    void tempoChange()
-    {
-
-        if (redTile && loopCycle.redFlag && flager1)
-        {
-
-            if (tempoTileFlag)
-            {
-                target = transform.position.y + 2;
-                tempoTileFlag = false;
-            }
-            
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed/10), transform.position.z);
-       
-            if (transform.position.y >= target -0.01f)
-            {
-                transform.position = new Vector3 (transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = false;
-            }
-
-        }
-        if (redTile && !loopCycle.redFlag && !flager1)
-        {
-
-            if (tempoTileFlag)
-            {
-                target = transform.position.y - 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y <= target + 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = true;
-
-            }
-        }
-
-        if (blueTile && loopCycle.blueFlag && flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y + 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y >= target - 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = false;
-
-            }
-        }
-
-
-        if (blueTile && !loopCycle.blueFlag && !flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y - 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y <= target + 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = true;
-
-            }
-        }
-
-
-        if (greenTile && loopCycle.greenFlag && flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y + 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y >= target - 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = false;
-
-            }
-        }
-
-
-        if (greenTile && !loopCycle.greenFlag && !flager1)
-        {
-            if (tempoTileFlag)
-            {
-                target = transform.position.y - 2;
-                tempoTileFlag = false;
-            }
-
-            transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y, target, tempoTileSpeed / 10), transform.position.z);
-
-            if (transform.position.y <= target + 0.01f)
-            {
-                transform.position = new Vector3(transform.position.x, target, transform.position.z);
-                tempoTileFlag = true;
-                flager1 = true;
-
-            }
-        }
-
-
-    }
-
     #endregion
 }

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class TilingEditor : MonoBehaviour
 {
-    [TextArea(minLines: 0, maxLines: 20)]
-    [SerializeField] string Notes = "Comment Here.";
+
 
     #region Variables
     GridTiles tile;
@@ -19,8 +18,11 @@ public class TilingEditor : MonoBehaviour
     int timerChangeInputValue;
     float levelTransiIndex;
     int tempoValue;
+    int tpValue;
     Renderer rend;
+    
 
+    
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
@@ -36,6 +38,7 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject LevelTransitionItem;
     [SerializeField] GameObject PSysTTU;
     [SerializeField] GameObject PSysTTD;
+    [SerializeField] GameObject TpItem;
 
     public Material redM;
     public Material blueM;
@@ -46,18 +49,26 @@ public class TilingEditor : MonoBehaviour
     #endregion
 
     private void Awake()
-    {       
+    {
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
     }
 
     private void OnDrawGizmos()
     {
+        if (Input.GetKeyDown(KeyCode.N) && !walkable)
+            walkable = true;
+
+        if (Input.GetKeyDown(KeyCode.B) && walkable)
+            walkable = false;
+
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
         GetVariablesValue();
         EditorBlocRenderering();
         CreateDestroyMethodsHub();
         EditorBlocSnapping();
         ItemColoring();
     }
-   
+
     void GetVariablesValue()
     {   
         if (flag)
@@ -66,13 +77,15 @@ public class TilingEditor : MonoBehaviour
             flag = false;
         }
         walkable = tile.walkable;
-        door = tile.door;
-        key = tile.key;
-        crumble = tile.crumble;
+        //door = tile.door;
+        //key = tile.key;
+        //crumble = tile.crumble;
         originalPosition = tile.originalPosition;
-        timerChangeInputValue = tile.timerChangeInputValue;
+        //timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;
         tempoValue = tile.tempoTile;
+        tpValue = tile.teleporter;
+        
        // doorRotation = tile.doorRotation;
     }
 
@@ -80,18 +93,18 @@ public class TilingEditor : MonoBehaviour
     {
         if (!walkable && door == 0)
         {
-            GetComponent<Renderer>().material = disabledMat;
+            rend.GetComponent<Renderer>().material = disabledMat;
         }
 
         if (walkable && !crumble)
         {
-            GetComponent<Renderer>().material = normalMat;
+            rend.GetComponent<Renderer>().material = normalMat;
         }
 
 
         if (crumble)
         {
-            GetComponent<Renderer>().material = crumbleMat;
+            rend.GetComponent<Renderer>().material = crumbleMat;
         }
     }
 
@@ -103,6 +116,7 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
         CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
+        CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
     }
 
     void EditorBlocSnapping()
@@ -128,7 +142,7 @@ public class TilingEditor : MonoBehaviour
     {
         if (localInt != 0 && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            var inst = InstantiatePrefab(itemType, itemHeight);
             inst.transform.parent = this.transform;
             inst.name = itemTypeName;
         }
@@ -143,7 +157,7 @@ public class TilingEditor : MonoBehaviour
     {
         if (localInt != 0 && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            var inst = InstantiatePrefab(itemType, itemHeight);
             inst.transform.parent = this.transform;
             inst.name = itemTypeName;
         }
@@ -158,7 +172,7 @@ public class TilingEditor : MonoBehaviour
     {
         if (localBool && !transform.Find(itemTypeName))
         {
-            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+            var inst = InstantiatePrefab(itemType, itemHeight);
             inst.transform.parent = this.transform;
             inst.name = itemTypeName;
         }
@@ -169,6 +183,21 @@ public class TilingEditor : MonoBehaviour
         }
     }
     #endregion
+
+    GameObject InstantiatePrefab(GameObject itemType, float itemHeight)
+    {
+        #if UNITY_EDITOR
+            Selection.activeObject = PrefabUtility.InstantiatePrefab(itemType);
+            var inst = Selection.activeObject as GameObject;
+            inst.transform.position = new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z);
+        #endif
+
+        #if !UNITY_EDITOR
+            var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
+        #endif
+
+        return inst;
+    } 
 
     #region ItemColoration
     void ItemColoring()
@@ -231,19 +260,19 @@ public class TilingEditor : MonoBehaviour
         if (tempoValue == 1)
         {
             var mesh = Color.red;
-            GetComponent<MeshRenderer>().material = tileRedM;
+            rend.GetComponent<MeshRenderer>().material = tileRedM;
         }
 
         if (tempoValue == 2)
         {
             var mesh = Color.blue;
-            GetComponent<MeshRenderer>().material = tileBlueM;
+            rend.GetComponent<MeshRenderer>().material = tileBlueM;
         }
 
         if (tempoValue== 3)
         {
             var mesh = Color.black;
-            GetComponent<MeshRenderer>().material = tileGreenM;
+            rend.GetComponent<MeshRenderer>().material = tileGreenM;
         }
 
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
