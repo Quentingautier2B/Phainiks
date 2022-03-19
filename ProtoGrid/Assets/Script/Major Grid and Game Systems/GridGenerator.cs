@@ -24,6 +24,7 @@ public class GridGenerator : MonoBehaviour
     #endregion
     void Awake()
     {
+        instantiateGrid = false;
         player = FindObjectOfType<Player>().transform;
         GridTiles[] list = FindObjectsOfType<GridTiles>();
         grid = new GridTiles[raws, columns];

@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6487227582654347611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Red
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Red
+  Guid:
+    Data1: -59974335
+    Data2: 1096077042
+    Data3: -198661973
+    Data4: -1388580007
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 600
+--- !u!114 &-6344135875903169935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Blue
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Blue
+  Guid:
+    Data1: 1639621862
+    Data2: 1174458595
+    Data3: 69922689
+    Data4: 1764054512
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2782
 --- !u!114 &-4578730943406009373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,10 +69,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637812318231991091
+  lastModified: 637833025204801198
   FileSizes:
   - Name: Desktop
-    Value: 181088
+    Value: 1410624
   Exists: 1
 --- !u!114 &-1125970279785010674
 MonoBehaviour:
@@ -62,11 +116,38 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637810525613773587
+  lastModified: 637833025204811216
   FileSizes:
   - Name: Desktop
-    Value: 1142
+    Value: 1300
   Exists: 1
+--- !u!114 &-47835882514682542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Green
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Green
+  Guid:
+    Data1: 841286276
+    Data2: 1153869218
+    Data3: -310352483
+    Data4: 339221949
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2932
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,12 +173,16 @@ MonoBehaviour:
   - {fileID: 4407541461879264445}
   - {fileID: 6596625448628180625}
   - {fileID: 5720614454893452643}
+  - {fileID: -6487227582654347611}
+  - {fileID: -47835882514682542}
+  - {fileID: 6201557240357146255}
+  - {fileID: -6344135875903169935}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4578730943406009373}
   StringsBanks:
   - {fileID: -769629533170134893}
-  cacheTime: 637812318231991091
+  cacheTime: 637833025204811216
   cacheVersion: 10
 --- !u!114 &1561784869028150870
 MonoBehaviour:
@@ -180,6 +265,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6201557240357146255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Main
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Main
+  Guid:
+    Data1: -46438993
+    Data2: 1218249937
+    Data3: -20400254
+    Data4: -1410157003
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 83448
 --- !u!114 &6257957765287000543
 MonoBehaviour:
   m_ObjectHideFlags: 0

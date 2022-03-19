@@ -10,7 +10,7 @@ public class SceneChange : MonoBehaviour
         StartCoroutine(EndBehavior(tile));
     }
 
-    IEnumerator EndBehavior(GridTiles tile)
+   public IEnumerator EndBehavior(GridTiles tile)
     {
       
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
