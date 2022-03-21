@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class DebugTools : MonoBehaviour
 {
     public bool debugModOn;
@@ -63,7 +66,8 @@ public class DebugTools : MonoBehaviour
     {
         if (!GameObject.Find(obj.name))
         {
-            var inst = Instantiate(obj);
+            Selection.activeObject = PrefabUtility.InstantiatePrefab(obj);
+            var inst = Selection.activeObject as GameObject;
             inst.name = obj.name;
         }
     }
