@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class InGameUI : MonoBehaviour
 {
     #region variables
@@ -11,7 +11,10 @@ public class InGameUI : MonoBehaviour
     [HideInInspector]public int timerValue;
     #endregion
 
-
+    public void OnResetClick()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     private void Awake()
     {
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();

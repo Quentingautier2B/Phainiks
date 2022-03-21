@@ -24,13 +24,16 @@ public class GridTiles : MonoBehaviour
     [Range(0, 20)] public int teleporter;
     [Range(0, 20)] public int tpTargetIndex;
     [HideInInspector] public GridTiles TpTarget;
-
+    [HideInInspector] public int target;
+    [HideInInspector] public bool tempoBool;
     [Space]
     [Header("Modifier")]
     public float tempoTileSpeed;
     //[HideInInspector] public int timerChangeValue;
     [HideInInspector] public int height;
-
+    [HideInInspector] public bool hitByCam = false;
+    [HideInInspector] public int numberFrameHit = 0;
+    int earlynumberFrameHit = 0;
 
     Renderer rend;
     GameObject gameManager;      
@@ -53,6 +56,7 @@ public class GridTiles : MonoBehaviour
 
     private void Start()
     {
+        tempoBool = true;
 /*        if(door != 0)
         {
             walkable = false;
@@ -81,13 +85,36 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
-
+        if (hitByCam)
+        {
+            var col = rend.material.color;
+            col.a = 0.5f;
+            rend.material.color = col;
+            
+        }
 
         HeightToInt();
 
         VisibleOrInvisibleTile();
 
         //tempoChange();
+    }
+
+    private void LateUpdate()
+    {
+        if(hitByCam && numberFrameHit > earlynumberFrameHit)
+        {
+            earlynumberFrameHit = numberFrameHit;
+        }
+        else if(numberFrameHit == earlynumberFrameHit && hitByCam)
+        {
+            hitByCam = false;
+            numberFrameHit = 0;
+            earlynumberFrameHit = 0;
+            var col = rend.material.color;
+            col.a = 1;
+            rend.material.color = col;
+        }
     }
     #endregion
 
