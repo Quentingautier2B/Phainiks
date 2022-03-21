@@ -46,16 +46,20 @@ public class TilingEditor : MonoBehaviour
     public Material tileRedM;
     public Material tileBlueM;
     public Material tileGreenM;
+    [SerializeField]bool playOn;
     #endregion
 
     private void Awake()
     {
         rend = transform.Find("Renderer").GetComponent<Renderer>();
+        playOn = false;
     }
 
     private void OnDrawGizmos()
     {
-        if (Input.GetKeyDown(KeyCode.N) && !walkable)
+
+    if (playOn){
+     if (Input.GetKeyDown(KeyCode.N) && !walkable)
             walkable = true;
 
         if (Input.GetKeyDown(KeyCode.B) && walkable)
@@ -69,6 +73,12 @@ public class TilingEditor : MonoBehaviour
         ItemColoring();
     }
 
+       
+    }
+    void OnApplicationQuit()
+    {
+        playOn = true;
+    }
     void GetVariablesValue()
     {   
         if (flag)
@@ -108,7 +118,7 @@ public class TilingEditor : MonoBehaviour
         }
     }
 
-    #region CreateDestroyMethods
+#region CreateDestroyMethods
     void CreateDestroyMethodsHub()
     {
         CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.53f);
@@ -182,24 +192,24 @@ public class TilingEditor : MonoBehaviour
             DestroyImmediate(inst);
         }
     }
-    #endregion
+#endregion
 
     GameObject InstantiatePrefab(GameObject itemType, float itemHeight)
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
             Selection.activeObject = PrefabUtility.InstantiatePrefab(itemType);
             var inst = Selection.activeObject as GameObject;
             inst.transform.position = new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z);
-        #endif
+#endif
 
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
             var inst = Instantiate(itemType, new Vector3(transform.position.x, transform.position.y + itemHeight, transform.position.z), Quaternion.identity);
-        #endif
+#endif
 
         return inst;
     } 
 
-    #region ItemColoration
+#region ItemColoration
     void ItemColoring()
     {
         DoorColoration();
@@ -279,5 +289,5 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
 
     }
-    #endregion
+#endregion
 }
