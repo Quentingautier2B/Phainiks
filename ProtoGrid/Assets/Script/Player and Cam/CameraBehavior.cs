@@ -51,11 +51,11 @@ public class CameraBehavior : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Debug.DrawRay(camTransform.position, playerPos.position - camTransform.position, Color.red);
     }
-
+*/
     private void LateUpdate()
     {
         // cam suit le joueur
