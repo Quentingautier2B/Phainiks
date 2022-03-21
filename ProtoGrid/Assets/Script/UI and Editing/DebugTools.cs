@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if  UNITY_EDITOR
-using UnityEditor;
-#endif
 public class DebugTools : MonoBehaviour
 {
     public bool debugModOn;
@@ -48,17 +45,17 @@ public class DebugTools : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        #if UNITY_EDITOR
+        
         if (!SceneLoaded && !FindObjectOfType<GridGenerator>())
         {
 
-            PrefabUtility.InstantiatePrefab(System);
-            PrefabUtility.InstantiatePrefab(SecondarySystem);
-            PrefabUtility.InstantiatePrefab(Player);
-            PrefabUtility.InstantiatePrefab(Terrain);
+            Instantiater(System);
+            Instantiater(SecondarySystem);
+            Instantiater(Player);
+            Instantiater(Terrain);
             SceneLoaded = true;
         }
-        #endif
+        
 
     }
 

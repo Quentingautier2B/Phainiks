@@ -46,15 +46,13 @@ public class TilingEditor : MonoBehaviour
     public Material tileRedM;
     public Material tileBlueM;
     public Material tileGreenM;
+    [SerializeField] bool playOn = true;
     #endregion
 
     private void Awake()
     {
+        playOn = false;
         rend = transform.Find("Renderer").GetComponent<Renderer>();
-    }
-
-    private void OnDrawGizmos()
-    {
         if (Input.GetKeyDown(KeyCode.N) && !walkable)
             walkable = true;
 
@@ -68,7 +66,30 @@ public class TilingEditor : MonoBehaviour
         EditorBlocSnapping();
         ItemColoring();
     }
+    
+    private void OnDrawGizmos()
+    {
+        if(playOn)
+        {
+        if (Input.GetKeyDown(KeyCode.N) && !walkable)
+            walkable = true;
 
+        if (Input.GetKeyDown(KeyCode.B) && walkable)
+            walkable = false;
+
+        rend = transform.Find("Renderer").GetComponent<Renderer>();
+        GetVariablesValue();
+        EditorBlocRenderering();
+        CreateDestroyMethodsHub();
+        EditorBlocSnapping();
+        ItemColoring();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {        
+        playOn = true;
+    }
     void GetVariablesValue()
     {   
         if (flag)

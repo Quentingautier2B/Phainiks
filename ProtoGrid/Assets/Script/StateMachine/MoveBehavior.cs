@@ -49,7 +49,10 @@ public class MoveBehavior : StateMachineBehaviour
         if (distance > 0f && grid[x, y].walkable)
         {
             Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
+            
             player.position += moveDir * moveSpeed * Time.deltaTime;
+            if(distance > 0.5f)
+                player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
             if (distance < 0.1f)
             {

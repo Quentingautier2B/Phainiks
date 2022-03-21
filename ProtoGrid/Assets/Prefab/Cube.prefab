@@ -67,6 +67,8 @@ MonoBehaviour:
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
 --- !u!114 &735905787984830351
@@ -99,6 +101,7 @@ MonoBehaviour:
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!1 &6603590573583608196
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
+  - {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
