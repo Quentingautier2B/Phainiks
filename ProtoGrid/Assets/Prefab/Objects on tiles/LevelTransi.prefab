@@ -50,7 +50,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2260027397729768549}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -198,6 +198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8057356591411306430}
     m_Modifications:
+    - target: {fileID: 223627657081926133, guid: 77b4b46ece2988343ae2262f442087dd, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5187570452773091565, guid: 77b4b46ece2988343ae2262f442087dd, type: 3}
       propertyPath: m_RootOrder
       value: 0

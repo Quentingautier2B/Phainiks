@@ -10,12 +10,12 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] float camZoomSpeed;
     [SerializeField]float smoothTime;
     Vector3 velocity = Vector3.zero;
-    Transform target;
+    Transform camTransform;
     bool flag = true;
-
     //[SerializeField] bool camMode;
     //[SerializeField] float camMoveSpeed;
     //[SerializeField] float camRotateSpeed;
+    
     #endregion
 
     private void Awake()
@@ -24,6 +24,7 @@ public class CameraBehavior : MonoBehaviour
         //camMode = true;
         camBehavior = transform.Find("Main Camera").GetComponent<Camera>();
         playerPos = FindObjectOfType<Player>().transform;
+        camTransform = transform.Find("Main Camera");
        
     }
 
@@ -36,6 +37,24 @@ public class CameraBehavior : MonoBehaviour
             camBehavior.orthographicSize = 3.8f;
     }
 
+    private void Update()
+    {
+       
+        RaycastHit[] hits = Physics.RaycastAll(camTransform.position, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+            if ( hits.Length >= 1)
+        {
+            foreach (RaycastHit h in hits)
+            {
+               h.collider.GetComponent<GridTiles>().hitByCam = true;
+               h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
+                
+            }
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(camTransform.position, playerPos.position - camTransform.position, Color.red);
+    }
 
     private void LateUpdate()
     {
