@@ -191,8 +191,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                         tile.transform.position = new Vector3(tile.transform.position.x, redTarget, tile.transform.position.z);
-                        
-                        redTempoTileFlag = true;
                         redFlager = false;
                     }
                 }
@@ -213,7 +211,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                         tile.transform.position = new Vector3(tile.transform.position.x, redTarget, tile.transform.position.z);
-                        redTempoTileFlag = true;
                         redFlager = false;
                     }
                 }
@@ -242,7 +239,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                         tile.transform.position = new Vector3(tile.transform.position.x, blueTarget, tile.transform.position.z);
-                        blueTempoTileFlag = true;
                         blueFlager = false;
                     }
                 }
@@ -262,7 +258,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                         tile.transform.position = new Vector3(tile.transform.position.x, blueTarget, tile.transform.position.z);
-                        blueTempoTileFlag = true;
                         blueFlager = false;
                     }
                 }
@@ -291,7 +286,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                         tile.transform.position = new Vector3(tile.transform.position.x, greenTarget, tile.transform.position.z);
-                        greenTempoTileFlag = true;
                         greenFlager = false;
                     }
                 }
@@ -311,7 +305,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                         tile.transform.position = new Vector3(tile.transform.position.x, greenTarget, tile.transform.position.z);
-                        greenTempoTileFlag = true;
                         greenFlager = false;
                     }
                 }
