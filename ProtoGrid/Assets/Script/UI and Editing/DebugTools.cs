@@ -27,9 +27,9 @@ public class DebugTools : MonoBehaviour
         greenMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Green");*/
 
         //TileMusic(mainMusic, "Main");
-        TileMusic(redMusic, "Red","VolumeRed");
+        /*TileMusic(redMusic, "Red","VolumeRed");
         TileMusic(blueMusic, "Blue", "VolumeBlue");
-        TileMusic(greenMusic, "Green", "VolumeGreen");
+        TileMusic(greenMusic, "Green", "VolumeGreen");*/
        
 
         /*        mainMusic.start();
