@@ -48,6 +48,8 @@ public class GridGenerator : MonoBehaviour
         }
     }
 
+
+
     private void OnDrawGizmos()
     {
 
@@ -81,7 +83,14 @@ public class GridGenerator : MonoBehaviour
                 {
                     if (!grid[x, y])
                     {
+#if UNITY_EDITOR
+                        Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
+                        var inst = Selection.activeObject as GameObject;
+#endif
+
+#if !UNITY_EDITOR
                         var inst = Instantiate(Tile);
+#endif
                         inst.transform.position = new Vector3(x, 0, y);
                         inst.transform.Find("Renderer").Rotate(90 * Random.Range(0, 5), 90 * Random.Range(0, 5), 90 * Random.Range(0, 5));
                         grid[x, y] = inst.GetComponent<GridTiles>();
@@ -97,7 +106,9 @@ public class GridGenerator : MonoBehaviour
 
     }
 
-    
 
-}
+
+
+
+                    }
 
