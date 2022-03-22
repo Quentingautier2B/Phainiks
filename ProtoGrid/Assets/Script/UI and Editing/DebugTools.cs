@@ -66,9 +66,16 @@ public class DebugTools : MonoBehaviour
     {
         if (!GameObject.Find(obj.name))
         {
+#if UNITY_EDITOR
             Selection.activeObject = PrefabUtility.InstantiatePrefab(obj);
             var inst = Selection.activeObject as GameObject;
+#endif
+
+#if !UNITY_EDITOR
+            var inst = Instantiate(obj);
+#endif
             inst.name = obj.name;
+
         }
     }
 
