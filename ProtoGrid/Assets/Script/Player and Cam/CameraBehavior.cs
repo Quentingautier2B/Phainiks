@@ -40,7 +40,7 @@ public class CameraBehavior : MonoBehaviour
     private void Update()
     {
        
-        RaycastHit[] hits = Physics.RaycastAll(camTransform.position, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+        RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
             if ( hits.Length >= 1)
         {
             foreach (RaycastHit h in hits)
@@ -51,11 +51,11 @@ public class CameraBehavior : MonoBehaviour
             }
         }
     }
-/*    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Debug.DrawRay(camTransform.position, playerPos.position - camTransform.position, Color.red);
-    }*/
-
+    }
+*/
     private void LateUpdate()
     {
         // cam suit le joueur

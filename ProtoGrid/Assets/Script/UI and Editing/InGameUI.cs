@@ -15,6 +15,12 @@ public class InGameUI : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void OnHubClick()
+    {
+        SceneManager.LoadScene("Lvl_1");
+    }
+
     private void Awake()
     {
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();

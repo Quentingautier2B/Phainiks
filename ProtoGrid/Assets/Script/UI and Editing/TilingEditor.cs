@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 public class TilingEditor : MonoBehaviour
 {
 
@@ -98,8 +101,8 @@ public class TilingEditor : MonoBehaviour
             flag = false;
         }
         walkable = tile.walkable;
-        //door = tile.door;
-        //key = tile.key;
+        door = tile.door;
+        key = tile.key;
         //crumble = tile.crumble;
         originalPosition = tile.originalPosition;
         //timerChangeInputValue = tile.timerChangeInputValue;
@@ -135,7 +138,7 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.53f);
         CreateDestroyObjectIndex(timerChangeInputValue, "Timer+", TimerItem, 0.5f);
         CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
-        CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
+        //CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
         CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
     }

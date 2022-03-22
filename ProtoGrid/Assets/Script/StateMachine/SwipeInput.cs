@@ -92,10 +92,10 @@ public class SwipeInput : StateMachineBehaviour
 
     void TestFourDirections(Animator anim)
     {
-        /*if (!TestDirection(pPosX, pPosY, 1) && !TestDirection(pPosX, pPosY, 2) && !TestDirection(pPosX, pPosY, 3) && !TestDirection(pPosX, pPosY, 4))
+        if (!TestDirection(pPosX, pPosY, 1) && !TestDirection(pPosX, pPosY, 2) && !TestDirection(pPosX, pPosY, 3) && !TestDirection(pPosX, pPosY, 4))
         {           
-            anim.SetBool("OntoTempoTile", true);
-        }*/
+            //anim.SetBool("OntoTempoTile", true);
+        }
             
 
         if (directionSwipe.x > 0 && directionSwipe.y > 0)
