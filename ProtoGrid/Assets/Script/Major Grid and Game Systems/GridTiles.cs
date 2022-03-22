@@ -13,8 +13,9 @@ public class GridTiles : MonoBehaviour
     [HideInInspector] public int step;
     public bool walkable;
     public bool originalPosition;
-    //[Range(0, 5)]public int key;
-    //[Range(0, 5)] public int door;
+    [Range(0, 5)] public int key;
+    [Range(0, 5)] public int door;
+    [HideInInspector] public bool open = false;
     //public bool crumble;
     [Range(0, 8)] public float levelTransiIndex;
     //[Range(-100, 100)] public int timerChangeInputValue;
@@ -34,7 +35,7 @@ public class GridTiles : MonoBehaviour
     [HideInInspector] public bool hitByCam = false;
     [HideInInspector] public int numberFrameHit = 0;
     int earlynumberFrameHit = 0;
-
+    float fadeInSpeed =3;
     Renderer rend;
     GameObject gameManager;      
     GridGenerator gridGenerator;
@@ -57,6 +58,19 @@ public class GridTiles : MonoBehaviour
     private void Start()
     {
         tempoBool = true;
+        if (walkable)
+        {
+            var col = rend.material.color;
+            col.a = 1;
+            rend.material.color = col;
+        }
+        if (!walkable)
+        {
+            var col = rend.material.color;
+            col.a = 0;
+            rend.material.color = col;
+        }
+
 /*        if(door != 0)
         {
             walkable = false;
@@ -92,6 +106,39 @@ public class GridTiles : MonoBehaviour
             rend.material.color = col;
             
         }
+
+        if (!walkable)
+        {
+            var yo = transform.GetComponentsInChildren<MeshRenderer>();
+            foreach(MeshRenderer y in yo)
+            {
+                if (name != "Renderer" && name != "Door")
+                    y.enabled = false;
+            }
+        }        
+        
+        if (walkable)
+        {
+            var yo = transform.GetComponentsInChildren<MeshRenderer>();
+            foreach(MeshRenderer y in yo)
+            {
+                if (name != "Renderer" && name != "Door" )
+                    y.enabled = true;
+            }
+        }
+
+
+        if(door != 0 && !open)
+        {
+            walkable = false;
+            print(1);
+        }
+
+        if (door != 0 && open) 
+        {
+            walkable = true;
+        }
+
 
         HeightToInt();
 
@@ -146,15 +193,21 @@ public class GridTiles : MonoBehaviour
 
     void VisibleOrInvisibleTile()
     {
-        if (walkable && !rend.enabled)
+        if (walkable)
         {
-            rend.enabled = true;
+            
+            var col = rend.material.color;
+            col.a = Mathf.Lerp(col.a,1,Time.deltaTime*fadeInSpeed);
+            rend.material.color = col;
         }
 
 
-        if (!walkable && rend.enabled /*&& door == 0*/)
+        if (!walkable)
         {
-            rend.enabled = false;
+            
+            var col = rend.material.color;
+            col.a = Mathf.Lerp(col.a, 0, Time.deltaTime * fadeInSpeed);
+            rend.material.color = col;
         }
     }
     #endregion

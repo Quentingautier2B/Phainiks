@@ -94,7 +94,7 @@ public class SwipeInput : StateMachineBehaviour
     {
         if (!TestDirection(pPosX, pPosY, 1) && !TestDirection(pPosX, pPosY, 2) && !TestDirection(pPosX, pPosY, 3) && !TestDirection(pPosX, pPosY, 4))
         {           
-            anim.SetBool("OntoTempoTile", true);
+            //anim.SetBool("OntoTempoTile", true);
         }
             
 

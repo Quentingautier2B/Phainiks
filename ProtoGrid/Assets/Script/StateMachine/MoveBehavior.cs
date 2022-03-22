@@ -90,8 +90,8 @@ public class MoveBehavior : StateMachineBehaviour
         }
 
 
-        /*if (grid[x, y].key != 0)       
-            KeyBehavior(grid[x, y]);*/
+        if (grid[x, y].key != 0)
+            KeyBehavior(grid[x, y]);
 
         /*if (currentPathIndex < highlightedTiles.Count -1)
         {
@@ -100,5 +100,15 @@ public class MoveBehavior : StateMachineBehaviour
         }   */
     }
 
-
+    void KeyBehavior(GridTiles tile)
+    {
+        tile.transform.Find("Key").gameObject.SetActive(false);
+        foreach(GridTiles t in grid)
+        {
+            if(t.door == tile.key)
+            {
+                t.open = true;
+            }
+        }
+    }
 }
