@@ -21,8 +21,7 @@ public class TempoBehavior : StateMachineBehaviour
 
     [SerializeField] bool redFlager,blueFlager,greenFlager;
     float redTarget, blueTarget, greenTarget;
-    public float tempoTileSpeed;
-    bool redTempoTileFlag, blueTempoTileFlag, greenTempoTileFlag;
+    public float tempoTileSpeed;    
     bool redTest, blueTest, greenTest;
     GridGenerator gridG;
     GridTiles[,] grid;
@@ -43,9 +42,9 @@ public class TempoBehavior : StateMachineBehaviour
         {
             tile.tempoBool = true;
         }
-        redTempoTileFlag = true;
-        blueTempoTileFlag = true;
-        greenTempoTileFlag = true;
+        //redTempoTileFlag = true;
+        //blueTempoTileFlag = true;
+        //greenTempoTileFlag = true;
         redTest = false;
         blueTest = false;
         greenTest = false;
@@ -281,7 +280,7 @@ public class TempoBehavior : StateMachineBehaviour
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        greenTempoTileFlag = true;
+                        //greenTempoTileFlag = true;
                         greenFlager = false;
                     }
                 }
@@ -299,7 +298,7 @@ public class TempoBehavior : StateMachineBehaviour
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        greenTempoTileFlag = true;
+                       // greenTempoTileFlag = true;
                         greenFlager = false;
                     }
                 }

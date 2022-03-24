@@ -60,7 +60,7 @@ public class SwipeInput : StateMachineBehaviour
 
         if(Input.GetMouseButtonUp(0) && clickBool)
         {
-            Debug.Log(directionSwipe);
+           
             if(directionIndex > 0)
             {
                 
@@ -88,14 +88,15 @@ public class SwipeInput : StateMachineBehaviour
     {
         pPosX = (int)player.position.x;
         pPosY = (int)player.position.z;
+    
     }
 
     void TestFourDirections(Animator anim)
     {
-        if (!TestDirection(pPosX, pPosY, 1) && !TestDirection(pPosX, pPosY, 2) && !TestDirection(pPosX, pPosY, 3) && !TestDirection(pPosX, pPosY, 4))
+        /*if (!TestDirection(pPosX, pPosY, 1) && !TestDirection(pPosX, pPosY, 2) && !TestDirection(pPosX, pPosY, 3) && !TestDirection(pPosX, pPosY, 4))
         {           
             //anim.SetBool("OntoTempoTile", true);
-        }
+        }*/
             
 
         if (directionSwipe.x > 0 && directionSwipe.y > 0)

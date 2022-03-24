@@ -39,8 +39,8 @@ public class GridTiles : MonoBehaviour
     Renderer rend;
     GameObject gameManager;      
     GridGenerator gridGenerator;
-
-
+    Transform tpTarget;
+    GridTiles[,] grid;
 
     
     #endregion
@@ -55,8 +55,11 @@ public class GridTiles : MonoBehaviour
         SetUpComponents();
     }
 
+
+
     private void Start()
     {
+        grid = FindObjectOfType<GridGenerator>().grid;
         tempoBool = true;
         if (walkable)
         {
@@ -75,11 +78,12 @@ public class GridTiles : MonoBehaviour
         {
             walkable = false;
         }*/
-
+        
         if (teleporter != 0)
         {
-            foreach (GridTiles obj in gridGenerator.grid)
+            foreach (GridTiles obj in grid)
             {
+                
                 if (obj.teleporter == tpTargetIndex)
                 {
                     if (TpTarget != null)
@@ -99,12 +103,15 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+
         if (hitByCam)
         {
-            var col = rend.material.color;
-            col.a = 0.5f;
-            rend.material.color = col;
-            
+            foreach (MeshRenderer m in transform.GetComponentsInChildren<MeshRenderer>())
+            {
+                var col = m.material.color;
+                col.a = 0.5f;
+                m.material.color = col;
+            }
         }
 
         if (!walkable)
@@ -131,7 +138,7 @@ public class GridTiles : MonoBehaviour
         if(door != 0 && !open)
         {
             walkable = false;
-            print(1);
+           
         }
 
         if (door != 0 && open) 
@@ -171,7 +178,8 @@ public class GridTiles : MonoBehaviour
         rend = transform.Find("Renderer").GetComponent<Renderer>();
         height = (int)transform.position.y;
         gameManager = FindObjectOfType<GridGenerator>().gameObject;
-        gridGenerator = gameManager.GetComponent<GridGenerator>();             
+        gridGenerator = gameManager.GetComponent<GridGenerator>();
+        
     }
 
     void HeightToInt()
@@ -194,8 +202,7 @@ public class GridTiles : MonoBehaviour
     void VisibleOrInvisibleTile()
     {
         if (walkable)
-        {
-            
+        {    
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a,1,Time.deltaTime*fadeInSpeed);
             rend.material.color = col;

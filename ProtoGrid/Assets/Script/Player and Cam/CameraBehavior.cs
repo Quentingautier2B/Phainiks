@@ -25,7 +25,8 @@ public class CameraBehavior : MonoBehaviour
         camBehavior = transform.Find("Main Camera").GetComponent<Camera>();
         playerPos = FindObjectOfType<Player>().transform;
         camTransform = transform.Find("Main Camera");
-       
+        Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
+
     }
 
     private void Start()
@@ -45,9 +46,13 @@ public class CameraBehavior : MonoBehaviour
         {
             foreach (RaycastHit h in hits)
             {
-               h.collider.GetComponent<GridTiles>().hitByCam = true;
-               h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
-                
+                if (h.collider.gameObject.GetComponent<GridTiles>() != null)
+                {
+                    h.collider.GetComponent<GridTiles>().hitByCam = true;
+                    h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
+
+                }
+
             }
         }
     }
