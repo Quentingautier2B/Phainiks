@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [TextArea]
-    [SerializeField] string Notes = "Comment Here.";    
+
+ 
     GridTiles[,] grid;
     SwipeInput sInput;
     public float roundingThreshhold = 0.7f;

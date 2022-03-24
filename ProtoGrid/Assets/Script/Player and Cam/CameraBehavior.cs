@@ -25,7 +25,8 @@ public class CameraBehavior : MonoBehaviour
         camBehavior = transform.Find("Main Camera").GetComponent<Camera>();
         playerPos = FindObjectOfType<Player>().transform;
         camTransform = transform.Find("Main Camera");
-       
+        Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
+
     }
 
     private void Start()
