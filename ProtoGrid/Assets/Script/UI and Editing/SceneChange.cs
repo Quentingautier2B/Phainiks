@@ -10,7 +10,7 @@ public class SceneChange : MonoBehaviour
         StartCoroutine(EndBehavior(tile));
     }
 
-    IEnumerator EndBehavior(GridTiles tile)
+   public IEnumerator EndBehavior(GridTiles tile)
     {
       
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
@@ -19,6 +19,6 @@ public class SceneChange : MonoBehaviour
         if(tile.levelTransiIndex == 1)
             SceneManager.LoadScene("Lvl_" + 1, LoadSceneMode.Single);
         else
-            SceneManager.LoadScene("Lvl_" + Mathf.Floor(tile.levelTransiIndex) + "," +((tile.levelTransiIndex-Mathf.Floor(tile.levelTransiIndex))*10), LoadSceneMode.Single);
+            SceneManager.LoadScene("Lvl_" + Mathf.Floor(tile.levelTransiIndex) + "," +(Mathf.RoundToInt((tile.levelTransiIndex-Mathf.Floor(tile.levelTransiIndex))*10)), LoadSceneMode.Single);
     }
 }

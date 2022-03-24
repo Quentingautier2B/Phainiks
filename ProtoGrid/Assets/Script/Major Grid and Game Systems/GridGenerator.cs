@@ -7,8 +7,6 @@ using UnityEditor;
 #endif
 public class GridGenerator : MonoBehaviour
 {
-    [TextArea]
-    [SerializeField] string Notes = "Comment Here.";
     #region variables
     public GridTiles[,] grid;
     [SerializeField] bool instantiateGrid = false;
@@ -24,6 +22,8 @@ public class GridGenerator : MonoBehaviour
     #endregion
     void Awake()
     {
+        
+        instantiateGrid = false;
         player = FindObjectOfType<Player>().transform;
         GridTiles[] list = FindObjectsOfType<GridTiles>();
         grid = new GridTiles[raws, columns];
@@ -48,9 +48,20 @@ public class GridGenerator : MonoBehaviour
         }
     }
 
+
+
     private void OnDrawGizmos()
     {
 
+        GridTiles[] list = FindObjectsOfType<GridTiles>();
+        grid = new GridTiles[raws, columns];
+        for (int i = 0; i < list.Length; i++)
+        {
+            int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
+            int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
+            grid[x, y] = list[i];
+            grid[x, y].name = "tiles " + x + " " + y;
+        }
 
         if (instantiateGrid)
         {
@@ -65,15 +76,7 @@ public class GridGenerator : MonoBehaviour
 
             }
 
-            GridTiles[] list = FindObjectsOfType<GridTiles>();
-            grid = new GridTiles[raws, columns];
-            for (int i = 0; i < list.Length; i++)
-            {
-                int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
-                int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
-                grid[x, y] = list[i];
-                grid[x, y].name = "tiles " + x + " " + y;
-            }
+
 
             for (int x = 0; x < raws; x++)
             {
@@ -81,7 +84,15 @@ public class GridGenerator : MonoBehaviour
                 {
                     if (!grid[x, y])
                     {
+#if UNITY_EDITOR
+                        Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
+                        Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
+                        var inst = Selection.activeObject as GameObject;
+#endif
+
+#if !UNITY_EDITOR
                         var inst = Instantiate(Tile);
+#endif
                         inst.transform.position = new Vector3(x, 0, y);
                         inst.transform.Find("Renderer").Rotate(90 * Random.Range(0, 5), 90 * Random.Range(0, 5), 90 * Random.Range(0, 5));
                         grid[x, y] = inst.GetComponent<GridTiles>();
@@ -97,7 +108,9 @@ public class GridGenerator : MonoBehaviour
 
     }
 
-    
 
-}
+
+
+
+                    }
 
