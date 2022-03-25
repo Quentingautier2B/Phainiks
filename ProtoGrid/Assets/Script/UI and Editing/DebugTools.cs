@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class DebugTools : MonoBehaviour
 {
     public bool debugModOn;
+    public FMOD.Studio.EventInstance mainMusic;
+    public FMOD.Studio.EventInstance redMusic;
+    public FMOD.Studio.EventInstance blueMusic;
+    public FMOD.Studio.EventInstance greenMusic;
 
     public GameObject System;
     public GameObject SecondarySystem;
@@ -12,16 +18,47 @@ public class DebugTools : MonoBehaviour
     public GameObject Terrain;
     bool SceneLoaded;
 
+    private void Awake()
+    {
+        
+/*        mainMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Main");
+        redMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Red");
+        blueMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Blue");
+        greenMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Green");*/
+
+        //TileMusic(mainMusic, "Main");
+        /*TileMusic(redMusic, "Red","VolumeRed");
+        TileMusic(blueMusic, "Blue", "VolumeBlue");
+        TileMusic(greenMusic, "Green", "VolumeGreen");*/
+       
+
+        /*        mainMusic.start();
+                redMusic.start();
+                blueMusic.start();
+                greenMusic.start();*/
+
+    }
+
+    void TileMusic(FMOD.Studio.EventInstance musicInstance, string name, string parameterName)
+    {
+        musicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/" + name);
+        musicInstance.start();       
+        musicInstance.setParameterByName(parameterName,-18);
+    }
+
     private void OnDrawGizmos()
     {
-        if (!SceneLoaded)
+        
+        if (!SceneLoaded && !FindObjectOfType<GridGenerator>())
         {
-        Instantiater(System);
-        Instantiater(SecondarySystem);
-        Instantiater(Player);
-        Instantiater(Terrain);
-        SceneLoaded = true;
+
+            Instantiater(System);
+            Instantiater(SecondarySystem);
+            Instantiater(Player);
+            Instantiater(Terrain);
+            SceneLoaded = true;
         }
+        
 
     }
 
@@ -29,8 +66,16 @@ public class DebugTools : MonoBehaviour
     {
         if (!GameObject.Find(obj.name))
         {
+#if UNITY_EDITOR
+            Selection.activeObject = PrefabUtility.InstantiatePrefab(obj);
+            var inst = Selection.activeObject as GameObject;
+#endif
+
+#if !UNITY_EDITOR
             var inst = Instantiate(obj);
+#endif
             inst.name = obj.name;
+
         }
     }
 
