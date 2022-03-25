@@ -34,7 +34,7 @@ public class Reset : MonoBehaviour
     {
         if(resetTimer <= 0)
         {
-            
+
             ResetEffect();
             resetTimer = resetTimerValue;
         }
