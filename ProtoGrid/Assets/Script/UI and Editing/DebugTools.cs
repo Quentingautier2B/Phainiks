@@ -64,11 +64,7 @@ public class DebugTools : MonoBehaviour
         
 
     }
-    private void OnApplicationQuit()
-    {
-        
-        
-    }
+
     void Instantiater(GameObject obj)
     {
         if (!GameObject.Find(obj.name))
