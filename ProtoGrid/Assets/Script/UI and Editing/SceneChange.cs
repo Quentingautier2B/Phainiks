@@ -15,7 +15,7 @@ public class SceneChange : MonoBehaviour
       
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         if(tile.levelTransiIndex == 1)
             SceneManager.LoadScene("Lvl_" + 1, LoadSceneMode.Single);
         else

@@ -103,13 +103,15 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
-        
+
         if (hitByCam)
         {
-            var col = rend.material.color;
-            col.a = 0.5f;
-            rend.material.color = col;
-            
+            foreach (MeshRenderer m in transform.GetComponentsInChildren<MeshRenderer>())
+            {
+                var col = m.material.color;
+                col.a = 0.5f;
+                m.material.color = col;
+            }
         }
 
         if (!walkable)
@@ -200,8 +202,7 @@ public class GridTiles : MonoBehaviour
     void VisibleOrInvisibleTile()
     {
         if (walkable)
-        {
-            
+        {    
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a,1,Time.deltaTime*fadeInSpeed);
             rend.material.color = col;

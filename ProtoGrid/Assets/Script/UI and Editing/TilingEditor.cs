@@ -58,6 +58,8 @@ public class TilingEditor : MonoBehaviour
     public Color[] LineColorList = new Color[5];
     Color lineColor;
     int lineHeight;
+    int targetLineHeight;
+    GridTiles targetTile;
 
     [Header("Materials")]
     [Space]
@@ -101,15 +103,10 @@ public class TilingEditor : MonoBehaviour
             {
                 if (t.teleporter == tpIndex)
                 {
-
+                    targetTile = t;
                     tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);
-                    if (height > t.height)
-                        lineHeight = height;
-                    else
-                    {
-                        lineHeight = t.height;
-                    }
-
+                    targetLineHeight = t.height;
+                    
                 }
             }
 
@@ -143,6 +140,15 @@ public class TilingEditor : MonoBehaviour
     {
         if (tpTarget != null && tpValue != 0)
         {
+            targetLineHeight = (int)GameObject.Find(targetTile.name).transform.position.y;
+        
+            if (height > targetLineHeight)
+                lineHeight = height;
+            else
+            {
+                lineHeight = targetLineHeight;
+            }
+
             var LineRendered = transform.Find("Line").GetComponent<LineRenderer>();
             var p1 = tpTarget;
             var p2 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
@@ -165,7 +171,12 @@ public class TilingEditor : MonoBehaviour
 
 
 
-
+        if (height > targetLineHeight)
+            lineHeight = height;
+        else
+        {
+            lineHeight = targetLineHeight;
+        }
 
 
 
@@ -184,7 +195,7 @@ public class TilingEditor : MonoBehaviour
             EditorBlocSnapping();
             ItemColoring();
 
-            if (tpValue != 0)
+            /*if (tpValue != 0)
             {
                 lineColor = LineColorList[colorIndex];
 
@@ -226,7 +237,7 @@ public class TilingEditor : MonoBehaviour
                     
                     //Graphics.DrawMeshNow(arrowHead, matrix);
                 }
-            }
+            }*/
         }
 
     }
