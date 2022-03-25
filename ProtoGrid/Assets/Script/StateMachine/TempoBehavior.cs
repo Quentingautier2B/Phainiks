@@ -26,12 +26,13 @@ public class TempoBehavior : StateMachineBehaviour
     GridGenerator gridG;
     GridTiles[,] grid;
     bool awake = true;
-
+    DebugTools debugTools;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
         {
+            debugTools = FindObjectOfType<DebugTools>();
             grid = FindObjectOfType<GridGenerator>().grid;
             t = FindObjectOfType<TileVariables>();
             awake = false;
@@ -187,7 +188,7 @@ public class TempoBehavior : StateMachineBehaviour
                     
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
-                        
+                        debugTools.redMusic.setVolume(1);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //redTempoTileFlag = true;
                         redFlager = false;
@@ -207,6 +208,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
+                        debugTools.redMusic.setVolume(0);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //redTempoTileFlag = true;
                         redFlager = false;
@@ -234,6 +236,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
+                        debugTools.blueMusic.setVolume(1);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //blueTempoTileFlag = true;
                         blueFlager = false;
@@ -252,6 +255,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
+                        debugTools.blueMusic.setVolume(0);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //blueTempoTileFlag = true;
                         blueFlager = false;
@@ -279,6 +283,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
+                        debugTools.greenMusic.setVolume(1);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //greenTempoTileFlag = true;
                         greenFlager = false;
@@ -297,6 +302,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
+                        debugTools.greenMusic.setVolume(0);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                        // greenTempoTileFlag = true;
                         greenFlager = false;
