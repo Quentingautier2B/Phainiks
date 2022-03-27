@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
+    DebugTools debugTools;
+
+    private void Awake()
+    {
+        debugTools = GetComponent<DebugTools>();
+    }
     public void startCoroutine(GridTiles tile)
     {
         StartCoroutine(EndBehavior(tile));
@@ -14,7 +20,15 @@ public class SceneChange : MonoBehaviour
     {
       
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
-        
+        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        debugTools.greenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        debugTools.mainMusic.release();
+        debugTools.redMusic.release();
+        debugTools.blueMusic.release();
+        debugTools.greenMusic.release();
         yield return new WaitForSeconds(0.1f);
         if(tile.levelTransiIndex == 1)
             SceneManager.LoadScene("Lvl_" + 1, LoadSceneMode.Single);

@@ -19,28 +19,35 @@ public class TempoBehavior : StateMachineBehaviour
     TileVariables t;
 
 
-    [SerializeField] bool redFlager,blueFlager,greenFlager;
+    [SerializeField] bool redFlager,blueFlager,greenFlager, crumbleFlager;
     float redTarget, blueTarget, greenTarget;
     public float tempoTileSpeed;    
     bool redTest, blueTest, greenTest;
     GridGenerator gridG;
     GridTiles[,] grid;
     bool awake = true;
-
+    DebugTools debugTools;
+    int x, y;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
         {
+            debugTools = FindObjectOfType<DebugTools>();
             grid = FindObjectOfType<GridGenerator>().grid;
             t = FindObjectOfType<TileVariables>();
             awake = false;
             
         }
 
-        foreach(GridTiles tile in grid)
+
+        x = animator.GetInteger("PreviousX");
+        y = animator.GetInteger("PreviousY");
+
+        foreach (GridTiles tile in grid)
         {
             tile.tempoBool = true;
+            
         }
         //redTempoTileFlag = true;
         //blueTempoTileFlag = true;
@@ -69,7 +76,7 @@ public class TempoBehavior : StateMachineBehaviour
     {
         tempoChange();
 
-        if(!redFlager && !blueFlager && !greenFlager)
+        if(!redFlager && !blueFlager && !greenFlager && !crumbleFlager)
         {
             if (stateInfo.IsName("Tempo"))
             {
@@ -119,7 +126,7 @@ public class TempoBehavior : StateMachineBehaviour
 
         }
 
-
+        
 
         if (greenTest)
         {
@@ -187,7 +194,8 @@ public class TempoBehavior : StateMachineBehaviour
                     
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
-                        
+                        debugTools.redMusic.setVolume(1);
+                        //debugTools.redMusic.start();
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //redTempoTileFlag = true;
                         redFlager = false;
@@ -207,6 +215,9 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
+                        debugTools.redMusic.setVolume(0);
+                        //debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                     
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //redTempoTileFlag = true;
                         redFlager = false;
@@ -234,6 +245,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
+                        debugTools.blueMusic.setVolume(1);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //blueTempoTileFlag = true;
                         blueFlager = false;
@@ -252,6 +264,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
+                        debugTools.blueMusic.setVolume(0);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //blueTempoTileFlag = true;
                         blueFlager = false;
@@ -279,6 +292,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y >= tile.target - 0.01f)
                     {
+                        debugTools.greenMusic.setVolume(1);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                         //greenTempoTileFlag = true;
                         greenFlager = false;
@@ -297,6 +311,7 @@ public class TempoBehavior : StateMachineBehaviour
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                     if (tile.transform.position.y <= tile.target + 0.01f)
                     {
+                        debugTools.greenMusic.setVolume(0);
                         tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
                        // greenTempoTileFlag = true;
                         greenFlager = false;
@@ -304,6 +319,53 @@ public class TempoBehavior : StateMachineBehaviour
                 }
             }
           
+        }
+        #endregion
+
+        #region crumbleRegionMove
+        if (grid[x,y].crumble)
+        {
+           
+                if (grid[x, y].crumbleUp)
+                {
+                    if (grid[x, y].tempoBool)
+                    {
+                        grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
+                        grid[x, y].tempoBool = false;
+                    }
+                        grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
+/*                      tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                        tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();*/
+                    if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
+                    {
+                        //debugTools.greenMusic.setVolume(1);
+                        grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
+                        grid[x, y].crumbleBool = false;
+                        crumbleFlager = false;
+                    }
+                }
+
+                if (!grid[x, y].crumbleUp)
+                {
+                    if (grid[x, y].tempoBool)
+                    {
+                        grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
+                        grid[x, y].tempoBool = false;
+                    }
+                        grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
+                        /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                        tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
+                    if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
+                    {
+                        //debugTools.greenMusic.setVolume(0);
+                        grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
+                        // greenTempoTileFlag = true;
+                        grid[x, y].crumbleBool = false;
+                        crumbleFlager = false;
+                    }
+                }
+            
+
         }
         #endregion
     }
