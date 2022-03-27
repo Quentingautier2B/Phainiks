@@ -15,7 +15,7 @@ public class TilingEditor : MonoBehaviour
     bool walkable;
     int door;
     public bool doorRotation;
-    //bool crumble;
+    bool crumble;
     bool originalPosition;
     int key;
     //int timerChangeInputValue;
@@ -50,16 +50,14 @@ public class TilingEditor : MonoBehaviour
 
     [Header("TP Lines Properties")]
     [Space]
-    public float LineLength;
-    public float LineCurving;
-    public float arrowHeadGirth;
-    public float lineThickness;
-    [Range(0,4)] public int colorIndex;
-    public Color[] LineColorList = new Color[5];
-    Color lineColor;
-    int lineHeight;
-    int targetLineHeight;
     GridTiles targetTile;
+    Vector3 p1, p2, p3, p1p3, p3p2, p1p2;
+    bool trailCreate = true;
+    [HideInInspector] bool tpFeedback;
+    float trailTimer;
+    bool trailBool;
+    Transform Trail;
+    float interpolateAmount;
 
     [Header("Materials")]
     [Space]
@@ -95,91 +93,106 @@ public class TilingEditor : MonoBehaviour
         grid = FindObjectOfType<GridGenerator>().grid;
         if (tpValue != 0)
         {
-            lineColor = LineColorList[colorIndex];
+            foreach (GridTiles t in FindObjectOfType<GridGenerator>().grid)
+            {
+                if (t.teleporter == tpIndex)
+                {
+                    targetTile = t;
+                    tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);                    
+                }
+            }
+        }
+    }   
 
+    private void Update()
+    {
 
+        trailSign();
+    }
+/*    private void OnMouseEnter()
+    {
+        trailBool = false;
+        trailTimer = 2;
+    }
 
+    private void OnMouseOver()
+    {
+        trailSign();
+    }
+
+    private void OnMouseExit()
+    {
+        if(Trail != null)
+        StartCoroutine(DestroyTrail(Trail.gameObject));
+    }*/
+
+    void trailSign()
+    {
+        grid = FindObjectOfType<GridGenerator>().grid;
+        if (tpValue != 0)
+        {
             foreach (GridTiles t in FindObjectOfType<GridGenerator>().grid)
             {
                 if (t.teleporter == tpIndex)
                 {
                     targetTile = t;
                     tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);
-                    targetLineHeight = t.height;
-                    
                 }
             }
-
-            if (tpTarget != null)
-            {
-                var LineRendered = transform.Find("Line").GetComponent<LineRenderer>();
-                var p1 = tpTarget;
-                var p2 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
-                var diffP = new Vector3(p1.x - p2.x, 0, p1.z - p2.z);
-                var diffPo = new Vector3(p2.x - p1.x, 0, p2.z - p1.z);
-                var distanceP = Vector3.Distance(new Vector3(p2.x, 0, p2.z), new Vector3(p1.x, 0, p1.z));
-                LineRendered.SetPosition(0, new Vector3(0, 0.5f, 0) - (diffPo) * (LineLength * (distanceP * 100)));
-                LineRendered.SetPosition(1, new Vector3(0, lineHeight + 1f, 0) - (diffPo) * (LineLength * (distanceP * 100)));
-                LineRendered.SetPosition(2, diffP + new Vector3(0, lineHeight + 1f, 0) + (diffPo) * (LineLength * (distanceP * 100)));
-                LineRendered.SetPosition(3, p1 - p2 + new Vector3(0, 0.5f, 0) + (diffPo) * (LineLength * (distanceP * 100)));
-                LineRendered.endWidth = 10;
-                //LineRendered.startColor = lineColor;
-                //LineRendered.endColor = lineColor;
-                LineRendered.startWidth = lineThickness;
-                
-                //Handles.DrawBezier(p2 - (p2 - p1) * LineLength, p1 + (p2 - p1) * LineLength, new Vector3(p2.x, p2.y + LineCurving, p2.z), new Vector3(p1.x, p1.y + LineCurving, p1.z), lineColor, null, lineThickness);
-               // Gizmos.DrawCube(p1 + (diffPo) * (LineLength * (distanceP * 100)), Vector3.one * arrowHeadGirth);
-                //Gizmos.DrawMesh(arrowHead,0, p1 + (p2 - p1) *LineLength, Quaternion.LookRotation(Vector3.forward, p2-p1), new Vector3(arrowHeadGirth, arrowHeadGirth, arrowHeadGirth));
-                //Gizmos.DrawLine(new Vector3(transform.position.x,transform.position.y +0.53f,transform.position.z), tpTarget);
-            }
-
         }
-    }
 
-    private void Update()
-    {
-        if (tpTarget != null && tpValue != 0)
+        if (!trailBool)
         {
-            targetLineHeight = (int)GameObject.Find(targetTile.name).transform.position.y;
-        
-            if (height > targetLineHeight)
-                lineHeight = height;
-            else
-            {
-                lineHeight = targetLineHeight;
-            }
+            trailTimer += Time.deltaTime;
 
-            var LineRendered = transform.Find("Line").GetComponent<LineRenderer>();
-            var p1 = tpTarget;
-            var p2 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
-            var diffP = new Vector3(p1.x - p2.x, 0, p1.z - p2.z);
-            var diffPo = new Vector3(p2.x - p1.x, 0, p2.z - p1.z);
-            var distanceP = Vector3.Distance(new Vector3(p2.x, 0, p2.z), new Vector3(p1.x, 0, p1.z));
-            LineRendered.SetPosition(0, new Vector3(0, 0.5f, 0) - (diffPo) * (LineLength * (distanceP * 100)));
-            LineRendered.SetPosition(1, new Vector3(0, lineHeight + 1f, 0) - (diffPo) * (LineLength * (distanceP * 100)));
-            LineRendered.SetPosition(2, diffP + new Vector3(0, lineHeight + 1f, 0) + (diffPo) * (LineLength * (distanceP * 100)));
-            LineRendered.SetPosition(3, p1 - p2 + new Vector3(0, 0.5f, 0) + (diffPo) * (LineLength * (distanceP * 100)));
-            LineRendered.startColor = lineColor;
-            //LineRendered.endColor = lineColor;
-            //LineRendered.startWidth = lineThickness;
-            LineRendered.endWidth = lineThickness;
+            if (trailTimer >= 1.5f /*&& tpFeedback*/)
+            {
+                trailBool = true;
+                trailTimer = 0;
+            }
+        }
+
+        
+        if (tpValue != 0 && trailBool && grid[(int)tpTarget.x,(int)tpTarget.z].open && grid[(int)transform.position.x, (int)transform.position.z].open)
+        {
+            if (interpolateAmount <= .05 && trailCreate)
+            {
+                trailCreate = false;
+                var inst = Instantiate(TeleLine, transform.position, Quaternion.identity);
+                inst.name = "Line";
+                inst.transform.parent = transform;
+            }
+            Trail = transform.Find("Line");
+            p1 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
+            p2 = tpTarget;
+            p3 = (p1 + p2) / 2 + new Vector3(0, 3, 0);
+            interpolateAmount = (interpolateAmount + Time.deltaTime) % 1f;
+            p1p3 = Vector3.Lerp(p1, p3, interpolateAmount);
+            p3p2 = Vector3.Lerp(p3, p2, interpolateAmount);
+            p1p2 = Vector3.Lerp(p1p3, p3p2, interpolateAmount);
+
+            if (Trail != null)
+                Trail.position = p1p2;
+
+            if (interpolateAmount >= .95 && !trailCreate)
+            {
+                trailCreate = true;
+                trailBool = false;
+                StartCoroutine(DestroyTrail(Trail.gameObject));
+            }
         }
     }
+
+
+    IEnumerator DestroyTrail(GameObject g)
+    {
+        g.name = "Discarded";
+        yield return new WaitForSeconds(1);
+        Destroy(g);
+    }
+
     private void OnDrawGizmos()
     {
-
-
-
-
-        if (height > targetLineHeight)
-            lineHeight = height;
-        else
-        {
-            lineHeight = targetLineHeight;
-        }
-
-
-
         if (!playOn)
         {
             if (Input.GetKeyDown(KeyCode.N) && !walkable)
@@ -194,50 +207,6 @@ public class TilingEditor : MonoBehaviour
             CreateDestroyMethodsHub();
             EditorBlocSnapping();
             ItemColoring();
-
-            /*if (tpValue != 0)
-            {
-                lineColor = LineColorList[colorIndex];
-
-
-
-                foreach (GridTiles t in FindObjectOfType<GridGenerator>().grid)
-                {
-                    if (t.teleporter == tpIndex)
-                    {
-
-                        tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);
-                        if (height > t.height)
-                            lineHeight = height;
-                        else
-                        {
-                            lineHeight = t.height;
-                        }
-
-                    }
-                }
-
-                if (tpTarget != null)
-                {
-                    var LineRendered = transform.Find("Line").GetComponent<LineRenderer>();
-                    var p1 = tpTarget;
-                    var p2 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
-                    var diffP = new Vector3(p1.x - p2.x, 0, p1.z - p2.z);
-                    var diffPo = new Vector3(p2.x - p1.x, 0, p2.z - p1.z);
-                    var distanceP = Vector3.Distance(new Vector3(p2.x, 0, p2.z), new Vector3(p1.x, 0, p1.z));
-                    LineRendered.SetPosition(0, new Vector3(0, 0.5f, 0) - (diffPo) * (LineLength * (distanceP * 100)));
-                    LineRendered.SetPosition(1, new Vector3(0, lineHeight + 1f, 0) - (diffPo) * (LineLength * (distanceP * 100)));
-                    LineRendered.SetPosition(2, diffP + new Vector3(0, lineHeight + 1f, 0) + (diffPo) * (LineLength * (distanceP * 100)));
-                    LineRendered.SetPosition(3, p1 - p2 + new Vector3(0, 0.5f, 0) + (diffPo) * (LineLength * (distanceP * 100)));
-                    //LineRendered.startColor = lineColor;
-                    //LineRendered.endColor = Color.red;
-                    LineRendered.startWidth = lineThickness;
-                    LineRendered.endWidth = lineThickness;
-                    //Matrix4x4 matrix = Matrix4x4.TRS(p1, Quaternion.identity, Vector3.one * 0.1f);
-                    
-                    //Graphics.DrawMeshNow(arrowHead, matrix);
-                }
-            }*/
         }
 
     }
@@ -258,7 +227,7 @@ public class TilingEditor : MonoBehaviour
         walkable = tile.walkable;
         door = tile.door;
         key = tile.key;
-        //crumble = tile.crumble;
+        crumble = tile.crumble;
         originalPosition = tile.originalPosition;
         //timerChangeInputValue = tile.timerChangeInputValue;
         levelTransiIndex = tile.levelTransiIndex;   
@@ -282,10 +251,10 @@ public class TilingEditor : MonoBehaviour
         }
 
 
-   /*     if (crumble)
+        if (crumble)
         {
             rend.GetComponent<Renderer>().material = crumbleMat;
-        }*/
+        }
     }
 
     #region CreateDestroyMethods
@@ -297,7 +266,7 @@ public class TilingEditor : MonoBehaviour
         //CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
         CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
-        CreateDestroyObjectIndex(tpValue, "Line", TeleLine, 0f);
+        //CreateDestroyObjectIndex(tpValue, "Line", TeleLine, 0f);
     }
 
     void EditorBlocSnapping()
