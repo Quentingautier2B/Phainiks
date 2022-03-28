@@ -93,21 +93,27 @@ public class MoveBehavior : StateMachineBehaviour
         if (grid[x, y].key != 0)
             KeyBehavior(grid[x, y]);
 
-        /*if (currentPathIndex < highlightedTiles.Count -1)
+        if (grid[x, y].crumble)
         {
-            if (highlightedTiles[currentPathIndex].crumble && highlightedTiles[currentPathIndex].walkable)        
-                CrumbleBehavior(highlightedTiles[currentPathIndex]);
-        }   */
+            grid[x, y].crumbleBool = true;
+            if (grid[x, y].crumbleUp)
+                grid[x, y].crumbleUp = false;
+            else if (!grid[x, y].crumbleUp)
+                grid[x, y].crumbleUp = true;
+        }       
     }
 
     void KeyBehavior(GridTiles tile)
     {
-        tile.transform.Find("Key").gameObject.SetActive(false);
+        //tile.transform.Find("Key").gameObject.SetActive(false);
         foreach(GridTiles t in grid)
         {
-            if(t.door == tile.key)
+            if(t.door == tile.key )
             {
-                t.open = true;
+                if (t.open)
+                    t.open = false;
+                else if(!t.open)
+                    t.open = true;
             }
         }
     }
