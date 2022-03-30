@@ -891,12 +891,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
+  TeleLine: {fileID: 0}
+  arrowHead: {fileID: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!114 &569904081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,13 +915,23 @@ MonoBehaviour:
   step: 0
   walkable: 1
   originalPosition: 0
+  key: 0
+  door: 0
+  open: 0
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
   levelTransiIndex: 0
   tempoTile: 0
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
+  hitByCam: 0
+  numberFrameHit: 0
 --- !u!65 &569904082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1244,12 +1257,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
+  TeleLine: {fileID: 0}
+  arrowHead: {fileID: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!114 &870065223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,13 +1281,23 @@ MonoBehaviour:
   step: 0
   walkable: 1
   originalPosition: 1
+  key: 0
+  door: 0
+  open: 0
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
   levelTransiIndex: 0
   tempoTile: 0
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
+  hitByCam: 0
+  numberFrameHit: 0
 --- !u!65 &870065224
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1759,12 +1785,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
+  TeleLine: {fileID: 0}
+  arrowHead: {fileID: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!114 &1299637240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,13 +1809,23 @@ MonoBehaviour:
   step: 0
   walkable: 1
   originalPosition: 0
+  key: 0
+  door: 0
+  open: 0
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
   levelTransiIndex: 0
   tempoTile: 1
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
+  hitByCam: 0
+  numberFrameHit: 0
 --- !u!65 &1299637241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2023,12 +2062,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
+  TeleLine: {fileID: 0}
+  arrowHead: {fileID: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!114 &1490616677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2044,13 +2086,23 @@ MonoBehaviour:
   step: 0
   walkable: 1
   originalPosition: 0
-  levelTransiIndex: 1
+  key: 0
+  door: 0
+  open: 0
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
+  levelTransiIndex: 5.2
   tempoTile: 0
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
+  hitByCam: 0
+  numberFrameHit: 0
 --- !u!65 &1490616678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2253,6 +2305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerValue: 0
+  tpOn: 1
 --- !u!1 &1746802537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,12 +2364,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
+  TeleLine: {fileID: 0}
+  arrowHead: {fileID: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!114 &1746802540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2332,13 +2388,23 @@ MonoBehaviour:
   step: 0
   walkable: 1
   originalPosition: 0
+  key: 0
+  door: 0
+  open: 0
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
   levelTransiIndex: 0
   tempoTile: 0
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
+  hitByCam: 0
+  numberFrameHit: 0
 --- !u!65 &1746802541
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2398,7 +2464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7be334378e2d4f4ba5d270587c4be6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: Class that contains Player properties.
   roundingThreshhold: 0.7
   Inventory: []
 --- !u!23 &1822896617
@@ -2526,12 +2591,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
+  TeleLine: {fileID: 0}
+  arrowHead: {fileID: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
+  playOn: 1
 --- !u!114 &1853802663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2547,13 +2615,23 @@ MonoBehaviour:
   step: 0
   walkable: 1
   originalPosition: 0
+  key: 0
+  door: 0
+  open: 0
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
   levelTransiIndex: 0
   tempoTile: 2
   teleporter: 0
   tpTargetIndex: 0
   TpTarget: {fileID: 0}
+  target: 0
+  tempoBool: 0
   tempoTileSpeed: 0.5
   height: 0
+  hitByCam: 0
+  numberFrameHit: 0
 --- !u!65 &1853802664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2753,13 +2831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9598e595b93a50c4c8035fea68c6026a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: 'Finds the tiles in the scene and put them in a 2 dimensional array named
-    "grid".
-
-    Enter Raws for Max ''x'' value in the grid.
-
-    Enter Columns for
-    Max ''y'' value in the grid.'
   instantiateGrid: 0
   Tile: {fileID: 963485817208866333, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
   raws: 1
