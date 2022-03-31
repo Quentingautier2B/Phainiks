@@ -86,7 +86,7 @@ public class GridGenerator : MonoBehaviour
                     {
 #if UNITY_EDITOR
                         Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
-                        Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
+                       // Selection.activeObject = PrefabUtility.InstantiatePrefab(Tile);
                         var inst = Selection.activeObject as GameObject;
 #endif
 

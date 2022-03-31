@@ -46,9 +46,13 @@ public class CameraBehavior : MonoBehaviour
         {
             foreach (RaycastHit h in hits)
             {
-               h.collider.GetComponent<GridTiles>().hitByCam = true;
-               h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
-                
+                if (h.collider.gameObject.GetComponent<GridTiles>() != null && h.collider.gameObject.GetComponent<GridTiles>().open)
+                {
+                    h.collider.GetComponent<GridTiles>().hitByCam = true;
+                    h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
+
+                }
+
             }
         }
     }

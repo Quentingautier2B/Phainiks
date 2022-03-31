@@ -5,7 +5,7 @@ using TMPro;
 
 public class GridTiles : MonoBehaviour
 {
-    
+
 
 
     #region variables
@@ -14,9 +14,13 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     public bool originalPosition;
     [Range(0, 5)] public int key;
-    [Range(0, 5)] public int door;
-    [HideInInspector] public bool open = false;
-    //public bool crumble;
+    [Range(0, 5)] public int door;    
+    public bool open = false;
+
+    public bool crumble;
+    [HideInInspector] public bool crumbleUp;
+    [HideInInspector] public bool crumbleBool;
+
     [Range(0, 8)] public float levelTransiIndex;
     //[Range(-100, 100)] public int timerChangeInputValue;
     [Range(0, 3)] public int tempoTile;
@@ -103,31 +107,33 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
-        
+
         if (hitByCam)
         {
-            var col = rend.material.color;
-            col.a = 0.5f;
-            rend.material.color = col;
-            
+            foreach (MeshRenderer m in transform.GetComponentsInChildren<MeshRenderer>())
+            {
+                var col = m.material.color;
+                col.a = 0.5f;
+                m.material.color = col;
+            }
         }
 
         if (!walkable)
         {
             var yo = transform.GetComponentsInChildren<MeshRenderer>();
-            foreach(MeshRenderer y in yo)
+            foreach (MeshRenderer y in yo)
             {
-                if (name != "Renderer" && name != "Door")
+                if (y.name != "Renderer" && y.name != "Door")
                     y.enabled = false;
             }
-        }        
-        
+        }
+
         if (walkable)
         {
             var yo = transform.GetComponentsInChildren<MeshRenderer>();
             foreach(MeshRenderer y in yo)
             {
-                if (name != "Renderer" && name != "Door" )
+                if (y.name != "Renderer" && y.name != "Door" )
                     y.enabled = true;
             }
         }
@@ -200,8 +206,7 @@ public class GridTiles : MonoBehaviour
     void VisibleOrInvisibleTile()
     {
         if (walkable)
-        {
-            
+        {    
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a,1,Time.deltaTime*fadeInSpeed);
             rend.material.color = col;
@@ -212,7 +217,7 @@ public class GridTiles : MonoBehaviour
         {
             
             var col = rend.material.color;
-            col.a = Mathf.Lerp(col.a, 0, Time.deltaTime * fadeInSpeed);
+            col.a = Mathf.Lerp(col.a, 0, Time.deltaTime*fadeInSpeed);
             rend.material.color = col;
         }
     }
