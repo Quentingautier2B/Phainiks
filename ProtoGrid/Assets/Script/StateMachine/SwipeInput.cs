@@ -18,6 +18,7 @@ public class SwipeInput : StateMachineBehaviour
     GridGenerator gridG;
     GridTiles[,] grid;
     TileVariables temp;
+    CameraBehavior cam;
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
   
@@ -32,6 +33,7 @@ public class SwipeInput : StateMachineBehaviour
             temp = FindObjectOfType<TileVariables>();
             clickTimer = clickTimerValue;
             awake = false;
+            cam = FindObjectOfType<CameraBehavior>();
         }
         grid = gridG.grid;
 
@@ -62,16 +64,35 @@ public class SwipeInput : StateMachineBehaviour
         {
             endTouchPos = Input.mousePosition;
             directionSwipe = -(startTouchPos - endTouchPos).normalized;
+            if (cam.rotateMode == 0)
+            {
+                directionSwipe = directionSwipe;
+            }
+            else if (cam.rotateMode == 1)
+            {
+                directionSwipe = Quaternion.AngleAxis(90, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 2)
+            {
+                directionSwipe = Quaternion.AngleAxis(180, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 3)
+            {
+                directionSwipe = Quaternion.AngleAxis(270, -Vector3.forward) * directionSwipe;
+            }
+            else
+            {
+                Debug.LogError("Prob avce l'angle de swipe, modulo pas correct");
+            }
             pPosAssignement();
             TestFourDirections(animator);
         }
 
-        if(Input.GetMouseButtonUp(0) && clickBool)
+        if (Input.GetMouseButtonUp(0) && clickBool)
         {
            
             if(directionIndex > 0)
             {
-                
                 pPosAssignement();
                 TestFourDirections(animator);
             }
