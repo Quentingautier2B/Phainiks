@@ -14,7 +14,7 @@ public class GridTiling : MonoBehaviour
     public Material mat1D;
     public Material mat0D;
     MeshRenderer mesh;
-    [SerializeField] bool refreshRend = true;
+    [SerializeField] bool refreshRend;
 
 
     private void Awake()
@@ -56,7 +56,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat4D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0,0,0);
+            mesh.transform.Rotate(-90, 0,0);
         }
 
         //3 directions
@@ -68,7 +68,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat3D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 180, 0);
+            mesh.transform.Rotate(-90, 0, 0);
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -79,7 +79,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat3D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 0, 0);
+            mesh.transform.Rotate(-90, 180, 0);
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -90,7 +90,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat3D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, -90, 0);
+            mesh.transform.Rotate(-90, 90, 0);
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -101,7 +101,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat3D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 90, 0);
+            mesh.transform.Rotate(-90, -90, 0);
         }
 
         //2 directions opposées
@@ -114,7 +114,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat2DO;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 0, 0);
+            mesh.transform.Rotate(-90, 0, 0);
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -125,7 +125,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat2DO;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 90, 0);
+            mesh.transform.Rotate(-90, 90, 0);
         }
 
         //2 directions adjacentes
@@ -138,7 +138,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 180, 0);
+            mesh.transform.Rotate(-90, -90, 0);
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -149,7 +149,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, -90, 0);
+            mesh.transform.Rotate(-90, 0, 0);
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -160,7 +160,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 0, 0);
+            mesh.transform.Rotate(-90, 90, 0);
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -171,7 +171,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 90, 0);
+            mesh.transform.Rotate(-90, 180, 0);
         }
 
         //1 direction
@@ -184,7 +184,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 180, 0);
+            mesh.transform.Rotate(-90, 180, 0);
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -195,7 +195,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, -90, 0);
+            mesh.transform.Rotate(-90, -90, 0);
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -206,7 +206,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 0, 0);
+            mesh.transform.Rotate(-90, 0, 0);
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -217,7 +217,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 90, 0);
+            mesh.transform.Rotate(-90, 90, 0);
         }
 
         //0 direction
@@ -230,7 +230,7 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat0D;
             //refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(0, 0, 0);
+            mesh.transform.Rotate(-90, 0, 0);
         }
     }
 }

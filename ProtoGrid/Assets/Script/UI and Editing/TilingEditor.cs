@@ -33,6 +33,9 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] Material disabledMat;
     [SerializeField] Material normalMat;
     [SerializeField] Material crumbleMat;
+    [SerializeField] Mesh normalTile;
+    [SerializeField] Mesh tempoTile;
+
 
     [Header("GameObjects to Instantiate on Tiles")]
     [Space]
@@ -242,18 +245,29 @@ public class TilingEditor : MonoBehaviour
     {
         if (!walkable && door == 0)
         {
+            
             rend.GetComponent<Renderer>().material = disabledMat;
         }
 
         if (walkable /*&& !crumble*/)
         {
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
+            transform.Find("Renderer").localScale = Vector3.one * 50;
             //rend.GetComponent<Renderer>().material = normalMat;
         }
 
 
         if (crumble)
         {
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
+            transform.Find("Renderer").localScale = Vector3.one;
             rend.GetComponent<Renderer>().material = crumbleMat;
+        }
+
+        if(tempoValue != 0)
+        {
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
+            transform.Find("Renderer").localScale = Vector3.one;
         }
     }
 
