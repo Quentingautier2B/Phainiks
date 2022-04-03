@@ -28,13 +28,21 @@ public class SwipeInput : StateMachineBehaviour
         {
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
-            grid = gridG.grid;
+            
             temp = FindObjectOfType<TileVariables>();
             clickTimer = clickTimerValue;
             awake = false;
         }
-     
+        grid = gridG.grid;
+
         pPosAssignement();
+        foreach(GridTiles g in grid)
+        {
+            if (g.walkable && g.tempoTile == 0 && !g.crumble && g.open)
+            {
+                g.GetComponent<GridTiling>().SetDirectionalMaterial();
+            }
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -101,7 +109,7 @@ public class SwipeInput : StateMachineBehaviour
 
         if (directionSwipe.x > 0 && directionSwipe.y > 0)
         {
-            if (TestDirection(pPosX, pPosY, 1))
+            if (gridG.TestDirection(pPosX, pPosY, 1))
                 {
                 roundingDirectionalYPosition = new Vector2(0, 0);
                 anim.SetInteger("TargetInfoX", pPosX + 1);
@@ -127,13 +135,12 @@ public class SwipeInput : StateMachineBehaviour
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
                 }
-            }
-                
+            }                
         }
 
         if (directionSwipe.x > 0 && directionSwipe.y < 0)
         {
-            if (TestDirection(pPosX, pPosY, 2))
+            if (gridG.TestDirection(pPosX, pPosY, 2))
             {
                 roundingDirectionalYPosition = new Vector2(0, 1);
                 anim.SetInteger("TargetInfoX", pPosX);
@@ -164,7 +171,7 @@ public class SwipeInput : StateMachineBehaviour
 
         if (directionSwipe.x < 0 && directionSwipe.y > 0)
         {
-            if (TestDirection(pPosX, pPosY, 3))
+            if (gridG.TestDirection(pPosX, pPosY, 3))
             {
                 roundingDirectionalYPosition = new Vector2(1, 0);
                 anim.SetInteger("TargetInfoX", pPosX);
@@ -190,14 +197,12 @@ public class SwipeInput : StateMachineBehaviour
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
                 }
-
-
             }
         }
 
         if (directionSwipe.x < 0 && directionSwipe.y < 0)
         {
-            if (TestDirection(pPosX, pPosY, 4))
+            if (gridG.TestDirection(pPosX, pPosY, 4))
             {
                 roundingDirectionalYPosition = new Vector2(1, 1);
                 anim.SetInteger("TargetInfoX", pPosX - 1);
@@ -227,7 +232,7 @@ public class SwipeInput : StateMachineBehaviour
         }
     }
 
-    bool TestDirection(int x, int y, int direction)
+/*    public bool TestDirection(int x, int y, int direction)
     {
         switch (direction)
         {
@@ -261,5 +266,5 @@ public class SwipeInput : StateMachineBehaviour
             default:
                 return false;
         }
-    }
+    }*/
 }

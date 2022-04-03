@@ -108,9 +108,41 @@ public class GridGenerator : MonoBehaviour
 
     }
 
+    public bool TestDirection(int x, int y, int direction)
+    {
+        switch (direction)
+        {
+            case 1:
+
+                if (x + 1 < raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x + 1, y].walkable)
+                    return true;
+                else
+                    return false;
 
 
+            case 2:
+                if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y - 1].walkable)
+                    return true;
+                else
+                    return false;
+
+            case 3:
+                if (y + 1 < columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y + 1].walkable)
+                    return true;
+                else
+                    return false;
 
 
-                    }
+            case 4:
+                if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x - 1, y].walkable)
+                    return true;
+                else
+                    return false;
+
+            default:
+                return false;
+        }
+    }
+
+}
 

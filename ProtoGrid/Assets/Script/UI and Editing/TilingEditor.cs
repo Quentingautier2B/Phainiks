@@ -247,7 +247,7 @@ public class TilingEditor : MonoBehaviour
 
         if (walkable /*&& !crumble*/)
         {
-            rend.GetComponent<Renderer>().material = normalMat;
+            //rend.GetComponent<Renderer>().material = normalMat;
         }
 
 

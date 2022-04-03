@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 963485817208866332}
   - component: {fileID: 963485817208866328}
   - component: {fileID: 735905787984830351}
+  - component: {fileID: 6586406125815804632}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorRotation: 0
   disabledMat: {fileID: 2100000, guid: 77ffbd6bf85bd244ba25de01a8d27ccc, type: 2}
-  normalMat: {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
+  normalMat: {fileID: 2100000, guid: fd25c917493110e4487b31fd318d7cab, type: 2}
   crumbleMat: {fileID: 2100000, guid: 0f35795f064e02447997748002b7fccb, type: 2}
   DoorItem: {fileID: 5040694192882191631, guid: fe2aac85868288d4c8a552d50d524616, type: 3}
   KeyItem: {fileID: 2239755094156513774, guid: 46081f84d17e2cf4190b8aacce68708d, type: 3}
@@ -112,6 +113,25 @@ MonoBehaviour:
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
   playOn: 0
+--- !u!114 &6586406125815804632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963485817208866333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b65bcb55acff2b4298dd50e7de73e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat4D: {fileID: 2100000, guid: 566bb14b769658043b11133cc398fef0, type: 2}
+  mat3D: {fileID: 2100000, guid: 5714df255732f1c4ab098781cf1dca30, type: 2}
+  mat2DO: {fileID: 2100000, guid: 84c490694dd314b469cac83a0352f1dd, type: 2}
+  mat2DA: {fileID: 2100000, guid: 7169304e375ebdd43883bf7ed24f3c01, type: 2}
+  mat1D: {fileID: 2100000, guid: fd25c917493110e4487b31fd318d7cab, type: 2}
+  mat0D: {fileID: 2100000, guid: 71497776401940b46b80f1533b3319a1, type: 2}
+  refreshRend: 1
 --- !u!1 &6603590573583608196
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0e60aa64a99ef50469301f64f34efdd1, type: 2}
+  - {fileID: 2100000, guid: 71497776401940b46b80f1533b3319a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
