@@ -206,7 +206,13 @@ public class GridTiles : MonoBehaviour
     void VisibleOrInvisibleTile()
     {
         if (walkable)
-        {    
+        {
+            if (tempoTile != 0)
+            {
+                transform.Find("DirectionTempoU").gameObject.SetActive(true);
+                transform.Find("DirectionTempoD").gameObject.SetActive(true);
+
+            }
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a,1,Time.deltaTime*fadeInSpeed);
             rend.material.color = col;
@@ -215,7 +221,12 @@ public class GridTiles : MonoBehaviour
 
         if (!walkable)
         {
-            
+            if(tempoTile != 0)
+            {
+                transform.Find("DirectionTempoU").gameObject.SetActive(false) ;
+                transform.Find("DirectionTempoD").gameObject.SetActive(false) ;
+                
+            }
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a, 0, Time.deltaTime*fadeInSpeed);
             rend.material.color = col;

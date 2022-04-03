@@ -43,6 +43,7 @@ public class SwipeInput : StateMachineBehaviour
             if (g.walkable && g.tempoTile == 0 && !g.crumble && g.open)
             {
                 g.GetComponent<GridTiling>().SetDirectionalMaterial();
+
             }
         }
     }

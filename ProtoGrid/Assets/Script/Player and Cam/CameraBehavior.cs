@@ -100,7 +100,7 @@ public class CameraBehavior : MonoBehaviour
     private void OnGUI()
     {
 
-        if (GUI.Button(new Rect(10, 540, 50, 50), "left"))
+        if (GUI.Button(new Rect(110, 440, 150, 150), "left"))
         {
             //transform.Rotate(0, 90, 0, Space.World);
             angleLerp = 90;
@@ -108,7 +108,7 @@ public class CameraBehavior : MonoBehaviour
             
         }
 
-        if (GUI.Button(new Rect(1860, 540, 50, 50), "right"))
+        if (GUI.Button(new Rect(1650, 440, 150, 150), "right"))
         {
             //transform.Rotate(0, -90, 0, Space.World);
             angleLerp = -90;

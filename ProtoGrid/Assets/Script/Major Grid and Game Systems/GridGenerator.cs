@@ -66,14 +66,14 @@ public class GridGenerator : MonoBehaviour
         if (instantiateGrid)
         {
 
-            if (grid != null)
+      /*      if (grid != null)
             {
                 foreach (GridTiles obj in grid)
                 {
                     DestroyImmediate(obj.gameObject);
                 }
 
-            }
+            }*/
 
             /*GridTiles[] */list = FindObjectsOfType<GridTiles>();
             grid = new GridTiles[raws, columns];
@@ -119,38 +119,44 @@ public class GridGenerator : MonoBehaviour
 
     public bool TestDirection(int x, int y, int direction)
     {
-        switch (direction)
+        if (grid[x,y] != null)
         {
-            case 1:
+            switch (direction)
+            {
+                case 1:
 
-                if (x + 1 < raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x + 1, y].walkable)
-                    return true;
-                else
+                    if (x + 1 < raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x + 1, y].walkable)
+                        return true;
+                    else
+                        return false;
+
+
+                case 2:
+                    if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y - 1].walkable)
+                        return true;
+                    else
+                        return false;
+
+                case 3:
+                    if (y + 1 < columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y + 1].walkable)
+                        return true;
+                    else
+                        return false;
+
+
+                case 4:
+                    if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x - 1, y].walkable)
+                        return true;
+                    else
+                        return false;
+
+                default:
                     return false;
-
-
-            case 2:
-                if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y - 1].walkable)
-                    return true;
-                else
-                    return false;
-
-            case 3:
-                if (y + 1 < columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y + 1].walkable)
-                    return true;
-                else
-                    return false;
-
-
-            case 4:
-                if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x - 1, y].walkable)
-                    return true;
-                else
-                    return false;
-
-            default:
-                return false;
+            }
         }
+
+            return false;
+        
     }
 
 }
