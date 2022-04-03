@@ -12,6 +12,7 @@ public class CameraBehavior : MonoBehaviour
     Vector3 velocity = Vector3.zero;
     Transform camTransform;
     bool flag = true;
+    public int rotateMode;
     //[SerializeField] bool camMode;
     //[SerializeField] float camMoveSpeed;
     //[SerializeField] float camRotateSpeed;
@@ -40,7 +41,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-       
+        AngleCheck();
         RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
             if ( hits.Length >= 1)
         {
@@ -90,14 +91,17 @@ public class CameraBehavior : MonoBehaviour
 
         if (GUI.Button(new Rect(10, 540, 50, 50), "left"))
         {
-            transform.Rotate(0, 90, 0);
-            
+            transform.Rotate(0, 90, 0, Space.World);
         }
 
         if (GUI.Button(new Rect(1860, 540, 50, 50), "right"))
         {
-            transform.Rotate(0, 90, 0);
+            transform.Rotate(0, -90, 0, Space.World);
         }
+    }
+    void AngleCheck()
+    {
+        rotateMode = Mathf.RoundToInt(((transform.localEulerAngles.y - 45) % 360) / 90);
     }
 
     #region oldCam
