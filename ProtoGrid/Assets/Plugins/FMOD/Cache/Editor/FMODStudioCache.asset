@@ -24,6 +24,35 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-4711303622041453765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/GlobalMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/GlobalMusic
+  Guid:
+    Data1: -1192150968
+    Data2: 1226488844
+    Data3: 1171697291
+    Data4: -1885157339
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 7106669267889101041}
+  - {fileID: -4390818940092414517}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4660
 --- !u!114 &-4578730943406009373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,10 +68,34 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637838046652064886
+  lastModified: 637844038569746190
   FileSizes:
   - Name: Desktop
-    Value: 294240
+    Value: 296512
+  Exists: 1
+--- !u!114 &-4390818940092414517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/GlobalMusic/VolumeBlue
+  m_EditorClassIdentifier: 
+  Name: VolumeBlue
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 706256616
+    data2: 1014483630
+  Type: 0
+  IsGlobal: 1
+  Labels: []
   Exists: 1
 --- !u!114 &-2432351605965904616
 MonoBehaviour:
@@ -114,10 +167,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637838046652084839
+  lastModified: 637844038569746190
   FileSizes:
   - Name: Desktop
-    Value: 1398
+    Value: 1452
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -148,12 +201,14 @@ MonoBehaviour:
   - {fileID: 6599992068307631886}
   - {fileID: 6380324812617487083}
   - {fileID: 5358651531694399133}
-  EditorParameters: []
+  - {fileID: -4711303622041453765}
+  EditorParameters:
+  - {fileID: 6834572710250185943}
   MasterBanks:
   - {fileID: -4578730943406009373}
   StringsBanks:
   - {fileID: -769629533170134893}
-  cacheTime: 637838046652084839
+  cacheTime: 637844038569746190
   cacheVersion: 10
 --- !u!114 &1561784869028150870
 MonoBehaviour:
@@ -426,6 +481,54 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4660
+--- !u!114 &6834572710250185943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/VolumeBlue
+  m_EditorClassIdentifier: 
+  Name: VolumeBlue
+  StudioPath: parameter:/VolumeBlue
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 706256616
+    data2: 1014483630
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &7106669267889101041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/GlobalMusic/VolumeRed
+  m_EditorClassIdentifier: 
+  Name: VolumeRed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2072279190
+    data2: 2663285317
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &7584329904587265479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +577,6 @@ MonoBehaviour:
     data1: 706256616
     data2: 1014483630
   Type: 0
-  IsGlobal: 0
+  IsGlobal: 1
   Labels: []
   Exists: 1

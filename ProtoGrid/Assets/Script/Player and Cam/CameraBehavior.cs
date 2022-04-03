@@ -85,7 +85,22 @@ public class CameraBehavior : MonoBehaviour
         flag = true;
     }
 
-        #region oldCam
+    private void OnGUI()
+    {
+
+        if (GUI.Button(new Rect(10, 540, 50, 50), "left"))
+        {
+            transform.Rotate(0, 90, 0);
+            
+        }
+
+        if (GUI.Button(new Rect(1860, 540, 50, 50), "right"))
+        {
+            transform.Rotate(0, 90, 0);
+        }
+    }
+
+    #region oldCam
     /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && camMode)
@@ -143,5 +158,5 @@ public class CameraBehavior : MonoBehaviour
             transform.Rotate(0, Time.deltaTime * camRotateSpeed,0,Space.World);
         }      
     }*/
-        #endregion
+    #endregion
 }
