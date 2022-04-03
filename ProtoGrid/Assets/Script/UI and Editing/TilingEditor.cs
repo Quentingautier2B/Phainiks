@@ -164,8 +164,8 @@ public class TilingEditor : MonoBehaviour
             }
             Trail = transform.Find("Line");
             p1 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
-            p2 = tpTarget;
-            p3 = (p1 + p2) / 2 + new Vector3(0, 3, 0);
+            p2 = new Vector3(tpTarget.x,tpTarget.y +0.1f, tpTarget.z);
+            p3 = (p1 + p2) / 2 + new Vector3(0, Mathf.Abs(p1.y-p2.y) + 1, 0);
             interpolateAmount = (interpolateAmount + Time.deltaTime) % 1f;
             p1p3 = Vector3.Lerp(p1, p3, interpolateAmount);
             p3p2 = Vector3.Lerp(p3, p2, interpolateAmount);

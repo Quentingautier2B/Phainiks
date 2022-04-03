@@ -39,11 +39,15 @@ public class TempoBehavior : StateMachineBehaviour
             awake = false;
             
         }
-
+            
 
         x = animator.GetInteger("PreviousX");
         y = animator.GetInteger("PreviousY");
 
+        if(grid[x, y].crumble)
+        {
+            crumbleFlager = true;
+        }
         foreach (GridTiles tile in grid)
         {
             tile.tempoBool = true;
