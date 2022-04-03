@@ -13,6 +13,11 @@ public class CameraBehavior : MonoBehaviour
     Transform camTransform;
     bool flag = true;
     public int rotateMode;
+    bool lerp;
+    int angleLerp;
+    public bool flagLerp;
+    float interpolateAmount;
+    Quaternion target;
     //[SerializeField] bool camMode;
     //[SerializeField] float camMoveSpeed;
     //[SerializeField] float camRotateSpeed;
@@ -43,19 +48,25 @@ public class CameraBehavior : MonoBehaviour
     {
         AngleCheck();
         RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
-            if ( hits.Length >= 1)
+        if ( hits.Length >= 1)
         {
             foreach (RaycastHit h in hits)
             {
                 if (h.collider.gameObject.GetComponent<GridTiles>() != null && h.collider.gameObject.GetComponent<GridTiles>().open)
                 {
-                    h.collider.GetComponent<GridTiles>().hitByCam = true;
-                    h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
+                        h.collider.GetComponent<GridTiles>().hitByCam = true;
+                        h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
 
                 }
 
             }
         }
+
+        if (lerp == true)
+        {
+            Lerp(angleLerp);
+        }
+
     }
     /*private void OnDrawGizmos()
     {
@@ -91,12 +102,36 @@ public class CameraBehavior : MonoBehaviour
 
         if (GUI.Button(new Rect(10, 540, 50, 50), "left"))
         {
-            transform.Rotate(0, 90, 0, Space.World);
+            //transform.Rotate(0, 90, 0, Space.World);
+            angleLerp = 90;
+            lerp = true;
+            
         }
 
         if (GUI.Button(new Rect(1860, 540, 50, 50), "right"))
         {
-            transform.Rotate(0, -90, 0, Space.World);
+            //transform.Rotate(0, -90, 0, Space.World);
+            angleLerp = -90;
+            lerp = true;
+        }
+    }
+
+    void Lerp(int angle)
+    {
+
+        if (flagLerp)
+        {
+            target = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
+            flagLerp = false;
+        }
+        interpolateAmount = (interpolateAmount + Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target, interpolateAmount);
+        if (interpolateAmount > 0.95)
+        {
+            transform.rotation = target;
+            lerp = false; 
+            flagLerp = true;
+            interpolateAmount = 0;
         }
     }
     void AngleCheck()
