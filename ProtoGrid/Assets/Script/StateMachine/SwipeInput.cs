@@ -66,7 +66,7 @@ public class SwipeInput : StateMachineBehaviour
             directionSwipe = -(startTouchPos - endTouchPos).normalized;
             if (cam.rotateMode == 0)
             {
-                directionSwipe = directionSwipe;
+                //directionSwipe = directionSwipe;
             }
             else if (cam.rotateMode == 1)
             {

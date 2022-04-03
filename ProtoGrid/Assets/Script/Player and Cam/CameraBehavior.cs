@@ -12,10 +12,10 @@ public class CameraBehavior : MonoBehaviour
     Vector3 velocity = Vector3.zero;
     Transform camTransform;
     bool flag = true;
-    public int rotateMode;
+    [HideInInspector] public int rotateMode;
     bool lerp;
     int angleLerp;
-    public bool flagLerp;
+    bool flagLerp;
     float interpolateAmount;
     Quaternion target;
     //[SerializeField] bool camMode;
@@ -32,7 +32,7 @@ public class CameraBehavior : MonoBehaviour
         playerPos = FindObjectOfType<Player>().transform;
         camTransform = transform.Find("Main Camera");
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
-
+        flagLerp = true;
     }
 
     private void Start()
@@ -124,8 +124,8 @@ public class CameraBehavior : MonoBehaviour
             target = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
             flagLerp = false;
         }
-        interpolateAmount = (interpolateAmount + Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, interpolateAmount);
+        interpolateAmount += Time.deltaTime*2;
+        transform.rotation = Quaternion.Lerp(transform.rotation, target, interpolateAmount);
         if (interpolateAmount > 0.95)
         {
             transform.rotation = target;
