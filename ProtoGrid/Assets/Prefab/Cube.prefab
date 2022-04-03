@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -64,7 +64,10 @@ MonoBehaviour:
   originalPosition: 0
   key: 0
   door: 0
-  open: 0
+  open: 1
+  crumble: 0
+  crumbleUp: 0
+  crumbleBool: 0
   levelTransiIndex: 0
   tempoTile: 0
   teleporter: 0
@@ -100,26 +103,15 @@ MonoBehaviour:
   PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
   PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
-  TeleLine: {fileID: 5274804491235746199, guid: 0ef8f3015f9a7e74eadbacb0b0885799, type: 3}
+  TeleLine: {fileID: 2758567794776003239, guid: abcd204533cb1c14083deefe9881a02b, type: 3}
   arrowHead: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  LineLength: 0.0001
-  LineCurving: 0
-  arrowHeadGirth: 0.14
-  lineThickness: 0.1
-  colorIndex: 2
-  LineColorList:
-  - {r: 1, g: 1, b: 1, a: 0.5019608}
-  - {r: 0, g: 0, b: 0, a: 0.654902}
-  - {r: 1, g: 0.23113209, b: 0.23113209, a: 0.7607843}
-  - {r: 0.89150846, g: 1, b: 0, a: 1}
-  - {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
   greenM: {fileID: 2100000, guid: 6fabce91070cd8b40a86d2e5ede15a0a, type: 2}
   tileRedM: {fileID: 2100000, guid: 01f4c2f112f2b8846a3a046c4ea03e89, type: 2}
   tileBlueM: {fileID: 2100000, guid: cc884ac9e6d65bf439c4c9886567e703, type: 2}
   tileGreenM: {fileID: 2100000, guid: 4bf2765a437eeca4fa3565a5cbc97e7a, type: 2}
-  playOn: 1
+  playOn: 0
 --- !u!1 &6603590573583608196
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +123,7 @@ GameObject:
   - component: {fileID: 3476655796450642466}
   - component: {fileID: 2860087046851871487}
   - component: {fileID: 5385845079073808831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +161,7 @@ MeshRenderer:
   m_GameObject: {fileID: 6603590573583608196}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 0
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
