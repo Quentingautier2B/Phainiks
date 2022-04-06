@@ -277,6 +277,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: teleporter
       value: 0
       objectReference: {fileID: 0}
@@ -332,21 +336,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 0 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000004371139
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 3.821371e-15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000008742278
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -364,6 +384,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: tempoTile
@@ -417,13 +441,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 1 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000004371139
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -441,6 +489,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: tempoTile
@@ -498,21 +550,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 1 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.50000006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.50000006
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -591,17 +659,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 4 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000061817246
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -619,6 +707,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: teleporter
@@ -676,17 +768,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 0 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70710677
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.70710677
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -831,21 +943,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 3 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.00000004371138
-      objectReference: {fileID: 0}
-    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.00000008742277
-      objectReference: {fileID: 0}
-    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
-      propertyPath: m_LocalRotation.y
+      propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000087422784
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1161,6 +1289,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: teleporter
       value: 0
       objectReference: {fileID: 0}
@@ -1216,21 +1348,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 4 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.49999997
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.50000006
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.50000006
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1313,13 +1461,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 2 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1633,6 +1805,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: tempoTile
       value: 0
       objectReference: {fileID: 0}
@@ -1688,21 +1864,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 3 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000004371139
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000008742278
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.821371e-15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1725,6 +1917,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
@@ -1774,13 +1970,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 0 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70710677
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.70710677
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1967,6 +2187,10 @@ PrefabInstance:
       propertyPath: walkable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2015,21 +2239,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 1 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000012363449
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000012363449
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2047,6 +2287,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
@@ -2096,17 +2340,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 3 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00000008742278
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7.642742e-15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000008742278
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2124,6 +2388,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
@@ -2173,21 +2441,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 1 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000030908623
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000030908623
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2263,6 +2547,10 @@ PrefabInstance:
       propertyPath: walkable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -2311,21 +2599,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 4 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.50000006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.50000006
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2351,6 +2655,10 @@ PrefabInstance:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: walkable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: tempoTile
@@ -2408,21 +2716,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 2 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000061817246
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000061817246
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2503,6 +2827,10 @@ PrefabInstance:
       propertyPath: walkable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2551,21 +2879,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 2 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2846,6 +3190,10 @@ PrefabInstance:
       propertyPath: walkable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: invisible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -2894,21 +3242,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 3 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000004371139
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 3.821371e-15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000008742278
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3044,21 +3408,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: tiles 2 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2860087046851871487, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.50000006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.50000006
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3476655796450642466, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.49999997
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5385845079073808831, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_Materials.Array.data[0]

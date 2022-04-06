@@ -45,6 +45,11 @@ public class SwipeInput : StateMachineBehaviour
                 g.GetComponent<GridTiling>().SetDirectionalMaterial();
 
             }
+            if (g.walkable && g.tempoTile != 0 && !g.crumble && g.open)
+            {
+                g.GetComponent<GridTiling>().TempoTileMaterial();
+
+            }
         }
     }
 
@@ -94,8 +99,8 @@ public class SwipeInput : StateMachineBehaviour
            
             if(directionIndex > 0)
             {
-                pPosAssignement();
-                TestFourDirections(animator);
+                //pPosAssignement();
+                //TestFourDirections(animator);
             }
             else { }
         }

@@ -19,7 +19,7 @@ public class CameraBehavior : MonoBehaviour
     float interpolateAmount;
     Quaternion target;
     //[SerializeField] bool camMode;
-    //[SerializeField] float camMoveSpeed;
+    //[SerializeField] float camMoveSpeed;  
     //[SerializeField] float camRotateSpeed;
     
     #endregion
@@ -68,6 +68,19 @@ public class CameraBehavior : MonoBehaviour
         }
 
     }
+
+    public void OnLeftButtonClick()
+    {
+        angleLerp = 90;
+        lerp = true;
+    }
+
+    public void OnRightButtonClick()
+    {
+        angleLerp = -90;
+        lerp = true;
+    }
+
     /*private void OnDrawGizmos()
     {
         Debug.DrawRay(camTransform.position, playerPos.position - camTransform.position, Color.red);
@@ -97,7 +110,7 @@ public class CameraBehavior : MonoBehaviour
         flag = true;
     }
 
-    private void OnGUI()
+/*    private void OnGUI()
     {
 
         if (GUI.Button(new Rect(110, 440, 150, 150), "left"))
@@ -114,7 +127,7 @@ public class CameraBehavior : MonoBehaviour
             angleLerp = -90;
             lerp = true;
         }
-    }
+    }*/
 
     void Lerp(int angle)
     {

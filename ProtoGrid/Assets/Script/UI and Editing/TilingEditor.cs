@@ -13,6 +13,7 @@ public class TilingEditor : MonoBehaviour
     GridTiles tile;
     bool flag = true;
     bool walkable;
+    bool invisible;
     int door;
     public bool doorRotation;
     bool crumble;
@@ -31,7 +32,7 @@ public class TilingEditor : MonoBehaviour
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
-    [SerializeField] Material normalMat;
+    [SerializeField] Material invisibleMat;
     [SerializeField] Material crumbleMat;
     [SerializeField] Mesh normalTile;
     [SerializeField] Mesh tempoTile;
@@ -196,6 +197,12 @@ public class TilingEditor : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (walkable)
+        {
+            invisible = false;
+            tile.invisible = invisible;
+        }
+
         if (!playOn)
         {
             if (Input.GetKeyDown(KeyCode.N) && !walkable)
@@ -228,6 +235,7 @@ public class TilingEditor : MonoBehaviour
             flag = false;
         }
         walkable = tile.walkable;
+        invisible = tile.invisible;
         door = tile.door;
         key = tile.key;
         crumble = tile.crumble;
@@ -245,15 +253,21 @@ public class TilingEditor : MonoBehaviour
     {
         if (!walkable && door == 0)
         {
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
+            transform.Find("Renderer").localScale = Vector3.one;
             transform.Find("Renderer").rotation = Quaternion.identity;
-            rend.GetComponent<Renderer>().material = disabledMat;
+            if (invisible)
+                rend.GetComponent<Renderer>().material = invisibleMat;
+            
+            else
+                rend.GetComponent<Renderer>().material = disabledMat;
         }
 
         if (walkable /*&& !crumble*/)
         {
 
             transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
-            //transform.Find("Renderer").localScale = new Vector3(50,50,500);
+            transform.Find("Renderer").localScale = new Vector3(50,50,50);
             //transform.Find("Renderer").position = new Vector3(transform.Find("Renderer").position.x, -4.9f, transform.Find("Renderer").position.z);
             //rend.GetComponent<Renderer>().material = normalMat;
         }
@@ -371,7 +385,7 @@ public class TilingEditor : MonoBehaviour
     {
         //DoorColoration();
         KeyColoration();
-        TempoTileColoration();
+        //TempoTileColoration();
     }
 
     /*void DoorColoration()

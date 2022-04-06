@@ -12,6 +12,7 @@ public class GridTiles : MonoBehaviour
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
     public bool walkable;
+    public bool invisible;
     public bool originalPosition;
     [Range(0, 5)] public int key;
     [Range(0, 5)] public int door;    
@@ -107,6 +108,8 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        if (walkable)
+            invisible = false;
 
         if (hitByCam)
         {

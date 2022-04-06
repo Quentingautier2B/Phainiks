@@ -16,6 +16,7 @@ public class DebugTools : MonoBehaviour
     public GameObject SecondarySystem;
     public GameObject Player;
     public GameObject Terrain;
+    public GameObject Decor;
     bool SceneLoaded;
 
     private void Awake()
@@ -59,6 +60,7 @@ public class DebugTools : MonoBehaviour
             Instantiater(SecondarySystem);
             Instantiater(Player);
             Instantiater(Terrain);
+            Instantiater(Decor);
             SceneLoaded = true;
         }
         
