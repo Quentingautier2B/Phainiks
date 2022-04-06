@@ -13,6 +13,7 @@ public class TilingEditor : MonoBehaviour
     GridTiles tile;
     bool flag = true;
     bool walkable;
+    bool invisible;
     int door;
     public bool doorRotation;
     bool crumble;
@@ -31,8 +32,11 @@ public class TilingEditor : MonoBehaviour
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
-    [SerializeField] Material normalMat;
+    [SerializeField] Material invisibleMat;
     [SerializeField] Material crumbleMat;
+    [SerializeField] Mesh normalTile;
+    [SerializeField] Mesh tempoTile;
+
 
     [Header("GameObjects to Instantiate on Tiles")]
     [Space]
@@ -98,7 +102,12 @@ public class TilingEditor : MonoBehaviour
                 if (t.teleporter == tpIndex)
                 {
                     targetTile = t;
-                    tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);                    
+                    tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);
+                    transform.Find("Teleporter").LookAt(tpTarget);
+                    var rotatio =  transform.Find("Teleporter").rotation;
+                    rotatio.eulerAngles = new Vector3(0, transform.Find("Teleporter").rotation.eulerAngles.y, 0);
+                    transform.Find("Teleporter").rotation = rotatio;
+
                 }
             }
         }
@@ -193,6 +202,12 @@ public class TilingEditor : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (walkable)
+        {
+            invisible = false;
+            tile.invisible = invisible;
+        }
+
         if (!playOn)
         {
             if (Input.GetKeyDown(KeyCode.N) && !walkable)
@@ -225,6 +240,7 @@ public class TilingEditor : MonoBehaviour
             flag = false;
         }
         walkable = tile.walkable;
+        invisible = tile.invisible;
         door = tile.door;
         key = tile.key;
         crumble = tile.crumble;
@@ -242,18 +258,39 @@ public class TilingEditor : MonoBehaviour
     {
         if (!walkable && door == 0)
         {
-            rend.GetComponent<Renderer>().material = disabledMat;
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
+            transform.Find("Renderer").localScale = Vector3.one;
+            transform.Find("Renderer").rotation = Quaternion.identity;
+            if (invisible)
+                rend.GetComponent<Renderer>().material = invisibleMat;
+            
+            else
+                rend.GetComponent<Renderer>().material = disabledMat;
         }
 
         if (walkable /*&& !crumble*/)
         {
-            rend.GetComponent<Renderer>().material = normalMat;
+
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
+            transform.Find("Renderer").localScale = new Vector3(50,50,50);
+            //transform.Find("Renderer").position = new Vector3(transform.Find("Renderer").position.x, -4.9f, transform.Find("Renderer").position.z);
+            //rend.GetComponent<Renderer>().material = normalMat;
         }
 
 
         if (crumble)
         {
+            transform.Find("Renderer").rotation = Quaternion.identity;
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
+            transform.Find("Renderer").localScale = Vector3.one;
             rend.GetComponent<Renderer>().material = crumbleMat;
+        }
+
+        if(tempoValue != 0)
+        {
+            transform.Find("Renderer").rotation = Quaternion.identity;
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
+            transform.Find("Renderer").localScale = Vector3.one;
         }
     }
 
@@ -406,7 +443,7 @@ public class TilingEditor : MonoBehaviour
 
     void TempoTileColoration()
     {
-        if (tempoValue == 1)
+/*        if (tempoValue == 1)
         {
             var mesh = Color.red;
             rend.GetComponent<MeshRenderer>().material = tileRedM;
@@ -423,7 +460,7 @@ public class TilingEditor : MonoBehaviour
             var mesh = Color.black;
             rend.GetComponent<MeshRenderer>().material = tileGreenM;
         }
-
+*/
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
 

@@ -7,7 +7,7 @@ public class Locked : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Object obj = this.gameObject as Object;
+        //Object obj = this.gameObject as Object;
         
     }
 

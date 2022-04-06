@@ -12,8 +12,14 @@ public class CameraBehavior : MonoBehaviour
     Vector3 velocity = Vector3.zero;
     Transform camTransform;
     bool flag = true;
+    [HideInInspector] public int rotateMode;
+    bool lerp;
+    int angleLerp;
+    bool flagLerp;
+    float interpolateAmount;
+    Quaternion target;
     //[SerializeField] bool camMode;
-    //[SerializeField] float camMoveSpeed;
+    //[SerializeField] float camMoveSpeed;  
     //[SerializeField] float camRotateSpeed;
     
     #endregion
@@ -26,7 +32,7 @@ public class CameraBehavior : MonoBehaviour
         playerPos = FindObjectOfType<Player>().transform;
         camTransform = transform.Find("Main Camera");
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
-
+        flagLerp = true;
     }
 
     private void Start()
@@ -40,22 +46,41 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-       
+        AngleCheck();
         RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
-            if ( hits.Length >= 1)
+        if ( hits.Length >= 1)
         {
             foreach (RaycastHit h in hits)
             {
                 if (h.collider.gameObject.GetComponent<GridTiles>() != null && h.collider.gameObject.GetComponent<GridTiles>().open)
                 {
-                    h.collider.GetComponent<GridTiles>().hitByCam = true;
-                    h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
+                        h.collider.GetComponent<GridTiles>().hitByCam = true;
+                        h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
 
                 }
 
             }
         }
+
+        if (lerp == true)
+        {
+            Lerp(angleLerp);
+        }
+
     }
+
+    public void OnLeftButtonClick()
+    {
+        angleLerp = 90;
+        lerp = true;
+    }
+
+    public void OnRightButtonClick()
+    {
+        angleLerp = -90;
+        lerp = true;
+    }
+
     /*private void OnDrawGizmos()
     {
         Debug.DrawRay(camTransform.position, playerPos.position - camTransform.position, Color.red);
@@ -85,7 +110,49 @@ public class CameraBehavior : MonoBehaviour
         flag = true;
     }
 
-        #region oldCam
+/*    private void OnGUI()
+    {
+
+        if (GUI.Button(new Rect(110, 440, 150, 150), "left"))
+        {
+            //transform.Rotate(0, 90, 0, Space.World);
+            angleLerp = 90;
+            lerp = true;
+            
+        }
+
+        if (GUI.Button(new Rect(1650, 440, 150, 150), "right"))
+        {
+            //transform.Rotate(0, -90, 0, Space.World);
+            angleLerp = -90;
+            lerp = true;
+        }
+    }*/
+
+    void Lerp(int angle)
+    {
+
+        if (flagLerp)
+        {
+            target = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
+            flagLerp = false;
+        }
+        interpolateAmount += Time.deltaTime*2;
+        transform.rotation = Quaternion.Lerp(transform.rotation, target, interpolateAmount);
+        if (interpolateAmount > 0.95)
+        {
+            transform.rotation = target;
+            lerp = false; 
+            flagLerp = true;
+            interpolateAmount = 0;
+        }
+    }
+    void AngleCheck()
+    {
+        rotateMode = Mathf.RoundToInt(((transform.localEulerAngles.y - 45) % 360) / 90);
+    }
+
+    #region oldCam
     /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && camMode)
@@ -143,5 +210,5 @@ public class CameraBehavior : MonoBehaviour
             transform.Rotate(0, Time.deltaTime * camRotateSpeed,0,Space.World);
         }      
     }*/
-        #endregion
+    #endregion
 }

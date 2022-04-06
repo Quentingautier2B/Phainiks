@@ -80,10 +80,9 @@ public class MoveBehavior : StateMachineBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         timerValue++;
 
-        
+
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
-
         if (grid[x, y].teleporter != 0)
         {
             player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);

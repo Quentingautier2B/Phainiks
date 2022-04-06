@@ -53,27 +53,38 @@ public class GridGenerator : MonoBehaviour
     private void OnDrawGizmos()
     {
 
-        GridTiles[] list = FindObjectsOfType<GridTiles>();
-        grid = new GridTiles[raws, columns];
-        for (int i = 0; i < list.Length; i++)
+        /*GridTiles[] list = FindObjectsOfType<GridTiles>();
+        if (list.Length != 0)
         {
-            int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
-            int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
-            grid[x, y] = list[i];
-            grid[x, y].name = "tiles " + x + " " + y;
-        }
-
+            grid = new GridTiles[raws, columns];
+            for (int i = 0; i < list.Length; i++)
+            {
+                int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
+                int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
+                grid[x, y] = list[i];
+                grid[x, y].name = "tiles " + x + " " + y;
+            }
+        }*/
         if (instantiateGrid)
         {
 
-            if (grid != null)
+          /*if (grid != null)
             {
                 foreach (GridTiles obj in grid)
                 {
-
-                    //DestroyImmediate(obj.gameObject);
+                    DestroyImmediate(obj.gameObject);
                 }
 
+            }*/
+
+            GridTiles[] list = FindObjectsOfType<GridTiles>();
+            grid = new GridTiles[raws, columns];
+            for (int i = 0; i < list.Length; i++)
+            {
+                int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
+                int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
+                grid[x, y] = list[i];
+                grid[x, y].name = "tiles " + x + " " + y;
             }
 
 
@@ -108,9 +119,47 @@ public class GridGenerator : MonoBehaviour
 
     }
 
+    public bool TestDirection(int x, int y, int direction)
+    {
+        if (grid[x,y] != null)
+        {
+            switch (direction)
+            {
+                case 1:
+
+                    if (x + 1 < raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x + 1, y].walkable)
+                        return true;
+                    else
+                        return false;
 
 
+                case 2:
+                    if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y - 1].walkable)
+                        return true;
+                    else
+                        return false;
+
+                case 3:
+                    if (y + 1 < columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y + 1].walkable)
+                        return true;
+                    else
+                        return false;
 
 
-                    }
+                case 4:
+                    if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x - 1, y].walkable)
+                        return true;
+                    else
+                        return false;
+
+                default:
+                    return false;
+            }
+        }
+
+            return false;
+        
+    }
+
+}
 
