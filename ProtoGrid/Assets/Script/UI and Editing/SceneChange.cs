@@ -39,7 +39,14 @@ public class SceneChange : MonoBehaviour
         if (Hub)
             LevelTransi(tile);
         else
+        {
+
             inGameUI.endLevelMenu.SetActive(true);
+            inGameUI.oneStarImage.gameObject.SetActive(true);
+            inGameUI.twoStarImage.gameObject.SetActive(true);
+            inGameUI.threeStarImage.gameObject.SetActive(true);
+        }
+
             inGameUI.endTile = tile;
             
     }

@@ -13,10 +13,13 @@ public class InGameUI : MonoBehaviour
     LineRenderer[] tps;
     DebugTools debugTools;
     [HideInInspector] public GameObject endLevelMenu;
-    public Text nbStep;
     [HideInInspector] public GridTiles endTile;
     SceneChange sceneChange;
     [SerializeField] List<GameObject> uiEndLevelDisable;
+    public TextMeshProUGUI nbStep;
+    public Image oneStarImage, twoStarImage, threeStarImage;
+    public int oneStar,twoStar,threeStar;
+    
     #endregion
 
 
@@ -79,9 +82,15 @@ public class InGameUI : MonoBehaviour
 
     private void Start()
     {
+        oneStarImage.gameObject.SetActive(false);
+        twoStarImage.gameObject.SetActive(false);
+        twoStarImage.color = Color.white;
+        threeStarImage.gameObject.SetActive(false);
+        threeStarImage.color = Color.white;
+
         endLevelMenu.SetActive(false);
         tps = FindObjectsOfType<LineRenderer>();
-        nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<Text>();
+        nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<TextMeshProUGUI>();
     }
     void Update()
     {       
@@ -105,6 +114,20 @@ public class InGameUI : MonoBehaviour
         foreach (GameObject g in uiEndLevelDisable)
         {
             g.SetActive(false);
+            Stars();    
+        }
+    }
+
+    void Stars()
+    {
+        if(timerValue > twoStar)
+        {
+            twoStarImage.color = Color.black;
+        }
+
+        if (timerValue > threeStar)
+        {
+            threeStarImage.color = Color.black;
         }
     }
 }
