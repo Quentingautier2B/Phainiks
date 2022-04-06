@@ -12,9 +12,14 @@ public class InGameUI : MonoBehaviour
     public bool tpOn = true;
     LineRenderer[] tps;
     DebugTools debugTools;
+    [HideInInspector] public GameObject endLevelMenu;
+    public Text nbStep;
+    [HideInInspector] public GridTiles endTile;
+    SceneChange sceneChange;
+    [SerializeField] List<GameObject> uiEndLevelDisable;
     #endregion
 
-    
+
 
     public void OnResetClick()
     {
@@ -67,22 +72,39 @@ public class InGameUI : MonoBehaviour
     private void Awake()
     {
         debugTools = FindObjectOfType<DebugTools>();
-        
+        endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
+        sceneChange = FindObjectOfType<SceneChange>();
     }
 
     private void Start()
     {
+        endLevelMenu.SetActive(false);
         tps = FindObjectsOfType<LineRenderer>();
+        nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<Text>();
     }
-
     void Update()
     {       
        TimerText();
+        nbStep.text = "" + timerValue;
     }
 
     void TimerText()
     {
        timerText.text = timerValue.ToString();
+    }
+    public void LevelTransi()
+    {
+        if (endTile != null)
+            sceneChange.LevelTransi(endTile);
+        else
+            print("need endTile");
+    }
+    public void UiEndDisable()
+    {
+        foreach (GameObject g in uiEndLevelDisable)
+        {
+            g.SetActive(false);
+        }
     }
 }
