@@ -102,7 +102,12 @@ public class TilingEditor : MonoBehaviour
                 if (t.teleporter == tpIndex)
                 {
                     targetTile = t;
-                    tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);                    
+                    tpTarget = new Vector3(t.transform.position.x, t.transform.position.y + 0.6f, t.transform.position.z);
+                    transform.Find("Teleporter").LookAt(tpTarget);
+                    var rotatio =  transform.Find("Teleporter").rotation;
+                    rotatio.eulerAngles = new Vector3(0, transform.Find("Teleporter").rotation.eulerAngles.y, 0);
+                    transform.Find("Teleporter").rotation = rotatio;
+
                 }
             }
         }
@@ -385,7 +390,7 @@ public class TilingEditor : MonoBehaviour
     {
         //DoorColoration();
         KeyColoration();
-        //TempoTileColoration();
+        TempoTileColoration();
     }
 
     /*void DoorColoration()
@@ -438,7 +443,7 @@ public class TilingEditor : MonoBehaviour
 
     void TempoTileColoration()
     {
-        if (tempoValue == 1)
+/*        if (tempoValue == 1)
         {
             var mesh = Color.red;
             rend.GetComponent<MeshRenderer>().material = tileRedM;
@@ -455,7 +460,7 @@ public class TilingEditor : MonoBehaviour
             var mesh = Color.black;
             rend.GetComponent<MeshRenderer>().material = tileGreenM;
         }
-
+*/
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
         CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
 
