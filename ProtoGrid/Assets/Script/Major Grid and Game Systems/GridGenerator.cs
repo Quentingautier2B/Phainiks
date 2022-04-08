@@ -53,7 +53,7 @@ public class GridGenerator : MonoBehaviour
     private void OnDrawGizmos()
     {
 
-        /*GridTiles[] list = FindObjectsOfType<GridTiles>();
+        GridTiles[] list = FindObjectsOfType<GridTiles>();
         if (list.Length != 0)
         {
             grid = new GridTiles[raws, columns];
@@ -64,7 +64,7 @@ public class GridGenerator : MonoBehaviour
                 grid[x, y] = list[i];
                 grid[x, y].name = "tiles " + x + " " + y;
             }
-        }*/
+        }
         if (instantiateGrid)
         {
 
@@ -77,7 +77,7 @@ public class GridGenerator : MonoBehaviour
 
             }*/
 
-            GridTiles[] list = FindObjectsOfType<GridTiles>();
+            /*GridTiles[] */list = FindObjectsOfType<GridTiles>();
             grid = new GridTiles[raws, columns];
             for (int i = 0; i < list.Length; i++)
             {
