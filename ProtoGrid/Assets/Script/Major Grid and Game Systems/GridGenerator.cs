@@ -48,11 +48,8 @@ public class GridGenerator : MonoBehaviour
         }
     }
 
-
-
-    private void OnDrawGizmos()
+    public void generateGrid()
     {
-
         GridTiles[] list = FindObjectsOfType<GridTiles>();
         if (list.Length != 0)
         {
@@ -65,20 +62,14 @@ public class GridGenerator : MonoBehaviour
                 grid[x, y].name = "tiles " + x + " " + y;
             }
         }
+    }
 
-        if (instantiateGrid)
+    private void OnDrawGizmos()
+    {
+
+       /* GridTiles[] list = FindObjectsOfType<GridTiles>();
+        if (list.Length != 0)
         {
-
-          /*if (grid != null)
-            {
-                foreach (GridTiles obj in grid)
-                {
-                    DestroyImmediate(obj.gameObject);
-                }
-
-            }*/
-
-            /*GridTiles[] *//*list = FindObjectsOfType<GridTiles>();
             grid = new GridTiles[raws, columns];
             for (int i = 0; i < list.Length; i++)
             {
@@ -86,7 +77,31 @@ public class GridGenerator : MonoBehaviour
                 int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
                 grid[x, y] = list[i];
                 grid[x, y].name = "tiles " + x + " " + y;
-            }*/
+            }
+        }*/
+
+        if (instantiateGrid)
+        {
+            //generateGrid();
+
+            if (grid != null)
+            {
+                /*foreach (GridTiles obj in grid)
+                {
+                    DestroyImmediate(obj.gameObject);
+                }*/
+
+            }
+
+            GridTiles[] list = FindObjectsOfType<GridTiles>();
+            grid = new GridTiles[raws, columns];
+            for (int i = 0; i < list.Length; i++)
+            {
+                int x = (int)list[i].transform.position.x / (int)list[i].transform.localScale.x;
+                int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
+                grid[x, y] = list[i];
+                grid[x, y].name = "tiles " + x + " " + y;
+            }
 
 
 
