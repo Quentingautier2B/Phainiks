@@ -65,6 +65,7 @@ public class GridGenerator : MonoBehaviour
                 grid[x, y].name = "tiles " + x + " " + y;
             }
         }
+
         if (instantiateGrid)
         {
 
@@ -77,7 +78,7 @@ public class GridGenerator : MonoBehaviour
 
             }*/
 
-            /*GridTiles[] */list = FindObjectsOfType<GridTiles>();
+            /*GridTiles[] *//*list = FindObjectsOfType<GridTiles>();
             grid = new GridTiles[raws, columns];
             for (int i = 0; i < list.Length; i++)
             {
@@ -85,7 +86,7 @@ public class GridGenerator : MonoBehaviour
                 int y = (int)list[i].transform.position.z / (int)list[i].transform.localScale.y;
                 grid[x, y] = list[i];
                 grid[x, y].name = "tiles " + x + " " + y;
-            }
+            }*/
 
 
 
