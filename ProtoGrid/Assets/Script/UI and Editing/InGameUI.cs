@@ -16,9 +16,11 @@ public class InGameUI : MonoBehaviour
     [HideInInspector] public GridTiles endTile;
     SceneChange sceneChange;
     [SerializeField] List<GameObject> uiEndLevelDisable;
+    Button revert;
     public TextMeshProUGUI nbStep;
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
+
     
     #endregion
 
@@ -78,6 +80,7 @@ public class InGameUI : MonoBehaviour
         endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         sceneChange = FindObjectOfType<SceneChange>();
+        revert = transform.Find("RevertTime").GetComponent<Button>();
     }
 
     private void Start()
@@ -96,7 +99,17 @@ public class InGameUI : MonoBehaviour
     {       
        TimerText();
         nbStep.text = "" + timerValue;
+        if(timerValue <= 0 )
+        {
+            revert.interactable = false;
+        }
+        else
+        {
+            revert.interactable = true;
+        }
+        
     }
+    
 
     void TimerText()
     {

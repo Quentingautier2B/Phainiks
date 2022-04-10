@@ -1509,7 +1509,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3762037905371921740}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5805355531001247871}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Rewind
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7236459808823680000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,6 +2211,11 @@ PrefabInstance:
 --- !u!4 &5805355531001247864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5943152722358956396, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+  m_PrefabInstance: {fileID: 210145196056529172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5805355531001247871 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5943152722358956395, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
   m_PrefabInstance: {fileID: 210145196056529172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5144612416406332521

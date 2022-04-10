@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SwipeInput : StateMachineBehaviour
 {
-    Vector2 startTouchPos, currentTouchPos, endTouchPos, directionSwipe;
+    Vector2 startTouchPos, currentTouchPos, endTouchPos;
+    public Vector2 directionSwipe;
     
     int pPosX, pPosY;
     int targetPosx, targetPosy;
@@ -13,6 +14,7 @@ public class SwipeInput : StateMachineBehaviour
     public float clickTimerValue;
     float clickTimer;
     bool clickBool;
+   
     
     Transform player;
     GridGenerator gridG;
@@ -21,7 +23,7 @@ public class SwipeInput : StateMachineBehaviour
     CameraBehavior cam;
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
-  
+    static public List<Vector2> rewindPos = new List<Vector2>();
     
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -116,6 +118,14 @@ public class SwipeInput : StateMachineBehaviour
         }
 
     }
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (animator.GetBool("Rewind"))
+        {
+            animator.SetInteger("PreviousX", pPosX);
+            animator.SetInteger("PreviousY", pPosY);
+        }
+    }
 
 
 
@@ -156,11 +166,13 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
                 else 
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }                
         }
@@ -187,11 +199,13 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
                 else
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }
         }
@@ -218,11 +232,13 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
                 else 
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }
         }
@@ -249,15 +265,19 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
                 else 
                 {
                     anim.SetBool("OntonormalTileMove", true);
                     anim.SetBool("OntonormalTileTempo", true);
+                    rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }
         }
+
     }
+
 
 /*    public bool TestDirection(int x, int y, int direction)
     {
