@@ -83,8 +83,11 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
+
+
         if (grid[x, y].teleporter != 0)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/World/TP");
             player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
         }
 
@@ -104,8 +107,9 @@ public class MoveBehavior : StateMachineBehaviour
 
     void KeyBehavior(GridTiles tile)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/World/GetKey");
         //tile.transform.Find("Key").gameObject.SetActive(false);
-        foreach(GridTiles t in grid)
+        foreach (GridTiles t in grid)
         {
             if(t.door == tile.key )
             {
