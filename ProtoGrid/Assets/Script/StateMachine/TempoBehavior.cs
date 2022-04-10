@@ -338,10 +338,11 @@ public class TempoBehavior : StateMachineBehaviour
                         grid[x, y].tempoBool = false;
                     }
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
-/*                      tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                        /*tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();*/
-                    if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
+                if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         //debugTools.greenMusic.setVolume(1);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         grid[x, y].crumbleBool = false;
@@ -361,6 +362,7 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         // greenTempoTileFlag = true;

@@ -22,10 +22,9 @@ public class InGameUI : MonoBehaviour
     
     #endregion
 
-
-
-    public void OnResetClick()
+    IEnumerator ResetLevelButtonEffect()
     {
+        yield return new WaitForSeconds(.5f);
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -38,8 +37,15 @@ public class InGameUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void OnResetClick()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/ResetLevel");
+        StartCoroutine(ResetLevelButtonEffect());
+    }
+
     public void OnHubClick()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -102,6 +108,7 @@ public class InGameUI : MonoBehaviour
     {
        timerText.text = timerValue.ToString();
     }
+
     public void LevelTransi()
     {
         if (endTile != null)

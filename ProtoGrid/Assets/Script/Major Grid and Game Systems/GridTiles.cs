@@ -194,17 +194,6 @@ public class GridTiles : MonoBehaviour
         if (height != (int)transform.position.y)
             height = (int)transform.position.y;
     }
-   
-    /*void TimerValueSetUp()
-    {
-        timerChangeValue = timerChangeInputValue;
-        if (timerChangeValue < 0)
-        {
-            transform.Find("Timer+").GetComponent<Renderer>().material.color = Color.red;
-
-            transform.Find("Timer+").Find("TimerPSys").GetComponent<ParticleSystemRenderer>().material.color = Color.black;
-        }
-    }*/
 
     void VisibleOrInvisibleTile()
     {
