@@ -79,6 +79,7 @@ public class GridTiling : MonoBehaviour
         if (tile.walkable && !tile.crumble && refreshRend)
         {
             gridG = FindObjectOfType<GridGenerator>();
+            gridG.generateGrid();
             grid = gridG.grid;
 
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();

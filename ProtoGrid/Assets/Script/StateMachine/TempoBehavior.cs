@@ -395,13 +395,14 @@ public class TempoBehavior : StateMachineBehaviour
                 {
                     if (grid[x, y].tempoBool)
                     {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
                         grid[x, y].tempoBool = false;
                     }
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
-/*                      tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                        /*tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();*/
-                    if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
+                if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
                         //debugTools.greenMusic.setVolume(1);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
@@ -416,6 +417,7 @@ public class TempoBehavior : StateMachineBehaviour
                     {
                         grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
                         grid[x, y].tempoBool = false;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                     }
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
                         /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();

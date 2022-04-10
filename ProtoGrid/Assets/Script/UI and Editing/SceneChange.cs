@@ -36,7 +36,7 @@ public class SceneChange : MonoBehaviour
         debugTools.blueMusic.release();
         debugTools.greenMusic.release();
         yield return new WaitForSeconds(0.1f);
-        if (Hub)
+        if (tile.levelTransiIndex<1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
             LevelTransi(tile);
         else
         {
