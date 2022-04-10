@@ -334,6 +334,7 @@ public class TempoBehavior : StateMachineBehaviour
                 {
                     if (grid[x, y].tempoBool)
                     {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
                         grid[x, y].tempoBool = false;
                     }
@@ -342,7 +343,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();*/
                 if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         //debugTools.greenMusic.setVolume(1);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         grid[x, y].crumbleBool = false;
@@ -356,13 +356,13 @@ public class TempoBehavior : StateMachineBehaviour
                     {
                         grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
                         grid[x, y].tempoBool = false;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                     }
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
                         /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         // greenTempoTileFlag = true;
