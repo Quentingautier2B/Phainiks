@@ -5,10 +5,14 @@ using UnityEngine;
 public class GridTiling : MonoBehaviour
 {
     [SerializeField] bool refreshRend = false;
+    [SerializeField] bool refreshRendTempo = false;
     GridTiles[,] grid;
     GridGenerator gridG;
     TileVariables t;
     GridTiles tile;
+    GameObject TempoTile;
+    public MeshRenderer[] tempoTilesMats = new MeshRenderer[6];
+
     public Material mat4D;
     public Material mat3D;
     public Material mat2DO;
@@ -31,6 +35,7 @@ public class GridTiling : MonoBehaviour
 
     private void Awake()
     {
+        TempoTile = transform.Find("TempoTile").gameObject;
         gridG = FindObjectOfType<GridGenerator>();
         t = FindObjectOfType<TileVariables>();
         grid = gridG.grid;
@@ -42,31 +47,56 @@ public class GridTiling : MonoBehaviour
 
     private void Start()
     {
-        if(tile.walkable && tile.tempoTile == 0 && !tile.crumble && tile.open)
+        if (tile.tempoTile != 0)
+        {
+            TempoTile.SetActive(true);
+        }
+        else
+        {
+            TempoTile.SetActive(false);
+        }
+        if (tile.walkable && !tile.crumble && tile.open)
             SetDirectionalMaterial();
         //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
     }
 
     private void OnDrawGizmos()
     {
+        TempoTile = transform.Find("TempoTile").gameObject;
         tile = GetComponent<GridTiles>();
         t = FindObjectOfType<TileVariables>();
-        if (tile.walkable && tile.tempoTile == 0 && !tile.crumble && refreshRend)
+
+
+        if (tile.tempoTile != 0)
+        {
+            TempoTile.SetActive(true);
+        }
+        else 
+        {
+            TempoTile.SetActive(false);
+        }
+
+        if (tile.walkable && !tile.crumble && refreshRend)
         {
             gridG = FindObjectOfType<GridGenerator>();
+            gridG.generateGrid();
             grid = gridG.grid;
-            
+
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             //meshF = transform.Find("Renderer").GetComponent<MeshFilter>().mesh;
             SetDirectionalMaterial();
             //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
         }
+        else
+            refreshRend = false;
 
-        if (tile.walkable && tile.tempoTile != 0 && !tile.crumble && refreshRend)
+        if (tile.walkable && tile.tempoTile != 0 && !tile.crumble && refreshRendTempo)
         {
-            mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
+            //mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             TempoTileMaterial();
         }
+        else
+            refreshRendTempo = false;
         //mesh.transform.rotation = Quaternion.identity;
     }
 
@@ -82,8 +112,11 @@ public class GridTiling : MonoBehaviour
 
             if (tile.tempoTile == 1)
             {
-                mesh.material = TmatR;
-                refreshRend = false;
+                foreach(MeshRenderer m in tempoTilesMats)
+                {
+                    m.material = TmatR;
+                    refreshRendTempo = false;
+                }
             }
 
 
@@ -91,33 +124,48 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.blueTimer == 0 || t.blueTimer == 2)
                 {
-                    mesh.material = TmatB2;
-                    refreshRend = false;
+                    foreach (MeshRenderer m in tempoTilesMats)
+                    {
+                        m.material = TmatB2;
+                        refreshRendTempo = false;
+                    }
                 }
                 else if (t.blueTimer == 1)
                 {
-                    mesh.material = TmatB1;
-                    refreshRend = false;
+                    foreach (MeshRenderer m in tempoTilesMats)
+                    {
+                        m.material = TmatB1;
+                        refreshRendTempo = false;
+                    }
                 }
-                refreshRend = false;
+                refreshRendTempo = false;
             }
 
             if (tile.tempoTile == 3)
             {
                 if (t.greenTimer == 0 || t.greenTimer == 3)
                 {
-                    mesh.material = TmatG3;
-                    refreshRend = false;
+                    foreach (MeshRenderer m in tempoTilesMats)
+                    {
+                        m.material = TmatG3;
+                        refreshRendTempo = false;
+                    }
                 }
                 else if ((t.greenTimer == 1 && t.greenFlag) || (t.greenTimer == 2 && !t.greenFlag))
                 {
-                    mesh.material = TmatG1;
-                    refreshRend = false;
+                    foreach (MeshRenderer m in tempoTilesMats)
+                    {
+                        m.material = TmatG1;
+                        refreshRendTempo = false;
+                    }
                 }
                 else if ((t.greenTimer == 2 && t.greenFlag) || (t.greenTimer == 1 && !t.greenFlag))
                 {
-                    mesh.material = TmatG2;
-                    refreshRend = false;
+                    foreach (MeshRenderer m in tempoTilesMats)
+                    {
+                        m.material = TmatG2;
+                        refreshRendTempo = false;
+                    }
                 }
             }
         }

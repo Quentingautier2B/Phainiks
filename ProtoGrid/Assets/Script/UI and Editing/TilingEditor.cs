@@ -288,9 +288,9 @@ public class TilingEditor : MonoBehaviour
 
         if(tempoValue != 0)
         {
-            transform.Find("Renderer").rotation = Quaternion.identity;
-            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
-            transform.Find("Renderer").localScale = Vector3.one;
+            //transform.Find("Renderer").rotation = Quaternion.identity;
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
+            transform.Find("Renderer").localScale = Vector3.one * 50;
         }
     }
 

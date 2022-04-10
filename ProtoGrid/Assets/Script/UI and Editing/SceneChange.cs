@@ -36,10 +36,17 @@ public class SceneChange : MonoBehaviour
         debugTools.blueMusic.release();
         debugTools.greenMusic.release();
         yield return new WaitForSeconds(0.1f);
-        if (Hub)
+        if (tile.levelTransiIndex<1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
             LevelTransi(tile);
         else
+        {
+
             inGameUI.endLevelMenu.SetActive(true);
+            inGameUI.oneStarImage.gameObject.SetActive(true);
+            inGameUI.twoStarImage.gameObject.SetActive(true);
+            inGameUI.threeStarImage.gameObject.SetActive(true);
+        }
+
             inGameUI.endTile = tile;
             
     }

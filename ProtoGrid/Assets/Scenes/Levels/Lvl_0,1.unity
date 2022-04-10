@@ -1109,6 +1109,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5144612415849755143, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: twoStar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144612415849755143, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: threeStar
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5691709543926792127, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: raws
       value: 7
@@ -1217,7 +1225,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8654703944353416209, guid: 7e6c16c56bebbc6488cce42d7c66805a, type: 3}
   m_PrefabInstance: {fileID: 1025805127}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1073402693
+--- !u!1001 &1095178001
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1230,7 +1238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8057356591411306430, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8057356591411306430, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1680,11 +1688,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: invisible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: levelTransiIndex
-      value: 0.2
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
