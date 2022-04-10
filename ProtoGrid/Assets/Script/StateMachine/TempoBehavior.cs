@@ -45,8 +45,8 @@ public class TempoBehavior : StateMachineBehaviour
  
         if (animator.GetBool("Rewind"))
         {
-            x = (int)SwipeInput.rewindPos[UI.timerValue - 1].x;
-            y = (int)SwipeInput.rewindPos[UI.timerValue - 1].x;
+            x = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
+            y = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
         }
         else 
         { 
@@ -105,18 +105,18 @@ public class TempoBehavior : StateMachineBehaviour
             {
                 animator.SetTrigger("tempoToMove");
             }
-            else
+            
+            
+            if (stateInfo.IsName("Tempo"))
             {
-                if (stateInfo.IsName("Tempo"))
-                {
                     animator.SetBool("OntoTempoTile", false);
-                }
-                else if (stateInfo.IsName("MoveOntoNormal"))
-                {
+            }
+            else if (stateInfo.IsName("MoveOntoNormal"))
+            {
 
                     animator.SetBool("OntonormalTileTempo", false);
-                }
             }
+            
 
             
         }
@@ -146,17 +146,38 @@ public class TempoBehavior : StateMachineBehaviour
 
         if (blueTest)
         {
-            if (t.blueTimer <= 0 )
+            if (anim.GetBool("Rewind"))
             {
-                t.blueFlag = false;
-                blueFlager = true;
-            }
+                if (t.blueTimer <= 0)
+                {
+                    t.blueFlag = true;
+                }
 
-            if (t.blueTimer >= blueOffValue)
-            {
-                t.blueFlag = true;
-                blueFlager = true;
+                if (t.blueTimer >= blueOffValue)
+                {
+                    t.blueFlag = false;
+                }
+                if (t.blueTimer == blueOffValue || t.blueTimer == 0)
+                {
+                    blueFlager = true;
+                }
+
             }
+            else
+            {
+                if (t.blueTimer <= 0)
+                {
+                    t.blueFlag = false;
+                    blueFlager = true;
+                }
+
+                if (t.blueTimer >= blueOffValue)
+                {
+                    t.blueFlag = true;
+                    blueFlager = true;
+                }
+            }
+            
 
         }
 
@@ -210,12 +231,23 @@ public class TempoBehavior : StateMachineBehaviour
 
 
 
+        if (anim.GetBool("Rewind"))
+        {
+            if (t.blueFlag)
+                t.blueTimer++;
 
-        if (t.blueFlag)
-            t.blueTimer--;
+            if (!t.blueFlag)
+                t.blueTimer--;
+        }
+        else
+        {
+            if (t.blueFlag)
+                t.blueTimer--;
 
-        if (!t.blueFlag)
-            t.blueTimer++;
+            if (!t.blueFlag)
+                t.blueTimer++;
+        }
+        
 
 
         if (anim.GetBool("Rewind"))

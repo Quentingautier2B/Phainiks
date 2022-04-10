@@ -17,6 +17,7 @@ public class InGameUI : MonoBehaviour
     SceneChange sceneChange;
     [SerializeField] List<GameObject> uiEndLevelDisable;
     Button revert;
+    Animator stateMachine;
     public TextMeshProUGUI nbStep;
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
@@ -82,6 +83,7 @@ public class InGameUI : MonoBehaviour
 
     private void Awake()
     {
+        stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
         endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
@@ -105,7 +107,7 @@ public class InGameUI : MonoBehaviour
     {       
        TimerText();
         nbStep.text = "" + timerValue;
-        if(timerValue <= 0 )
+        if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
         {
             revert.interactable = false;
         }

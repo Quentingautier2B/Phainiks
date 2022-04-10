@@ -32,8 +32,8 @@ public class MoveBehavior : StateMachineBehaviour
         canMove = true;
         if (animator.GetBool("Rewind"))
         {
-            x = (int)SwipeInput.rewindPos[UI.timerValue - 1].x;
-            y = (int)SwipeInput.rewindPos[UI.timerValue - 1].y;
+            x = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
+            y = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].y;
         }
         else
         {
@@ -67,6 +67,8 @@ public class MoveBehavior : StateMachineBehaviour
             if (distance < 0.1f)
             {
                 player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
+                if (anim.GetBool("Rewind"))
+                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);
             }
         }
         else
@@ -84,7 +86,7 @@ public class MoveBehavior : StateMachineBehaviour
             if (anim.GetBool("Rewind"))
             {
                 anim.SetBool("Rewind", false);
-                SwipeInput.rewindPos.RemoveAt(UI.timerValue);
+                SwipeInput.rewindPos.RemoveAt(SwipeInput.rewindPos.Count - 1);
             }
 
             if (stateInfo.IsName("Move"))

@@ -36,6 +36,7 @@ public class SwipeInput : StateMachineBehaviour
             clickTimer = clickTimerValue;
             awake = false;
             cam = FindObjectOfType<CameraBehavior>();
+            rewindPos.Clear();
         }
         grid = gridG.grid;
 
