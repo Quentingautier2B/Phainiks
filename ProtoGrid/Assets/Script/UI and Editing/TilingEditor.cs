@@ -33,7 +33,7 @@ public class TilingEditor : MonoBehaviour
     [Space]
     [SerializeField] Material disabledMat;
     [SerializeField] Material invisibleMat;
-    [SerializeField] Material crumbleMat;
+    //[SerializeField] Material crumbleMat;
     [SerializeField] Mesh normalTile;
     [SerializeField] Mesh tempoTile;
 
@@ -280,10 +280,10 @@ public class TilingEditor : MonoBehaviour
 
         if (crumble)
         {
-            transform.Find("Renderer").rotation = Quaternion.identity;
-            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = tempoTile;
-            transform.Find("Renderer").localScale = Vector3.one;
-            rend.GetComponent<Renderer>().material = crumbleMat;
+            //transform.Find("Renderer").rotation = Quaternion.identity;
+            transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
+            transform.Find("Renderer").localScale = Vector3.one * 50;
+            //rend.GetComponent<Renderer>().material = crumbleMat;
         }
 
         if(tempoValue != 0)

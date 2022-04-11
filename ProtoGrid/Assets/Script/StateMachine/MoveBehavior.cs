@@ -103,7 +103,7 @@ public class MoveBehavior : StateMachineBehaviour
 
     void TileEffectOnMove(int x, int y, Animator anim)
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         //timerValue++;
 
         if (grid[x, y].levelTransiIndex != 0)
@@ -111,6 +111,7 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (grid[x, y].teleporter != 0)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/World/TP");
             player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
         }
 
@@ -120,6 +121,7 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (grid[x, y].crumble)
         {
+            
             grid[x, y].crumbleBool = true;
             if (grid[x, y].crumbleUp)
                 grid[x, y].crumbleUp = false;
@@ -138,9 +140,11 @@ public class MoveBehavior : StateMachineBehaviour
 
     void KeyBehavior(GridTiles tile)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/World/GetKey");
         //tile.transform.Find("Key").gameObject.SetActive(false);
-        foreach(GridTiles t in grid)
+        foreach (GridTiles t in grid)
         {
+
             if(t.door == tile.key )
             {
                 if (t.open)
