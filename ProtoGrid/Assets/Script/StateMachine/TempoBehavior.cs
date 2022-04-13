@@ -128,19 +128,38 @@ public class TempoBehavior : StateMachineBehaviour
     {
         if (redTest)
         {
-                
-             if (t.redTimer <= 0)
-             {
-                t.redFlag = false;
-                redFlager = true;
-             }
 
-             if (t.redTimer >= redOffValue)
-             {
-                t.redFlag = true;
-                redFlager = true;
-             }
-            
+            if (anim.GetBool("Rewind"))
+            {
+                if (t.redTimer <= 0)
+                {
+                    t.redFlag = true;
+                    redFlager = true;
+                }
+
+                if (t.redTimer >= redOffValue)
+                {
+                    t.redFlag = false;
+                    redFlager = true;
+                }
+
+            }
+            else
+            {
+                if (t.redTimer <= 0)
+                {
+                    t.redFlag = false;
+                    redFlager = true;
+                }
+
+                if (t.redTimer >= redOffValue)
+                {
+                    t.redFlag = true;
+                    redFlager = true;
+                }
+
+            }
+
         }
 
 
@@ -223,11 +242,23 @@ public class TempoBehavior : StateMachineBehaviour
 
     void TempoTileIncr(Animator anim)
     {
-        if (t.redFlag)
-            t.redTimer--;
+        if (anim.GetBool("Rewind"))
+        {
+            if (t.redFlag)
+                t.redTimer++;
 
-        if (!t.redFlag)
-            t.redTimer++;
+            if (!t.redFlag)
+                t.redTimer--;
+        }
+        else
+        {
+            if (t.redFlag)
+                t.redTimer--;
+
+            if (!t.redFlag)
+                t.redTimer++;
+        }
+        
 
 
 
