@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TempoBehavior : StateMachineBehaviour
 {
     //public int redTimer = 0;
@@ -27,27 +28,37 @@ public class TempoBehavior : StateMachineBehaviour
     GridTiles[,] grid;
     bool awake = true;
     DebugTools debugTools;
+    InGameUI UI;
     int x, y;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
         {
+
             debugTools = FindObjectOfType<DebugTools>();
             grid = FindObjectOfType<GridGenerator>().grid;
             t = FindObjectOfType<TileVariables>();
+            UI = FindObjectOfType<InGameUI>();
             awake = false;
-            
         }
-            
-
-        x = animator.GetInteger("PreviousX");
-        y = animator.GetInteger("PreviousY");
+ 
+        if (animator.GetBool("Rewind"))
+        {
+            x = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
+            y = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
+        }
+        else 
+        { 
+            x = animator.GetInteger("PreviousX");
+            y = animator.GetInteger("PreviousY");
+        }
 
         if(grid[x, y].crumble)
         {
             crumbleFlager = true;
         }
+
         foreach (GridTiles tile in grid)
         {
             tile.tempoBool = true;
@@ -71,9 +82,17 @@ public class TempoBehavior : StateMachineBehaviour
             if (tile.tempoTile == 3)
                 greenTest = true;
         }
-
-        TempoTileIncr();
-        NewTempoTile();
+        if (animator.GetBool("Rewind"))
+        {
+            NewTempoTile(animator);
+            TempoTileIncr(animator);
+        }
+        else
+        {
+            TempoTileIncr(animator);
+            NewTempoTile(animator);
+        }
+        
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -82,51 +101,83 @@ public class TempoBehavior : StateMachineBehaviour
 
         if(!redFlager && !blueFlager && !greenFlager && !crumbleFlager)
         {
+            if (animator.GetBool("Rewind"))
+            {
+                animator.SetTrigger("tempoToMove");
+            }
+            
+            
             if (stateInfo.IsName("Tempo"))
             {
-                animator.SetBool("OntoTempoTile", false);
+                    animator.SetBool("OntoTempoTile", false);
             }
             else if (stateInfo.IsName("MoveOntoNormal"))
             {
-                
-                animator.SetBool("OntonormalTileTempo", false);
+
+                    animator.SetBool("OntonormalTileTempo", false);
             }
+            
+
+            
         }
     }
 
 
 
-    void NewTempoTile()
+    void NewTempoTile(Animator anim)
     {
         if (redTest)
         {
-            if (t.redTimer <= 0)
-            {
+                
+             if (t.redTimer <= 0)
+             {
                 t.redFlag = false;
                 redFlager = true;
-            }
+             }
 
-            if (t.redTimer >= redOffValue)
-            {
+             if (t.redTimer >= redOffValue)
+             {
                 t.redFlag = true;
                 redFlager = true;
-            }
+             }
+            
         }
 
 
         if (blueTest)
         {
-            if (t.blueTimer <= 0 )
+            if (anim.GetBool("Rewind"))
             {
-                t.blueFlag = false;
-                blueFlager = true;
-            }
+                if (t.blueTimer <= 0)
+                {
+                    t.blueFlag = true;
+                }
 
-            if (t.blueTimer >= blueOffValue)
-            {
-                t.blueFlag = true;
-                blueFlager = true;
+                if (t.blueTimer >= blueOffValue)
+                {
+                    t.blueFlag = false;
+                }
+                if (t.blueTimer == blueOffValue || t.blueTimer == 0)
+                {
+                    blueFlager = true;
+                }
+
             }
+            else
+            {
+                if (t.blueTimer <= 0)
+                {
+                    t.blueFlag = false;
+                    blueFlager = true;
+                }
+
+                if (t.blueTimer >= blueOffValue)
+                {
+                    t.blueFlag = true;
+                    blueFlager = true;
+                }
+            }
+            
 
         }
 
@@ -134,22 +185,43 @@ public class TempoBehavior : StateMachineBehaviour
 
         if (greenTest)
         {
-            if (t.greenTimer <= 0)
+            if (anim.GetBool("Rewind"))
             {
-                t.greenFlag = false;
-                greenFlager = true;
-            }
+                if (t.greenTimer <= 0)
+                {
+                    t.greenFlag = true;
+                    
+                }
 
-            if (t.greenTimer >= greenOffValue)
+                if (t.greenTimer >= greenOffValue)
+                {
+                    t.greenFlag = false;
+                    
+                }
+                if (t.greenTimer == greenOffValue || t.greenTimer == 0)
+                {
+                    greenFlager = true;
+                }
+            }
+            else
             {
-                t.greenFlag = true;
-                greenFlager = true;
+                if (t.greenTimer <= 0)
+                {
+                    t.greenFlag = false;
+                    greenFlager = true;
+                }
+
+                if (t.greenTimer >= greenOffValue)
+                {
+                    t.greenFlag = true;
+                    greenFlager = true;
+                }
             }
         }
 
     }
 
-    void TempoTileIncr()
+    void TempoTileIncr(Animator anim)
     {
         if (t.redFlag)
             t.redTimer--;
@@ -159,21 +231,42 @@ public class TempoBehavior : StateMachineBehaviour
 
 
 
+        if (anim.GetBool("Rewind"))
+        {
+            if (t.blueFlag)
+                t.blueTimer++;
 
-        if (t.blueFlag)
-            t.blueTimer--;
+            if (!t.blueFlag)
+                t.blueTimer--;
+        }
+        else
+        {
+            if (t.blueFlag)
+                t.blueTimer--;
 
-        if (!t.blueFlag)
-            t.blueTimer++;
+            if (!t.blueFlag)
+                t.blueTimer++;
+        }
+        
 
 
+        if (anim.GetBool("Rewind"))
+        {
+            if (t.greenFlag)
+                t.greenTimer++;
 
+            if (!t.greenFlag)
+                t.greenTimer--;
+        }
+        else
+        {
+            if (t.greenFlag)
+                t.greenTimer--;
 
-        if (t.greenFlag)
-            t.greenTimer--;
-
-        if (!t.greenFlag)
-            t.greenTimer++;
+            if (!t.greenFlag)
+                t.greenTimer++;
+        }
+            
     }
 
     void tempoChange()
@@ -334,6 +427,7 @@ public class TempoBehavior : StateMachineBehaviour
                 {
                     if (grid[x, y].tempoBool)
                     {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
                         grid[x, y].tempoBool = false;
                     }
@@ -342,7 +436,6 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();*/
                 if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         //debugTools.greenMusic.setVolume(1);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         grid[x, y].crumbleBool = false;
@@ -356,13 +449,13 @@ public class TempoBehavior : StateMachineBehaviour
                     {
                         grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
                         grid[x, y].tempoBool = false;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                     }
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
                         /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         // greenTempoTileFlag = true;

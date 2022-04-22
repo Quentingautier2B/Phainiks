@@ -30,18 +30,28 @@ public class MoveBehavior : StateMachineBehaviour
             sChange = FindObjectOfType<SceneChange>();
         }
         canMove = true;
-        x = animator.GetInteger("TargetInfoX");
-        y = animator.GetInteger("TargetInfoY");        
+        if (animator.GetBool("Rewind"))
+        {
+            x = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
+            y = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].y;
+        }
+        else
+        {
+            x = animator.GetInteger("TargetInfoX");
+            y = animator.GetInteger("TargetInfoY");
+        }
+               
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-            
-
         if(canMove)
+        {
             Move(animator,stateInfo);
+        }
+
     }
+
 
     void Move(Animator anim, AnimatorStateInfo stateInfo)
     {
@@ -57,12 +67,28 @@ public class MoveBehavior : StateMachineBehaviour
             if (distance < 0.1f)
             {
                 player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
+                if (anim.GetBool("Rewind"))
+                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);
             }
         }
         else
         {
-            UI.timerValue++;
-            TileEffectOnMove(x, y);
+            if (anim.GetBool("Rewind"))
+            {
+                UI.timerValue--;
+            }
+            else
+            {
+                UI.timerValue++;
+            }
+
+            TileEffectOnMove(x, y, anim);
+            if (anim.GetBool("Rewind"))
+            {
+                anim.SetBool("Rewind", false);
+                SwipeInput.rewindPos.RemoveAt(SwipeInput.rewindPos.Count - 1);
+            }
+
             if (stateInfo.IsName("Move"))
             {
                 anim.SetTrigger("moveToTempo");
@@ -75,15 +101,13 @@ public class MoveBehavior : StateMachineBehaviour
         }
     }
 
-    void TileEffectOnMove(int x, int y)
+    void TileEffectOnMove(int x, int y, Animator anim)
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
-        timerValue++;
-
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
+        //timerValue++;
 
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
-
 
         if (grid[x, y].teleporter != 0)
         {
@@ -91,18 +115,27 @@ public class MoveBehavior : StateMachineBehaviour
             player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
         }
 
-
+        
         if (grid[x, y].key != 0)
             KeyBehavior(grid[x, y]);
 
         if (grid[x, y].crumble)
         {
+            
             grid[x, y].crumbleBool = true;
             if (grid[x, y].crumbleUp)
                 grid[x, y].crumbleUp = false;
             else if (!grid[x, y].crumbleUp)
                 grid[x, y].crumbleUp = true;
-        }       
+        }
+
+        if (anim.GetBool("Rewind"))
+        { 
+            if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].key !=0)
+            {
+                KeyBehavior(grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")]);
+            }
+        }
     }
 
     void KeyBehavior(GridTiles tile)
@@ -111,6 +144,7 @@ public class MoveBehavior : StateMachineBehaviour
         //tile.transform.Find("Key").gameObject.SetActive(false);
         foreach (GridTiles t in grid)
         {
+
             if(t.door == tile.key )
             {
                 if (t.open)
