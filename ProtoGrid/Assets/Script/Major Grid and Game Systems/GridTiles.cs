@@ -9,6 +9,9 @@ public class GridTiles : MonoBehaviour
 
 
     #region variables
+    [SerializeField, HideInInspector]public bool pauseAnim = false;
+    [SerializeField, HideInInspector]public float lerpSpeed = .1f;
+    [SerializeField, HideInInspector]public float currentPosY ;
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
     public bool walkable;
@@ -18,6 +21,7 @@ public class GridTiles : MonoBehaviour
     [Range(0, 5)] public int door;    
     public bool open = false;
 
+    
     public bool crumble;
     [HideInInspector] public bool crumbleUp;
     [HideInInspector] public bool crumbleBool;

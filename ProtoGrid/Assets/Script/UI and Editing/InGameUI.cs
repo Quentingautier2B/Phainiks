@@ -24,6 +24,16 @@ public class InGameUI : MonoBehaviour
 
     
     #endregion
+     
+    public void OnPauseClick()
+    {
+        FindObjectOfType<Animator>().SetBool("Paused", true);
+    }
+
+    public void OnUnPauseClick()
+    {
+        FindObjectOfType<Animator>().SetTrigger("ExitPause");
+    }
 
     IEnumerator ResetLevelButtonEffect()
     {

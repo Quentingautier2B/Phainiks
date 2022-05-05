@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{8f1a64bc-5073-4927-8ce0-302b21ad30ec}">
 		<property name="name">
-			<value>RotateCam</value>
+			<value>ResetLevel</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -92,7 +92,7 @@
 	</object>
 	<object class="MultiSound" id="{d3a34c19-829b-433d-834b-6b9c3e343042}">
 		<relationship name="sounds">
-			<destination>{fa5dc612-8273-4d67-929d-7cd5f8ff4bf3}</destination>
+			<destination>{8d753b41-9032-42a9-bef2-f5e55b8022c3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{e3944db5-e360-4fb4-8a59-a0930f48849c}">
@@ -121,15 +121,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{eb70ffb8-afd5-4d3e-8f36-6360bc8194cc}" />
-	<object class="SingleSound" id="{fa5dc612-8273-4d67-929d-7cd5f8ff4bf3}">
-		<property name="volume">
-			<value>10</value>
-		</property>
-		<property name="pitch">
-			<value>3.60000014</value>
+	<object class="SingleSound" id="{8d753b41-9032-42a9-bef2-f5e55b8022c3}">
+		<property name="startOffset">
+			<value>2.5</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{6aaae12c-e002-495c-9664-7eca33ffd82b}</destination>
+			<destination>{67e01250-fbf5-4154-ad1d-e5278de0f815}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{85baedac-5db0-4281-b3a6-043d74036e0a}" />

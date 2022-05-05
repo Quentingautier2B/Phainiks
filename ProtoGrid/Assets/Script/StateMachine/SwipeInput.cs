@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SwipeInput : StateMachineBehaviour
 {
     Vector2 startTouchPos, currentTouchPos, endTouchPos;
     public Vector2 directionSwipe;
-    
     int pPosX, pPosY;
     int targetPosx, targetPosy;
     public float deadZoneDiameter;
@@ -25,8 +25,11 @@ public class SwipeInput : StateMachineBehaviour
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
     
+ 
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if (awake)
         {
             player = FindObjectOfType<Player>().transform;
@@ -58,6 +61,9 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+     
+
+
         if (Input.GetMouseButtonDown(0))
         {
             startTouchPos = Input.mousePosition;
@@ -126,9 +132,13 @@ public class SwipeInput : StateMachineBehaviour
             animator.SetInteger("PreviousX", pPosX);
             animator.SetInteger("PreviousY", pPosY);
         }
+ 
+        animator.SetInteger("CurrentX", (int)player.position.x);
+        animator.SetInteger("CurrentY", (int)player.position.z);
+        
     }
 
-
+    
 
     void pPosAssignement()
     {
@@ -139,12 +149,6 @@ public class SwipeInput : StateMachineBehaviour
 
     void TestFourDirections(Animator anim)
     {
-        /*if (!TestDirection(pPosX, pPosY, 1) && !TestDirection(pPosX, pPosY, 2) && !TestDirection(pPosX, pPosY, 3) && !TestDirection(pPosX, pPosY, 4))
-        {           
-            //anim.SetBool("OntoTempoTile", true);
-        }*/
-            
-
         if (directionSwipe.x > 0 && directionSwipe.y > 0)
         {
             if (gridG.TestDirection(pPosX, pPosY, 1))
@@ -155,7 +159,7 @@ public class SwipeInput : StateMachineBehaviour
                 anim.SetInteger("PreviousX", pPosX);
                 anim.SetInteger("PreviousY", pPosY);
                 directionIndex = 1;
-                //anim.SetBool("OntoTempoTile", true);
+                
                 if ((grid[pPosX + 1, pPosY].tempoTile == 1) ||
                    (grid[pPosX + 1, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX + 1, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
@@ -187,7 +191,7 @@ public class SwipeInput : StateMachineBehaviour
                 anim.SetInteger("TargetInfoY", pPosY - 1);
                 anim.SetInteger("PreviousX", pPosX);
                 anim.SetInteger("PreviousY", pPosY);
-                //anim.SetBool("OntoTempoTile", true);
+                
                 directionIndex = 1;
                 if ((grid[pPosX, pPosY - 1].tempoTile == 1) ||
                    (grid[pPosX, pPosY - 1].tempoTile == 2 && temp.blueTimer == 1) ||
@@ -220,7 +224,7 @@ public class SwipeInput : StateMachineBehaviour
                 anim.SetInteger("TargetInfoY", pPosY + 1);
                 anim.SetInteger("PreviousX", pPosX);
                 anim.SetInteger("PreviousY", pPosY);
-                //anim.SetBool("OntoTempoTile", true);
+                
                 directionIndex = 1;
                 if ((grid[pPosX, pPosY + 1].tempoTile == 1) ||
                    (grid[pPosX, pPosY + 1].tempoTile == 2 && temp.blueTimer == 1) ||
@@ -253,7 +257,7 @@ public class SwipeInput : StateMachineBehaviour
                 anim.SetInteger("TargetInfoY", pPosY);
                 anim.SetInteger("PreviousX", pPosX);
                 anim.SetInteger("PreviousY", pPosY);
-                //anim.SetBool("OntoTempoTile", true);
+                
                 directionIndex = 1;
                 if ((grid[pPosX - 1, pPosY].tempoTile == 1) || 
                    (grid[pPosX - 1, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
@@ -278,41 +282,4 @@ public class SwipeInput : StateMachineBehaviour
         }
 
     }
-
-
-/*    public bool TestDirection(int x, int y, int direction)
-    {
-        switch (direction)
-        {
-            case 1:
-
-                if (x + 1 < gridG.raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].height - grid[x, y].height == 0 || grid[x + 1, y].height - grid[x, y].height == -1) && grid[x + 1, y].walkable)
-                    return true;
-                else
-                    return false;
-
-
-            case 2:
-                if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].height - grid[x, y].height == 0 || grid[x, y - 1].height - grid[x, y].height == -1) && grid[x, y - 1].walkable)
-                    return true;
-                else
-                    return false;
-
-            case 3:
-                if (y + 1 < gridG.columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].height - grid[x, y].height == 0 || grid[x, y + 1].height - grid[x, y].height == -1) && grid[x, y + 1].walkable)
-                    return true;
-                else
-                    return false;
-
-
-            case 4:
-                if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].height - grid[x, y].height == 0 || grid[x - 1, y].height - grid[x, y].height == -1) && grid[x - 1, y].walkable)
-                    return true;
-                else
-                    return false;
-
-            default:
-                return false;
-        }
-    }*/
 }
