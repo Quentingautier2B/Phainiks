@@ -5,7 +5,7 @@ using TMPro;
 
 public class GridTiles : MonoBehaviour
 {
-    
+
 
 
     #region variables
@@ -14,9 +14,13 @@ public class GridTiles : MonoBehaviour
     public bool walkable;
     public bool originalPosition;
     [Range(0, 5)] public int key;
-    [Range(0, 5)] public int door;
-    [HideInInspector] public bool open = false;
-    //public bool crumble;
+    [Range(0, 5)] public int door;    
+    public bool open = false;
+
+    public bool crumble;
+    [HideInInspector] public bool crumbleUp;
+    [HideInInspector] public bool crumbleBool;
+
     [Range(0, 8)] public float levelTransiIndex;
     //[Range(-100, 100)] public int timerChangeInputValue;
     [Range(0, 3)] public int tempoTile;
@@ -117,19 +121,19 @@ public class GridTiles : MonoBehaviour
         if (!walkable)
         {
             var yo = transform.GetComponentsInChildren<MeshRenderer>();
-            foreach(MeshRenderer y in yo)
+            foreach (MeshRenderer y in yo)
             {
-                if (name != "Renderer" && name != "Door")
+                if (y.name != "Renderer" && y.name != "Door")
                     y.enabled = false;
             }
-        }        
-        
+        }
+
         if (walkable)
         {
             var yo = transform.GetComponentsInChildren<MeshRenderer>();
             foreach(MeshRenderer y in yo)
             {
-                if (name != "Renderer" && name != "Door" )
+                if (y.name != "Renderer" && y.name != "Door" )
                     y.enabled = true;
             }
         }
@@ -213,7 +217,7 @@ public class GridTiles : MonoBehaviour
         {
             
             var col = rend.material.color;
-            col.a = Mathf.Lerp(col.a, 0, Time.deltaTime * fadeInSpeed);
+            col.a = Mathf.Lerp(col.a, 0, Time.deltaTime*fadeInSpeed);
             rend.material.color = col;
         }
     }

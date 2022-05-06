@@ -93,6 +93,7 @@ MonoBehaviour:
   redFlager: 0
   blueFlager: 0
   greenFlager: 0
+  crumbleFlager: 0
   tempoTileSpeed: 32
 --- !u!1102 &-4645878036670595445
 AnimatorState:
@@ -286,6 +287,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: PreviousX
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: PreviousY
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -403,6 +416,7 @@ MonoBehaviour:
   redFlager: 0
   blueFlager: 0
   greenFlager: 0
+  crumbleFlager: 0
   tempoTileSpeed: 32
 --- !u!1102 &7507371001887530473
 AnimatorState:

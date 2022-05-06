@@ -88,7 +88,7 @@ public class SwipeInput : StateMachineBehaviour
     {
         pPosX = (int)player.position.x;
         pPosY = (int)player.position.z;
-    
+        
     }
 
     void TestFourDirections(Animator anim)
@@ -106,6 +106,8 @@ public class SwipeInput : StateMachineBehaviour
                 roundingDirectionalYPosition = new Vector2(0, 0);
                 anim.SetInteger("TargetInfoX", pPosX + 1);
                 anim.SetInteger("TargetInfoY", pPosY);
+                anim.SetInteger("PreviousX", pPosX);
+                anim.SetInteger("PreviousY", pPosY);
                 directionIndex = 1;
                 //anim.SetBool("OntoTempoTile", true);
                 if ((grid[pPosX + 1, pPosY].tempoTile == 1) ||
@@ -115,7 +117,8 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].tempoTile == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
-                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag))
+                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
+                   (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
@@ -135,6 +138,8 @@ public class SwipeInput : StateMachineBehaviour
                 roundingDirectionalYPosition = new Vector2(0, 1);
                 anim.SetInteger("TargetInfoX", pPosX);
                 anim.SetInteger("TargetInfoY", pPosY - 1);
+                anim.SetInteger("PreviousX", pPosX);
+                anim.SetInteger("PreviousY", pPosY);
                 //anim.SetBool("OntoTempoTile", true);
                 directionIndex = 1;
                 if ((grid[pPosX, pPosY - 1].tempoTile == 1) ||
@@ -144,7 +149,8 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].tempoTile == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
-                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag))
+                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
+                   (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
@@ -163,6 +169,8 @@ public class SwipeInput : StateMachineBehaviour
                 roundingDirectionalYPosition = new Vector2(1, 0);
                 anim.SetInteger("TargetInfoX", pPosX);
                 anim.SetInteger("TargetInfoY", pPosY + 1);
+                anim.SetInteger("PreviousX", pPosX);
+                anim.SetInteger("PreviousY", pPosY);
                 //anim.SetBool("OntoTempoTile", true);
                 directionIndex = 1;
                 if ((grid[pPosX, pPosY + 1].tempoTile == 1) ||
@@ -172,7 +180,8 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].tempoTile == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
-                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag))
+                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
+                   (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
@@ -193,6 +202,8 @@ public class SwipeInput : StateMachineBehaviour
                 roundingDirectionalYPosition = new Vector2(1, 1);
                 anim.SetInteger("TargetInfoX", pPosX - 1);
                 anim.SetInteger("TargetInfoY", pPosY);
+                anim.SetInteger("PreviousX", pPosX);
+                anim.SetInteger("PreviousY", pPosY);
                 //anim.SetBool("OntoTempoTile", true);
                 directionIndex = 1;
                 if ((grid[pPosX - 1, pPosY].tempoTile == 1) || 
@@ -202,7 +213,8 @@ public class SwipeInput : StateMachineBehaviour
                    (grid[pPosX, pPosY].tempoTile == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 2 && temp.blueTimer == 1) ||
                    (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 1 && temp.greenFlag) ||
-                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag))
+                   (grid[pPosX, pPosY].tempoTile == 3 && temp.greenTimer == 2 && !temp.greenFlag) ||
+                   (grid[pPosX, pPosY].crumble))
                 {
                     anim.SetBool("OntoTempoTile", true);
                 }
