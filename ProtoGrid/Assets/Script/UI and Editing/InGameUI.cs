@@ -16,16 +16,18 @@ public class InGameUI : MonoBehaviour
     [HideInInspector] public GridTiles endTile;
     SceneChange sceneChange;
     [SerializeField] List<GameObject> uiEndLevelDisable;
+    Button revert;
+    Animator stateMachine;
     public TextMeshProUGUI nbStep;
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
+
     
     #endregion
 
-
-
-    public void OnResetClick()
+    IEnumerator ResetLevelButtonEffect()
     {
+        yield return new WaitForSeconds(.5f);
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -38,8 +40,15 @@ public class InGameUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void OnResetClick()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/ResetLevel");
+        StartCoroutine(ResetLevelButtonEffect());
+    }
+
     public void OnHubClick()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -74,10 +83,12 @@ public class InGameUI : MonoBehaviour
 
     private void Awake()
     {
+        stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
         endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         sceneChange = FindObjectOfType<SceneChange>();
+        revert = transform.Find("RevertTime").GetComponent<Button>();
     }
 
     private void Start()
@@ -96,12 +107,23 @@ public class InGameUI : MonoBehaviour
     {       
        TimerText();
         nbStep.text = "" + timerValue;
+        if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
+        {
+            revert.interactable = false;
+        }
+        else
+        {
+            revert.interactable = true;
+        }
+        
     }
+    
 
     void TimerText()
     {
        timerText.text = timerValue.ToString();
     }
+
     public void LevelTransi()
     {
         if (endTile != null)

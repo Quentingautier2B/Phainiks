@@ -25,6 +25,7 @@ public class GridTiling : MonoBehaviour
     public Material TmatG1;
     public Material TmatG2;
     public Material TmatG3;
+    public Material Cmat;
 
     public Mesh mesh1D;
     public Mesh mesh2DA;
@@ -47,7 +48,7 @@ public class GridTiling : MonoBehaviour
 
     private void Start()
     {
-        if (tile.tempoTile != 0)
+        if (tile.tempoTile != 0 || tile.crumble)
         {
             TempoTile.SetActive(true);
         }
@@ -55,7 +56,7 @@ public class GridTiling : MonoBehaviour
         {
             TempoTile.SetActive(false);
         }
-        if (tile.walkable && !tile.crumble && tile.open)
+        if (tile.walkable  && tile.open)
             SetDirectionalMaterial();
         //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
     }
@@ -67,7 +68,7 @@ public class GridTiling : MonoBehaviour
         t = FindObjectOfType<TileVariables>();
 
 
-        if (tile.tempoTile != 0)
+        if (tile.tempoTile != 0 || tile.crumble)
         {
             TempoTile.SetActive(true);
         }
@@ -76,7 +77,7 @@ public class GridTiling : MonoBehaviour
             TempoTile.SetActive(false);
         }
 
-        if (tile.walkable && !tile.crumble && refreshRend)
+        if (tile.walkable && refreshRend)
         {
             gridG = FindObjectOfType<GridGenerator>();
             gridG.generateGrid();
@@ -90,7 +91,7 @@ public class GridTiling : MonoBehaviour
         else
             refreshRend = false;
 
-        if (tile.walkable && tile.tempoTile != 0 && !tile.crumble && refreshRendTempo)
+        if (tile.walkable && (tile.tempoTile != 0 || tile.crumble)  && refreshRendTempo)
         {
             //mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             TempoTileMaterial();
@@ -107,8 +108,16 @@ public class GridTiling : MonoBehaviour
 
     public void TempoTileMaterial()
     {
-        if (tile.tempoTile != 0)
+        if (tile.tempoTile != 0 || tile.crumble)
         {
+            if (tile.crumble)
+            {
+                foreach (MeshRenderer m in tempoTilesMats)
+                {
+                    m.material = Cmat;
+                    refreshRendTempo = false;
+                }
+            }
 
             if (tile.tempoTile == 1)
             {

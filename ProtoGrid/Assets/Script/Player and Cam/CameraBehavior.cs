@@ -71,12 +71,14 @@ public class CameraBehavior : MonoBehaviour
 
     public void OnLeftButtonClick()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/RotateCam");
         angleLerp = 90;
         lerp = true;
     }
 
     public void OnRightButtonClick()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/RotateCam");
         angleLerp = -90;
         lerp = true;
     }

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{4ffb4007-6a23-4890-a9cc-f4db52e0c33f}">
 		<property name="name">
-			<value>DoorOpen</value>
+			<value>GetKey</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -92,7 +92,7 @@
 	</object>
 	<object class="MultiSound" id="{28606f35-37b9-4cfd-886d-a99a69cd517d}">
 		<relationship name="sounds">
-			<destination>{ae784744-5b14-4bbd-8a2e-8d289df5d06c}</destination>
+			<destination>{67006670-6730-4e29-95b2-f2db813a6759}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{72676187-2b85-4438-b04d-5c1726c8b4d8}">
@@ -121,18 +121,9 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6528f9be-bd49-4765-92b1-b991e42646c1}" />
-	<object class="SingleSound" id="{ae784744-5b14-4bbd-8a2e-8d289df5d06c}">
-		<property name="startOffset">
-			<value>24</value>
-		</property>
-		<property name="volume">
-			<value>-10.5</value>
-		</property>
-		<property name="pitch">
-			<value>-8</value>
-		</property>
+	<object class="SingleSound" id="{67006670-6730-4e29-95b2-f2db813a6759}">
 		<relationship name="audioFile">
-			<destination>{13b3d7c1-098d-41e4-99cf-51f6eb085ca2}</destination>
+			<destination>{cd6e203a-8ffb-4a6b-9bd6-4bc602c7c2f6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{96ac6097-d497-43ba-9c33-1626daed384f}" />
