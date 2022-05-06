@@ -12,6 +12,7 @@ public class GridTiles : MonoBehaviour
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
     public bool walkable;
+    public bool invisible;
     public bool originalPosition;
     [Range(0, 5)] public int key;
     [Range(0, 5)] public int door;    
@@ -107,6 +108,8 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        if (walkable)
+            invisible = false;
 
         if (hitByCam)
         {
@@ -206,7 +209,13 @@ public class GridTiles : MonoBehaviour
     void VisibleOrInvisibleTile()
     {
         if (walkable)
-        {    
+        {
+            if (tempoTile != 0)
+            {
+                transform.Find("DirectionTempoU").gameObject.SetActive(true);
+                transform.Find("DirectionTempoD").gameObject.SetActive(true);
+
+            }
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a,1,Time.deltaTime*fadeInSpeed);
             rend.material.color = col;
@@ -215,7 +224,12 @@ public class GridTiles : MonoBehaviour
 
         if (!walkable)
         {
-            
+            if(tempoTile != 0)
+            {
+                transform.Find("DirectionTempoU").gameObject.SetActive(false) ;
+                transform.Find("DirectionTempoD").gameObject.SetActive(false) ;
+                
+            }
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a, 0, Time.deltaTime*fadeInSpeed);
             rend.material.color = col;

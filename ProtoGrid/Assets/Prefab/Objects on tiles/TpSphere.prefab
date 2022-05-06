@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1541461063523677795}
   - component: {fileID: 7321566272623395649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TpSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6061113546939508534}
   - component: {fileID: 1771442733167933846}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.7
+  m_Time: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -126,16 +126,16 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.06451416
-        inSlope: 0
-        outSlope: 0
+        value: 0.012084961
+        inSlope: 0.46628478
+        outSlope: 0.46628478
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.09514926
       - serializedVersion: 3
         time: 1
-        value: 0.17741689
+        value: 0.294345
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -147,7 +147,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9339623, g: 0.7267795, b: 0.022027409, a: 1}
+      key0: {r: 0.4000089, g: 0.8396226, b: 0.4575501, a: 1}
       key1: {r: 0, g: 0, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

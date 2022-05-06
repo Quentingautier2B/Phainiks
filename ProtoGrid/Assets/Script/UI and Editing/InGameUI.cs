@@ -12,9 +12,17 @@ public class InGameUI : MonoBehaviour
     public bool tpOn = true;
     LineRenderer[] tps;
     DebugTools debugTools;
+    [HideInInspector] public GameObject endLevelMenu;
+    [HideInInspector] public GridTiles endTile;
+    SceneChange sceneChange;
+    [SerializeField] List<GameObject> uiEndLevelDisable;
+    public TextMeshProUGUI nbStep;
+    public Image oneStarImage, twoStarImage, threeStarImage;
+    public int oneStar,twoStar,threeStar;
+    
     #endregion
 
-    
+
 
     public void OnResetClick()
     {
@@ -67,22 +75,59 @@ public class InGameUI : MonoBehaviour
     private void Awake()
     {
         debugTools = FindObjectOfType<DebugTools>();
-        
+        endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
+        sceneChange = FindObjectOfType<SceneChange>();
     }
 
     private void Start()
     {
-        tps = FindObjectsOfType<LineRenderer>();
-    }
+        oneStarImage.gameObject.SetActive(false);
+        twoStarImage.gameObject.SetActive(false);
+        twoStarImage.color = Color.white;
+        threeStarImage.gameObject.SetActive(false);
+        threeStarImage.color = Color.white;
 
+        endLevelMenu.SetActive(false);
+        tps = FindObjectsOfType<LineRenderer>();
+        nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<TextMeshProUGUI>();
+    }
     void Update()
     {       
        TimerText();
+        nbStep.text = "" + timerValue;
     }
 
     void TimerText()
     {
        timerText.text = timerValue.ToString();
+    }
+    public void LevelTransi()
+    {
+        if (endTile != null)
+            sceneChange.LevelTransi(endTile);
+        else
+            print("need endTile");
+    }
+    public void UiEndDisable()
+    {
+        foreach (GameObject g in uiEndLevelDisable)
+        {
+            g.SetActive(false);
+            Stars();    
+        }
+    }
+
+    void Stars()
+    {
+        if(timerValue > twoStar)
+        {
+            twoStarImage.color = Color.black;
+        }
+
+        if (timerValue > threeStar)
+        {
+            threeStarImage.color = Color.black;
+        }
     }
 }
