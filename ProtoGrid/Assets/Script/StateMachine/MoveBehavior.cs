@@ -14,7 +14,10 @@ public class MoveBehavior : StateMachineBehaviour
     SceneChange sChange;
     GridTiles[,] grid;
     InGameUI UI;
-
+    
+    int previousX;
+    int previousY;
+    bool flag;
     bool awake = true;
     public bool canMove;
     #endregion
@@ -40,11 +43,17 @@ public class MoveBehavior : StateMachineBehaviour
             x = animator.GetInteger("TargetInfoX");
             y = animator.GetInteger("TargetInfoY");
         }
+
+        previousX = animator.GetInteger("PreviousX");
+        previousY = animator.GetInteger("PreviousY");
+
+        flag = true;
                
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if(canMove)
         {
             Move(animator,stateInfo);
@@ -55,6 +64,12 @@ public class MoveBehavior : StateMachineBehaviour
 
     void Move(Animator anim, AnimatorStateInfo stateInfo)
     {
+        if (anim.GetBool("Rewind") && flag == true)
+        {
+            flag = false;
+            TileEffectOnMove(x, y, anim);
+        }
+
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
         if (distance > 0f && grid[x, y].walkable)
         {
@@ -64,7 +79,7 @@ public class MoveBehavior : StateMachineBehaviour
             if(distance > 0.5f)
                 player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
-            if (distance < 0.1f)
+            if (distance < 0.3f)
             {
                 player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
                 if (anim.GetBool("Rewind"))
@@ -82,7 +97,11 @@ public class MoveBehavior : StateMachineBehaviour
                 UI.timerValue++;
             }
 
-            TileEffectOnMove(x, y, anim);
+            if (!anim.GetBool("Rewind"))
+            {
+                TileEffectOnMove(x, y, anim);
+            }
+
             if (anim.GetBool("Rewind"))
             {
                 anim.SetBool("Rewind", false);
@@ -109,7 +128,11 @@ public class MoveBehavior : StateMachineBehaviour
         if (grid[x, y].levelTransiIndex != 0)
             sChange.startCoroutine(grid[x, y]);
 
-        if (grid[x, y].teleporter != 0)
+        if (anim.GetBool("Rewind") && grid[previousX, previousY].teleporter != 0)
+        {
+            player.position = new Vector3(grid[previousX, previousY].TpTarget.transform.position.x, grid[previousX, previousY].TpTarget.transform.position.y + 1.5f, grid[previousX, previousY].TpTarget.transform.position.z);
+        }
+        else if (grid[x, y].teleporter != 0 && !anim.GetBool("Rewind"))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/World/TP");
             player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
@@ -119,9 +142,16 @@ public class MoveBehavior : StateMachineBehaviour
         if (grid[x, y].key != 0)
             KeyBehavior(grid[x, y]);
 
-        if (grid[x, y].crumble)
+        if (anim.GetBool("Rewind") && grid[previousX, previousY].crumble)
         {
-            
+            grid[previousX, previousY].crumbleBool = true;
+            if (grid[previousX, previousY].crumbleUp)
+                grid[previousX, previousY].crumbleUp = false;
+            else if (!grid[previousX, previousY].crumbleUp)
+                grid[previousX, previousY].crumbleUp = true;
+        }
+        else if (grid[x, y].crumble)
+        {
             grid[x, y].crumbleBool = true;
             if (grid[x, y].crumbleUp)
                 grid[x, y].crumbleUp = false;
@@ -131,9 +161,9 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (anim.GetBool("Rewind"))
         { 
-            if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].key !=0)
+            if (grid[previousX, previousY].key !=0)
             {
-                KeyBehavior(grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")]);
+                KeyBehavior(grid[previousX, previousY]);
             }
         }
     }
