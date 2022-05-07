@@ -1,29 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9040377385668391246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/2/VolumeBlue
-  m_EditorClassIdentifier: 
-  Name: VolumeBlue
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 706256616
-    data2: 1014483630
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
 --- !u!114 &-8416661068168324743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,33 +54,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7123565642227065752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Tiles/3
-  m_EditorClassIdentifier: 
-  Path: event:/Tiles/3
-  Guid:
-    Data1: 841286276
-    Data2: 1153869218
-    Data3: -310352483
-    Data4: 339221949
-  Banks:
-  - {fileID: -4578730943406009373}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 28444
 --- !u!114 &-4578730943406009373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,34 +69,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637875500604401482
+  lastModified: 637875685442663661
   FileSizes:
   - Name: Desktop
     Value: 909344
-  Exists: 1
---- !u!114 &-2473571846104645989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/1/VolumeRed
-  m_EditorClassIdentifier: 
-  Name: VolumeRed
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2072279190
-    data2: 2663285317
-  Type: 0
-  IsGlobal: 0
-  Labels: []
   Exists: 1
 --- !u!114 &-887265536856595329
 MonoBehaviour:
@@ -191,10 +116,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637875500604441651
+  lastModified: 637875685442683617
   FileSizes:
   - Name: Desktop
-    Value: 1376
+    Value: 1384
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -222,16 +147,16 @@ MonoBehaviour:
   - {fileID: -7846710340076606455}
   - {fileID: 5704058426117198550}
   - {fileID: 7743653084266379811}
-  - {fileID: 1669234725019074728}
-  - {fileID: -7123565642227065752}
-  - {fileID: 5457183784858205055}
+  - {fileID: 4705628827547279012}
+  - {fileID: 8811717922208143390}
+  - {fileID: 5787979667728474302}
   EditorParameters:
   - {fileID: 6834572710250185943}
   MasterBanks:
   - {fileID: -4578730943406009373}
   StringsBanks:
   - {fileID: -769629533170134893}
-  cacheTime: 637875500604441651
+  cacheTime: 637875685442683617
   cacheVersion: 10
 --- !u!114 &521795608761048539
 MonoBehaviour:
@@ -260,7 +185,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &1669234725019074728
+--- !u!114 &1109246160212830689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,25 +194,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Tiles/1
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Red/VolumeRed
   m_EditorClassIdentifier: 
-  Path: event:/Tiles/1
-  Guid:
-    Data1: -59974335
-    Data2: 1096077042
-    Data3: -198661973
-    Data4: -1388580007
-  Banks:
-  - {fileID: -4578730943406009373}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -2473571846104645989}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 28444
+  Name: VolumeRed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2072279190
+    data2: 2663285317
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &4017769258760780046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +263,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &5457183784858205055
+--- !u!114 &4705628827547279012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,21 +273,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Tiles/2
+  m_Name: event:/Tiles/Red
   m_EditorClassIdentifier: 
-  Path: event:/Tiles/2
+  Path: event:/Tiles/Red
   Guid:
-    Data1: 1639621862
-    Data2: 1174458595
-    Data3: 69922689
-    Data4: 1764054512
+    Data1: -59974335
+    Data2: 1096077042
+    Data3: -198661973
+    Data4: -1388580007
   Banks:
   - {fileID: -4578730943406009373}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -9040377385668391246}
+  - {fileID: 1109246160212830689}
   MinDistance: 1
   MaxDistance: 20
   Length: 28444
@@ -397,6 +318,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5787979667728474302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Blue
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Blue
+  Guid:
+    Data1: 1639621862
+    Data2: 1174458595
+    Data3: 69922689
+    Data4: 1764054512
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6889620267885905751}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 28444
 --- !u!114 &6380324812617487083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +397,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &6889620267885905751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blue/VolumeBlue
+  m_EditorClassIdentifier: 
+  Name: VolumeBlue
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 706256616
+    data2: 1014483630
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &7743653084266379811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +448,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &8811717922208143390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Green
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Green
+  Guid:
+    Data1: 841286276
+    Data2: 1153869218
+    Data3: -310352483
+    Data4: 339221949
+  Banks:
+  - {fileID: -4578730943406009373}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 28444
 --- !u!114 &8935359105627202595
 MonoBehaviour:
   m_ObjectHideFlags: 0
