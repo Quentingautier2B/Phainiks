@@ -20,7 +20,7 @@ public class TempoBehavior : StateMachineBehaviour
     TileVariables t;
 
 
-    [SerializeField] bool redFlager,blueFlager,greenFlager, crumbleFlager;
+    [SerializeField] public bool redFlager,blueFlager,greenFlager, crumbleFlager;
     float redTarget, blueTarget, greenTarget;
     public float tempoTileSpeed;    
     bool redTest, blueTest, greenTest;
@@ -271,149 +271,32 @@ public class TempoBehavior : StateMachineBehaviour
 
     void tempoChange()
     {
-        #region redTempoMove
+        #region TempoMove
         if (redFlager)
         {
             foreach (GridTiles tile in grid)
             {
-                if (tile.tempoTile == 1 && t.redFlag)
-                {
-                    
-                    if (tile.tempoBool)
-                    {
-                        tile.target = (int)tile.transform.position.y + 2;
-                        tile.tempoBool = false;
-                        
-                    }
-                    tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                    
-                    if (tile.transform.position.y >= tile.target - 0.01f)
-                    {
-                        debugTools.redMusic.setVolume(1);
-                        //debugTools.redMusic.start();
-                        tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        //redTempoTileFlag = true;
-                        redFlager = false;
-                    }
-                }
-
-                if (tile.tempoTile == 1 && !t.redFlag)
-                {
-                    
-                    if (tile.tempoBool)
-                    {
-                        tile.target = (int)tile.transform.position.y - 2;
-                        tile.tempoBool = false;
-                    }
-                    tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                    if (tile.transform.position.y <= tile.target + 0.01f)
-                    {
-                        debugTools.redMusic.setVolume(0);
-                        //debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                     
-                        tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        //redTempoTileFlag = true;
-                        redFlager = false;
-                    }
-                }
+                if (tile.tempoTile == 1)
+                    redFlager = LerpPos(tile, debugTools.redMusic, redFlager, t.redFlag);                
             }
            
         }
-        #endregion
 
-        #region blueTempoMove
         if (blueFlager)
         {
             foreach (GridTiles tile in grid)
             {
-                if (tile.tempoTile == 2 && t.blueFlag)
-                {
-                    if (tile.tempoBool)
-                    {
-                        tile.target = (int)tile.transform.position.y + 2;
-                        tile.tempoBool = false;
-                    }
-                    tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                    if (tile.transform.position.y >= tile.target - 0.01f)
-                    {
-                        debugTools.blueMusic.setVolume(1);
-                        tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        //blueTempoTileFlag = true;
-                        blueFlager = false;
-                    }
-                }
-
-                if (tile.tempoTile == 2 && !t.blueFlag)
-                {
-                    if (tile.tempoBool)
-                    {
-                        tile.target = (int)tile.transform.position.y - 2;
-                        tile.tempoBool = false;
-                    }
-                    tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                    if (tile.transform.position.y <= tile.target + 0.01f)
-                    {
-                        debugTools.blueMusic.setVolume(0);
-                        tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        //blueTempoTileFlag = true;
-                        blueFlager = false;
-                    }
-                }
+                if (tile.tempoTile == 2)
+                    blueFlager = LerpPos(tile, debugTools.blueMusic, blueFlager, t.blueFlag);
             }
-           
         }
-        #endregion
 
-        #region greenRegionMove
         if (greenFlager)
         {
             foreach (GridTiles tile in grid)
             {
-                if (tile.tempoTile == 3 && t.greenFlag)
-                {
-                    if (tile.tempoBool)
-                    {
-                        tile.target = (int)tile.transform.position.y + 2;
-                        tile.tempoBool = false;
-                    }
-                    tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                    if (tile.transform.position.y >= tile.target - 0.01f)
-                    {
-                        debugTools.greenMusic.setVolume(1);
-                        tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                        //greenTempoTileFlag = true;
-                        greenFlager = false;
-                    }
-                }
-
-                if (tile.tempoTile == 3 && !t.greenFlag)
-                {
-                    if (tile.tempoBool)
-                    {
-                        tile.target = (int)tile.transform.position.y - 2;
-                        tile.tempoBool = false;
-                    }
-                    tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                    if (tile.transform.position.y <= tile.target + 0.01f)
-                    {
-                        debugTools.greenMusic.setVolume(0);
-                        tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-                       // greenTempoTileFlag = true;
-                        greenFlager = false;
-                    }
-                }
+                if (tile.tempoTile == 3)
+                    greenFlager = LerpPos(tile, debugTools.greenMusic, greenFlager, t.greenFlag);               
             }
           
         }
@@ -432,11 +315,9 @@ public class TempoBehavior : StateMachineBehaviour
                         grid[x, y].tempoBool = false;
                     }
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
-                        /*tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                        tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();*/
-                if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
+
+                    if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
-                        //debugTools.greenMusic.setVolume(1);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         grid[x, y].crumbleBool = false;
                         crumbleFlager = false;
@@ -467,5 +348,51 @@ public class TempoBehavior : StateMachineBehaviour
 
         }
         #endregion
+    }
+
+    bool LerpPos(GridTiles tile, FMOD.Studio.EventInstance music, bool Flager, bool colorFlag)
+    {
+            //Called on First Loop
+            if (tile.tempoBool && colorFlag)
+            {
+                tile.target = (int)tile.transform.position.y + 2;
+                tile.tempoBool = false;
+            }
+            else if(tile.tempoBool && !colorFlag)
+            {
+                tile.target = (int)tile.transform.position.y - 2;
+                tile.tempoBool = false;
+            }
+
+            //Called Every loop
+            tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
+     
+
+            //Called on last loop
+            if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
+            {
+
+                if (colorFlag)
+                {
+                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
+                    music.setVolume(1);
+                }
+                else
+                {
+                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
+                    music.setVolume(0);
+                }
+
+                tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
+                return false;
+            }
+            else
+            {
+            return true;
+            }
+        
+       
     }
 }
