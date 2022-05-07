@@ -120,6 +120,8 @@ MonoBehaviour:
   greenFlager: 0
   crumbleFlager: 0
   tempoTileSpeed: 13
+  x: 0
+  y: 0
 --- !u!1102 &-4645878036670595445
 AnimatorState:
   serializedVersion: 6
@@ -497,6 +499,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: RewindPreviousPosX
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: RewindPreviousPosY
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -772,6 +786,8 @@ MonoBehaviour:
   greenFlager: 0
   crumbleFlager: 0
   tempoTileSpeed: 10
+  x: 0
+  y: 0
 --- !u!1102 &7507371001887530473
 AnimatorState:
   serializedVersion: 6
@@ -820,3 +836,5 @@ MonoBehaviour:
   greenFlager: 0
   crumbleFlager: 0
   tempoTileSpeed: 20
+  x: 0
+  y: 0
