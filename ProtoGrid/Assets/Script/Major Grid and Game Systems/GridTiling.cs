@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GridTiling : MonoBehaviour
 {
-    [SerializeField] bool refreshRend = false;
-    [SerializeField] bool refreshRendTempo = false;
+    [SerializeField] public bool refreshRend = false;
+    [SerializeField] public bool refreshRendTempo = false;
     GridTiles[,] grid;
     GridGenerator gridG;
     TileVariables t;

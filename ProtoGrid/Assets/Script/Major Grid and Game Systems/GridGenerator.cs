@@ -9,13 +9,13 @@ public class GridGenerator : MonoBehaviour
 {
     #region variables
     public GridTiles[,] grid;
-    [SerializeField] bool instantiateGrid = false;
+    [SerializeField] public bool instantiateGrid = false;
     public GameObject Tile;
     Transform player;
     [Header("Input Values")]
     
-    public int raws;
-    public int columns;
+    [SerializeField] public int raws;
+    [SerializeField] public int columns;
     [HideInInspector] public Vector3 ogPos;
 
 
