@@ -16,6 +16,8 @@ public class TileEditorWindow : EditorWindow
     int TempoTile;
     int Teleporter;
     int TeleporterTarget;
+    
+    
 
 
 
@@ -296,20 +298,74 @@ public class TileEditorWindow : EditorWindow
             {
                 tileSelected = true;
 
-                g.walkable = walkable;
-                g.originalPosition = ogPos;
-                g.key = Key;
-                g.door = Door;
-                g.open = Open;
-                g.crumble = Crumble;
-                g.levelTransiIndex = LevelTransiIndex / 10;
-                g.tempoTile = TempoTile;
-                g.teleporter = Teleporter;
-                g.tpTargetIndex = TeleporterTarget;
+                if (g.walkableC != walkable)
+                {
+                    g.walkableC = walkable;
+                    g.walkable = walkable;
+                }
+
+                if (g.ogPosC != ogPos)
+                {
+                    g.ogPosC = ogPos;
+                    g.originalPosition = ogPos;
+                }
+
+                if (g.KeyC != Key)
+                {
+                    g.KeyC = Key;
+                    g.KeyC = Key;
+                }
+
+                if (g.DoorC != Door )
+                {
+                    g.door = Door;
+                    g.door = Door;
+                }
+
+                if (g.OpenC != Open )
+                {
+                    g.OpenC  = Open ;
+                    g.open = Open;
+                }
+
+                if (g.CrumbleC != Crumble)
+                {
+                    g.CrumbleC = Crumble;
+                    g.crumble = Crumble;
+                }
+
+                if (g.LevelTransiIndexC != LevelTransiIndex)
+                {
+                    g.LevelTransiIndexC = LevelTransiIndex;
+                    g.levelTransiIndex = LevelTransiIndex / 10;
+                }
+
+                if (g.TempoTileC != TempoTile)
+                {
+                    g.TempoTileC = TempoTile;
+                    g.tempoTile = TempoTile;
+                }
+
+                if (g.TeleporterC != Teleporter)
+                {
+                    g.TeleporterC = Teleporter;
+                    g.teleporter = Teleporter;
+                }
+
+                if (g.TeleporterTargetC != TeleporterTarget )
+                {
+                    g.TeleporterTargetC = TeleporterTarget;
+                    g.tpTargetIndex = TeleporterTarget;
+                }
+               
 
                 if (!walkable)
                 {
-                    g.invisible = invisible;
+                    if (g.invisibleC != invisible)
+                    {
+                        g.invisibleC = invisible;
+                        g.invisible = invisible;
+                    }
                 }
 
             }
