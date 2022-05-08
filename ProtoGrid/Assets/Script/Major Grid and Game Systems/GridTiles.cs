@@ -14,6 +14,19 @@ public class GridTiles : MonoBehaviour
     [SerializeField, HideInInspector]public float currentPosY ;
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
+
+    [HideInInspector] public bool walkableC;
+    [HideInInspector] public bool invisibleC;
+    [HideInInspector] public bool ogPosC;
+    [HideInInspector] public int KeyC;
+    [HideInInspector] public int DoorC;
+    [HideInInspector] public bool OpenC;
+    [HideInInspector] public bool CrumbleC;
+    [HideInInspector] public int LevelTransiIndexC;
+    [HideInInspector] public int TempoTileC;
+    [HideInInspector] public int TeleporterC;
+    [HideInInspector] public int TeleporterTargetC;
+
     public bool walkable;
     public bool invisible;
     public bool originalPosition;
