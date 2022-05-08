@@ -1,5 +1,11 @@
 using UnityEngine;
+
+
+#if UNITY_EDITOR
 using UnityEditor;
+
+
+
 public class TileEditorWindow : EditorWindow
 {
     GridGenerator gridG;
@@ -18,7 +24,6 @@ public class TileEditorWindow : EditorWindow
     int TeleporterTarget;
     int Raws;
     int Columns;
-    
 
 
 
@@ -383,3 +388,6 @@ public class TileEditorWindow : EditorWindow
         }
     }
 }
+#endif
+
+

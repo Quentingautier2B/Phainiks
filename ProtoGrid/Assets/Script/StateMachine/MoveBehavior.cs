@@ -82,8 +82,8 @@ public class MoveBehavior : StateMachineBehaviour
             if (distance < 0.3f)
             {
                 player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
-                if (anim.GetBool("Rewind"))
-                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);
+                /*if (anim.GetBool("Rewind"))
+                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*/
             }
         }
         else
