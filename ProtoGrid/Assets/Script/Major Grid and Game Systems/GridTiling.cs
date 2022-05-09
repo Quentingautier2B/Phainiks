@@ -26,6 +26,7 @@ public class GridTiling : MonoBehaviour
     public Material TmatG2;
     public Material TmatG3;
     public Material Cmat;
+    public GameObject cube1, cube2, cube3, cube4;
 
     public Mesh mesh1D;
     public Mesh mesh2DA;
@@ -193,6 +194,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90,0);
+            CubeActive(cube1, false);
+
         }
 
         //3 directions
@@ -206,6 +209,11 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
+            CubeActive(cube1,false);
+            /*print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffR);
+            print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffL);
+            print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffU);
+            print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffD);*/
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -218,6 +226,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
+            CubeActive(cube1,false);
+            SetCubeSize();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -230,6 +240,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90, 0);
+            CubeActive(cube1,false);
+            SetCubeSize();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -242,6 +254,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
+            CubeActive(cube1,false);
+            SetCubeSize();
         }
 
         //2 directions opposées
@@ -256,6 +270,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
+            CubeActive(cube1, false);
+            SetCubeSize();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -268,6 +284,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
+            CubeActive(cube1, false);
+            SetCubeSize();
         }
 
         //2 directions adjacentes
@@ -282,6 +300,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
+            CubeActive(cube1, true);
+            SetCubeSize();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -294,6 +314,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90, 0);
+            CubeActive(cube1, true);
+            SetCubeSize();
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -306,6 +328,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
+            CubeActive(cube1, true);
+            SetCubeSize();
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -318,6 +342,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
+            CubeActive(cube1, true);
+            SetCubeSize();
         }
 
         //1 direction
@@ -332,6 +358,8 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
+            CubeActiveTwo(cube1, cube3, true);
+            SetCubeSize();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -344,6 +372,9 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90, 0);
+            CubeActiveTwo(cube1, cube3, true);
+            SetCubeSize();
+     
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -356,6 +387,9 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
+            CubeActiveTwo(cube1, cube3, true);
+            SetCubeSize();
+
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -368,6 +402,10 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
+            CubeActiveTwo(cube1, cube3, true);
+            SetCubeSize();
+
+
         }
 
         //0 direction
@@ -380,8 +418,95 @@ public class GridTiling : MonoBehaviour
             mesh.material = mat0D;
             //meshF = normalMesh;
             refreshRend = false;
-           // mesh.transform.rotation = Quaternion.identity;
-           // mesh.transform.Rotate(-90, mesh.transform.rotation.y, 0);
+            cube1.SetActive(true);
+            cube2.SetActive(true);
+            cube3.SetActive(true);
+            cube4.SetActive(true);
+            SetCubeSize();
+            // mesh.transform.rotation = Quaternion.identity;
+            // mesh.transform.Rotate(-90, mesh.transform.rotation.y, 0);
         }
+    }
+
+    void CubeActive(GameObject cube, bool activate)
+    {
+        /*cube1.SetActive(false);
+        cube2.SetActive(false);
+        cube3.SetActive(false);
+        cube4.SetActive(false);
+
+        if(activate)
+            cube.SetActive(true);*/
+    }
+    
+    void CubeActiveTwo(GameObject cube, GameObject cubeT, bool activate)
+    {
+       /* cube1.SetActive(false);
+        cube2.SetActive(false);
+        cube3.SetActive(false);
+        cube4.SetActive(false);
+
+        if (activate)
+        {
+            cube.SetActive(true);
+            cubeT.SetActive(true);
+        }*/
+    }
+
+
+    void SetCubeSize()
+    {
+
+        cube1.transform.localPosition = new Vector3(cube1.transform.localPosition.x, cube1.transform.localPosition.y,  0.01f);
+        cube2.transform.localPosition = new Vector3(cube2.transform.localPosition.x, cube2.transform.localPosition.y,  0.01f);
+        cube3.transform.localPosition = new Vector3(cube3.transform.localPosition.x, cube3.transform.localPosition.y,  0.01f);
+        cube4.transform.localPosition = new Vector3(cube4.transform.localPosition.x, cube4.transform.localPosition.y,  0.01f);
+
+        if (tile.HeightDiffU > tile.HeightDiffL)
+        {
+            cube1.transform.localScale = new Vector3(cube1.transform.localScale.x, tile.HeightDiffL * 0.02f, cube1.transform.localScale.z);
+            cube1.transform.localPosition = new Vector3(cube1.transform.localPosition.x, cube1.transform.localPosition.y, cube1.transform.localPosition.z - (tile.HeightDiffL * 0.01f));
+        }
+        else
+        {
+            cube1.transform.localScale = new Vector3(cube1.transform.localScale.x, tile.HeightDiffU * 0.02f, cube1.transform.localScale.z);
+            cube1.transform.localPosition = new Vector3(cube1.transform.localPosition.x, cube1.transform.localPosition.y, cube1.transform.localPosition.z - (tile.HeightDiffU * 0.01f));
+        }
+
+
+        if (tile.HeightDiffU > tile.HeightDiffR )
+        {
+            cube2.transform.localScale = new Vector3(cube2.transform.localScale.x, tile.HeightDiffR * 0.02f, cube2.transform.localScale.z);
+            cube2.transform.localPosition = new Vector3(cube2.transform.localPosition.x, cube2.transform.localPosition.y, cube2.transform.localPosition.z - (tile.HeightDiffR * 0.01f));
+        }
+        else
+        {
+            cube2.transform.localScale = new Vector3(cube2.transform.localScale.x, tile.HeightDiffU * 0.02f, cube2.transform.localScale.z);
+            cube2.transform.localPosition = new Vector3(cube2.transform.localPosition.x, cube2.transform.localPosition.y, cube2.transform.localPosition.z - (tile.HeightDiffU * 0.01f));
+        }
+
+
+        if (tile.HeightDiffD > tile.HeightDiffL )
+        {
+            cube3.transform.localScale = new Vector3(cube3.transform.localScale.x, tile.HeightDiffL * 0.02f, cube3.transform.localScale.z);
+            cube3.transform.localPosition = new Vector3(cube3.transform.localPosition.x, cube3.transform.localPosition.y, cube3.transform.localPosition.z - (tile.HeightDiffL * 0.01f));
+        }
+        else
+        {
+            cube3.transform.localScale = new Vector3(cube3.transform.localScale.x, tile.HeightDiffD * 0.02f, cube3.transform.localScale.z);
+            cube3.transform.localPosition = new Vector3(cube3.transform.localPosition.x, cube3.transform.localPosition.y, cube3.transform.localPosition.z - (tile.HeightDiffD * 0.01f));
+        }
+
+        if (tile.HeightDiffD > tile.HeightDiffR)
+        {
+            cube4.transform.localScale = new Vector3(cube4.transform.localScale.x, tile.HeightDiffR * 0.02f, cube4.transform.localScale.z);
+            cube4.transform.localPosition = new Vector3(cube4.transform.localPosition.x, cube4.transform.localPosition.y, cube4.transform.localPosition.z - (tile.HeightDiffR * 0.01f / 2));
+        }
+        else
+        {
+            cube4.transform.localScale = new Vector3(cube4.transform.localScale.x, tile.HeightDiffD * 0.02f, cube4.transform.localScale.z);
+            cube4.transform.localPosition = new Vector3(cube4.transform.localPosition.x, cube4.transform.localPosition.y, cube4.transform.localPosition.z - (tile.HeightDiffD * 0.01f / 2));
+        }
+
     }
 }
