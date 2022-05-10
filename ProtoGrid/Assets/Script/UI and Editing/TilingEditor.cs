@@ -264,7 +264,7 @@ public class TilingEditor : MonoBehaviour
             if (invisible)
                 rend.GetComponent<Renderer>().material = invisibleMat;
             
-            else
+            else if(tempoValue == 0)
                 rend.GetComponent<Renderer>().material = disabledMat;
         }
 

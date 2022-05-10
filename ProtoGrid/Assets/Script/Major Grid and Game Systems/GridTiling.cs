@@ -26,13 +26,14 @@ public class GridTiling : MonoBehaviour
     public Material TmatG2;
     public Material TmatG3;
     public Material Cmat;
-    public GameObject cube1, cube2, cube3, cube4;
+    public GameObject colonne1, colonne2, colonne3, colonne4;
+    public Material Orange, Purple, Green;
 
+    public MeshRenderer decorMesh;
     public Mesh mesh1D;
     public Mesh mesh2DA;
     public Mesh normalMesh;
     MeshRenderer mesh;
-    Mesh meshF;
 
 
     private void Awake()
@@ -43,13 +44,12 @@ public class GridTiling : MonoBehaviour
         grid = gridG.grid;
         tile = GetComponent<GridTiles>();
         mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
-        //meshF = transform.Find("Renderer").GetComponent<MeshFilter>().mesh;
-       // transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
     }
 
     private void Start()
     {
-        if (tile.tempoTile != 0 || tile.crumble)
+        TempoDecorMaterial();
+        if (/*tile.tempoTile != 0 || */tile.crumble)
         {
             TempoTile.SetActive(true);
         }
@@ -83,10 +83,10 @@ public class GridTiling : MonoBehaviour
             gridG = FindObjectOfType<GridGenerator>();
             gridG.generateGrid();
             grid = gridG.grid;
-
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             //meshF = transform.Find("Renderer").GetComponent<MeshFilter>().mesh;
             SetDirectionalMaterial();
+            TempoDecorMaterial();
             //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
         }
         else
@@ -96,6 +96,7 @@ public class GridTiling : MonoBehaviour
         {
             //mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             TempoTileMaterial();
+            TempoDecorMaterial();
         }
         else
             refreshRendTempo = false;
@@ -105,6 +106,25 @@ public class GridTiling : MonoBehaviour
     private void Update()
     {
         //TempoTileMaterial();
+    }
+
+
+    public void TempoDecorMaterial()
+    {
+        if (tile.tempoTile == 1)
+        {
+            decorMesh.material = Orange;
+        }
+
+        if (tile.tempoTile == 2)
+        {
+            decorMesh.material = Purple;
+        }
+
+        if (tile.tempoTile == 3)
+        {
+            decorMesh.material = Green;
+        }
     }
 
     public void TempoTileMaterial()
@@ -122,11 +142,8 @@ public class GridTiling : MonoBehaviour
 
             if (tile.tempoTile == 1)
             {
-                foreach(MeshRenderer m in tempoTilesMats)
-                {
-                    m.material = TmatR;
-                    refreshRendTempo = false;
-                }
+                mesh.material = TmatR;
+                refreshRendTempo = false;
             }
 
 
@@ -134,19 +151,23 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.blueTimer == 0 || t.blueTimer == 2)
                 {
-                    foreach (MeshRenderer m in tempoTilesMats)
+                    mesh.material = TmatB2;
+                    refreshRendTempo = false;
+                    /*foreach (MeshRenderer m in tempoTilesMats)
                     {
                         m.material = TmatB2;
                         refreshRendTempo = false;
-                    }
+                    }*/
                 }
                 else if (t.blueTimer == 1)
                 {
-                    foreach (MeshRenderer m in tempoTilesMats)
-                    {
-                        m.material = TmatB1;
-                        refreshRendTempo = false;
-                    }
+                    mesh.material = TmatB1;
+                    refreshRendTempo = false;
+                    /* foreach (MeshRenderer m in tempoTilesMats)
+                     {
+                         m.material = TmatB1;
+                         refreshRendTempo = false;
+                     }*/
                 }
                 refreshRendTempo = false;
             }
@@ -155,27 +176,33 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.greenTimer == 0 || t.greenTimer == 3)
                 {
-                    foreach (MeshRenderer m in tempoTilesMats)
+                    mesh.material = TmatG3;
+                    refreshRendTempo = false;
+                    /*foreach (MeshRenderer m in tempoTilesMats)
                     {
                         m.material = TmatG3;
                         refreshRendTempo = false;
-                    }
+                    }*/
                 }
                 else if ((t.greenTimer == 1 && t.greenFlag) || (t.greenTimer == 2 && !t.greenFlag))
                 {
-                    foreach (MeshRenderer m in tempoTilesMats)
+                    mesh.material = TmatG2;
+                    refreshRendTempo = false;
+                    /*foreach (MeshRenderer m in tempoTilesMats)
                     {
                         m.material = TmatG1;
                         refreshRendTempo = false;
-                    }
+                    }*/
                 }
                 else if ((t.greenTimer == 2 && t.greenFlag) || (t.greenTimer == 1 && !t.greenFlag))
                 {
-                    foreach (MeshRenderer m in tempoTilesMats)
-                    {
-                        m.material = TmatG2;
-                        refreshRendTempo = false;
-                    }
+                    mesh.material = TmatG1;
+                    refreshRendTempo = false;
+                    /* foreach (MeshRenderer m in tempoTilesMats)
+                     {
+                         m.material = TmatG2;
+                         refreshRendTempo = false;
+                     }*/
                 }
             }
         }
@@ -190,11 +217,10 @@ public class GridTiling : MonoBehaviour
             gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat4D;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90,0);
-            CubeActive(cube1, false);
+            AllColonneActivate();
 
         }
 
@@ -205,15 +231,11 @@ public class GridTiling : MonoBehaviour
                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat3D;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
-            CubeActive(cube1,false);
-            /*print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffR);
-            print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffL);
-            print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffU);
-            print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffD);*/
+            AllColonneActivate();
+
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -222,12 +244,11 @@ public class GridTiling : MonoBehaviour
                   gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat3D;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
-            CubeActive(cube1,false);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -236,12 +257,11 @@ public class GridTiling : MonoBehaviour
                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat3D;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90, 0);
-            CubeActive(cube1,false);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -250,12 +270,11 @@ public class GridTiling : MonoBehaviour
                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat3D;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
-            CubeActive(cube1,false);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         //2 directions opposées
@@ -266,12 +285,11 @@ public class GridTiling : MonoBehaviour
                  !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat2DO;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
-            CubeActive(cube1, false);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -280,12 +298,11 @@ public class GridTiling : MonoBehaviour
                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat2DO;
-            //meshF = normalMesh;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
-            CubeActive(cube1, false);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         //2 directions adjacentes
@@ -296,12 +313,13 @@ public class GridTiling : MonoBehaviour
                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat2DA;
-            //meshF = mesh2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
-            CubeActive(cube1, true);
             SetCubeSize();
+            AllColonneActivate();
+
+
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -310,12 +328,11 @@ public class GridTiling : MonoBehaviour
                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat2DA;
-            //meshF = mesh2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90, 0);
-            CubeActive(cube1, true);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -324,12 +341,11 @@ public class GridTiling : MonoBehaviour
                   gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat2DA;
-           // meshF = mesh2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 180, 0);
-            CubeActive(cube1, true);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -338,12 +354,11 @@ public class GridTiling : MonoBehaviour
                   gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat2DA;
-            //meshF = mesh2DA;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
-            CubeActive(cube1, true);
             SetCubeSize();
+            AllColonneActivate();
         }
 
         //1 direction
@@ -354,12 +369,12 @@ public class GridTiling : MonoBehaviour
                  !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat1D;
-            //meshF = mesh1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
-            CubeActiveTwo(cube1, cube3, true);
             SetCubeSize();
+            AllColonneActivate();
+
         }
 
         else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -368,13 +383,15 @@ public class GridTiling : MonoBehaviour
                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat1D;
-            meshF = mesh1D;
+            //meshF = mesh1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90, 0);
-            CubeActiveTwo(cube1, cube3, true);
             SetCubeSize();
-     
+            AllColonneActivate();
+
+
+
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -383,13 +400,11 @@ public class GridTiling : MonoBehaviour
                  !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat1D;
-            //meshF = mesh1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 180, 0);
-            CubeActiveTwo(cube1, cube3, true);
+            mesh.transform.Rotate(-90, 180, 0);           
             SetCubeSize();
-
+            AllColonneActivate();
         }
 
         else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
@@ -398,12 +413,11 @@ public class GridTiling : MonoBehaviour
                   gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat1D;
-            //meshF = mesh1D;
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, -90, 0);
-            CubeActiveTwo(cube1, cube3, true);
             SetCubeSize();
+            AllColonneActivate();
 
 
         }
@@ -416,97 +430,58 @@ public class GridTiling : MonoBehaviour
                  !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
         {
             mesh.material = mat0D;
-            //meshF = normalMesh;
             refreshRend = false;
-            cube1.SetActive(true);
-            cube2.SetActive(true);
-            cube3.SetActive(true);
-            cube4.SetActive(true);
+            Quaternion rot = mesh.transform.rotation ;
+            rot.eulerAngles = new Vector3(-90,0,0);
+            mesh.transform.rotation = rot;
             SetCubeSize();
-            // mesh.transform.rotation = Quaternion.identity;
-            // mesh.transform.Rotate(-90, mesh.transform.rotation.y, 0);
+            AllColonneActivate();
         }
     }
 
-    void CubeActive(GameObject cube, bool activate)
+    void ColonneActive(GameObject colonne)
     {
-        /*cube1.SetActive(false);
-        cube2.SetActive(false);
-        cube3.SetActive(false);
-        cube4.SetActive(false);
-
-        if(activate)
-            cube.SetActive(true);*/
+        if(colonne.transform.localScale.y == 0)
+            colonne.SetActive(false);
+        else
+            colonne.SetActive(true);
     }
-    
-    void CubeActiveTwo(GameObject cube, GameObject cubeT, bool activate)
+
+    public void AllColonneActivate()
     {
-       /* cube1.SetActive(false);
-        cube2.SetActive(false);
-        cube3.SetActive(false);
-        cube4.SetActive(false);
-
-        if (activate)
-        {
-            cube.SetActive(true);
-            cubeT.SetActive(true);
-        }*/
+        ColonneActive(colonne1);
+        ColonneActive(colonne2);
+        ColonneActive(colonne3);
+        ColonneActive(colonne4);
     }
 
-
-    void SetCubeSize()
+    void SetSingleCubeSize(Transform colonne, float hDiff1, float hDiff2)
     {
+        colonne.localPosition = new Vector3(colonne.localPosition.x, .5f, colonne.localPosition.z);
 
-        cube1.transform.localPosition = new Vector3(cube1.transform.localPosition.x, cube1.transform.localPosition.y,  0.01f);
-        cube2.transform.localPosition = new Vector3(cube2.transform.localPosition.x, cube2.transform.localPosition.y,  0.01f);
-        cube3.transform.localPosition = new Vector3(cube3.transform.localPosition.x, cube3.transform.localPosition.y,  0.01f);
-        cube4.transform.localPosition = new Vector3(cube4.transform.localPosition.x, cube4.transform.localPosition.y,  0.01f);
-
-        if (tile.HeightDiffU > tile.HeightDiffL)
+        if(hDiff1 > hDiff2)
         {
-            cube1.transform.localScale = new Vector3(cube1.transform.localScale.x, tile.HeightDiffL * 0.02f, cube1.transform.localScale.z);
-            cube1.transform.localPosition = new Vector3(cube1.transform.localPosition.x, cube1.transform.localPosition.y, cube1.transform.localPosition.z - (tile.HeightDiffL * 0.01f));
+            colonne.localScale = new Vector3(colonne.localScale.x, hDiff2 * 0.4f, colonne.localScale.z);
+            colonne.localPosition -=  new Vector3(0, hDiff2 * 0.2f, 0); 
         }
         else
         {
-            cube1.transform.localScale = new Vector3(cube1.transform.localScale.x, tile.HeightDiffU * 0.02f, cube1.transform.localScale.z);
-            cube1.transform.localPosition = new Vector3(cube1.transform.localPosition.x, cube1.transform.localPosition.y, cube1.transform.localPosition.z - (tile.HeightDiffU * 0.01f));
+            colonne.localScale = new Vector3(colonne.localScale.x, hDiff1 * 0.4f, colonne.localScale.z);
+            colonne.localPosition -= new Vector3(0, hDiff1 * 0.2f, 0);
         }
-
-
-        if (tile.HeightDiffU > tile.HeightDiffR )
-        {
-            cube2.transform.localScale = new Vector3(cube2.transform.localScale.x, tile.HeightDiffR * 0.02f, cube2.transform.localScale.z);
-            cube2.transform.localPosition = new Vector3(cube2.transform.localPosition.x, cube2.transform.localPosition.y, cube2.transform.localPosition.z - (tile.HeightDiffR * 0.01f));
-        }
-        else
-        {
-            cube2.transform.localScale = new Vector3(cube2.transform.localScale.x, tile.HeightDiffU * 0.02f, cube2.transform.localScale.z);
-            cube2.transform.localPosition = new Vector3(cube2.transform.localPosition.x, cube2.transform.localPosition.y, cube2.transform.localPosition.z - (tile.HeightDiffU * 0.01f));
-        }
-
-
-        if (tile.HeightDiffD > tile.HeightDiffL )
-        {
-            cube3.transform.localScale = new Vector3(cube3.transform.localScale.x, tile.HeightDiffL * 0.02f, cube3.transform.localScale.z);
-            cube3.transform.localPosition = new Vector3(cube3.transform.localPosition.x, cube3.transform.localPosition.y, cube3.transform.localPosition.z - (tile.HeightDiffL * 0.01f));
-        }
-        else
-        {
-            cube3.transform.localScale = new Vector3(cube3.transform.localScale.x, tile.HeightDiffD * 0.02f, cube3.transform.localScale.z);
-            cube3.transform.localPosition = new Vector3(cube3.transform.localPosition.x, cube3.transform.localPosition.y, cube3.transform.localPosition.z - (tile.HeightDiffD * 0.01f));
-        }
-
-        if (tile.HeightDiffD > tile.HeightDiffR)
-        {
-            cube4.transform.localScale = new Vector3(cube4.transform.localScale.x, tile.HeightDiffR * 0.02f, cube4.transform.localScale.z);
-            cube4.transform.localPosition = new Vector3(cube4.transform.localPosition.x, cube4.transform.localPosition.y, cube4.transform.localPosition.z - (tile.HeightDiffR * 0.01f / 2));
-        }
-        else
-        {
-            cube4.transform.localScale = new Vector3(cube4.transform.localScale.x, tile.HeightDiffD * 0.02f, cube4.transform.localScale.z);
-            cube4.transform.localPosition = new Vector3(cube4.transform.localPosition.x, cube4.transform.localPosition.y, cube4.transform.localPosition.z - (tile.HeightDiffD * 0.01f / 2));
-        }
-
     }
+
+    public void SetCubeSize()
+    {
+        SetSingleCubeSize(colonne1.transform, tile.HeightDiffU, tile.HeightDiffR);
+        SetSingleCubeSize(colonne2.transform, tile.HeightDiffD, tile.HeightDiffR);
+        SetSingleCubeSize(colonne3.transform, tile.HeightDiffU, tile.HeightDiffL);
+        SetSingleCubeSize(colonne4.transform, tile.HeightDiffD, tile.HeightDiffL);
+    }
+
+
+    /*print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffR);
+print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffL);
+print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffU);
+print(grid[(int)transform.position.x, (int)transform.position.z].HeightDiffD);*/
 }
