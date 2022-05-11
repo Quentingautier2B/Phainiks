@@ -17,7 +17,7 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] public int raws;
     [SerializeField] public int columns;
     [HideInInspector] public Vector3 ogPos;
-
+    float maxDepth = 50f;
 
     #endregion
     void Awake()
@@ -144,29 +144,120 @@ public class GridGenerator : MonoBehaviour
                 case 1:
 
                     if (x + 1 < raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x + 1, y].walkable)
+                    {
+                        if (grid[x, y].transform.position.y - grid[x + 1, y].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                            grid[x, y].HeightDiffR = 2.5f;
+                        else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffR = maxDepth;
+                        else
+                            grid[x, y].HeightDiffR = 0;
+
                         return true;
+                    }
                     else
+                    {
+                        if (x + 1 < raws && grid[x + 1, y].walkable)
+                        {
+                            if (grid[x, y].transform.position.y - grid[x + 1, y].transform.position.y > 0)
+                                grid[x, y].HeightDiffR = ((int)grid[x, y].transform.position.y - (int)grid[x + 1, y].transform.position.y) * 2.5f;
+                            else
+                                grid[x, y].HeightDiffR = 0;
+                        }
+                        else
+                            grid[x, y].HeightDiffR = maxDepth;
+
+
                         return false;
+                    }
 
 
                 case 2:
                     if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y - 1].walkable)
+                    {
+                        if (grid[x, y].transform.position.y - grid[x, y - 1].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                            grid[x, y].HeightDiffD = 2.5f;
+                        else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffD = maxDepth;
+                        else
+                            grid[x, y].HeightDiffD = 0;
+                        
                         return true;
+                    }
                     else
+                    {
+                        if (y - 1 > -1 && grid[x, y - 1].walkable)
+                        {
+                            if (grid[x, y].transform.position.y - grid[x, y - 1].transform.position.y > 0)
+                                grid[x, y].HeightDiffD = ((int)grid[x, y].transform.position.y - (int)grid[x, y - 1].transform.position.y) * 2.5f;
+                            else
+                                grid[x, y].HeightDiffD = 0;
+                        }
+                        else
+                            grid[x, y].HeightDiffD = maxDepth;
+
+
+
                         return false;
+                    }
 
                 case 3:
                     if (y + 1 < columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y + 1].walkable)
+                    {
+                        if (grid[x, y].transform.position.y - grid[x, y + 1].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                            grid[x, y].HeightDiffU = 2.5f;
+                        else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffU = maxDepth;
+                        else
+                            grid[x, y].HeightDiffU = 0;
+
                         return true;
+
+                    }
                     else
+                    {
+                        if (y + 1 < columns && grid[x, y + 1].walkable)
+                        {
+                            if (grid[x, y].transform.position.y - grid[x, y + 1].transform.position.y > 0)
+                                grid[x, y].HeightDiffU = ((int)grid[x, y].transform.position.y - (int)grid[x, y + 1].transform.position.y) * 2.5f;
+                            else
+                                grid[x, y].HeightDiffU = 0;
+                        }
+                        else
+                            grid[x, y].HeightDiffU = maxDepth;
+
+
                         return false;
+                    }
 
 
                 case 4:
                     if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x - 1, y].walkable)
+                    {
+                        if (grid[x, y].transform.position.y - grid[x - 1, y].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                            grid[x, y].HeightDiffL = 2.5f;
+                        else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffL = maxDepth;
+                        else
+                            grid[x, y].HeightDiffL = 0;
+
                         return true;
+
+                    }
                     else
+                    {
+                        if (x - 1 > -1 && grid[x - 1, y].walkable)
+                        {
+                            if (grid[x, y].transform.position.y - grid[x - 1, y].transform.position.y > 0)
+                                grid[x, y].HeightDiffL = ((int)grid[x, y].transform.position.y - (int)grid[x - 1, y].transform.position.y) * 2.5f;
+                            else
+                                grid[x, y].HeightDiffL = 0;
+                        }
+                        else
+                            grid[x, y].HeightDiffL = maxDepth;
+
+
                         return false;
+                    }
 
                 default:
                     return false;

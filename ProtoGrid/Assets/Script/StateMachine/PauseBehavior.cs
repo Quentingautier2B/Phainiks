@@ -8,6 +8,7 @@ public class PauseBehavior : StateMachineBehaviour
     GameObject inGameUI;
     GameObject PauseMenu;
     GridTiles[,] grid;
+    GridTiling gT;
     Vector3 Target;
     int x, y;
     public float slowLerpSpeed;
@@ -30,7 +31,9 @@ public class PauseBehavior : StateMachineBehaviour
         y = (int)player.position.z;
         Target = new Vector3(x, grid[x, y].transform.position.y + 20, y);
         LerpSpeed = slowLerpSpeed;
-        grid[x,y].transform.Find("Renderer").GetComponent<MeshRenderer>().material = grid[x, y].GetComponent<GridTiling>().mat0D;
+        gT = grid[x, y].GetComponent<GridTiling>();
+        grid[x,y].transform.Find("Renderer").GetComponent<MeshRenderer>().material =gT.mat0D;
+        
         foreach (GridTiles tile in grid)
         {            
             if((tile.transform.position.x != x || tile.transform.position.z != y) && !tile.invisible)
@@ -45,6 +48,9 @@ public class PauseBehavior : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        gT.AllColonneActivate();
+        gT.SetCubeSize();
+
         foreach (GridTiles tile in grid)
         {
             if (tile.pauseAnim)

@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 #if UNITY_EDITOR
+
 using UnityEditor;
 #endif
 public class TilingEditor : MonoBehaviour
@@ -264,7 +264,7 @@ public class TilingEditor : MonoBehaviour
             if (invisible)
                 rend.GetComponent<Renderer>().material = invisibleMat;
             
-            else
+            else if(tempoValue == 0)
                 rend.GetComponent<Renderer>().material = disabledMat;
         }
 

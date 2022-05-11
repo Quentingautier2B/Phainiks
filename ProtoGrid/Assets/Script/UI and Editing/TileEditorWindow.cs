@@ -1,5 +1,11 @@
 using UnityEngine;
+
+
+#if UNITY_EDITOR
 using UnityEditor;
+
+
+
 public class TileEditorWindow : EditorWindow
 {
     GridGenerator gridG;
@@ -16,8 +22,8 @@ public class TileEditorWindow : EditorWindow
     int TempoTile;
     int Teleporter;
     int TeleporterTarget;
-    
-    
+    int Raws;
+    int Columns;
 
 
 
@@ -61,16 +67,22 @@ public class TileEditorWindow : EditorWindow
     {
         gridG = FindObjectOfType<GridGenerator>();
 
+        Raws = gridG.raws;
+        Columns = gridG.columns;
+
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Raws");
-        gridG.raws = EditorGUILayout.IntSlider(gridG.raws, 1, 10);
+        Raws = EditorGUILayout.IntSlider(Raws, 1, 10);
         EditorGUILayout.EndHorizontal();
 
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Columns");
-        gridG.columns = EditorGUILayout.IntSlider(gridG.columns, 1, 10);
+        Columns = EditorGUILayout.IntSlider(Columns, 1, 10);
         EditorGUILayout.EndHorizontal();
+
+        gridG.raws = Raws;
+        gridG.columns = Columns;
 
         if (GUILayout.Button("Generate Grid"))
         {
@@ -376,3 +388,6 @@ public class TileEditorWindow : EditorWindow
         }
     }
 }
+#endif
+
+

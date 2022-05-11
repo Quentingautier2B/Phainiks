@@ -12,6 +12,7 @@ public class GridTiles : MonoBehaviour
     [SerializeField, HideInInspector]public bool pauseAnim = false;
     [SerializeField, HideInInspector]public float lerpSpeed = .1f;
     [SerializeField, HideInInspector]public float currentPosY ;
+    [SerializeField, HideInInspector]public float HeightDiffR, HeightDiffL,HeightDiffU, HeightDiffD;
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
 
