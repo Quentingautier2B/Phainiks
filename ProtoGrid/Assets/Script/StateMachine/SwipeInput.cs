@@ -46,7 +46,7 @@ public class SwipeInput : StateMachineBehaviour
         pPosAssignement();
         foreach(GridTiles g in grid)
         {
-            if (g.walkable && g.open)
+            if (g.walkable && g.open && g.tempoTile == 0)
             {
                 g.GetComponent<GridTiling>().SetDirectionalMaterial();
 

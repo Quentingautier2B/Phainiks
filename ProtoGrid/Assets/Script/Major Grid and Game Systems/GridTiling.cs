@@ -28,7 +28,7 @@ public class GridTiling : MonoBehaviour
     public Material Cmat;
     public GameObject colonne1, colonne2, colonne3, colonne4;
     public Material Orange, Purple, Green;
-
+    float lerpMatTimer;
     public MeshRenderer decorMesh;
     public Mesh mesh1D;
     public Mesh mesh2DA;
@@ -57,7 +57,7 @@ public class GridTiling : MonoBehaviour
         {
             TempoTile.SetActive(false);
         }
-        if (tile.walkable  && tile.open)
+        if (tile.walkable  && tile.open && tile.tempoTile == 0)
             SetDirectionalMaterial();
         //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
     }
@@ -85,7 +85,9 @@ public class GridTiling : MonoBehaviour
             grid = gridG.grid;
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             //meshF = transform.Find("Renderer").GetComponent<MeshFilter>().mesh;
-            SetDirectionalMaterial();
+            if(tile.tempoTile == 0)
+                SetDirectionalMaterial();
+
             TempoDecorMaterial();
             //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
         }
@@ -127,6 +129,23 @@ public class GridTiling : MonoBehaviour
         }
     }
 
+    void MaterialLerping(Material previousMat, Material mat)
+    {
+        print(1);
+        lerpMatTimer += Time.deltaTime * 2;
+        mesh.material.Lerp(previousMat, mat, lerpMatTimer);
+        if(lerpMatTimer < 1)
+        {
+            MaterialLerping(previousMat, mat);
+        }
+        else
+        {
+            lerpMatTimer = 0;
+        }
+
+    }
+
+
     public void TempoTileMaterial()
     {
         if (tile.tempoTile != 0 || tile.crumble)
@@ -136,6 +155,7 @@ public class GridTiling : MonoBehaviour
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
                     m.material = Cmat;
+                    //m.material.Lerp(m.material,Cmat,Time.deltaTime);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -144,7 +164,10 @@ public class GridTiling : MonoBehaviour
 
             if (tile.tempoTile == 1)
             {
-                mesh.material = TmatR;
+                //mesh.material = TmatR;
+                Material curM = mesh.material;
+                MaterialLerping(TmatR, TmatR);
+                // mesh.material.Lerp(mesh.material,TmatR,Time.deltaTime*2);
                 SetCubeSize();
                 AllColonneActivate();
                 refreshRendTempo = false;
@@ -155,7 +178,9 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.blueTimer == 0 || t.blueTimer == 2)
                 {
+                    //MaterialLerping(TmatB1, TmatB2);
                     mesh.material = TmatB2;
+                    //mesh.material.Lerp(mesh.material, TmatB2, Time.deltaTime * 2);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -167,7 +192,9 @@ public class GridTiling : MonoBehaviour
                 }
                 else if (t.blueTimer == 1)
                 {
+                    //MaterialLerping(TmatB2, TmatB1);
                     mesh.material = TmatB1;
+                    //mesh.material.Lerp(mesh.material, TmatB1, Time.deltaTime * 2);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -184,7 +211,9 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.greenTimer == 0 || t.greenTimer == 3)
                 {
+                    //MaterialLerping(TmatG2, TmatG3);
                     mesh.material = TmatG3;
+                    //mesh.material.Lerp(mesh.material, TmatG3, Time.deltaTime * 2);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -196,6 +225,8 @@ public class GridTiling : MonoBehaviour
                 }
                 else if ((t.greenTimer == 1 && t.greenFlag) || (t.greenTimer == 2 && !t.greenFlag))
                 {
+                    //MaterialLerping(TmatG1, TmatG2);
+                    //mesh.material.Lerp(mesh.material, TmatG2, Time.deltaTime * 2);
                     mesh.material = TmatG2;
                     SetCubeSize();
                     AllColonneActivate();
@@ -208,6 +239,8 @@ public class GridTiling : MonoBehaviour
                 }
                 else if ((t.greenTimer == 2 && t.greenFlag) || (t.greenTimer == 1 && !t.greenFlag))
                 {
+                    //MaterialLerping(TmatG3, TmatG1);
+                    //mesh.material.Lerp(mesh.material, TmatG1, Time.deltaTime * 2);
                     mesh.material = TmatG1;
                     SetCubeSize();
                     AllColonneActivate();
