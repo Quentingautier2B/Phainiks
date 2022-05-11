@@ -91,7 +91,12 @@ public class CameraBehavior : MonoBehaviour
     private void LateUpdate()
     {
         // cam suit le joueur
-        transform.position = Vector3.SmoothDamp(transform.position, playerPos.position, ref velocity, smoothTime);
+        if(Time.timeSinceLevelLoad > .5)
+            transform.position = Vector3.SmoothDamp(transform.position, playerPos.position, ref velocity, smoothTime);
+        else
+        {
+            transform.position = playerPos.position;
+        }
 
         // cam dezoom et woom, ne marche pas encore en pinch
         //camBehavior.orthographicSize = Mathf.Lerp(camBehavior.orthographicSize,(Mathf.Clamp(camBehavior.orthographicSize - Mathf.Clamp(Input.mouseScrollDelta.y, -1, 1), 1f, 10)),Mathf.Clamp(camZoomSpeed/10,0,1));

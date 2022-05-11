@@ -15,6 +15,7 @@ public class GridTiles : MonoBehaviour
     [SerializeField, HideInInspector]public float HeightDiffR, HeightDiffL,HeightDiffU, HeightDiffD;
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
+    [HideInInspector] public bool opening;
 
     [HideInInspector] public bool walkableC;
     [HideInInspector] public bool invisibleC;
@@ -48,7 +49,10 @@ public class GridTiles : MonoBehaviour
     [Range(0, 20)] public int teleporter;
     [Range(0, 20)] public int tpTargetIndex;
     [HideInInspector] public GridTiles TpTarget;
+
     [HideInInspector] public int target;
+    [HideInInspector] public int targetOpen;
+    [HideInInspector] public int currentOpen = 0;
     [HideInInspector] public bool tempoBool;
     [Space]
     [Header("Modifier")]
@@ -71,7 +75,11 @@ public class GridTiles : MonoBehaviour
     #region CallMethods
     private void Awake()
     {
-        
+        if (originalPosition)
+        {
+            transform.position += new Vector3(0,20,0);
+        }
+     
 
         //TimerValueSetUp();
 
@@ -82,6 +90,7 @@ public class GridTiles : MonoBehaviour
 
     private void Start()
     {
+        currentOpen = 0;
         grid = FindObjectOfType<GridGenerator>().grid;
         tempoBool = true;
         if (walkable)
@@ -139,7 +148,7 @@ public class GridTiles : MonoBehaviour
             }
         }
 
-        if (!walkable)
+        if (!walkable && door == 0)
         {
             var yo = transform.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer y in yo)
@@ -160,13 +169,13 @@ public class GridTiles : MonoBehaviour
         }
 
 
-        if(door != 0 && !open)
+        if(door != 0 && open)
         {
             walkable = false;
            
         }
 
-        if (door != 0 && open) 
+        if (door != 0 && !open) 
         {
             walkable = true;
         }
