@@ -136,6 +136,8 @@ public class GridTiling : MonoBehaviour
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
                     m.material = Cmat;
+                    SetCubeSize();
+                    AllColonneActivate();
                     refreshRendTempo = false;
                 }
             }
@@ -143,6 +145,8 @@ public class GridTiling : MonoBehaviour
             if (tile.tempoTile == 1)
             {
                 mesh.material = TmatR;
+                SetCubeSize();
+                AllColonneActivate();
                 refreshRendTempo = false;
             }
 
@@ -152,6 +156,8 @@ public class GridTiling : MonoBehaviour
                 if (t.blueTimer == 0 || t.blueTimer == 2)
                 {
                     mesh.material = TmatB2;
+                    SetCubeSize();
+                    AllColonneActivate();
                     refreshRendTempo = false;
                     /*foreach (MeshRenderer m in tempoTilesMats)
                     {
@@ -162,6 +168,8 @@ public class GridTiling : MonoBehaviour
                 else if (t.blueTimer == 1)
                 {
                     mesh.material = TmatB1;
+                    SetCubeSize();
+                    AllColonneActivate();
                     refreshRendTempo = false;
                     /* foreach (MeshRenderer m in tempoTilesMats)
                      {
@@ -177,6 +185,8 @@ public class GridTiling : MonoBehaviour
                 if (t.greenTimer == 0 || t.greenTimer == 3)
                 {
                     mesh.material = TmatG3;
+                    SetCubeSize();
+                    AllColonneActivate();
                     refreshRendTempo = false;
                     /*foreach (MeshRenderer m in tempoTilesMats)
                     {
@@ -187,6 +197,8 @@ public class GridTiling : MonoBehaviour
                 else if ((t.greenTimer == 1 && t.greenFlag) || (t.greenTimer == 2 && !t.greenFlag))
                 {
                     mesh.material = TmatG2;
+                    SetCubeSize();
+                    AllColonneActivate();
                     refreshRendTempo = false;
                     /*foreach (MeshRenderer m in tempoTilesMats)
                     {
@@ -197,6 +209,8 @@ public class GridTiling : MonoBehaviour
                 else if ((t.greenTimer == 2 && t.greenFlag) || (t.greenTimer == 1 && !t.greenFlag))
                 {
                     mesh.material = TmatG1;
+                    SetCubeSize();
+                    AllColonneActivate();
                     refreshRendTempo = false;
                     /* foreach (MeshRenderer m in tempoTilesMats)
                      {
@@ -210,6 +224,8 @@ public class GridTiling : MonoBehaviour
 
     public void SetDirectionalMaterial()
     {
+        if (tile.tempoTile != 0)
+            refreshRend = false;
         //4 directions
         if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
             gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
@@ -220,6 +236,7 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 90,0);
+            SetCubeSize();
             AllColonneActivate();
 
         }
@@ -234,6 +251,7 @@ public class GridTiling : MonoBehaviour
             refreshRend = false;
             mesh.transform.rotation = Quaternion.identity;
             mesh.transform.Rotate(-90, 0, 0);
+            SetCubeSize();
             AllColonneActivate();
 
         }
