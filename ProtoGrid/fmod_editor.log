@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001F474928618 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000014F44D1FEA8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,108 +18,6 @@
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F478E242A8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F478E242A8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F478E242A8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F478E242A8
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 893120
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 16224
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000ADDF16F4A8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFCE6EA0AD0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFCE6EA0AA0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFCE6EA0BA0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFCE6EA0C60
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F478733D98
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='mixkit-arcade-game-complete-or-approved-mission-205', format=5, channels=2, frequency=48000, lengthbytes=21248, lengthpcm=74561, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.989929.
-[LOG] SoundI::release                          : 3 (000001F478E240F8)
-[LOG] SoundI::release                          :     3 (000001F3DB27B158)
-[LOG] SoundI::release                          :     3 (000001F478E24CC8)
-[LOG] SoundI::release                          : 2 (000001F478E23F48)
-[LOG] SoundI::release                          :     2 (000001F3DB279418)
-[LOG] SoundI::release                          :     2 (000001F478E24608)
-[LOG] SoundI::release                          : 1 (000001F478E23BE8)
-[LOG] SoundI::release                          :     1 (000001F3DB27AAD8)
-[LOG] SoundI::release                          :     1 (000001F478E242A8)
-[LOG] SystemI::createSound                     : filename = ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001F478E23888 : node = 000001F3DC3F0E40
-[LOG] SystemI::createSound                     : add node to async list : head = 000001F44C5D7CD8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F478E23888
-[LOG] SystemI::createSoundInternal             :     Create name='../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     filename = ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 893120
-[LOG] SystemI::createSound                     :     setdata soundi = 000001F478E25538 : node = 000001F3DC3F0BC0
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 16224
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001F44C5D7CD8.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F3DC3F0F50
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     filename = ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     setdata soundi = 000001F478E24458 : node = 000001F3DC3F0300
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001F44C5D7CD8.  list count = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='1', format=5, channels=2, frequency=48000, lengthbytes=269664, lengthpcm=1365334, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.151184.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F478E23888
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F478E25538
-[LOG] SystemI::createSoundInternal             :     Create name='../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 893120
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 16224
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F3DC3F0CD0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='2', format=5, channels=2, frequency=48000, lengthbytes=220064, lengthpcm=1365334, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.307831.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F478E25538
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F478E24458
-[LOG] SystemI::createSoundInternal             :     Create name='../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 893120
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 16224
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F3DC3F0410
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='3', format=5, channels=2, frequency=48000, lengthbytes=234496, lengthpcm=1365334, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.165314.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F478E24458
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F478E256E8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F478E256E8
-[LOG] SoundI::release                          : 3 (000001F478E24458)
-[LOG] SoundI::release                          :     3 (000001F3DB27EBD8)
-[LOG] SoundI::release                          :     3 (000001F478E25BF8)
-[LOG] SoundI::release                          : 2 (000001F478E25538)
-[LOG] SoundI::release                          :     2 (000001F3DB27A938)
-[LOG] SoundI::release                          :     2 (000001F478E25A48)
-[LOG] SoundI::release                          : 1 (000001F478E23888)
-[LOG] SoundI::release                          :     1 (000001F3DB27E898)
-[LOG] SoundI::release                          :     1 (000001F478E256E8)
-[LOG] SoundI::release                          :  (000001F43E6C1118)
-[LOG] SoundI::release                          :     mixkit-arcade-game-complete-or-approved-mission-205 (000001F49EE0FD88)
-[LOG] SoundI::release                          :  (000001F3DA910BF8)
-[LOG] SoundI::release                          :     main (000001F49DF30BC8)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -127,5 +25,3 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
