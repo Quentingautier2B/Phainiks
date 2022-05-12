@@ -15,17 +15,18 @@ public class PauseBehavior : StateMachineBehaviour
     float LerpSpeed;
     public float fastLerpSpeed;
     Transform player;
-    bool lerping; 
+    bool lerping;
+    DoCoroutine doC;
+    RectTransform pauseUI;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
         {
-            //PauseMenu = FindObjectOfType<PauseMenuUI>().gameObject;
-            //inGameUI = FindObjectOfType<InGameUI>().gameObject;
+            doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
             awake = false;
-
         }
         x = (int)player.position.x;
         y = (int)player.position.z;
@@ -33,14 +34,15 @@ public class PauseBehavior : StateMachineBehaviour
         LerpSpeed = slowLerpSpeed;
         gT = grid[x, y].GetComponent<GridTiling>();
         grid[x,y].transform.Find("Renderer").GetComponent<MeshRenderer>().material =gT.mat0D;
-        
+        doC.startLerper();
         foreach (GridTiles tile in grid)
         {            
             if((tile.transform.position.x != x || tile.transform.position.z != y) && !tile.invisible)
             {
 
                 tile.target = (int)tile.transform.position.y - 20;
-                animator.GetComponent<DoCoroutine>().startCoroutine(tile);
+                doC.startCoroutine(tile);
+                
             }
 
         }
@@ -54,40 +56,12 @@ public class PauseBehavior : StateMachineBehaviour
         foreach (GridTiles tile in grid)
         {
             if (tile.pauseAnim)
-                pauseTileMovement(tile);
-
-            
+                doC.pauseTileMovement(tile, grid[x,y].GetComponent<GridTiling>());         
         }
-
-            /*grid[x, y].transform.position = Vector3.Lerp(grid[x, y].transform.position, Target, Time.deltaTime * LerpSpeed);
-            LerpSpeed = Mathf.Lerp(LerpSpeed, fastLerpSpeed, Time.deltaTime * LerpSpeed);
-            if (LerpSpeed > 0.8 * fastLerpSpeed)
-            {
-                fastLerpSpeed = slowLerpSpeed;
-            }
-
-            if ( Target.y - grid[x, y].transform.position.y < 0.4)
-            {
-                grid[x, y].transform.position = Target;
-            }*/
     }
 
-    void pauseTileMovement(GridTiles tile)
-    {
-        tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tile.lerpSpeed * Time.deltaTime), tile.transform.position.z);
-        
-        tile.lerpSpeed = Mathf.Lerp(tile.lerpSpeed, 3, Time.deltaTime * tile.lerpSpeed);
+
     
-
-        //Called on last loop
-        if (tile.transform.position.y <= tile.target + 0.3f)
-        {
-            tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-            
-            tile.pauseAnim = false;
-        }
-
-    }
 
 
 

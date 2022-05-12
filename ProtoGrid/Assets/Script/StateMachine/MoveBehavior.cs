@@ -14,7 +14,8 @@ public class MoveBehavior : StateMachineBehaviour
     SceneChange sChange;
     GridTiles[,] grid;
     InGameUI UI;
-    
+    DoCoroutine doC;
+
     int previousX;
     int previousY;
     bool flag;
@@ -27,6 +28,7 @@ public class MoveBehavior : StateMachineBehaviour
     {
         if (awake)
         {
+            doC = animator.GetComponent<DoCoroutine>();
             UI = FindObjectOfType<InGameUI>();
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
@@ -126,7 +128,21 @@ public class MoveBehavior : StateMachineBehaviour
         //timerValue++;
 
         if (grid[x, y].levelTransiIndex != 0)
-            sChange.startCoroutine(grid[x, y]);
+        {
+            sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));
+            foreach (GridTiles tile in grid)
+            {
+                if(tile.levelTransiIndex == 0)
+                {
+                    tile.levelTransiIndex = 100;
+                    
+                    doC.startClose(tile, grid[x,y].levelTransiIndex);
+                }
+            }
+        }
+            
+
+        //sChange.startCoroutine(grid[x, y]);
 
         if (anim.GetBool("Rewind") && grid[previousX, previousY].teleporter != 0)
         {
@@ -174,13 +190,9 @@ public class MoveBehavior : StateMachineBehaviour
         //tile.transform.Find("Key").gameObject.SetActive(false);
         foreach (GridTiles t in grid)
         {
-
-            if(t.door == tile.key )
+            if(t.door == tile.key && t.door > 0)
             {
-                if (t.open)
-                    t.open = false;
-                else if(!t.open)
-                    t.open = true;
+               doC.startClose(t, t.levelTransiIndex);
             }
         }
     }

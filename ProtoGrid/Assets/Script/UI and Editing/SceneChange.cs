@@ -9,19 +9,23 @@ public class SceneChange : MonoBehaviour
     [SerializeField] bool Hub;
     InGameUI inGameUI;
     GameObject stateMachine;
-
+    float lerper;
+    float endLerper;
+    [HideInInspector] public bool loadScene = false;
     private void Awake()
     {
         stateMachine = GameObject.Find("StateMachine");
         debugTools = GetComponent<DebugTools>();
         inGameUI = FindObjectOfType<InGameUI>();
     }
-    public void startCoroutine(GridTiles tile)
+
+
+    public void startCoroutine(float tile)
     {
         StartCoroutine(EndBehavior(tile));
     }
 
-    public IEnumerator EndBehavior(GridTiles tile)
+    public IEnumerator EndBehavior(float tile)
     {
         stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
@@ -36,27 +40,59 @@ public class SceneChange : MonoBehaviour
         debugTools.blueMusic.release();
         debugTools.greenMusic.release();
         yield return new WaitForSeconds(0.1f);
-        if (tile.levelTransiIndex<1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
+        if (tile < 1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
             LevelTransi(tile);
         else
         {
-
-            inGameUI.endLevelMenu.SetActive(true);
+            //StartCoroutine(Lerper(inGameUI.startPosX, inGameUI.endPosX));
+            inGameUI.endTile = tile;
+            /*inGameUI.endLevelMenu.SetActive(true);
             inGameUI.oneStarImage.gameObject.SetActive(true);
             inGameUI.twoStarImage.gameObject.SetActive(true);
-            inGameUI.threeStarImage.gameObject.SetActive(true);
+            inGameUI.threeStarImage.gameObject.SetActive(true);*/
         }
 
             inGameUI.endTile = tile;
             
     }
 
-    public void LevelTransi(GridTiles tile)
+    public IEnumerator Lerper(float startLerp, float endLerp)
     {
-        if (tile.levelTransiIndex == 1)
+
+        endLerper += Time.deltaTime * 1;
+        var vec = inGameUI.Endlevel.anchoredPosition;
+        vec.x = Mathf.Lerp(startLerp, endLerp, endLerper);
+        inGameUI.Endlevel.anchoredPosition = vec;
+
+        if(lerper >= 1)
+        {
+
+            endLerper = 0;
+            yield return new WaitForEndOfFrame();
+
+        }
+        else
+        {
+            
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(Lerper(startLerp, endLerp));
+        }
+    }
+
+    public IEnumerator lastLerp()
+    {
+        endLerper = 0;
+        StartCoroutine(Lerper(inGameUI.endPosX, inGameUI.startPosX));
+        yield return new WaitForSeconds(1.2f);
+        LevelTransi(inGameUI.endTile);
+    }
+
+    public void LevelTransi(float tile)
+    {
+        if (tile == 1)
             SceneManager.LoadScene("Lvl_" + 1, LoadSceneMode.Single);
         else
-            SceneManager.LoadScene("Lvl_" + Mathf.Floor(tile.levelTransiIndex) + "," + (Mathf.RoundToInt((tile.levelTransiIndex - Mathf.Floor(tile.levelTransiIndex)) * 10)), LoadSceneMode.Single);
+            SceneManager.LoadScene("Lvl_" + Mathf.Floor(tile) + "," + (Mathf.RoundToInt((tile - Mathf.Floor(tile)) * 10)), LoadSceneMode.Single);
     }
 
 }
