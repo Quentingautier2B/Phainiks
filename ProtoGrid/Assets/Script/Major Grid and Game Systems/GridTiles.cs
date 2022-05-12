@@ -11,6 +11,7 @@ public class GridTiles : MonoBehaviour
     #region variables
     [SerializeField, HideInInspector]public bool pauseAnim = false;
     [SerializeField, HideInInspector]public float lerpSpeed = .1f;
+    [SerializeField, HideInInspector]public float pauseLerpSpeed = .1f;
     [SerializeField, HideInInspector]public float currentPosY ;
     [SerializeField, HideInInspector]public float HeightDiffR, HeightDiffL,HeightDiffU, HeightDiffD;
     [Header("TempoTilesEffect")]
@@ -75,9 +76,9 @@ public class GridTiles : MonoBehaviour
     #region CallMethods
     private void Awake()
     {
-        if (originalPosition)
+        if (!originalPosition)
         {
-            transform.position += new Vector3(0,20,0);
+            transform.position += new Vector3(0,-20,0);
         }
      
 

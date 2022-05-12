@@ -530,6 +530,24 @@ public class GridTiling : MonoBehaviour
         }
     }
 
+    public void FourColonneInfiniteSize()
+    {
+        setInfiniteCubeSize(colonne1.transform);
+        setInfiniteCubeSize(colonne2.transform);
+        setInfiniteCubeSize(colonne3.transform);
+        setInfiniteCubeSize(colonne4.transform);
+    }
+
+    void setInfiniteCubeSize(Transform colonne)
+    {
+        colonne.gameObject.SetActive(true);
+        colonne.localPosition = new Vector3(colonne.localPosition.x, .5f, colonne.localPosition.z);
+        colonne.localScale = new Vector3(colonne.localScale.x, 50 * 0.4f, colonne.localScale.z);
+        colonne.localPosition -= new Vector3(0, 50 * 0.2f, 0);
+    }
+
+     
+
     public void SetCubeSize()
     {
         SetSingleCubeSize(colonne1.transform, tile.HeightDiffU, tile.HeightDiffR);

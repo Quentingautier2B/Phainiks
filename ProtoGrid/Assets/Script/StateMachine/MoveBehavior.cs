@@ -128,7 +128,19 @@ public class MoveBehavior : StateMachineBehaviour
         //timerValue++;
 
         if (grid[x, y].levelTransiIndex != 0)
-            doC.startClose(grid[x,y]);
+        {
+            sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));
+            foreach (GridTiles tile in grid)
+            {
+                if(tile.levelTransiIndex == 0)
+                {
+                    tile.levelTransiIndex = 100;
+                    
+                    doC.startClose(tile, grid[x,y].levelTransiIndex);
+                }
+            }
+        }
+            
 
         //sChange.startCoroutine(grid[x, y]);
 
@@ -180,7 +192,7 @@ public class MoveBehavior : StateMachineBehaviour
         {
             if(t.door == tile.key && t.door > 0)
             {
-               doC.startClose(t);
+               doC.startClose(t, t.levelTransiIndex);
             }
         }
     }

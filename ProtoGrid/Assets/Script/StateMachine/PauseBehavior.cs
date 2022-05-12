@@ -17,6 +17,7 @@ public class PauseBehavior : StateMachineBehaviour
     Transform player;
     bool lerping;
     DoCoroutine doC;
+    RectTransform pauseUI;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -33,7 +34,7 @@ public class PauseBehavior : StateMachineBehaviour
         LerpSpeed = slowLerpSpeed;
         gT = grid[x, y].GetComponent<GridTiling>();
         grid[x,y].transform.Find("Renderer").GetComponent<MeshRenderer>().material =gT.mat0D;
-        
+        doC.startLerper();
         foreach (GridTiles tile in grid)
         {            
             if((tile.transform.position.x != x || tile.transform.position.z != y) && !tile.invisible)
@@ -41,6 +42,7 @@ public class PauseBehavior : StateMachineBehaviour
 
                 tile.target = (int)tile.transform.position.y - 20;
                 doC.startCoroutine(tile);
+                
             }
 
         }
@@ -54,7 +56,7 @@ public class PauseBehavior : StateMachineBehaviour
         foreach (GridTiles tile in grid)
         {
             if (tile.pauseAnim)
-                doC.pauseTileMovement(tile);         
+                doC.pauseTileMovement(tile, grid[x,y].GetComponent<GridTiling>());         
         }
     }
 

@@ -36,15 +36,15 @@ public class SwipeInput : StateMachineBehaviour
             grid = FindObjectOfType<GridGenerator>().grid;
             foreach (GridTiles g in grid)
             {
-                if (g.originalPosition)
-                {
-                    doC.startClose(g);
+                if (!g.originalPosition)
+                {                  
+                    doC.startClose(g, g.levelTransiIndex);
                 }
 
-                if (g.door != 0 && !g.open)
-                    doC.startClose(g);
+                /*if (g.door != 0 && !g.open)
+                    doC.startClose(g, g.levelTransiIndex);
                 else
-                    g.open = false;
+                    g.open = false;*/
             }
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();

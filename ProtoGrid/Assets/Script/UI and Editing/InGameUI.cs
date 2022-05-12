@@ -13,12 +13,15 @@ public class InGameUI : MonoBehaviour
     LineRenderer[] tps;
     DebugTools debugTools;
     [HideInInspector] public GameObject endLevelMenu;
-    [HideInInspector] public GridTiles endTile;
+    [HideInInspector] public float endTile;
     SceneChange sceneChange;
     [SerializeField] List<GameObject> uiEndLevelDisable;
     Button revert;
     Animator stateMachine;
     public TextMeshProUGUI nbStep;
+    public RectTransform Endlevel;
+    public RectTransform PauseLevel;
+    public float endPosX, startPosX, pauseEndPosX, pauseStartPosX;
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
 
@@ -95,7 +98,7 @@ public class InGameUI : MonoBehaviour
     {
         stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
-        endLevelMenu = transform.Find("EndlevelMenu").gameObject;
+        //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         sceneChange = FindObjectOfType<SceneChange>();
         revert = transform.Find("RevertTime").GetComponent<Button>();
@@ -103,18 +106,21 @@ public class InGameUI : MonoBehaviour
 
     private void Start()
     {
-        oneStarImage.gameObject.SetActive(false);
+        
+        /*oneStarImage.gameObject.SetActive(false);
         twoStarImage.gameObject.SetActive(false);
         twoStarImage.color = Color.white;
         threeStarImage.gameObject.SetActive(false);
-        threeStarImage.color = Color.white;
+        threeStarImage.color = Color.white;*/
 
-        endLevelMenu.SetActive(false);
+        //endLevelMenu.SetActive(false);
         tps = FindObjectsOfType<LineRenderer>();
-        nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<TextMeshProUGUI>();
+        //nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<TextMeshProUGUI>();
     }
     void Update()
-    {       
+    {
+        print(endTile);
+
        TimerText();
         nbStep.text = "" + timerValue;
         if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
@@ -136,10 +142,8 @@ public class InGameUI : MonoBehaviour
 
     public void LevelTransi()
     {
-        if (endTile != null)
-            sceneChange.LevelTransi(endTile);
-        else
-            print("need endTile");
+       StartCoroutine( sceneChange.lastLerp()); 
+       //sceneChange.LevelTransi(endTile);
     }
     public void UiEndDisable()
     {

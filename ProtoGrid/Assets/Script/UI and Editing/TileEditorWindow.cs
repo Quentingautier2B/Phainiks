@@ -346,11 +346,11 @@ public class TileEditorWindow : EditorWindow
                     g.crumble = Crumble;
                 }
 
-                if (g.LevelTransiIndexC != LevelTransiIndex)
+               /* if (g.LevelTransiIndexC != LevelTransiIndex)
                 {
                     g.LevelTransiIndexC = LevelTransiIndex;
                     g.levelTransiIndex = LevelTransiIndex / 10;
-                }
+                }*/
 
                 if (g.TempoTileC != TempoTile)
                 {

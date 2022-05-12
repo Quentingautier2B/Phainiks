@@ -14,7 +14,7 @@ public class ExitPause : StateMachineBehaviour
     Transform player;
     bool lerping;
     bool endFlag;
-   
+    DoCoroutine doC;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,6 +22,7 @@ public class ExitPause : StateMachineBehaviour
         {
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
+            doC = FindObjectOfType<DoCoroutine>();
             awake = false;
 
         }
@@ -29,7 +30,7 @@ public class ExitPause : StateMachineBehaviour
 
         x = (int)player.position.x;
         y = (int)player.position.z;
-        
+        doC.revertLerper();
         foreach (GridTiles tile in grid)
         {
             if ((tile.transform.position.x != x || tile.transform.position.z != y) && !tile.invisible)
