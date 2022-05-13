@@ -14,8 +14,8 @@ public class SwipeInput : StateMachineBehaviour
     public float clickTimerValue;
     float clickTimer;
     bool clickBool;
-   
-    
+
+    DoCoroutine doC;
     Transform player;
     GridGenerator gridG;
     GridTiles[,] grid;
@@ -29,9 +29,23 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        
         if (awake)
-        {
+        {        
+            doC = animator.GetComponent<DoCoroutine>();
+            grid = FindObjectOfType<GridGenerator>().grid;
+            foreach (GridTiles g in grid)
+            {
+                if (!g.originalPosition)
+                {                  
+                    doC.startClose(g, g.levelTransiIndex);
+                }
+
+                /*if (g.door != 0 && !g.open)
+                    doC.startClose(g, g.levelTransiIndex);
+                else
+                    g.open = false;*/
+            }
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
             
@@ -41,12 +55,14 @@ public class SwipeInput : StateMachineBehaviour
             cam = FindObjectOfType<CameraBehavior>();
             rewindPos.Clear();
         }
-        grid = gridG.grid;
 
+        grid = gridG.grid;
         pPosAssignement();
+        
         foreach(GridTiles g in grid)
         {
-            if (g.walkable && g.open)
+            
+            if (g.walkable && g.open && g.tempoTile == 0)
             {
                 g.GetComponent<GridTiling>().SetDirectionalMaterial();
 
@@ -54,8 +70,8 @@ public class SwipeInput : StateMachineBehaviour
             if (g.walkable && (g.tempoTile != 0 || g.crumble) && g.open)
             {
                 g.GetComponent<GridTiling>().TempoTileMaterial();
-
             }
+           
         }
     }
 

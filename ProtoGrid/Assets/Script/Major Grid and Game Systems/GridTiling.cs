@@ -28,7 +28,7 @@ public class GridTiling : MonoBehaviour
     public Material Cmat;
     public GameObject colonne1, colonne2, colonne3, colonne4;
     public Material Orange, Purple, Green;
-
+    float lerpMatTimer;
     public MeshRenderer decorMesh;
     public Mesh mesh1D;
     public Mesh mesh2DA;
@@ -49,6 +49,7 @@ public class GridTiling : MonoBehaviour
     private void Start()
     {
         TempoDecorMaterial();
+        TempoTileMaterial();
         if (/*tile.tempoTile != 0 || */tile.crumble)
         {
             TempoTile.SetActive(true);
@@ -57,7 +58,7 @@ public class GridTiling : MonoBehaviour
         {
             TempoTile.SetActive(false);
         }
-        if (tile.walkable  && tile.open)
+        if (tile.walkable  && tile.open && tile.tempoTile == 0)
             SetDirectionalMaterial();
         //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
     }
@@ -85,7 +86,9 @@ public class GridTiling : MonoBehaviour
             grid = gridG.grid;
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             //meshF = transform.Find("Renderer").GetComponent<MeshFilter>().mesh;
-            SetDirectionalMaterial();
+            if(tile.tempoTile == 0)
+                SetDirectionalMaterial();
+
             TempoDecorMaterial();
             //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
         }
@@ -127,6 +130,23 @@ public class GridTiling : MonoBehaviour
         }
     }
 
+    void MaterialLerping(Material previousMat, Material mat)
+    {
+        print(1);
+        lerpMatTimer += Time.deltaTime * 2;
+        mesh.material.Lerp(previousMat, mat, lerpMatTimer);
+        if(lerpMatTimer < 1)
+        {
+            MaterialLerping(previousMat, mat);
+        }
+        else
+        {
+            lerpMatTimer = 0;
+        }
+
+    }
+
+
     public void TempoTileMaterial()
     {
         if (tile.tempoTile != 0 || tile.crumble)
@@ -136,6 +156,7 @@ public class GridTiling : MonoBehaviour
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
                     m.material = Cmat;
+                    //m.material.Lerp(m.material,Cmat,Time.deltaTime);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -145,6 +166,9 @@ public class GridTiling : MonoBehaviour
             if (tile.tempoTile == 1)
             {
                 mesh.material = TmatR;
+                //Material curM = mesh.material;
+                //MaterialLerping(TmatR, TmatR);
+                // mesh.material.Lerp(mesh.material,TmatR,Time.deltaTime*2);
                 SetCubeSize();
                 AllColonneActivate();
                 refreshRendTempo = false;
@@ -155,7 +179,9 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.blueTimer == 0 || t.blueTimer == 2)
                 {
+                    //MaterialLerping(TmatB1, TmatB2);
                     mesh.material = TmatB2;
+                    //mesh.material.Lerp(mesh.material, TmatB2, Time.deltaTime * 2);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -167,7 +193,9 @@ public class GridTiling : MonoBehaviour
                 }
                 else if (t.blueTimer == 1)
                 {
+                    //MaterialLerping(TmatB2, TmatB1);
                     mesh.material = TmatB1;
+                    //mesh.material.Lerp(mesh.material, TmatB1, Time.deltaTime * 2);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -184,7 +212,9 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.greenTimer == 0 || t.greenTimer == 3)
                 {
+                    //MaterialLerping(TmatG2, TmatG3);
                     mesh.material = TmatG3;
+                    //mesh.material.Lerp(mesh.material, TmatG3, Time.deltaTime * 2);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -196,6 +226,8 @@ public class GridTiling : MonoBehaviour
                 }
                 else if ((t.greenTimer == 1 && t.greenFlag) || (t.greenTimer == 2 && !t.greenFlag))
                 {
+                    //MaterialLerping(TmatG1, TmatG2);
+                    //mesh.material.Lerp(mesh.material, TmatG2, Time.deltaTime * 2);
                     mesh.material = TmatG2;
                     SetCubeSize();
                     AllColonneActivate();
@@ -208,6 +240,8 @@ public class GridTiling : MonoBehaviour
                 }
                 else if ((t.greenTimer == 2 && t.greenFlag) || (t.greenTimer == 1 && !t.greenFlag))
                 {
+                    //MaterialLerping(TmatG3, TmatG1);
+                    //mesh.material.Lerp(mesh.material, TmatG1, Time.deltaTime * 2);
                     mesh.material = TmatG1;
                     SetCubeSize();
                     AllColonneActivate();
@@ -224,237 +258,244 @@ public class GridTiling : MonoBehaviour
 
     public void SetDirectionalMaterial()
     {
-        if (tile.tempoTile != 0)
-            refreshRend = false;
-        //4 directions
-        if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+        if (tile.tempoTile == 0)
+        {
+            if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
             gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
             gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
             gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat4D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 90,0);
-            SetCubeSize();
-            AllColonneActivate();
+            {
+                mesh.material = mat4D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 90, 0);
+                SetCubeSize();
+                AllColonneActivate();
 
+            }
+
+            //3 directions
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat3D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
+                SetCubeSize();
+                AllColonneActivate();
+
+            }
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat3D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 180, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat3D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat3D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, -90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            //2 directions opposées
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat2DO;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 180, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat2DO;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, -90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            //2 directions adjacentes
+
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat2DA;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
+                SetCubeSize();
+                AllColonneActivate();
+
+
+            }
+
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat2DA;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat2DA;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 180, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat2DA;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, -90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            //1 direction
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat1D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
+                SetCubeSize();
+                AllColonneActivate();
+
+            }
+
+            else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                    !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat1D;
+                //meshF = mesh1D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+
+
+
+            }
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat1D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 180, 0);
+                SetCubeSize();
+                AllColonneActivate();
+            }
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                      gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat1D;
+                refreshRend = false;
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, -90, 0);
+                SetCubeSize();
+                AllColonneActivate();
+
+
+            }
+
+            //0 direction
+
+            else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
+                     !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
+            {
+                mesh.material = mat0D;
+                refreshRend = false;
+                Quaternion rot = mesh.transform.rotation;
+                rot.eulerAngles = new Vector3(-90, 0, 0);
+                mesh.transform.rotation = rot;
+                SetCubeSize();
+                AllColonneActivate();
+            }
+            else
+                refreshRend = false;
         }
+       /* else
+            refreshRend = false;*/
 
-        //3 directions
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat3D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 0, 0);
-            SetCubeSize();
-            AllColonneActivate();
+        //4 directions
 
-        }
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat3D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 180, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat3D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat3D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, -90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        //2 directions opposées
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat2DO;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 180, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat2DO;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, -90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        //2 directions adjacentes
-
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat2DA;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 0, 0);
-            SetCubeSize();
-            AllColonneActivate();
-
-
-        }
-
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat2DA;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat2DA;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 180, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat2DA;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, -90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        //1 direction
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat1D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 0, 0);
-            SetCubeSize();
-            AllColonneActivate();
-
-        }
-
-        else if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat1D;
-            //meshF = mesh1D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-
-
-
-        }
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat1D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, 180, 0);           
-            SetCubeSize();
-            AllColonneActivate();
-        }
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                  gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat1D;
-            refreshRend = false;
-            mesh.transform.rotation = Quaternion.identity;
-            mesh.transform.Rotate(-90, -90, 0);
-            SetCubeSize();
-            AllColonneActivate();
-
-
-        }
-
-        //0 direction
-
-        else if (!gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3) &&
-                 !gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4))
-        {
-            mesh.material = mat0D;
-            refreshRend = false;
-            Quaternion rot = mesh.transform.rotation ;
-            rot.eulerAngles = new Vector3(-90,0,0);
-            mesh.transform.rotation = rot;
-            SetCubeSize();
-            AllColonneActivate();
-        }
     }
 
     void ColonneActive(GameObject colonne)
@@ -488,6 +529,24 @@ public class GridTiling : MonoBehaviour
             colonne.localPosition -= new Vector3(0, hDiff1 * 0.2f, 0);
         }
     }
+
+    public void FourColonneInfiniteSize()
+    {
+        setInfiniteCubeSize(colonne1.transform);
+        setInfiniteCubeSize(colonne2.transform);
+        setInfiniteCubeSize(colonne3.transform);
+        setInfiniteCubeSize(colonne4.transform);
+    }
+
+    void setInfiniteCubeSize(Transform colonne)
+    {
+        colonne.gameObject.SetActive(true);
+        colonne.localPosition = new Vector3(colonne.localPosition.x, .5f, colonne.localPosition.z);
+        colonne.localScale = new Vector3(colonne.localScale.x, 50 * 0.4f, colonne.localScale.z);
+        colonne.localPosition -= new Vector3(0, 50 * 0.2f, 0);
+    }
+
+     
 
     public void SetCubeSize()
     {

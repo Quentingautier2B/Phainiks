@@ -386,11 +386,13 @@ public class TempoBehavior : StateMachineBehaviour
             if (tile.tempoBool && colorFlag)
             {
                 tile.target = (int)tile.transform.position.y + 2;
+                tile.opening = true;
                 tile.tempoBool = false;
             }
             else if(tile.tempoBool && !colorFlag)
             {
                 tile.target = (int)tile.transform.position.y - 2;
+                tile.opening = true;
                 tile.tempoBool = false;
             }
 
@@ -401,7 +403,7 @@ public class TempoBehavior : StateMachineBehaviour
             //Called on last loop
             if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
             {
-
+                tile.opening = false;
                 if (colorFlag)
                 {
                     tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
