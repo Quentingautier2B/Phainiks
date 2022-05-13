@@ -132,7 +132,6 @@ public class GridTiling : MonoBehaviour
 
     void MaterialLerping(Material previousMat, Material mat)
     {
-        print(1);
         lerpMatTimer += Time.deltaTime * 2;
         mesh.material.Lerp(previousMat, mat, lerpMatTimer);
         if(lerpMatTimer < 1)
@@ -258,6 +257,7 @@ public class GridTiling : MonoBehaviour
 
     public void SetDirectionalMaterial()
     {
+        print(1);
         if (tile.tempoTile == 0)
         {
             if (gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1) &&

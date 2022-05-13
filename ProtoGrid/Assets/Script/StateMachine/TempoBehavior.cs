@@ -309,7 +309,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 1)
-                    redFlager = LerpPos(tile, debugTools.redMusic, redFlager, t.redFlag);                
+                    redFlager = LerpPos(tile, debugTools.redMusic, redFlager, t.redFlag, tile.GetComponent<GridTiling>());                
             }
            
         }
@@ -319,7 +319,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 2)
-                    blueFlager = LerpPos(tile, debugTools.blueMusic, blueFlager, t.blueFlag);
+                    blueFlager = LerpPos(tile, debugTools.blueMusic, blueFlager, t.blueFlag, tile.GetComponent<GridTiling>());
             }
         }
 
@@ -328,7 +328,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 3)
-                    greenFlager = LerpPos(tile, debugTools.greenMusic, greenFlager, t.greenFlag);               
+                    greenFlager = LerpPos(tile, debugTools.greenMusic, greenFlager, t.greenFlag, tile.GetComponent<GridTiling>());               
             }
           
         }
@@ -380,7 +380,7 @@ public class TempoBehavior : StateMachineBehaviour
         #endregion
     }
 
-    bool LerpPos(GridTiles tile, FMOD.Studio.EventInstance music, bool Flager, bool colorFlag)
+    bool LerpPos(GridTiles tile, FMOD.Studio.EventInstance music, bool Flager, bool colorFlag, GridTiling g)
     {
             //Called on First Loop
             if (tile.tempoBool && colorFlag)
@@ -396,7 +396,8 @@ public class TempoBehavior : StateMachineBehaviour
                 tile.tempoBool = false;
             }
 
-            //Called Every loop
+        //Called Every loop
+            g.SetDirectionalMaterial();
             tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
      
 

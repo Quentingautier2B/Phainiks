@@ -119,8 +119,6 @@ public class InGameUI : MonoBehaviour
     }
     void Update()
     {
-        print(endTile);
-
        TimerText();
         nbStep.text = "" + timerValue;
         if(timerValue <= 0 || stateMachine.GetBool("Rewind"))

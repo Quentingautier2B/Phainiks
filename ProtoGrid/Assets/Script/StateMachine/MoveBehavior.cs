@@ -136,7 +136,7 @@ public class MoveBehavior : StateMachineBehaviour
                 {
                     tile.levelTransiIndex = 100;
                     
-                    doC.startClose(tile, grid[x,y].levelTransiIndex);
+                    doC.startClose(tile, grid[x,y].levelTransiIndex, grid[x,y].GetComponent<GridTiling>());
                 }
             }
         }
@@ -192,7 +192,7 @@ public class MoveBehavior : StateMachineBehaviour
         {
             if(t.door == tile.key && t.door > 0)
             {
-               doC.startClose(t, t.levelTransiIndex);
+               doC.startClose(t, t.levelTransiIndex, t.GetComponent<GridTiling>());
             }
         }
     }

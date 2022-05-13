@@ -34,13 +34,22 @@ public class SwipeInput : StateMachineBehaviour
         {        
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
+            GridTiling gTil = null;
+            foreach(GridTiles g in grid)
+            {
+                if (g.originalPosition)
+                {
+                    gTil = g.GetComponent<GridTiling>();
+                }
+            }
             foreach (GridTiles g in grid)
             {
-                if (!g.originalPosition)
+                if ((!g.originalPosition && g.open && g.door != 0) || (!g.originalPosition && g.door == 0))
                 {                  
-                    doC.startClose(g, g.levelTransiIndex);
+                    doC.startClose(g, g.levelTransiIndex, gTil);
                 }
-
+                /*if (g.door != 0 && g.open)
+                    g.open = false;*/
                 /*if (g.door != 0 && !g.open)
                     doC.startClose(g, g.levelTransiIndex);
                 else

@@ -52,20 +52,20 @@ public class DoCoroutine : MonoBehaviour
 
     }
 
-    public void startClose(GridTiles tile, float levelTransiIndex)
+    public void startClose(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
     {
 
-            StartCoroutine(Queue1(tile,levelTransiIndex));
+            StartCoroutine(Queue1(tile,levelTransiIndex, otherTile));
     }
 
-    IEnumerator Queue1(GridTiles tile, float levelTransiIndex)
+    IEnumerator Queue1(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
     {
         if (Time.timeSinceLevelLoad < 1)
         {
             float speed = 1;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
            
-            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex));
+            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile));
 
         }
         else if (tile.levelTransiIndex == 100)
@@ -74,24 +74,24 @@ public class DoCoroutine : MonoBehaviour
             float speed = 1f;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
             
-            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex));
+            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile));
         }
         else if (tile.tempoTile != 0)
         {
             float speed = 2;
             yield return new WaitForSeconds(1);
-            StartCoroutine(QueueForOpen(tile, speed, SpeedCurve, levelTransiIndex));
+            StartCoroutine(QueueForOpen(tile, speed, SpeedCurve, levelTransiIndex, otherTile));
         }
         else
         {
             yield return new WaitForSeconds(0);
-            StartCoroutine(QueueForOpen(tile, 1, SpeedCurve, levelTransiIndex));
+            StartCoroutine(QueueForOpen(tile, 1, SpeedCurve, levelTransiIndex, otherTile));
 
         }
 
     }
 
-    IEnumerator QueueForOpen(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex)
+    IEnumerator QueueForOpen(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile)
     {
        
         yield return new WaitUntil(() => !tile.opening);
@@ -124,18 +124,22 @@ public class DoCoroutine : MonoBehaviour
 
         if(tile.door != 0 && Time.timeSinceLevelLoad < 1f && !tile.open)
         {
-            tile.open = true;
-   
+            tile.open = true;   
         }
         else
         {
-
-           StartCoroutine(CloseTileMovement(tile,speed, curve, levelTransiIndex));
+           StartCoroutine(CloseTileMovement(tile,speed, curve, levelTransiIndex, otherTile));
         }
     }
 
-    IEnumerator CloseTileMovement(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex)
+    IEnumerator CloseTileMovement(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile)
     {
+        if(otherTile != null)
+            otherTile.SetDirectionalMaterial();
+
+
+
+
         //tile.GetComponent<GridTiling>().SetDirectionalMaterial();
         tile.opening = true;
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.currentOpen, tile.targetOpen, tile.lerpSpeed), tile.transform.position.z);
@@ -176,12 +180,24 @@ public class DoCoroutine : MonoBehaviour
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.opening = false;
-            yield return new WaitForEndOfFrame();
+            //tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+
+            /*if (tile.walkable)
+            {
+                tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            }*/
+
+            yield return new WaitForSeconds(.41f);
+            if (tile.walkable)
+            {
+                tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            }
+            //otherTile.SetDirectionalMaterial();
         }
         else
         {
             yield return new WaitForEndOfFrame();
-            StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex));
+            StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile));
         }
 
     }
