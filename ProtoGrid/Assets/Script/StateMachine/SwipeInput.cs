@@ -21,6 +21,7 @@ public class SwipeInput : StateMachineBehaviour
     GridTiles[,] grid;
     TileVariables temp;
     CameraBehavior cam;
+    SceneChange sceneChange;
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
@@ -34,6 +35,7 @@ public class SwipeInput : StateMachineBehaviour
         {        
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
+            sceneChange = FindObjectOfType<SceneChange>();
             foreach (GridTiles g in grid)
             {
                 if (!g.originalPosition)
@@ -95,7 +97,11 @@ public class SwipeInput : StateMachineBehaviour
         {
             endTouchPos = Input.mousePosition;
             directionSwipe = -(startTouchPos - endTouchPos).normalized;
-            if (cam.rotateMode == 0)
+            if (sceneChange.Hub)
+            {
+                directionSwipe = Quaternion.AngleAxis(-45, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 0)
             {
                 //directionSwipe = directionSwipe;
             }
