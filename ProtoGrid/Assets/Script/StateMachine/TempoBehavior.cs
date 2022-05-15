@@ -310,7 +310,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 1)
-                    redFlager = LerpPos(tile, debugTools.redMusic, redFlager, t.redFlag, tile.GetComponent<GridTiling>(), "Tile Rouge");                
+                    redFlager = LerpPos(tile, redFlager, t.redFlag, tile.GetComponent<GridTiling>(), "Tile Rouge");                
             }
            
         }
@@ -320,7 +320,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 2)
-                    blueFlager = LerpPos(tile, debugTools.blueMusic, blueFlager, t.blueFlag, tile.GetComponent<GridTiling>(), "Tile Bleu");
+                    blueFlager = LerpPos(tile, blueFlager, t.blueFlag, tile.GetComponent<GridTiling>(), "Tile Bleu");
             }
         }
 
@@ -329,7 +329,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 3)
-                    greenFlager = LerpPos(tile, debugTools.greenMusic, greenFlager, t.greenFlag, tile.GetComponent<GridTiling>(), "Tile Verte");               
+                    greenFlager = LerpPos(tile, greenFlager, t.greenFlag, tile.GetComponent<GridTiling>(), "Tile Vert");               
             }
           
         }
@@ -381,7 +381,7 @@ public class TempoBehavior : StateMachineBehaviour
         #endregion
     }
 
-    bool LerpPos(GridTiles tile, FMOD.Studio.EventInstance music, bool Flager, bool colorFlag, GridTiling g, string musicName)
+    bool LerpPos(GridTiles tile, bool Flager, bool colorFlag, GridTiling g, string musicName)
     {
             //Called on First Loop
             if (tile.tempoBool && colorFlag)
@@ -389,7 +389,7 @@ public class TempoBehavior : StateMachineBehaviour
                 doC.UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
                 tile.target = (int)tile.transform.position.y + 2;
                 tile.opening = true;
-                music.setParameterByName(musicName, 1);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName(musicName, 1);
                 tile.tempoBool = false;
             }
             else if(tile.tempoBool && !colorFlag)
@@ -397,7 +397,7 @@ public class TempoBehavior : StateMachineBehaviour
                 doC.UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
                 tile.target = (int)tile.transform.position.y - 2;
                 tile.opening = true;
-                music.setParameterByName(musicName, 0);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName(musicName, 0);
                 tile.tempoBool = false;
             }
 
@@ -420,7 +420,7 @@ public class TempoBehavior : StateMachineBehaviour
                     {
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                        music.setVolume(0);
+                        
                     }
 
                     tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               

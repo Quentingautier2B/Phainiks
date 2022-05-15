@@ -8,9 +8,6 @@ public class DebugTools : MonoBehaviour
 {
     public bool debugModOn;
     public FMOD.Studio.EventInstance mainMusic;
-    public FMOD.Studio.EventInstance redMusic;
-    public FMOD.Studio.EventInstance blueMusic;
-    public FMOD.Studio.EventInstance greenMusic;
 
     public GameObject System;
     public GameObject SecondarySystem;
@@ -21,34 +18,11 @@ public class DebugTools : MonoBehaviour
 
     private void Awake()
     {
-        
         mainMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Main");
-        redMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Red");
-        blueMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Blue");
-        greenMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Green");
-
-        /*TileMusic(mainMusic, "Main");
-        TileMusic(redMusic, "Red");
-        TileMusic(blueMusic, "Blue" );
-        TileMusic(greenMusic, "Green");*/
-       
         mainMusic.start();
-        redMusic.start();
-        blueMusic.start();
-        greenMusic.start();
-
-        redMusic.setVolume(0);
-        blueMusic.setVolume(0);
-        greenMusic.setVolume(0);
-
     }
 
-    void TileMusic(FMOD.Studio.EventInstance musicInstance, string name)
-    {
-        musicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/" + name);
-        musicInstance.start();       
-        musicInstance.setVolume(0);
-    }
+
 
     private void OnDrawGizmos()
     {

@@ -30,14 +30,10 @@ public class SceneChange : MonoBehaviour
         stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.greenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
 
         debugTools.mainMusic.release();
-        debugTools.redMusic.release();
-        debugTools.blueMusic.release();
-        debugTools.greenMusic.release();
+
         yield return new WaitForSeconds(0.1f);
         if (tile < 1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
             LevelTransi(tile);

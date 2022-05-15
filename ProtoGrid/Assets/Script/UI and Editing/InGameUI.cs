@@ -47,14 +47,10 @@ public class InGameUI : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.greenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
 
         debugTools.mainMusic.release();
-        debugTools.redMusic.release();
-        debugTools.blueMusic.release();
-        debugTools.greenMusic.release();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -83,14 +79,10 @@ public class InGameUI : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
         yield return new WaitForSeconds(0.3f);
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.greenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
 
         debugTools.mainMusic.release();
-        debugTools.redMusic.release();
-        debugTools.blueMusic.release();
-        debugTools.greenMusic.release();
+
         SceneManager.LoadScene("Lvl_1");
     }
 
