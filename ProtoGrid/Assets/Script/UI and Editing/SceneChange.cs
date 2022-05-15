@@ -10,7 +10,7 @@ public class SceneChange : MonoBehaviour
     InGameUI inGameUI;
     GameObject stateMachine;
     float lerper;
-    float endLerper;
+    [HideInInspector] public float endLerper;
     [HideInInspector] public bool loadScene = false;
     private void Awake()
     {
@@ -29,7 +29,6 @@ public class SceneChange : MonoBehaviour
     {
         stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
-        FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
         debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -64,10 +63,10 @@ public class SceneChange : MonoBehaviour
         vec.x = Mathf.Lerp(startLerp, endLerp, endLerper);
         inGameUI.Endlevel.anchoredPosition = vec;
 
-        if(lerper >= 1)
+        if(endLerper >= 1)
         {
 
-            endLerper = 0;
+               
             yield return new WaitForEndOfFrame();
 
         }

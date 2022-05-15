@@ -118,22 +118,7 @@ public class TilingEditor : MonoBehaviour
 
         trailSign();
     }
-/*    private void OnMouseEnter()
-    {
-        trailBool = false;
-        trailTimer = 2;
-    }
 
-    private void OnMouseOver()
-    {
-        trailSign();
-    }
-
-    private void OnMouseExit()
-    {
-        if(Trail != null)
-        StartCoroutine(DestroyTrail(Trail.gameObject));
-    }*/
 
     void trailSign()
     {

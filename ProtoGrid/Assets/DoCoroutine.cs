@@ -8,13 +8,45 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve oGSpeedCurve;
     float yo;
     SceneChange sChange;
-    public float begin = 5;
+    public float begin = 2.2f;
     public float lerper;
     InGameUI inGameUI;
+    GridTiles[,] grid;
+    GridGenerator gridG;
+
+    public void UpdateAdjTiles(GridTiles g, int x, int y)
+    {
+        grid = gridG.grid;
+        StartCoroutine(UpdateAdjacentTiles(g, x, y));
+    }
+    IEnumerator UpdateAdjacentTiles(GridTiles g, int x, int y)
+    {
+        yield return new WaitForEndOfFrame();
+        if (x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
+        {
+            grid[x + 1, y].GetComponent<GridTiling>().SetDirectionalMaterial();
+        }
+
+        if (y - 1 > - 1 && grid[x, y - 1] != null && grid[x, y - 1].walkable && grid[x, y - 1].tempoTile == 0)
+        {
+            grid[x, y - 1].GetComponent<GridTiling>().SetDirectionalMaterial();
+        }
+
+        if (y + 1 < gridG.columns && grid[x, y + 1] != null && grid[x, y + 1].walkable && grid[x, y + 1].tempoTile == 0)
+        {
+            grid[x, y + 1].GetComponent<GridTiling>().SetDirectionalMaterial();
+        }
+
+        if (x - 1 > -1 && grid[x - 1, y] != null && grid[x - 1, y].walkable && grid[x - 1, y].tempoTile == 0)
+        {
+            grid[x - 1, y].GetComponent<GridTiling>().SetDirectionalMaterial();
+        }
+    }
 
 
     private void Awake()
     {
+        gridG = FindObjectOfType<GridGenerator>();
         sChange = FindObjectOfType<SceneChange>();
         inGameUI = FindObjectOfType<InGameUI>();
     }
@@ -54,15 +86,14 @@ public class DoCoroutine : MonoBehaviour
 
     public void startClose(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
     {
-
-            StartCoroutine(Queue1(tile,levelTransiIndex, otherTile));
+        StartCoroutine(Queue1(tile,levelTransiIndex, otherTile));
     }
 
     IEnumerator Queue1(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
     {
         if (Time.timeSinceLevelLoad < 1)
         {
-            float speed = 1;
+            float speed = 2;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
            
             StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile));
@@ -71,7 +102,7 @@ public class DoCoroutine : MonoBehaviour
         else if (tile.levelTransiIndex == 100)
         {
             inGameUI.endTile = levelTransiIndex;
-            float speed = 1f;
+            float speed = 1.5f;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
             
             StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile));
@@ -112,13 +143,13 @@ public class DoCoroutine : MonoBehaviour
             tile.lerpSpeed = 0f;
             //t.open = false;
             
-            tile.targetOpen = (int)tile.transform.position.y - 20;
+            tile.targetOpen = (int)tile.transform.position.y + 20;
             tile.currentOpen = (int)tile.transform.position.y;
         }
         else
         {
             tile.lerpSpeed = 0f;
-            tile.targetOpen = (int)tile.transform.position.y + 20;
+            tile.targetOpen = (int)tile.transform.position.y - 20;
             tile.currentOpen = (int)tile.transform.position.y;
         }
 
@@ -143,31 +174,33 @@ public class DoCoroutine : MonoBehaviour
         //tile.GetComponent<GridTiling>().SetDirectionalMaterial();
         tile.opening = true;
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.currentOpen, tile.targetOpen, tile.lerpSpeed), tile.transform.position.z);
-        tile.lerpSpeed += Time.deltaTime * curve.Evaluate(tile.lerpSpeed);
+        tile.lerpSpeed += Time.deltaTime * curve.Evaluate(tile.lerpSpeed) * speed;
 
         if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.levelTransiIndex == 100)
         {
-   
+            //TransiLevel
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             sChange.startCoroutine(levelTransiIndex);
             tile.opening = false;
         }
-        else if (tile.transform.position.y >= tile.targetOpen - 0.01f && tile.open && Time.timeSinceLevelLoad > begin && tile.levelTransiIndex != 100)
+        else if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.open && Time.timeSinceLevelLoad > begin && tile.levelTransiIndex != 100)
         {
-   
-
+            //open
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
+            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            UpdateAdjTiles( tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.open = false;
             tile.opening = false;
             yield return new WaitForEndOfFrame();
         }
-        else if(tile.transform.position.y <= tile.targetOpen + 0.01f && !tile.open && Time.timeSinceLevelLoad > begin && tile.levelTransiIndex != 100)
+        else if(tile.transform.position.y >= tile.targetOpen - 0.01f && !tile.open && Time.timeSinceLevelLoad > begin && tile.levelTransiIndex != 100)
         {
-  
-
+            //!open
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
+            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.open = true;
             tile.opening = false;
@@ -175,27 +208,20 @@ public class DoCoroutine : MonoBehaviour
         }
         else if (tile.transform.position.y >= tile.targetOpen - 0.01f && Time.timeSinceLevelLoad < begin && tile.levelTransiIndex != 100)
         {
-            
-
+            //ogPos
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.opening = false;
-            //tile.GetComponent<GridTiling>().SetDirectionalMaterial();
-
-            /*if (tile.walkable)
-            {
-                tile.GetComponent<GridTiling>().SetDirectionalMaterial();
-            }*/
-
+            UpdateAdjTiles(otherTile.GetComponent<GridTiles>(), (int)otherTile.transform.position.x, (int)otherTile.transform.position.z);
             yield return new WaitForSeconds(.41f);
             if (tile.walkable)
             {
                 tile.GetComponent<GridTiling>().SetDirectionalMaterial();
             }
-            //otherTile.SetDirectionalMaterial();
         }
         else
         {
+            //not yet
             yield return new WaitForEndOfFrame();
             StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile));
         }
@@ -217,7 +243,7 @@ public class DoCoroutine : MonoBehaviour
 
     IEnumerator Lerper(float startPos, float endPos)
     {
-        
+
         lerper += Time.deltaTime * 1;
         var vec = inGameUI.PauseLevel.anchoredPosition;
         vec.x = Mathf.Lerp(startPos, endPos, lerper);
