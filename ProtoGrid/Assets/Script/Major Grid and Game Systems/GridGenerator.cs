@@ -17,7 +17,7 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] public int raws;
     [SerializeField] public int columns;
     [HideInInspector] public Vector3 ogPos;
-    float maxDepth = 50f;
+    public float maxDepth = 50f;
 
     #endregion
     void Awake()
@@ -26,6 +26,7 @@ public class GridGenerator : MonoBehaviour
         instantiateGrid = false;
         player = FindObjectOfType<Player>().transform;
         GridTiles[] list = FindObjectsOfType<GridTiles>();
+
         grid = new GridTiles[raws, columns];
         for (int i = 0; i < list.Length; i++)
         {
@@ -145,10 +146,10 @@ public class GridGenerator : MonoBehaviour
 
                     if (x + 1 < raws && grid[x + 1, y] && grid[x + 1, y].step > -1 && (grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x + 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x + 1, y].walkable)
                     {
-                        if (grid[x, y].transform.position.y - grid[x + 1, y].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                        if (grid[x, y].transform.position.y - grid[x + 1, y].transform.position.y == 1)
                             grid[x, y].HeightDiffR = 2.5f;
-                        else if (grid[x, y].tempoTile > 0)
-                            grid[x, y].HeightDiffR = maxDepth;
+                        /*else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffR = maxDepth;*/
                         else
                             grid[x, y].HeightDiffR = 0;
 
@@ -159,7 +160,7 @@ public class GridGenerator : MonoBehaviour
                         if (x + 1 < raws && grid[x + 1, y].walkable)
                         {
                             if (grid[x, y].transform.position.y - grid[x + 1, y].transform.position.y > 0)
-                                grid[x, y].HeightDiffR = ((int)grid[x, y].transform.position.y - (int)grid[x + 1, y].transform.position.y) * 2.5f;
+                                grid[x, y].HeightDiffR = (grid[x, y].transform.position.y - grid[x + 1, y].transform.position.y) * 2.5f;
                             else
                                 grid[x, y].HeightDiffR = 0;
                         }
@@ -174,10 +175,10 @@ public class GridGenerator : MonoBehaviour
                 case 2:
                     if (y - 1 > -1 && grid[x, y - 1] && grid[x, y - 1].step > -1 && (grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y - 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y - 1].walkable)
                     {
-                        if (grid[x, y].transform.position.y - grid[x, y - 1].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                        if (grid[x, y].transform.position.y - grid[x, y - 1].transform.position.y == 1)
                             grid[x, y].HeightDiffD = 2.5f;
-                        else if (grid[x, y].tempoTile > 0)
-                            grid[x, y].HeightDiffD = maxDepth;
+                        /*else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffD = maxDepth;*/
                         else
                             grid[x, y].HeightDiffD = 0;
                         
@@ -188,7 +189,7 @@ public class GridGenerator : MonoBehaviour
                         if (y - 1 > -1 && grid[x, y - 1].walkable)
                         {
                             if (grid[x, y].transform.position.y - grid[x, y - 1].transform.position.y > 0)
-                                grid[x, y].HeightDiffD = ((int)grid[x, y].transform.position.y - (int)grid[x, y - 1].transform.position.y) * 2.5f;
+                                grid[x, y].HeightDiffD = (grid[x, y].transform.position.y - grid[x, y - 1].transform.position.y) * 2.5f;
                             else
                                 grid[x, y].HeightDiffD = 0;
                         }
@@ -203,10 +204,10 @@ public class GridGenerator : MonoBehaviour
                 case 3:
                     if (y + 1 < columns && grid[x, y + 1] && grid[x, y + 1].step > -1 && (grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x, y + 1].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x, y + 1].walkable)
                     {
-                        if (grid[x, y].transform.position.y - grid[x, y + 1].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                        if (grid[x, y].transform.position.y - grid[x, y + 1].transform.position.y == 1)
                             grid[x, y].HeightDiffU = 2.5f;
-                        else if (grid[x, y].tempoTile > 0)
-                            grid[x, y].HeightDiffU = maxDepth;
+                        /*else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffU = maxDepth;*/
                         else
                             grid[x, y].HeightDiffU = 0;
 
@@ -218,7 +219,7 @@ public class GridGenerator : MonoBehaviour
                         if (y + 1 < columns && grid[x, y + 1].walkable)
                         {
                             if (grid[x, y].transform.position.y - grid[x, y + 1].transform.position.y > 0)
-                                grid[x, y].HeightDiffU = ((int)grid[x, y].transform.position.y - (int)grid[x, y + 1].transform.position.y) * 2.5f;
+                                grid[x, y].HeightDiffU = (grid[x, y].transform.position.y - grid[x, y + 1].transform.position.y) * 2.5f;
                             else
                                 grid[x, y].HeightDiffU = 0;
                         }
@@ -233,10 +234,10 @@ public class GridGenerator : MonoBehaviour
                 case 4:
                     if (x - 1 > -1 && grid[x - 1, y] && grid[x - 1, y].step > -1 && (grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == 0 || grid[x - 1, y].transform.position.y - grid[x, y].transform.position.y == -1) && grid[x - 1, y].walkable)
                     {
-                        if (grid[x, y].transform.position.y - grid[x - 1, y].transform.position.y == 1 && grid[x, y].tempoTile != 0)
+                        if (grid[x, y].transform.position.y - grid[x - 1, y].transform.position.y == 1)
                             grid[x, y].HeightDiffL = 2.5f;
-                        else if (grid[x, y].tempoTile > 0)
-                            grid[x, y].HeightDiffL = maxDepth;
+                       /* else if (grid[x, y].tempoTile > 0)
+                            grid[x, y].HeightDiffL = maxDepth;*/
                         else
                             grid[x, y].HeightDiffL = 0;
 
@@ -248,7 +249,7 @@ public class GridGenerator : MonoBehaviour
                         if (x - 1 > -1 && grid[x - 1, y].walkable)
                         {
                             if (grid[x, y].transform.position.y - grid[x - 1, y].transform.position.y > 0)
-                                grid[x, y].HeightDiffL = ((int)grid[x, y].transform.position.y - (int)grid[x - 1, y].transform.position.y) * 2.5f;
+                                grid[x, y].HeightDiffL = (grid[x, y].transform.position.y - grid[x - 1, y].transform.position.y) * 2.5f;
                             else
                                 grid[x, y].HeightDiffL = 0;
                         }

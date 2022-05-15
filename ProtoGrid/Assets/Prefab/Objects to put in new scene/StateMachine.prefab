@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5943152722358956396}
   - component: {fileID: 5943152722358956395}
   - component: {fileID: 4447310145361317015}
+  - component: {fileID: 2468726520109806168}
   m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
@@ -129,3 +130,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  begin: 5
+  lerper: 0
+--- !u!114 &2468726520109806168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943152722358956397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96bf3dded23bb24e92df09715751d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SavedInput: []
+  clickTimerValue: 0.25
+  deadZoneDiameter: 50
