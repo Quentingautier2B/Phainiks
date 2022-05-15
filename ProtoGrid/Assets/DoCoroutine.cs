@@ -179,6 +179,9 @@ public class DoCoroutine : MonoBehaviour
         if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.levelTransiIndex == 100)
         {
             //TransiLevel
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             sChange.startCoroutine(levelTransiIndex);

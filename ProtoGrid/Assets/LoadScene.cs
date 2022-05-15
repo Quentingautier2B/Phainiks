@@ -14,10 +14,10 @@ public class LoadScene : MonoBehaviour
     }
     public void SceneLoader(string yo)
     {
-        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+      /*  debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 
-        debugTools.mainMusic.release();
+        debugTools.mainMusic.r();*/
 
 
 

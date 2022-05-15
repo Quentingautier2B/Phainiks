@@ -542,13 +542,13 @@ public class GridTiling : MonoBehaviour
         ColonneActive(colonne4);
     }
 
-    void SetSingleCubeSize(Transform colonne, float hDiff1, float hDiff2, float hDiff3)
+    void SetSingleCubeSize(Transform colonne, float hDiff1, float hDiff2, float hDiff3, float posDiffX, float posDiffZ)
     {
-        colonne.localPosition = new Vector3(colonne.localPosition.x, .5002f, colonne.localPosition.z);
+        colonne.localPosition = new Vector3(posDiffX * 9.8f, .5002f, posDiffZ * 9.8f);
         if (hDiff1 == 0 && hDiff2 == 0 && hDiff3 > 0)
         {
-            colonne.localScale = new Vector3(.06f, hDiff3 * 0.4f, .06f);
-            colonne.localPosition -= new Vector3(0, hDiff3 * 0.2f, 0);
+            colonne.localScale = new Vector3(.05f, hDiff3 * 0.4f, .05f);
+            colonne.localPosition -= new Vector3(0 - posDiffX/5, hDiff3 * 0.2f, 0 - posDiffZ/5);
         }
         else if(hDiff1 > hDiff2)
         {
@@ -583,11 +583,11 @@ public class GridTiling : MonoBehaviour
 
         if(x + 1 < gridG.raws && y - 1 > - 1 && gridG.TestDirection(x, y, 1) && gridG.TestDirection(x, y, 2) && !grid[x+1,y-1].walkable)
         {
-            grid[x, y].HeightDiffRU = gridG.maxDepth;
+            grid[x, y].HeightDiffRD = gridG.maxDepth;
         }
         else if(x + 1 < gridG.raws && y - 1 > -1 && transform.position.y - grid[x + 1, y - 1].transform.position.y > 0)
         {
-            grid[x, y].HeightDiffRU = transform.position.y - grid[x + 1, y - 1].transform.position.y * 2.5f;
+            grid[x, y].HeightDiffRD = transform.position.y - grid[x + 1, y - 1].transform.position.y * 2.5f;
         }
         else
         {
@@ -622,9 +622,9 @@ public class GridTiling : MonoBehaviour
         }
 
 
-        SetSingleCubeSize(colonne1.transform, tile.HeightDiffU, tile.HeightDiffR, tile.HeightDiffRU);
-        SetSingleCubeSize(colonne2.transform, tile.HeightDiffD, tile.HeightDiffR, tile.HeightDiffRD);
-        SetSingleCubeSize(colonne3.transform, tile.HeightDiffU, tile.HeightDiffL, tile.HeightDiffLU);
-        SetSingleCubeSize(colonne4.transform, tile.HeightDiffD, tile.HeightDiffL, tile.HeightDiffLD);
+        SetSingleCubeSize(colonne1.transform, tile.HeightDiffU, tile.HeightDiffR, tile.HeightDiffRU, 0.05f, 0.05f);
+        SetSingleCubeSize(colonne2.transform, tile.HeightDiffD, tile.HeightDiffR, tile.HeightDiffRD, 0.05f, -0.05f);
+        SetSingleCubeSize(colonne3.transform, tile.HeightDiffU, tile.HeightDiffL, tile.HeightDiffLU, -0.05f, 0.05f);
+        SetSingleCubeSize(colonne4.transform, tile.HeightDiffD, tile.HeightDiffL, tile.HeightDiffLD, -0.05f, -0.05f);
     }
 }

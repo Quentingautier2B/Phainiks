@@ -29,10 +29,10 @@ public class SceneChange : MonoBehaviour
     {
         stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
-        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+/*        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 
-        debugTools.mainMusic.release();
+        debugTools.mainMusic.release();*/
 
         yield return new WaitForSeconds(0.1f);
         if (tile < 1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)

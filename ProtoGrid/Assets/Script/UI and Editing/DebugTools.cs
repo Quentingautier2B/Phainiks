@@ -15,11 +15,24 @@ public class DebugTools : MonoBehaviour
     public GameObject Terrain;
     public GameObject Decor;
     bool SceneLoaded;
-
+    static bool isPlaying = false;
     private void Awake()
     {
-        mainMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Main");
-        mainMusic.start();
+/*        FMOD.Studio.PLAYBACK_STATE playbackState;
+        mainMusic.getPlaybackState(out playbackState);
+        bool isPlaying = playbackState != FMOD.Studio.PLAYBACK_STATE.STOPPED;*/
+
+        if (isPlaying)
+        {
+
+        }
+        else
+        {
+            mainMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Main");
+            mainMusic.start();
+            isPlaying = true;
+        }
+        
     }
 
 

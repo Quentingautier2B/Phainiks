@@ -31,6 +31,7 @@ public class InGameUI : MonoBehaviour
     public void OnPauseClick()
     {
         FindObjectOfType<Animator>().SetBool("Paused", true);
+
     }
 
     public void OnUnPauseClick()
@@ -40,16 +41,18 @@ public class InGameUI : MonoBehaviour
 
     IEnumerator ResetLevelButtonEffect()
     {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
 
 
-       
 
 
         yield return new WaitForSeconds(.5f);
-        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+ /*       debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 
-        debugTools.mainMusic.release();
+        debugTools.mainMusic.release();*/
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -67,21 +70,24 @@ public class InGameUI : MonoBehaviour
 
     IEnumerator OnHubClick()
     {
-/*        sceneChange.endLerper = 0;
-        if (PauseLevel.anchoredPosition.x > pauseStartPosX)
-        {           
-            StartCoroutine(sceneChange.Lerper(pauseEndPosX, pauseStartPosX));
-        }
-        else if (Endlevel.anchoredPosition.x < endPosX)
-        {
-            StartCoroutine(sceneChange.Lerper(endPosX, startPosX));
-        }*/
+        /*        sceneChange.endLerper = 0;
+                if (PauseLevel.anchoredPosition.x > pauseStartPosX)
+                {           
+                    StartCoroutine(sceneChange.Lerper(pauseEndPosX, pauseStartPosX));
+                }
+                else if (Endlevel.anchoredPosition.x < endPosX)
+                {
+                    StartCoroutine(sceneChange.Lerper(endPosX, startPosX));
+                }*/
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
         yield return new WaitForSeconds(0.3f);
-        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+/*        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 
-        debugTools.mainMusic.release();
+        debugTools.mainMusic.release();*/
 
         SceneManager.LoadScene("Lvl_1");
     }
@@ -154,7 +160,9 @@ public class InGameUI : MonoBehaviour
     {
        StartCoroutine( sceneChange.lastLerp());
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
-
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
         //sceneChange.LevelTransi(endTile);
     }
     public void UiEndDisable()
