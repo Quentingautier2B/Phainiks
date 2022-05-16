@@ -138,10 +138,11 @@ public class SwipeInput : StateMachineBehaviour
         }
 
         if (Input.GetMouseButtonUp(0) && clickBool)
-
-        if(inputBuffer.SavedInput.Count > 0)
         {
-            directionSwipe = inputBuffer.SavedInput[0];   
+            if(inputBuffer.SavedInput.Count > 0)
+            {
+                directionSwipe = inputBuffer.SavedInput[0];   
+            }
         }
         pPosAssignement();
         TestFourDirections(animator);

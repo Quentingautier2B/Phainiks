@@ -15,6 +15,7 @@ public class MoveBehavior : StateMachineBehaviour
     GridTiles[,] grid;
     InGameUI UI;
     DoCoroutine doC;
+    SceneChange sceneChange;
     float lerper;
     int previousX;
     int previousY;
@@ -35,6 +36,7 @@ public class MoveBehavior : StateMachineBehaviour
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
             sChange = FindObjectOfType<SceneChange>();
+            sceneChange = FindObjectOfType<SceneChange>();
         }
         startPos = player.position;
         canMove = true;
@@ -134,7 +136,17 @@ public class MoveBehavior : StateMachineBehaviour
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         //timerValue++;
-
+        if (sceneChange.Hub)
+        {
+            if (grid[anim.GetInteger("PreviousX"),anim.GetInteger("PreviousY")].World > 0)
+            {
+                grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);
+            }
+            if (grid[x, y].World > 0)
+            {
+                grid[x, y].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(true); 
+            }
+        }
         if (grid[x, y].levelTransiIndex != 0)
         {
             if(grid[x, y].levelTransiIndex > 1)

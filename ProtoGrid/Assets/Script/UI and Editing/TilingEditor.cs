@@ -19,6 +19,7 @@ public class TilingEditor : MonoBehaviour
     bool crumble;
     bool originalPosition;
     int key;
+    int world;
     //int timerChangeInputValue;
     float levelTransiIndex;
     int tempoValue;
@@ -49,6 +50,7 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject PSysTTD;
     [SerializeField] GameObject TpItem;
     [SerializeField] GameObject TeleLine;
+    [SerializeField] GameObject WorldItem;
 
     [SerializeField] Mesh arrowHead;
 
@@ -228,6 +230,7 @@ public class TilingEditor : MonoBehaviour
         invisible = tile.invisible;
         door = tile.door;
         key = tile.key;
+        world = tile.World;
         crumble = tile.crumble;
         originalPosition = tile.originalPosition;
         //timerChangeInputValue = tile.timerChangeInputValue;
@@ -289,6 +292,7 @@ public class TilingEditor : MonoBehaviour
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
         CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
         //CreateDestroyObjectIndex(tpValue, "Line", TeleLine, 0f);
+        CreateDestroyObjectIndex(world, "World", WorldItem, 0.5f);
     }
 
     void EditorBlocSnapping()
