@@ -24,13 +24,14 @@ public class InGameUI : MonoBehaviour
     public float endPosX, startPosX, pauseEndPosX, pauseStartPosX;
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
-
+    public GameObject inGameUI;
     
     #endregion
      
     public void OnPauseClick()
     {
         FindObjectOfType<Animator>().SetBool("Paused", true);
+
     }
 
     public void OnUnPauseClick()
@@ -40,16 +41,19 @@ public class InGameUI : MonoBehaviour
 
     IEnumerator ResetLevelButtonEffect()
     {
-        yield return new WaitForSeconds(.5f);
-        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.greenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
 
-        debugTools.mainMusic.release();
-        debugTools.redMusic.release();
-        debugTools.blueMusic.release();
-        debugTools.greenMusic.release();
+
+
+
+        yield return new WaitForSeconds(.5f);
+ /*       debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
+        debugTools.mainMusic.release();*/
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -59,18 +63,32 @@ public class InGameUI : MonoBehaviour
         StartCoroutine(ResetLevelButtonEffect());
     }
 
-    public void OnHubClick()
+    public void HubClick()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
-        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.redMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.blueMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        debugTools.greenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        StartCoroutine(OnHubClick());
+    }
 
-        debugTools.mainMusic.release();
-        debugTools.redMusic.release();
-        debugTools.blueMusic.release();
-        debugTools.greenMusic.release();
+    IEnumerator OnHubClick()
+    {
+        /*        sceneChange.endLerper = 0;
+                if (PauseLevel.anchoredPosition.x > pauseStartPosX)
+                {           
+                    StartCoroutine(sceneChange.Lerper(pauseEndPosX, pauseStartPosX));
+                }
+                else if (Endlevel.anchoredPosition.x < endPosX)
+                {
+                    StartCoroutine(sceneChange.Lerper(endPosX, startPosX));
+                }*/
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
+        yield return new WaitForSeconds(0.3f);
+/*        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
+        debugTools.mainMusic.release();*/
+
         SceneManager.LoadScene("Lvl_1");
     }
 
@@ -99,9 +117,9 @@ public class InGameUI : MonoBehaviour
         stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
         //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
-        timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
+        timerText = inGameUI.transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         sceneChange = FindObjectOfType<SceneChange>();
-        revert = transform.Find("RevertTime").GetComponent<Button>();
+        revert = inGameUI.transform.Find("RevertTime").GetComponent<Button>();
     }
 
     private void Start()
@@ -119,8 +137,6 @@ public class InGameUI : MonoBehaviour
     }
     void Update()
     {
-        print(endTile);
-
        TimerText();
         nbStep.text = "" + timerValue;
         if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
@@ -142,8 +158,12 @@ public class InGameUI : MonoBehaviour
 
     public void LevelTransi()
     {
-       StartCoroutine( sceneChange.lastLerp()); 
-       //sceneChange.LevelTransi(endTile);
+       StartCoroutine( sceneChange.lastLerp());
+        FMODUnity.RuntimeManager.PlayOneShot("event:/World/LevelEnd");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
+        //sceneChange.LevelTransi(endTile);
     }
     public void UiEndDisable()
     {

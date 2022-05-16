@@ -60,11 +60,12 @@ public class TileEditorWindow : EditorWindow
         AssignVariableValue();
         DrawVariablesInWindow();
         UpdateValues();
-
+        EditorUtility.SetDirty(gridG);
     }
 
     void GridGeneration()
     {
+        
         gridG = FindObjectOfType<GridGenerator>();
 
         Raws = gridG.raws;

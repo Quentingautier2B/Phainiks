@@ -15,17 +15,19 @@ public class MoveBehavior : StateMachineBehaviour
     GridTiles[,] grid;
     InGameUI UI;
     DoCoroutine doC;
-
+    float lerper;
     int previousX;
     int previousY;
     bool flag;
     bool awake = true;
     public bool canMove;
+    Vector3 startPos;
     #endregion
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if (awake)
         {
             doC = animator.GetComponent<DoCoroutine>();
@@ -34,11 +36,13 @@ public class MoveBehavior : StateMachineBehaviour
             player = FindObjectOfType<Player>().transform;
             sChange = FindObjectOfType<SceneChange>();
         }
+        startPos = player.position;
         canMove = true;
         if (animator.GetBool("Rewind"))
         {
             x = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
             y = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].y;
+
         }
         else
         {
@@ -68,6 +72,7 @@ public class MoveBehavior : StateMachineBehaviour
     {
         if (anim.GetBool("Rewind") && flag == true)
         {
+            
             flag = false;
             TileEffectOnMove(x, y, anim);
         }
@@ -75,14 +80,17 @@ public class MoveBehavior : StateMachineBehaviour
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
         if (distance > 0f && grid[x, y].walkable)
         {
-            Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
+            lerper += Time.deltaTime * moveSpeed;
+            player.position = Vector3.Lerp(startPos, new Vector3(grid[x, y].transform.position.x, player.position.y, grid[x, y].transform.position.z), lerper);
+            //Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
             
-            player.position += moveDir * moveSpeed * Time.deltaTime;
-            if(distance > 0.5f)
+            //player.position += moveDir * moveSpeed * Time.deltaTime;
+            if(lerper <.2f)
                 player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
-            if (distance < 0.3f)
+            if (lerper >= 1)
             {
+                lerper = 0;
                 player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
                 /*if (anim.GetBool("Rewind"))
                     Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*/
@@ -129,14 +137,16 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (grid[x, y].levelTransiIndex != 0)
         {
-            sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));
+            if(grid[x, y].levelTransiIndex >= 1)
+                sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));
+
             foreach (GridTiles tile in grid)
             {
-                if(tile.levelTransiIndex == 0)
+                if(tile.levelTransiIndex != grid[x, y].levelTransiIndex)
                 {
                     tile.levelTransiIndex = 100;
                     
-                    doC.startClose(tile, grid[x,y].levelTransiIndex);
+                    doC.startClose(tile, grid[x,y].levelTransiIndex, grid[x,y].GetComponent<GridTiling>());
                 }
             }
         }
@@ -192,7 +202,7 @@ public class MoveBehavior : StateMachineBehaviour
         {
             if(t.door == tile.key && t.door > 0)
             {
-               doC.startClose(t, t.levelTransiIndex);
+               doC.startClose(t, t.levelTransiIndex, t.GetComponent<GridTiling>());
             }
         }
     }

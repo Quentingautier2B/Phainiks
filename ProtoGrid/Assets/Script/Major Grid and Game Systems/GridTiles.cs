@@ -14,6 +14,7 @@ public class GridTiles : MonoBehaviour
     [SerializeField, HideInInspector]public float pauseLerpSpeed = .1f;
     [SerializeField, HideInInspector]public float currentPosY ;
     [SerializeField, HideInInspector]public float HeightDiffR, HeightDiffL,HeightDiffU, HeightDiffD;
+    [SerializeField, HideInInspector] public float HeightDiffLD, HeightDiffRD, HeightDiffLU, HeightDiffRU;
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
     [HideInInspector] public bool opening;
@@ -172,13 +173,13 @@ public class GridTiles : MonoBehaviour
 
         if(door != 0 && open)
         {
-            walkable = false;
+            walkable = true;
            
         }
 
         if (door != 0 && !open) 
         {
-            walkable = true;
+            walkable = false;
         }
 
 
