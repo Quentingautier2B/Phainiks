@@ -12,10 +12,11 @@ public class InputSaver : MonoBehaviour
     public float clickTimerValue;
     public float deadZoneDiameter;
     CameraBehavior cam;
-
+    SceneChange sceneChange;
     private void Awake()
     {
         cam = FindObjectOfType<CameraBehavior>();
+        sceneChange = FindObjectOfType<SceneChange>();
     }
 
     private void Start()
@@ -40,7 +41,12 @@ public class InputSaver : MonoBehaviour
         {
             endTouchPos = Input.mousePosition;
             directionSwipe = -(startTouchPos - endTouchPos).normalized;
-            if (cam.rotateMode == 0)
+
+            if (sceneChange.Hub)
+            {
+                directionSwipe = Quaternion.AngleAxis(-45, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 0)
             {
                 //directionSwipe = directionSwipe;
             }

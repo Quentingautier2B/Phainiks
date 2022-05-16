@@ -25,9 +25,11 @@ public class InGameUI : MonoBehaviour
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
     public GameObject inGameUI;
-    
+    [SerializeField] GameObject restart;
+    [SerializeField] GameObject rotateLeft;
+    [SerializeField] GameObject rotateRight;
     #endregion
-     
+
     public void OnPauseClick()
     {
         FindObjectOfType<Animator>().SetBool("Paused", true);
@@ -137,17 +139,36 @@ public class InGameUI : MonoBehaviour
     }
     void Update()
     {
-       TimerText();
-        nbStep.text = "" + timerValue;
-        if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
+        /*       TimerText();
+                nbStep.text = "" + timerValue;
+                if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
+                {
+                    revert.interactable = false;
+                }
+                else
+                {
+                    revert.interactable = true;
+                }*/
+        if (sceneChange.Hub)
         {
+            rotateLeft.SetActive(false);
+            rotateRight.SetActive(false);
+            restart.SetActive(false);
+            revert.gameObject.SetActive(false);
+            timerText.gameObject.SetActive(false);
+        }
+        else if (timerValue <= 0 || stateMachine.GetBool("Rewind"))
+        {
+            TimerText();
+            nbStep.text = "" + timerValue;
             revert.interactable = false;
         }
         else
         {
+            TimerText();
+            nbStep.text = "" + timerValue;
             revert.interactable = true;
         }
-        
     }
     
 

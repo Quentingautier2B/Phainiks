@@ -14,7 +14,7 @@ public class SwipeInput : StateMachineBehaviour
     public float clickTimerValue;
     float clickTimer;
     bool clickBool;
-
+    SkinnedMeshRenderer pSRend;
     DoCoroutine doC;
     Transform player;
     GridGenerator gridG;
@@ -25,13 +25,18 @@ public class SwipeInput : StateMachineBehaviour
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
     InputSaver inputBuffer;
- 
+    float animIndexValue;
+    bool monte; 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
+        
+
+
         if (awake)
         {
+            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
             inputBuffer = FindObjectOfType<InputSaver>();
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
@@ -87,18 +92,57 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log(animIndexValue);
 
-        if(inputBuffer.SavedInput.Count > 0)
+        //animIndexValue += Time.deltaTime * 150;
+        if (monte)
+        {
+            animIndexValue += Time.deltaTime * 50;
+        }
+        else
+        {
+            animIndexValue -= Time.deltaTime * 50;
+        }
+        if(animIndexValue < 0 && !monte)
+        {
+            animIndexValue = 1;
+            monte = true;
+        }
+        else if(animIndexValue > 50 && monte)
+        {
+            animIndexValue = 49;
+            monte = false;
+        }
+        pSRend.SetBlendShapeWeight(1, animIndexValue);
+        if (doC.right)
+        {
+            pPosAssignement();
+            HubTestRightDirections(animator);
+            doC.right = false;
+        }
+
+        if (doC.left)
+        {
+            pPosAssignement();
+            HubTestLeftDirections(animator);
+            doC.left = false;
+        }
+
+        if (inputBuffer.SavedInput.Count > 0)
         {
             directionSwipe = inputBuffer.SavedInput[0];
-           
+            pPosAssignement();
+            TestFourDirections(animator);
         }
-        pPosAssignement();
-        TestFourDirections(animator);
+
+
+
 
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animIndexValue = 0;
+        monte = true;
         if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
             inputBuffer.SavedInput.RemoveAt(0);
 
@@ -114,7 +158,7 @@ public class SwipeInput : StateMachineBehaviour
         
     }
 
-    
+
 
     void pPosAssignement()
     {
@@ -282,5 +326,30 @@ public class SwipeInput : StateMachineBehaviour
         }
 
 
+    }
+
+    void HubTestRightDirections(Animator anim)
+    {
+        roundingDirectionalYPosition = new Vector2(0, 0);
+        anim.SetInteger("TargetInfoX", pPosX + 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+        rewindPos.Add(new Vector2(pPosX, pPosY));
+    }
+    void HubTestLeftDirections(Animator anim)
+    {
+        roundingDirectionalYPosition = new Vector2(1, 1);
+        anim.SetInteger("TargetInfoX", pPosX - 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+        rewindPos.Add(new Vector2(pPosX, pPosY));
     }
 }

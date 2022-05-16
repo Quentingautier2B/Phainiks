@@ -9,7 +9,7 @@ public class MoveBehavior : StateMachineBehaviour
     [SerializeField] float moveSpeed;    
     [HideInInspector] public int timerValue;
     int x,y;
-      
+    public AnimationCurve moveAnimation;  
     Transform player;
     SceneChange sChange;
     GridTiles[,] grid;
@@ -22,14 +22,18 @@ public class MoveBehavior : StateMachineBehaviour
     bool awake = true;
     public bool canMove;
     Vector3 startPos;
+    SceneChange sceneChange;
+    SkinnedMeshRenderer pSRend;
     #endregion
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        lerper = 0;
         if (awake)
         {
+            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
+            sceneChange = FindObjectOfType<SceneChange>();
             doC = animator.GetComponent<DoCoroutine>();
             UI = FindObjectOfType<InGameUI>();
             grid = FindObjectOfType<GridGenerator>().grid;
@@ -78,9 +82,21 @@ public class MoveBehavior : StateMachineBehaviour
         }
 
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
-        if (distance > 0f && grid[x, y].walkable)
+        if (/*distance > 0*/ lerper < 1 && grid[x, y].walkable)
         {
             lerper += Time.deltaTime * moveSpeed;
+            pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
+
+            if(lerper <= .5f)
+            {
+                pSRend.SetBlendShapeWeight(0,Mathf.Lerp(0,100,lerper));
+
+            }
+            else
+            {
+                pSRend.SetBlendShapeWeight(0, Mathf.Lerp(100, 0, lerper));
+            }
+
             player.position = Vector3.Lerp(startPos, new Vector3(grid[x, y].transform.position.x, player.position.y, grid[x, y].transform.position.z), lerper);
             //Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
             
@@ -88,16 +104,17 @@ public class MoveBehavior : StateMachineBehaviour
             if(lerper <.2f)
                 player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
-            if (lerper >= 1)
+            /*if (lerper >= 1)
             {
                 lerper = 0;
-                player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
-                /*if (anim.GetBool("Rewind"))
-                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*/
-            }
+                player.position = new Vector3(x, player.position.y*//*1.5f + grid[x, y].transform.position.y*//*, y);
+                *//*if (anim.GetBool("Rewind"))
+                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*//*
+            }*/
         }
         else
         {
+            player.position = new Vector3(x, player.position.y , y);
             if (anim.GetBool("Rewind"))
             {
                 UI.timerValue--;
@@ -134,8 +151,18 @@ public class MoveBehavior : StateMachineBehaviour
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         //timerValue++;
-
-        if (grid[x, y].levelTransiIndex != 0)
+        if (sceneChange.Hub)
+        {
+            if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].World > 0)
+            {
+                grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);
+            }
+            if (grid[x, y].World > 0)
+            {
+                grid[x, y].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(true);
+            }
+        }
+        else if (grid[x, y].levelTransiIndex != 0)
         {
             if(grid[x, y].levelTransiIndex >= 1)
                 sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));

@@ -13,6 +13,9 @@ public class DoCoroutine : MonoBehaviour
     InGameUI inGameUI;
     GridTiles[,] grid;
     GridGenerator gridG;
+    public bool right, left;
+
+
 
     public void UpdateAdjTiles(GridTiles g, int x, int y)
     {
@@ -49,6 +52,16 @@ public class DoCoroutine : MonoBehaviour
         gridG = FindObjectOfType<GridGenerator>();
         sChange = FindObjectOfType<SceneChange>();
         inGameUI = FindObjectOfType<InGameUI>();
+    }
+
+    public void Right()
+    {
+        right = true;
+    }
+
+    public void Left()
+    {
+        left = true;
     }
 
     public void startCoroutine(GridTiles tile)

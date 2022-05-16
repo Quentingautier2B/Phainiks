@@ -45,11 +45,12 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject originalPositionItem;
     [SerializeField] GameObject TimerItem;
     [SerializeField] GameObject LevelTransitionItem;
-    [SerializeField] GameObject PSysTTU;
-    [SerializeField] GameObject PSysTTD;
+    //[SerializeField] GameObject PSysTTU;
+    //[SerializeField] GameObject PSysTTD;
     [SerializeField] GameObject TpItem;
     [SerializeField] GameObject TeleLine;
 
+    public GameObject WorldItem;
     [SerializeField] Mesh arrowHead;
 
     [Header("TP Lines Properties")]
@@ -72,10 +73,19 @@ public class TilingEditor : MonoBehaviour
     public Material tileBlueM;
     public Material tileGreenM;
     [SerializeField] bool playOn = true;
+    int world;
     #endregion
 
     private void Awake()
     {
+        if (transform.Find("DirectionTempoU"))
+        {
+            Destroy(transform.Find("DirectionTempoU").gameObject);
+        }
+        if (transform.Find("DirectionTempoD"))
+        {
+            Destroy(transform.Find("DirectionTempoD").gameObject);
+        }
         gridG = FindObjectOfType<GridGenerator>();
         playOn = true;
         rend = transform.Find("Renderer").GetComponent<Renderer>();
@@ -126,7 +136,7 @@ public class TilingEditor : MonoBehaviour
         grid = gridG.grid;
         if (tpValue != 0)
         {
-            foreach (GridTiles t in FindObjectOfType<GridGenerator>().grid)
+            foreach (GridTiles t in gridG.grid)
             {
                 if (t.teleporter == tpIndex)
                 {
@@ -229,6 +239,7 @@ public class TilingEditor : MonoBehaviour
         invisible = tile.invisible;
         door = tile.door;
         key = tile.key;
+        world = tile.World;
         crumble = tile.crumble;
         originalPosition = tile.originalPosition;
         //timerChangeInputValue = tile.timerChangeInputValue;
@@ -283,12 +294,13 @@ public class TilingEditor : MonoBehaviour
     #region CreateDestroyMethods
     void CreateDestroyMethodsHub()
     {
-        CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.53f);
+        CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.5f);
         //CreateDestroyObjectIndex(timerChangeInputValue, "Timer+", TimerItem, 0.5f);
         CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
         //CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
         CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
+        CreateDestroyObjectIndex(world, "World", WorldItem, 0.5f);
         //CreateDestroyObjectIndex(tpValue, "Line", TeleLine, 0f);
     }
 
@@ -447,8 +459,8 @@ public class TilingEditor : MonoBehaviour
             rend.GetComponent<MeshRenderer>().material = tileGreenM;
         }
 */
-        CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
-        CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
+        //CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
+        //CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
 
     }
     #endregion

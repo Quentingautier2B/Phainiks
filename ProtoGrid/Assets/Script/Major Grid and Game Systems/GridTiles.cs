@@ -70,7 +70,7 @@ public class GridTiles : MonoBehaviour
     GridGenerator gridGenerator;
     Transform tpTarget;
     GridTiles[,] grid;
-
+    [Range(0, 4)] public int World;
     
     #endregion
 

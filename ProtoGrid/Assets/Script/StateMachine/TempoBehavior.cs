@@ -410,7 +410,7 @@ public class TempoBehavior : StateMachineBehaviour
             if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
                 {
                     tile.opening = false;
-                    if (colorFlag)
+/*                    if (colorFlag)
                     {
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
@@ -421,7 +421,7 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
                         
-                    }
+                    }*/
 
                     tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
                     return false;
