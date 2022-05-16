@@ -28,7 +28,7 @@ public class TilingEditor : MonoBehaviour
     Renderer rend;
     Vector3 tpTarget;
     GridTiles[,] grid;
-    
+    GridGenerator gridG;
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
@@ -76,6 +76,7 @@ public class TilingEditor : MonoBehaviour
 
     private void Awake()
     {
+        gridG = FindObjectOfType<GridGenerator>();
         playOn = true;
         rend = transform.Find("Renderer").GetComponent<Renderer>();
         if (Input.GetKeyDown(KeyCode.N) && !walkable)
@@ -94,10 +95,10 @@ public class TilingEditor : MonoBehaviour
 
     private void Start()
     {
-        grid = FindObjectOfType<GridGenerator>().grid;
+        grid = gridG.grid;
         if (tpValue != 0)
         {
-            foreach (GridTiles t in FindObjectOfType<GridGenerator>().grid)
+            foreach (GridTiles t in grid)
             {
                 if (t.teleporter == tpIndex)
                 {
@@ -122,7 +123,7 @@ public class TilingEditor : MonoBehaviour
 
     void trailSign()
     {
-        grid = FindObjectOfType<GridGenerator>().grid;
+        grid = gridG.grid;
         if (tpValue != 0)
         {
             foreach (GridTiles t in FindObjectOfType<GridGenerator>().grid)
