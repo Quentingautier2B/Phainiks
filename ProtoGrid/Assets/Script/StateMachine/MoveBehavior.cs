@@ -22,8 +22,6 @@ public class MoveBehavior : StateMachineBehaviour
     bool awake = true;
     public bool canMove;
     Vector3 startPos;
-    float startPosY;
-    SkinnedMeshRenderer pSRend;
     #endregion
 
 
@@ -32,7 +30,6 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (awake)
         {
-            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
             doC = animator.GetComponent<DoCoroutine>();
             UI = FindObjectOfType<InGameUI>();
             grid = FindObjectOfType<GridGenerator>().grid;
@@ -81,34 +78,20 @@ public class MoveBehavior : StateMachineBehaviour
         }
 
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
-        
         if (distance > 0f && grid[x, y].walkable)
         {
             lerper += Time.deltaTime * moveSpeed;
-
             player.position = Vector3.Lerp(startPos, new Vector3(grid[x, y].transform.position.x, player.position.y, grid[x, y].transform.position.z), lerper);
-            if (lerper <= .5f)
-            {
-                
-                pSRend.SetBlendShapeWeight(0, Mathf.Lerp(0, 100, lerper));
-                pSRend.transform.localPosition = Vector3.Lerp(new Vector3(0, -0.42f, 0), new Vector3(0, 0.5f, 0), lerper);
-            }
-            else
-            {
-                pSRend.SetBlendShapeWeight(0, Mathf.Lerp(100, 0, lerper));
-                pSRend.transform.position = Vector3.Lerp(new Vector3(0, 0.5f, 0), new Vector3(0, -.42f, 0), lerper);
-            }
             //Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
-
+            
             //player.position += moveDir * moveSpeed * Time.deltaTime;
-            if (lerper <.2f)
+            if(lerper <.2f)
                 player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
             if (lerper >= 1)
             {
                 lerper = 0;
-                player.position = new Vector3(x, startPos.y/*1.5f + grid[x, y].transform.position.y*/, y);
-                pSRend.transform.localPosition = new Vector3(0, -.42f, 0);
+                player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
                 /*if (anim.GetBool("Rewind"))
                     Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*/
             }

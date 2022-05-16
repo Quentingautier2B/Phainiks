@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     {
         var yPos = transform.position;
 
-        if (sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 0)
+        if(sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 0)
             yPos.y = grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
 
         if (sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 1)
