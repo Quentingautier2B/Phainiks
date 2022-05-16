@@ -25,13 +25,14 @@ public class SwipeInput : StateMachineBehaviour
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
     InputSaver inputBuffer;
- 
-
+    SkinnedMeshRenderer pSRend;
+    float playerIdleIndex;
+    bool monte;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
         if (awake)
         {
+            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
             inputBuffer = FindObjectOfType<InputSaver>();
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
@@ -56,6 +57,8 @@ public class SwipeInput : StateMachineBehaviour
                 else
                     g.open = false;*/
             }
+
+
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
             
@@ -65,7 +68,8 @@ public class SwipeInput : StateMachineBehaviour
             cam = FindObjectOfType<CameraBehavior>();
             rewindPos.Clear();
         }
-
+        playerIdleIndex = 1;
+        monte = true;
         grid = gridG.grid;
         pPosAssignement();
         
@@ -87,8 +91,29 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (monte)
+        {
+            playerIdleIndex += Time.deltaTime * 150;
+        }
+        else
+        {
+            playerIdleIndex -= Time.deltaTime * 150;
+        }
 
-        if(inputBuffer.SavedInput.Count > 0)
+        if (playerIdleIndex >= 100)
+        {
+            monte = false;
+            playerIdleIndex = 99;
+        }
+        if (playerIdleIndex < 0)
+        {
+            monte = true;
+            playerIdleIndex = 1;
+        }
+
+        pSRend.SetBlendShapeWeight(1, playerIdleIndex);
+
+        if (inputBuffer.SavedInput.Count > 0)
         {
             directionSwipe = inputBuffer.SavedInput[0];
            
@@ -99,6 +124,9 @@ public class SwipeInput : StateMachineBehaviour
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        pSRend.SetBlendShapeWeight(1, 0);
+
+
         if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
             inputBuffer.SavedInput.RemoveAt(0);
 
