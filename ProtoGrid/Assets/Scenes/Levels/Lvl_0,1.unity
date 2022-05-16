@@ -891,7 +891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5691709543926792127, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: instantiateGrid
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5743147353043392712, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -927,11 +927,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 6e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.384088e+31
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.3510647e-38
+      value: -2.2722425e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 5.91e-43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
