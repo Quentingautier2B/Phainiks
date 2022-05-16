@@ -137,7 +137,7 @@ public class MoveBehavior : StateMachineBehaviour
 
         if (grid[x, y].levelTransiIndex != 0)
         {
-            if(grid[x, y].levelTransiIndex > 1)
+            if(grid[x, y].levelTransiIndex >= 1)
                 sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));
 
             foreach (GridTiles tile in grid)

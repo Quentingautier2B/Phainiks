@@ -24,7 +24,7 @@ public class InGameUI : MonoBehaviour
     public float endPosX, startPosX, pauseEndPosX, pauseStartPosX;
     public Image oneStarImage, twoStarImage, threeStarImage;
     public int oneStar,twoStar,threeStar;
-
+    public GameObject inGameUI;
     
     #endregion
      
@@ -117,9 +117,9 @@ public class InGameUI : MonoBehaviour
         stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
         //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
-        timerText = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
+        timerText = inGameUI.transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         sceneChange = FindObjectOfType<SceneChange>();
-        revert = transform.Find("RevertTime").GetComponent<Button>();
+        revert = inGameUI.transform.Find("RevertTime").GetComponent<Button>();
     }
 
     private void Start()

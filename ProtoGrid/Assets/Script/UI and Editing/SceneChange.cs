@@ -36,7 +36,9 @@ public class SceneChange : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         if (tile < 1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
+        {
             LevelTransi(tile);
+        }
         else
         {
             //StartCoroutine(Lerper(inGameUI.startPosX, inGameUI.endPosX));

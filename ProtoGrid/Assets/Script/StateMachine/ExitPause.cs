@@ -15,7 +15,7 @@ public class ExitPause : StateMachineBehaviour
     bool lerping;
     bool endFlag;
     DoCoroutine doC;
-
+    InGameUI inGameUI;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
@@ -23,6 +23,7 @@ public class ExitPause : StateMachineBehaviour
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
             doC = FindObjectOfType<DoCoroutine>();
+            inGameUI = FindObjectOfType<InGameUI>();
             awake = false;
 
         }
@@ -81,6 +82,7 @@ public class ExitPause : StateMachineBehaviour
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        inGameUI.inGameUI.SetActive(true);
         foreach (GridTiles tile in grid)
         {
             var til = tile.transform.position;

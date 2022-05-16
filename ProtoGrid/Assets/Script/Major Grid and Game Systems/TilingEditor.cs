@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -115,8 +115,8 @@ public class TilingEditor : MonoBehaviour
 
     private void Update()
     {
-
-        trailSign();
+        if(Time.timeSinceLevelLoad > 2)
+            trailSign();
     }
 
 

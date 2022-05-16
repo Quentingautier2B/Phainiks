@@ -97,6 +97,10 @@ public class GridTiling : MonoBehaviour
 
         if (tile.walkable && (tile.tempoTile != 0 || tile.crumble)  && refreshRendTempo)
         {
+            gridG = FindObjectOfType<GridGenerator>();
+            gridG.generateGrid();
+            grid = gridG.grid;
+            mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             //mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             TempoTileMaterial();
             TempoDecorMaterial();
@@ -130,7 +134,7 @@ public class GridTiling : MonoBehaviour
         }
     }
 
-    void MaterialLerping(Material previousMat, Material mat)
+/*    void MaterialLerping(Material previousMat, Material mat)
     {
         lerpMatTimer += Time.deltaTime * 2;
         mesh.material.Lerp(previousMat, mat, lerpMatTimer);
@@ -143,7 +147,7 @@ public class GridTiling : MonoBehaviour
             lerpMatTimer = 0;
         }
 
-    }
+    }*/
 
 
     public void TempoTileMaterial()
@@ -154,12 +158,14 @@ public class GridTiling : MonoBehaviour
             {
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
+                    mesh.transform.rotation = Quaternion.identity;
+                    mesh.transform.Rotate(-90, 0, 0);
                     m.material = Cmat;
                     //m.material.Lerp(m.material,Cmat,Time.deltaTime);
-                    var fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -168,14 +174,16 @@ public class GridTiling : MonoBehaviour
 
             if (tile.tempoTile == 1)
             {
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
                 mesh.material = TmatR;
                 //Material curM = mesh.material;
                 //MaterialLerping(TmatR, TmatR);
                 // mesh.material.Lerp(mesh.material,TmatR,Time.deltaTime*2);
-                var fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
                 SetCubeSize();
                 AllColonneActivate();
                 refreshRendTempo = false;
@@ -186,6 +194,8 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.blueTimer == 0 || t.blueTimer == 2)
                 {
+                    mesh.transform.rotation = Quaternion.identity;
+                    mesh.transform.Rotate(-90, 0, 0);
                     //MaterialLerping(TmatB1, TmatB2);
                     mesh.material = TmatB2;
                     //mesh.material.Lerp(mesh.material, TmatB2, Time.deltaTime * 2);
@@ -204,13 +214,15 @@ public class GridTiling : MonoBehaviour
                 }
                 else if (t.blueTimer == 1)
                 {
+                    mesh.transform.rotation = Quaternion.identity;
+                    mesh.transform.Rotate(-90, 0, 0);
                     //MaterialLerping(TmatB2, TmatB1);
                     mesh.material = TmatB1;
                     //mesh.material.Lerp(mesh.material, TmatB1, Time.deltaTime * 2);
-                    var fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -227,13 +239,15 @@ public class GridTiling : MonoBehaviour
             {
                 if (t.greenTimer == 0 || t.greenTimer == 3)
                 {
+                    mesh.transform.rotation = Quaternion.identity;
+                    mesh.transform.Rotate(-90, 0, 0);
                     //MaterialLerping(TmatG2, TmatG3);
                     mesh.material = TmatG3;
                     //mesh.material.Lerp(mesh.material, TmatG3, Time.deltaTime * 2);
-                    var fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
                     SetCubeSize();
                     AllColonneActivate();
                     refreshRendTempo = false;
@@ -247,10 +261,12 @@ public class GridTiling : MonoBehaviour
                 {
                     //MaterialLerping(TmatG1, TmatG2);
                     //mesh.material.Lerp(mesh.material, TmatG2, Time.deltaTime * 2);
-                    var fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                    mesh.transform.rotation = Quaternion.identity;
+                    mesh.transform.Rotate(-90, 0 , 0);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
                     mesh.material = TmatG2;
                     SetCubeSize();
                     AllColonneActivate();
@@ -263,12 +279,14 @@ public class GridTiling : MonoBehaviour
                 }
                 else if ((t.greenTimer == 2 && t.greenFlag) || (t.greenTimer == 1 && !t.greenFlag))
                 {
+                    mesh.transform.rotation = Quaternion.identity;
+                    mesh.transform.Rotate(-90, 0, 0);
                     //MaterialLerping(TmatG3, TmatG1);
                     //mesh.material.Lerp(mesh.material, TmatG1, Time.deltaTime * 2);
-                    var fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    fakeB = gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
                     mesh.material = TmatG1;
                     SetCubeSize();
                     AllColonneActivate();

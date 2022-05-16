@@ -5,7 +5,7 @@ using UnityEngine;
 public class PauseBehavior : StateMachineBehaviour
 {
     bool awake = true;
-    GameObject inGameUI;
+    InGameUI inGameUI;
     GameObject PauseMenu;
     GridTiles[,] grid;
     GridTiling gT;
@@ -26,6 +26,7 @@ public class PauseBehavior : StateMachineBehaviour
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
+            inGameUI = FindObjectOfType<InGameUI>();
             awake = false;
         }
         x = (int)player.position.x;
@@ -52,7 +53,7 @@ public class PauseBehavior : StateMachineBehaviour
     {
         gT.AllColonneActivate();
         gT.SetCubeSize();
-
+        inGameUI.inGameUI.SetActive(false);
         foreach (GridTiles tile in grid)
         {
             if (tile.pauseAnim)
