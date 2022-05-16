@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class WorldManager : MonoBehaviour
     GridTiles gridTiles;
     [SerializeField] float[] LevelsOfTheWorld;
     GameObject worldLevelUi;
+    List<Scene> previewScene;
 
     void Start()
     {
@@ -22,9 +24,13 @@ public class WorldManager : MonoBehaviour
         worldLevelUi = transform.Find("CanvasCam/").gameObject;
         if (LevelsOfTheWorld.Length > 1)
         {
-            for (int i = 1; i < LevelsOfTheWorld.Length; i++)
+            for (int i = 1; i <= LevelsOfTheWorld.Length; i++)
             {
-                worldLevelUi.transform.Find(""+ i).gameObject.SetActive(true);
+                GameObject world = worldLevelUi.transform.Find("" + i).gameObject;
+                world.SetActive(true);
+                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "Level " + i;
+
+                
             }
         }
     }
@@ -37,6 +43,6 @@ public class WorldManager : MonoBehaviour
 
     public void OpenWorld(GameObject button)
     {
-        SceneManager.LoadScene("Lvl_" + Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)]) + "," + (Mathf.RoundToInt((LevelsOfTheWorld[int.Parse(button.name)] - Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)])) * 10)), LoadSceneMode.Single);
+        SceneManager.LoadScene("Lvl_" + Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)- 1]) + "," + (Mathf.RoundToInt((LevelsOfTheWorld[int.Parse(button.name)- 1] - Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)- 1])) * 10)), LoadSceneMode.Single);
     }
 }
