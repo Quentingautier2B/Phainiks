@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     DebugTools debugTools;
-    [SerializeField] bool Hub;
+    public bool Hub;
     InGameUI inGameUI;
     GameObject stateMachine;
     float lerper;

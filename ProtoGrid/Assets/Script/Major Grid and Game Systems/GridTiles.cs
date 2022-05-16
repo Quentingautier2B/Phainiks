@@ -30,10 +30,12 @@ public class GridTiles : MonoBehaviour
     [HideInInspector] public int TempoTileC;
     [HideInInspector] public int TeleporterC;
     [HideInInspector] public int TeleporterTargetC;
+    
 
     public bool walkable;
     public bool invisible;
     public bool originalPosition;
+    [Range(0, 4)] public int World;
     [Range(0, 5)] public int key;
     [Range(0, 5)] public int door;    
     public bool open = false;
@@ -137,6 +139,7 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        
         if (walkable)
             invisible = false;
 

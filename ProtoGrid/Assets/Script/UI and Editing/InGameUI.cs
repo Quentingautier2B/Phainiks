@@ -16,6 +16,9 @@ public class InGameUI : MonoBehaviour
     [HideInInspector] public float endTile;
     SceneChange sceneChange;
     [SerializeField] List<GameObject> uiEndLevelDisable;
+    [SerializeField] GameObject restart;
+    [SerializeField] GameObject rotateLeft;
+    [SerializeField] GameObject rotateRight;
     Button revert;
     Animator stateMachine;
     public TextMeshProUGUI nbStep;
@@ -44,9 +47,6 @@ public class InGameUI : MonoBehaviour
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
-
-
-
 
         yield return new WaitForSeconds(.5f);
  /*       debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -137,14 +137,27 @@ public class InGameUI : MonoBehaviour
     }
     void Update()
     {
-       TimerText();
-        nbStep.text = "" + timerValue;
-        if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
+        
+        //TimerText();
+        //nbStep.text = "" + timerValue;
+        if (sceneChange.Hub)
         {
+            rotateLeft.SetActive(false);
+            rotateRight.SetActive(false);
+            restart.SetActive(false);
+            revert.gameObject.SetActive(false);
+            timerText.gameObject.SetActive(false);
+        }
+        else if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
+        {
+            TimerText();
+            nbStep.text = "" + timerValue;
             revert.interactable = false;
         }
         else
         {
+            TimerText();
+            nbStep.text = "" + timerValue;
             revert.interactable = true;
         }
         

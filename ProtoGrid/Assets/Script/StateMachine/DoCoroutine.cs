@@ -7,6 +7,8 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve SpeedCurve;
     public AnimationCurve oGSpeedCurve;
     float yo;
+    public bool right;
+    public bool left;
     SceneChange sChange;
     public float begin = 2.2f;
     public float lerper;
@@ -49,6 +51,8 @@ public class DoCoroutine : MonoBehaviour
         gridG = FindObjectOfType<GridGenerator>();
         sChange = FindObjectOfType<SceneChange>();
         inGameUI = FindObjectOfType<InGameUI>();
+        right = false;
+        left = false;
     }
 
     public void startCoroutine(GridTiles tile)
@@ -266,5 +270,13 @@ public class DoCoroutine : MonoBehaviour
             yield return new WaitForEndOfFrame();
             StartCoroutine(Lerper(startPos, endPos));
         }
+    }
+    public void Right()
+    {
+        right = true;
+    }
+    public void Left()
+    {
+        left = true;
     }
 }
