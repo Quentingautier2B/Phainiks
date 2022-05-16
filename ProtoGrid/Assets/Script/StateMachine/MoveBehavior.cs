@@ -140,7 +140,7 @@ public class MoveBehavior : StateMachineBehaviour
         {
             if (grid[anim.GetInteger("PreviousX"),anim.GetInteger("PreviousY")].World > 0)
             {
-                grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);
+                grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);      
             }
             if (grid[x, y].World > 0)
             {

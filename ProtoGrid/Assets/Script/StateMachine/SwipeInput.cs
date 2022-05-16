@@ -92,7 +92,19 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
+        if (doC.right)
+        {
+            pPosAssignement();
+            HubTestRightDirections(animator);
+            doC.right = false;
+        }
 
+        if (doC.left)
+        {
+            pPosAssignement();
+            HubTestLeftDirections(animator);
+            doC.left = false;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -143,9 +155,9 @@ public class SwipeInput : StateMachineBehaviour
             {
                 directionSwipe = inputBuffer.SavedInput[0];   
             }
+            pPosAssignement();
+            TestFourDirections(animator);
         }
-        pPosAssignement();
-        TestFourDirections(animator);
 
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -333,5 +345,29 @@ public class SwipeInput : StateMachineBehaviour
         }
 
 
+    }
+    void HubTestRightDirections(Animator anim)
+    {
+        roundingDirectionalYPosition = new Vector2(0, 0);
+        anim.SetInteger("TargetInfoX", pPosX + 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+        rewindPos.Add(new Vector2(pPosX, pPosY));
+    }
+    void HubTestLeftDirections(Animator anim)
+    {
+        roundingDirectionalYPosition = new Vector2(1, 1);
+        anim.SetInteger("TargetInfoX", pPosX - 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+        rewindPos.Add(new Vector2(pPosX, pPosY));
     }
 }

@@ -139,6 +139,7 @@ public class GridTiles : MonoBehaviour
 
     void Update()
     {
+        
         if (walkable)
             invisible = false;
 
