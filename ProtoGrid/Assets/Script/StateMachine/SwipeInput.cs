@@ -92,7 +92,7 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log(animIndexValue);
+       // Debug.Log(animIndexValue);
 
         //animIndexValue += Time.deltaTime * 150;
         if (monte)
@@ -103,6 +103,7 @@ public class SwipeInput : StateMachineBehaviour
         {
             animIndexValue -= Time.deltaTime * 50;
         }
+
         if(animIndexValue < 0 && !monte)
         {
             animIndexValue = 1;
@@ -113,7 +114,7 @@ public class SwipeInput : StateMachineBehaviour
             animIndexValue = 49;
             monte = false;
         }
-        pSRend.SetBlendShapeWeight(1, animIndexValue);
+        //pSRend.SetBlendShapeWeight(1, animIndexValue);
         if (doC.right)
         {
             pPosAssignement();

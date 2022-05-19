@@ -265,11 +265,11 @@ public class TilingEditor : MonoBehaviour
                 rend.GetComponent<Renderer>().material = disabledMat;
         }
 
-        if (walkable /*&& !crumble*/)
+        if (walkable && !crumble)
         {
 
             transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
-            transform.Find("Renderer").localScale = new Vector3(50,50,50);
+           // transform.Find("Renderer").localScale = new Vector3(50,50,50);
             //transform.Find("Renderer").position = new Vector3(transform.Find("Renderer").position.x, -4.9f, transform.Find("Renderer").position.z);
             //rend.GetComponent<Renderer>().material = normalMat;
         }
@@ -279,7 +279,7 @@ public class TilingEditor : MonoBehaviour
         {
             //transform.Find("Renderer").rotation = Quaternion.identity;
             transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
-            transform.Find("Renderer").localScale = Vector3.one * 50;
+            //transform.Find("Renderer").localScale = Vector3.one * 50;
             //rend.GetComponent<Renderer>().material = crumbleMat;
         }
 
@@ -287,7 +287,7 @@ public class TilingEditor : MonoBehaviour
         {
             //transform.Find("Renderer").rotation = Quaternion.identity;
             transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
-            transform.Find("Renderer").localScale = Vector3.one * 50;
+            //transform.Find("Renderer").localScale = Vector3.one * 50;
         }
     }
 

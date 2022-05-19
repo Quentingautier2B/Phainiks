@@ -9,13 +9,29 @@ public class DoCoroutine : MonoBehaviour
     float yo;
     SceneChange sChange;
     public float begin = 2.2f;
-    public float lerper;
+    public float lerper, lerpix;
     InGameUI inGameUI;
     GridTiles[,] grid;
     GridGenerator gridG;
     public bool right, left;
+    public AnimationCurve landAnimation;
+    SkinnedMeshRenderer pSRend;
 
+    public IEnumerator lerping()
+    {
+        lerpix += Time.deltaTime * 3;
+        pSRend.SetBlendShapeWeight(1, landAnimation.Evaluate(lerpix ) * 100);
 
+        if (lerpix >= 1)
+        {
+            lerpix = 0;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(lerping());
+        }
+    }
 
     public void UpdateAdjTiles(GridTiles g, int x, int y)
     {
@@ -51,6 +67,7 @@ public class DoCoroutine : MonoBehaviour
     {
         gridG = FindObjectOfType<GridGenerator>();
         sChange = FindObjectOfType<SceneChange>();
+        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
     }
 

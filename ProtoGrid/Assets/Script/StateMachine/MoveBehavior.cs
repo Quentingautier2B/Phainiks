@@ -9,7 +9,7 @@ public class MoveBehavior : StateMachineBehaviour
     [SerializeField] float moveSpeed;    
     [HideInInspector] public int timerValue;
     int x,y;
-    public AnimationCurve moveAnimation;  
+    public AnimationCurve moveAnimation, landAnimation;  
     Transform player;
     SceneChange sChange;
     GridTiles[,] grid;
@@ -24,6 +24,7 @@ public class MoveBehavior : StateMachineBehaviour
     Vector3 startPos;
     SceneChange sceneChange;
     SkinnedMeshRenderer pSRend;
+    Quaternion startRot, endRot;
     #endregion
 
 
@@ -41,6 +42,8 @@ public class MoveBehavior : StateMachineBehaviour
             sChange = FindObjectOfType<SceneChange>();
         }
         startPos = player.position;
+        startRot = player.rotation;
+        endRot = Quaternion.AngleAxis(90, player.forward);
         canMove = true;
         if (animator.GetBool("Rewind"))
         {
@@ -86,7 +89,7 @@ public class MoveBehavior : StateMachineBehaviour
         {
             lerper += Time.deltaTime * moveSpeed;
             pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
-
+            pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
             if(lerper <= .5f)
             {
                 pSRend.SetBlendShapeWeight(0,Mathf.Lerp(0,100,lerper));
@@ -114,10 +117,14 @@ public class MoveBehavior : StateMachineBehaviour
         }
         else
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
+            pSRend.transform.rotation = Quaternion.identity;
+            pSRend.transform.Rotate(90, 0, 0);
+            doC.StartCoroutine(doC.lerping());
             player.position = new Vector3(x, player.position.y , y);
             if (anim.GetBool("Rewind"))
             {
-                UI.timerValue--;
+                UI.timerValue++;
             }
             else
             {
@@ -233,4 +240,6 @@ public class MoveBehavior : StateMachineBehaviour
             }
         }
     }
+
+
 }
