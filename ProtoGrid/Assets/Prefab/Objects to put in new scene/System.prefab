@@ -1082,7 +1082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8849078889904249877
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3015,7 +3015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &654084594178787182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3161,7 +3161,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.633e-41, y: 6e-44, z: 6.0155455e+28, w: NaN}
+  m_BoundingSphereOverride: {x: 6.92e-43, y: -7.339283, z: 6.92e-43, w: -23.279373}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -3926,7 +3926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2650609339960240438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4345,6 +4345,10 @@ PrefabInstance:
     - target: {fileID: 2468726520109806168, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
       propertyPath: deadZoneDiameter
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447310145361317015, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
+      propertyPath: begin
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4447310145361317015, guid: 15f8600bc677d3b4a9894c66668a2ace, type: 3}
       propertyPath: landAnimation.m_Curve.Array.size

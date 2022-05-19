@@ -8,7 +8,7 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve oGSpeedCurve;
     float yo;
     SceneChange sChange;
-    public float begin = 2.2f;
+    public float begin = 1.7f;
     public float lerper, lerpix;
     InGameUI inGameUI;
     GridTiles[,] grid;
@@ -123,7 +123,7 @@ public class DoCoroutine : MonoBehaviour
     {
         if (Time.timeSinceLevelLoad < 1)
         {
-            float speed = 2;
+            float speed = 2.5f;
             float queueWaitTime = Random.Range(0f, .4f);
             yield return new WaitForSeconds(queueWaitTime);
            
@@ -133,7 +133,7 @@ public class DoCoroutine : MonoBehaviour
         else if (tile.levelTransiIndex == 100)
         {
             inGameUI.endTile = levelTransiIndex;
-            float speed = 1.5f;
+            float speed = 2.5f;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
             
             StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile, 0));
