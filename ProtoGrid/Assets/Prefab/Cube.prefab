@@ -206,6 +206,7 @@ MonoBehaviour:
   height: 0
   hitByCam: 0
   numberFrameHit: 0
+  World: 0
 --- !u!114 &735905787984830351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,10 +229,9 @@ MonoBehaviour:
   originalPositionItem: {fileID: 7825203435587043538, guid: 2aa05ed043117734daccda0561ae677e, type: 3}
   TimerItem: {fileID: 6409185897952528890, guid: 09684c61948e2784e9847af68cd189e5, type: 3}
   LevelTransitionItem: {fileID: 7260719824112251076, guid: 73ff13af07f9fbf468c75eb79e2418cf, type: 3}
-  PSysTTU: {fileID: 8000799274760664656, guid: b92269c6ae44f3f48818bdaacf2da423, type: 3}
-  PSysTTD: {fileID: 2598777416349976410, guid: 8374df013a39d0445b5f400c616d9ed7, type: 3}
   TpItem: {fileID: 8656460371348955301, guid: 9b8e5a992bd0b7942836e71a93547a30, type: 3}
   TeleLine: {fileID: 2758567794776003239, guid: abcd204533cb1c14083deefe9881a02b, type: 3}
+  WorldItem: {fileID: 0}
   arrowHead: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   redM: {fileID: 2100000, guid: 95d5bb723c51bbc48b7ea84a25194578, type: 2}
   blueM: {fileID: 2100000, guid: 4d7ecfea9b104b948be199f18cd77dbe, type: 2}
@@ -712,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4464268822109999575
 Transform:
   m_ObjectHideFlags: 0
@@ -722,7 +722,7 @@ Transform:
   m_GameObject: {fileID: 6630282231513708124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.506, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.1, z: 0.07}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 2037274178713318906}
   m_RootOrder: 0

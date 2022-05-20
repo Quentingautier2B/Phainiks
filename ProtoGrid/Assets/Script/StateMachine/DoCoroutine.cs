@@ -8,14 +8,30 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve oGSpeedCurve;
     float yo;
     SceneChange sChange;
-    public float begin = 2.2f;
-    public float lerper;
+    public float begin = 1.7f;
+    public float lerper, lerpix;
     InGameUI inGameUI;
     GridTiles[,] grid;
     GridGenerator gridG;
     public bool right, left;
+    public AnimationCurve landAnimation;
+    SkinnedMeshRenderer pSRend;
 
+    public IEnumerator lerping()
+    {
+        lerpix += Time.deltaTime * 3;
+        pSRend.SetBlendShapeWeight(1, landAnimation.Evaluate(lerpix ) * 100);
 
+        if (lerpix >= 1)
+        {
+            lerpix = 0;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(lerping());
+        }
+    }
 
     public void UpdateAdjTiles(GridTiles g, int x, int y)
     {
@@ -51,6 +67,7 @@ public class DoCoroutine : MonoBehaviour
     {
         gridG = FindObjectOfType<GridGenerator>();
         sChange = FindObjectOfType<SceneChange>();
+        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
     }
 
@@ -106,7 +123,7 @@ public class DoCoroutine : MonoBehaviour
     {
         if (Time.timeSinceLevelLoad < 1)
         {
-            float speed = 2;
+            float speed = 2.5f;
             float queueWaitTime = Random.Range(0f, .4f);
             yield return new WaitForSeconds(queueWaitTime);
            
@@ -116,7 +133,7 @@ public class DoCoroutine : MonoBehaviour
         else if (tile.levelTransiIndex == 100)
         {
             inGameUI.endTile = levelTransiIndex;
-            float speed = 1.5f;
+            float speed = 2.5f;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
             
             StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile, 0));

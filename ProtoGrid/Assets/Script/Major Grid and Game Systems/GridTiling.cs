@@ -70,7 +70,7 @@ public class GridTiling : MonoBehaviour
         t = FindObjectOfType<TileVariables>();
 
 
-        if (tile.tempoTile != 0 || tile.crumble)
+        if (/*tile.tempoTile != 0 ||*/ tile.crumble)
         {
             TempoTile.SetActive(true);
         }
@@ -107,12 +107,6 @@ public class GridTiling : MonoBehaviour
         }
         else
             refreshRendTempo = false;
-        //mesh.transform.rotation = Quaternion.identity;
-    }
-
-    private void Update()
-    {
-        //TempoTileMaterial();
     }
 
 
@@ -133,21 +127,6 @@ public class GridTiling : MonoBehaviour
             decorMesh.material = Green;
         }
     }
-
-/*    void MaterialLerping(Material previousMat, Material mat)
-    {
-        lerpMatTimer += Time.deltaTime * 2;
-        mesh.material.Lerp(previousMat, mat, lerpMatTimer);
-        if(lerpMatTimer < 1)
-        {
-            MaterialLerping(previousMat, mat);
-        }
-        else
-        {
-            lerpMatTimer = 0;
-        }
-
-    }*/
 
 
     public void TempoTileMaterial()

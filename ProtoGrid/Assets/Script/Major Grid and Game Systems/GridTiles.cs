@@ -230,8 +230,7 @@ public class GridTiles : MonoBehaviour
         {
             if (tempoTile != 0)
             {
-                transform.Find("DirectionTempoU").gameObject.SetActive(true);
-                transform.Find("DirectionTempoD").gameObject.SetActive(true);
+
 
             }
             var col = rend.material.color;
@@ -244,8 +243,7 @@ public class GridTiles : MonoBehaviour
         {
             if(tempoTile != 0)
             {
-                transform.Find("DirectionTempoU").gameObject.SetActive(false) ;
-                transform.Find("DirectionTempoD").gameObject.SetActive(false) ;
+
                 
             }
             var col = rend.material.color;
