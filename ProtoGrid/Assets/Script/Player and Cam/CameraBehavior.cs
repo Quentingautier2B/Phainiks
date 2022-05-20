@@ -46,6 +46,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
+        ForPicture();
         AngleCheck();
         RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
         if ( hits.Length >= 1)
@@ -157,6 +158,11 @@ public class CameraBehavior : MonoBehaviour
     void AngleCheck()
     {
         rotateMode = Mathf.RoundToInt(((transform.localEulerAngles.y - 45) % 360) / 90);
+    }
+
+    void ForPicture()
+    {
+        //if ()
     }
 
     #region oldCam

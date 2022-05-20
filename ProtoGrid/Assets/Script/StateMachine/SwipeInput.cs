@@ -92,6 +92,7 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         Debug.Log(animIndexValue);
 
         //animIndexValue += Time.deltaTime * 150;
