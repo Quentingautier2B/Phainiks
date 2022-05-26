@@ -92,12 +92,9 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-<<<<<<< HEAD
+
         
-        Debug.Log(animIndexValue);
-=======
        // Debug.Log(animIndexValue);
->>>>>>> origin/Andre
 
         //animIndexValue += Time.deltaTime * 150;
         if (monte)
