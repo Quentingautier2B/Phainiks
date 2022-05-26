@@ -271,7 +271,7 @@ public class TilingEditor : MonoBehaviour
         {
 
             transform.Find("Renderer").GetComponent<MeshFilter>().mesh = normalTile;
-           // transform.Find("Renderer").localScale = new Vector3(50,50,50);
+            transform.Find("Renderer").localScale = new Vector3(50,50,50);
             //transform.Find("Renderer").position = new Vector3(transform.Find("Renderer").position.x, -4.9f, transform.Find("Renderer").position.z);
             //rend.GetComponent<Renderer>().material = normalMat;
         }
