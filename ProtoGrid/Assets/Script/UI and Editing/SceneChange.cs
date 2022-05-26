@@ -29,13 +29,6 @@ public class SceneChange : MonoBehaviour
     {
         stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
-<<<<<<< HEAD
-=======
-/*        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-
-        debugTools.mainMusic.release();*/
->>>>>>> QuentinBackup
 
         yield return new WaitForSeconds(0.1f);
         if (tile < 1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
@@ -44,16 +37,7 @@ public class SceneChange : MonoBehaviour
         }
         else
         {
-<<<<<<< HEAD
             inGameUI.endTile = tile;
-=======
-            //StartCoroutine(Lerper(inGameUI.startPosX, inGameUI.endPosX));
-            inGameUI.endTile = tile;
-            /*inGameUI.endLevelMenu.SetActive(true);
-            inGameUI.oneStarImage.gameObject.SetActive(true);
-            inGameUI.twoStarImage.gameObject.SetActive(true);
-            inGameUI.threeStarImage.gameObject.SetActive(true);*/
->>>>>>> QuentinBackup
         }
 
             inGameUI.endTile = tile;

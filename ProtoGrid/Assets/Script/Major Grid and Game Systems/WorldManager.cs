@@ -26,26 +26,11 @@ public class WorldManager : MonoBehaviour
             {
                 GameObject world = worldLevelUi.transform.Find("" + i).gameObject;
                 world.SetActive(true);
-<<<<<<< HEAD
                 world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;               
-=======
-                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;
-
-                
->>>>>>> QuentinBackup
             }
         }
     }
 
-<<<<<<< HEAD
-=======
-    
-    void Update()
-    {
-        
-    }
-
->>>>>>> QuentinBackup
     public void OpenWorld(GameObject button)
     {
         SceneManager.LoadScene("Lvl_" + Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)- 1]) + "," + (Mathf.RoundToInt((LevelsOfTheWorld[int.Parse(button.name)- 1] - Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)- 1])) * 10)), LoadSceneMode.Single);
