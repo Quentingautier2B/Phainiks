@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5943152722358956396}
   - component: {fileID: 5943152722358956395}
   - component: {fileID: 4447310145361317015}
+  - component: {fileID: 2468726520109806168}
   m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
@@ -63,3 +64,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a8e544d7f6b394cbf000215150e7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.016666412
+      value: 0.009433746
+      inSlope: 5.428819
+      outSlope: 5.428819
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.13086347
+      value: 0.8103468
+      inSlope: 0.8198334
+      outSlope: 0.8198334
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.66108733
+      outWeight: 0.22982925
+    - serializedVersion: 3
+      time: 0.6492332
+      value: 0.81019306
+      inSlope: -0.4194959
+      outSlope: -0.4194959
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16874513
+      outWeight: 0.45164865
+    - serializedVersion: 3
+      time: 1.0291748
+      value: 0.082546234
+      inSlope: -1.9151545
+      outSlope: -1.9151545
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  oGSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.015382187
+      value: 0.061721556
+      inSlope: 1.5132768
+      outSlope: 1.5132768
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07738282
+    - serializedVersion: 3
+      time: 1.0301208
+      value: 0.25911713
+      inSlope: -0.4421729
+      outSlope: -0.4421729
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2531603
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  begin: 5
+  lerper: 0
+--- !u!114 &2468726520109806168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943152722358956397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96bf3dded23bb24e92df09715751d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SavedInput: []
+  clickTimerValue: 0.25
+  deadZoneDiameter: 50

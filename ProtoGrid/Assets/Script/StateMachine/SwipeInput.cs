@@ -14,8 +14,8 @@ public class SwipeInput : StateMachineBehaviour
     public float clickTimerValue;
     float clickTimer;
     bool clickBool;
-   
-    
+    SkinnedMeshRenderer pSRend;
+    DoCoroutine doC;
     Transform player;
     GridGenerator gridG;
     GridTiles[,] grid;
@@ -24,14 +24,43 @@ public class SwipeInput : StateMachineBehaviour
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
-    
- 
+    InputSaver inputBuffer;
+    float animIndexValue;
+    bool monte; 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
+        
+
 
         if (awake)
         {
+            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
+            inputBuffer = FindObjectOfType<InputSaver>();
+            doC = animator.GetComponent<DoCoroutine>();
+            grid = FindObjectOfType<GridGenerator>().grid;
+            GridTiling gTil = null;
+            foreach(GridTiles g in grid)
+            {
+                if (g.originalPosition)
+                {
+                    gTil = g.GetComponent<GridTiling>();
+                }
+            }
+            foreach (GridTiles g in grid)
+            {
+                if ((!g.originalPosition && g.open && g.door != 0) || (!g.originalPosition && g.door == 0))
+                {                  
+                    doC.startClose(g, g.levelTransiIndex, gTil);
+                }
+                /*if (g.door != 0 && g.open)
+                    g.open = false;*/
+                /*if (g.door != 0 && !g.open)
+                    doC.startClose(g, g.levelTransiIndex);
+                else
+                    g.open = false;*/
+            }
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
             
@@ -41,12 +70,14 @@ public class SwipeInput : StateMachineBehaviour
             cam = FindObjectOfType<CameraBehavior>();
             rewindPos.Clear();
         }
-        grid = gridG.grid;
 
+        grid = gridG.grid;
         pPosAssignement();
+        
         foreach(GridTiles g in grid)
         {
-            if (g.walkable && g.open)
+            
+            if (g.walkable && g.open && g.tempoTile == 0)
             {
                 g.GetComponent<GridTiling>().SetDirectionalMaterial();
 
@@ -54,79 +85,69 @@ public class SwipeInput : StateMachineBehaviour
             if (g.walkable && (g.tempoTile != 0 || g.crumble) && g.open)
             {
                 g.GetComponent<GridTiling>().TempoTileMaterial();
-
             }
+           
         }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-     
+       // Debug.Log(animIndexValue);
 
-
-        if (Input.GetMouseButtonDown(0))
+        //animIndexValue += Time.deltaTime * 150;
+        if (monte)
         {
-            startTouchPos = Input.mousePosition;
-            clickBool = true;
+            animIndexValue += Time.deltaTime * 50;
+        }
+        else
+        {
+            animIndexValue -= Time.deltaTime * 50;
         }
 
-        if (Input.GetMouseButton(0))
+        if(animIndexValue < 0 && !monte)
         {
-            currentTouchPos = Input.mousePosition;
+            animIndexValue = 1;
+            monte = true;
+        }
+        else if(animIndexValue > 50 && monte)
+        {
+            animIndexValue = 49;
+            monte = false;
+        }
+        //pSRend.SetBlendShapeWeight(1, animIndexValue);
+        if (doC.right)
+        {
+            pPosAssignement();
+            HubTestRightDirections(animator);
+            doC.right = false;
         }
 
-        if (Input.GetMouseButtonUp(0) && Vector2.Distance(currentTouchPos, startTouchPos) >= deadZoneDiameter /*&& !clickBool*/)
+        if (doC.left)
         {
-            endTouchPos = Input.mousePosition;
-            directionSwipe = -(startTouchPos - endTouchPos).normalized;
-            if (cam.rotateMode == 0)
-            {
-                //directionSwipe = directionSwipe;
-            }
-            else if (cam.rotateMode == 1)
-            {
-                directionSwipe = Quaternion.AngleAxis(90, -Vector3.forward) * directionSwipe;
-            }
-            else if (cam.rotateMode == 2)
-            {
-                directionSwipe = Quaternion.AngleAxis(180, -Vector3.forward) * directionSwipe;
-            }
-            else if (cam.rotateMode == 3)
-            {
-                directionSwipe = Quaternion.AngleAxis(270, -Vector3.forward) * directionSwipe;
-            }
-            else
-            {
-                Debug.LogError("Prob avce l'angle de swipe, modulo pas correct");
-            }
+            pPosAssignement();
+            HubTestLeftDirections(animator);
+            doC.left = false;
+        }
+
+        if (inputBuffer.SavedInput.Count > 0)
+        {
+            directionSwipe = inputBuffer.SavedInput[0];
             pPosAssignement();
             TestFourDirections(animator);
         }
 
-        if (Input.GetMouseButtonUp(0) && clickBool)
-        {
-           
-            if(directionIndex > 0)
-            {
-                //pPosAssignement();
-                //TestFourDirections(animator);
-            }
-            else { }
-        }
 
-        if (clickBool)
-        {
-            clickTimer -= Time.deltaTime;
-            if(clickTimer <=0)
-            {
-                clickBool = false;
-                clickTimer = clickTimerValue;
-            }
-        }
+
 
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animIndexValue = 0;
+        monte = true;
+        if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+            inputBuffer.SavedInput.RemoveAt(0);
+
+        directionSwipe = Vector2.zero;
         if (animator.GetBool("Rewind"))
         {
             animator.SetInteger("PreviousX", pPosX);
@@ -138,7 +159,7 @@ public class SwipeInput : StateMachineBehaviour
         
     }
 
-    
+
 
     void pPosAssignement()
     {
@@ -151,8 +172,9 @@ public class SwipeInput : StateMachineBehaviour
     {
         if (directionSwipe.x > 0 && directionSwipe.y > 0)
         {
+            
             if (gridG.TestDirection(pPosX, pPosY, 1))
-                {
+            {
                 roundingDirectionalYPosition = new Vector2(0, 0);
                 anim.SetInteger("TargetInfoX", pPosX + 1);
                 anim.SetInteger("TargetInfoY", pPosY);
@@ -179,11 +201,17 @@ public class SwipeInput : StateMachineBehaviour
                     anim.SetBool("OntonormalTileTempo", true);
                     rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
-            }                
+            }
+            else
+            {
+                if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                    inputBuffer.SavedInput.RemoveAt(0);
+            }
         }
 
         if (directionSwipe.x > 0 && directionSwipe.y < 0)
         {
+      
             if (gridG.TestDirection(pPosX, pPosY, 2))
             {
                 roundingDirectionalYPosition = new Vector2(0, 1);
@@ -213,10 +241,16 @@ public class SwipeInput : StateMachineBehaviour
                     rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }
+            else
+            {
+                if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                    inputBuffer.SavedInput.RemoveAt(0);
+            }
         }
 
         if (directionSwipe.x < 0 && directionSwipe.y > 0)
         {
+
             if (gridG.TestDirection(pPosX, pPosY, 3))
             {
                 roundingDirectionalYPosition = new Vector2(1, 0);
@@ -246,10 +280,16 @@ public class SwipeInput : StateMachineBehaviour
                     rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }
+            else
+            {
+                if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                    inputBuffer.SavedInput.RemoveAt(0);
+            }
         }
 
         if (directionSwipe.x < 0 && directionSwipe.y < 0)
         {
+
             if (gridG.TestDirection(pPosX, pPosY, 4))
             {
                 roundingDirectionalYPosition = new Vector2(1, 1);
@@ -279,7 +319,38 @@ public class SwipeInput : StateMachineBehaviour
                     rewindPos.Add(new Vector2(pPosX, pPosY));
                 }
             }
+            else
+            {
+                if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                    inputBuffer.SavedInput.RemoveAt(0);
+            }
         }
 
+
+    }
+
+    void HubTestRightDirections(Animator anim)
+    {
+        roundingDirectionalYPosition = new Vector2(0, 0);
+        anim.SetInteger("TargetInfoX", pPosX + 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+        rewindPos.Add(new Vector2(pPosX, pPosY));
+    }
+    void HubTestLeftDirections(Animator anim)
+    {
+        roundingDirectionalYPosition = new Vector2(1, 1);
+        anim.SetInteger("TargetInfoX", pPosX - 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+        rewindPos.Add(new Vector2(pPosX, pPosY));
     }
 }

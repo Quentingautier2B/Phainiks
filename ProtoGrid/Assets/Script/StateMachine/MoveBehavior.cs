@@ -9,34 +9,47 @@ public class MoveBehavior : StateMachineBehaviour
     [SerializeField] float moveSpeed;    
     [HideInInspector] public int timerValue;
     int x,y;
-      
+    public AnimationCurve moveAnimation, landAnimation;  
     Transform player;
     SceneChange sChange;
     GridTiles[,] grid;
     InGameUI UI;
-    
+    DoCoroutine doC;
+    float lerper;
     int previousX;
     int previousY;
     bool flag;
     bool awake = true;
     public bool canMove;
+    Vector3 startPos;
+    SceneChange sceneChange;
+    SkinnedMeshRenderer pSRend;
+    Quaternion startRot, endRot;
     #endregion
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        lerper = 0;
         if (awake)
         {
+            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
+            sceneChange = FindObjectOfType<SceneChange>();
+            doC = animator.GetComponent<DoCoroutine>();
             UI = FindObjectOfType<InGameUI>();
             grid = FindObjectOfType<GridGenerator>().grid;
             player = FindObjectOfType<Player>().transform;
             sChange = FindObjectOfType<SceneChange>();
         }
+        startPos = player.position;
+        startRot = player.rotation;
+        endRot = Quaternion.AngleAxis(90, player.forward);
         canMove = true;
         if (animator.GetBool("Rewind"))
         {
             x = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].x;
             y = (int)SwipeInput.rewindPos[SwipeInput.rewindPos.Count - 1].y;
+
         }
         else
         {
@@ -66,31 +79,52 @@ public class MoveBehavior : StateMachineBehaviour
     {
         if (anim.GetBool("Rewind") && flag == true)
         {
+            
             flag = false;
             TileEffectOnMove(x, y, anim);
         }
 
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
-        if (distance > 0f && grid[x, y].walkable)
+        if (/*distance > 0*/ lerper < 1 && grid[x, y].walkable)
         {
-            Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
+            lerper += Time.deltaTime * moveSpeed;
+            pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
+            pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
+            if(lerper <= .5f)
+            {
+                pSRend.SetBlendShapeWeight(0,Mathf.Lerp(0,100,lerper));
+
+            }
+            else
+            {
+                pSRend.SetBlendShapeWeight(0, Mathf.Lerp(100, 0, lerper));
+            }
+
+            player.position = Vector3.Lerp(startPos, new Vector3(grid[x, y].transform.position.x, player.position.y, grid[x, y].transform.position.z), lerper);
+            //Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
             
-            player.position += moveDir * moveSpeed * Time.deltaTime;
-            if(distance > 0.5f)
+            //player.position += moveDir * moveSpeed * Time.deltaTime;
+            if(lerper <.2f)
                 player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
-            if (distance < 0.3f)
+            /*if (lerper >= 1)
             {
-                player.position = new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y);
-                if (anim.GetBool("Rewind"))
-                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);
-            }
+                lerper = 0;
+                player.position = new Vector3(x, player.position.y*//*1.5f + grid[x, y].transform.position.y*//*, y);
+                *//*if (anim.GetBool("Rewind"))
+                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*//*
+            }*/
         }
         else
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
+            pSRend.transform.rotation = Quaternion.identity;
+            pSRend.transform.Rotate(90, 0, 0);
+            doC.StartCoroutine(doC.lerping());
+            player.position = new Vector3(x, player.position.y , y);
             if (anim.GetBool("Rewind"))
             {
-                UI.timerValue--;
+                UI.timerValue++;
             }
             else
             {
@@ -124,9 +158,35 @@ public class MoveBehavior : StateMachineBehaviour
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
         //timerValue++;
+        if (sceneChange.Hub)
+        {
+            if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].World > 0)
+            {
+                grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);
+            }
+            if (grid[x, y].World > 0)
+            {
+                grid[x, y].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(true);
+            }
+        }
+        else if (grid[x, y].levelTransiIndex != 0)
+        {
+            if(grid[x, y].levelTransiIndex >= 1)
+                sChange.StartCoroutine(sChange.Lerper(UI.startPosX, UI.endPosX));
 
-        if (grid[x, y].levelTransiIndex != 0)
-            sChange.startCoroutine(grid[x, y]);
+            foreach (GridTiles tile in grid)
+            {
+                if(tile.levelTransiIndex != grid[x, y].levelTransiIndex)
+                {
+                    tile.levelTransiIndex = 100;
+                    
+                    doC.startClose(tile, grid[x,y].levelTransiIndex, grid[x,y].GetComponent<GridTiling>());
+                }
+            }
+        }
+            
+
+        //sChange.startCoroutine(grid[x, y]);
 
         if (anim.GetBool("Rewind") && grid[previousX, previousY].teleporter != 0)
         {
@@ -174,14 +234,12 @@ public class MoveBehavior : StateMachineBehaviour
         //tile.transform.Find("Key").gameObject.SetActive(false);
         foreach (GridTiles t in grid)
         {
-
-            if(t.door == tile.key )
+            if(t.door == tile.key && t.door > 0)
             {
-                if (t.open)
-                    t.open = false;
-                else if(!t.open)
-                    t.open = true;
+               doC.startClose(t, t.levelTransiIndex, t.GetComponent<GridTiling>());
             }
         }
     }
+
+
 }

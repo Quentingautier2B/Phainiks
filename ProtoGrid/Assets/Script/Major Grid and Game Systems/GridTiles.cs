@@ -11,9 +11,13 @@ public class GridTiles : MonoBehaviour
     #region variables
     [SerializeField, HideInInspector]public bool pauseAnim = false;
     [SerializeField, HideInInspector]public float lerpSpeed = .1f;
+    [SerializeField, HideInInspector]public float pauseLerpSpeed = .1f;
     [SerializeField, HideInInspector]public float currentPosY ;
+    [SerializeField, HideInInspector]public float HeightDiffR, HeightDiffL,HeightDiffU, HeightDiffD;
+    [SerializeField, HideInInspector] public float HeightDiffLD, HeightDiffRD, HeightDiffLU, HeightDiffRU;
     [Header("TempoTilesEffect")]
     [HideInInspector] public int step;
+    [HideInInspector] public bool opening;
 
     [HideInInspector] public bool walkableC;
     [HideInInspector] public bool invisibleC;
@@ -47,7 +51,10 @@ public class GridTiles : MonoBehaviour
     [Range(0, 20)] public int teleporter;
     [Range(0, 20)] public int tpTargetIndex;
     [HideInInspector] public GridTiles TpTarget;
+
     [HideInInspector] public int target;
+    [HideInInspector] public int targetOpen;
+    [HideInInspector] public int currentOpen = 0;
     [HideInInspector] public bool tempoBool;
     [Space]
     [Header("Modifier")]
@@ -63,14 +70,18 @@ public class GridTiles : MonoBehaviour
     GridGenerator gridGenerator;
     Transform tpTarget;
     GridTiles[,] grid;
-
+    [Range(0, 4)] public int World;
     
     #endregion
 
     #region CallMethods
     private void Awake()
     {
-        
+        if (!originalPosition)
+        {
+            transform.position += new Vector3(0,-20,0);
+        }
+     
 
         //TimerValueSetUp();
 
@@ -81,6 +92,7 @@ public class GridTiles : MonoBehaviour
 
     private void Start()
     {
+        currentOpen = 0;
         grid = FindObjectOfType<GridGenerator>().grid;
         tempoBool = true;
         if (walkable)
@@ -138,7 +150,7 @@ public class GridTiles : MonoBehaviour
             }
         }
 
-        if (!walkable)
+        if (!walkable && door == 0)
         {
             var yo = transform.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer y in yo)
@@ -159,15 +171,15 @@ public class GridTiles : MonoBehaviour
         }
 
 
-        if(door != 0 && !open)
+        if(door != 0 && open)
         {
-            walkable = false;
+            walkable = true;
            
         }
 
-        if (door != 0 && open) 
+        if (door != 0 && !open) 
         {
-            walkable = true;
+            walkable = false;
         }
 
 
@@ -218,8 +230,7 @@ public class GridTiles : MonoBehaviour
         {
             if (tempoTile != 0)
             {
-                transform.Find("DirectionTempoU").gameObject.SetActive(true);
-                transform.Find("DirectionTempoD").gameObject.SetActive(true);
+
 
             }
             var col = rend.material.color;
@@ -232,8 +243,7 @@ public class GridTiles : MonoBehaviour
         {
             if(tempoTile != 0)
             {
-                transform.Find("DirectionTempoU").gameObject.SetActive(false) ;
-                transform.Find("DirectionTempoD").gameObject.SetActive(false) ;
+
                 
             }
             var col = rend.material.color;

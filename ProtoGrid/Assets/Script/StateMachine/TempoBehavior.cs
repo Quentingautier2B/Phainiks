@@ -30,12 +30,13 @@ public class TempoBehavior : StateMachineBehaviour
     DebugTools debugTools;
     InGameUI UI;
     public int x, y;
-
+    DoCoroutine doC;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
         {
-
+            gridG = FindObjectOfType<GridGenerator>();
+            doC = FindObjectOfType<DoCoroutine>();
             debugTools = FindObjectOfType<DebugTools>();
             grid = FindObjectOfType<GridGenerator>().grid;
             t = FindObjectOfType<TileVariables>();
@@ -309,7 +310,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 1)
-                    redFlager = LerpPos(tile, debugTools.redMusic, redFlager, t.redFlag);                
+                    redFlager = LerpPos(tile, redFlager, t.redFlag, tile.GetComponent<GridTiling>(), "Tile Rouge");                
             }
            
         }
@@ -319,7 +320,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 2)
-                    blueFlager = LerpPos(tile, debugTools.blueMusic, blueFlager, t.blueFlag);
+                    blueFlager = LerpPos(tile, blueFlager, t.blueFlag, tile.GetComponent<GridTiling>(), "Tile Bleu");
             }
         }
 
@@ -328,7 +329,7 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 3)
-                    greenFlager = LerpPos(tile, debugTools.greenMusic, greenFlager, t.greenFlag);               
+                    greenFlager = LerpPos(tile, greenFlager, t.greenFlag, tile.GetComponent<GridTiling>(), "Tile Vert");               
             }
           
         }
@@ -380,49 +381,83 @@ public class TempoBehavior : StateMachineBehaviour
         #endregion
     }
 
-    bool LerpPos(GridTiles tile, FMOD.Studio.EventInstance music, bool Flager, bool colorFlag)
+    bool LerpPos(GridTiles tile, bool Flager, bool colorFlag, GridTiling g, string musicName)
     {
             //Called on First Loop
             if (tile.tempoBool && colorFlag)
             {
+                doC.UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
                 tile.target = (int)tile.transform.position.y + 2;
+                tile.opening = true;
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName(musicName, 1);
                 tile.tempoBool = false;
             }
             else if(tile.tempoBool && !colorFlag)
             {
+                doC.UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
                 tile.target = (int)tile.transform.position.y - 2;
+                tile.opening = true;
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName(musicName, 0);
                 tile.tempoBool = false;
             }
 
-            //Called Every loop
+        //Called Every loop
+            g.TempoTileMaterial();
             tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-     
+            UpdateAdjacentTileColonnes(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
 
             //Called on last loop
             if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
-            {
-
-                if (colorFlag)
                 {
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                    music.setVolume(1);
-                }
-                else
-                {
-                    tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                    tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                    music.setVolume(0);
-                }
+                    tile.opening = false;
+/*                    if (colorFlag)
+                    {
+                        tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
+                        tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
+                        
+                    }
+                    else
+                    {
+                        tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
+                        tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
+                        
+                    }*/
 
-                tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
-                return false;
-            }
+                    tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
+                    return false;
+                }
             else
             {
-            return true;
+                return true;
             }
         
        
+    }
+
+    void UpdateAdjacentTileColonnes(GridTiles g, int x, int y)
+    {
+        if(x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
+        {
+            gridG.TestDirection(x + 1, y, 4);
+            grid[x + 1, y].GetComponent<GridTiling>().SetCubeSize();
+        }
+
+        if (y - 1 > -1 && grid[x, y - 1] != null && grid[x, y - 1].walkable && grid[x, y - 1].tempoTile == 0)
+        {
+            gridG.TestDirection(x, y - 1, 3);
+            grid[x, y - 1].GetComponent<GridTiling>().SetCubeSize();
+        }
+
+        if (y + 1 < gridG.columns && grid[x, y + 1] != null && grid[x, y + 1].walkable && grid[x, y + 1].tempoTile == 0)
+        {
+            gridG.TestDirection(x, y + 1, 2);
+            grid[x, y + 1].GetComponent<GridTiling>().SetCubeSize();
+        }
+
+        if (x - 1 > -1 && grid[x - 1, y] != null && grid[x - 1, y].walkable && grid[x - 1, y].tempoTile == 0)
+        {
+            gridG.TestDirection(x - 1, y, 1);
+            grid[x - 1, y].GetComponent<GridTiling>().SetCubeSize();
+        }
     }
 }
