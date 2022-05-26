@@ -37,7 +37,7 @@ public class GridTiles : MonoBehaviour
     [Range(0, 5)] public int key;
     [Range(0, 5)] public int door;    
     public bool open = false;
-
+    public bool keyOn;    
     
     public bool crumble;
     [HideInInspector] public bool crumbleUp;

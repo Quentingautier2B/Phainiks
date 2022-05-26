@@ -194,11 +194,21 @@ public class MoveBehavior : StateMachineBehaviour
         }
         else if (grid[x, y].teleporter != 0 && !anim.GetBool("Rewind"))
         {
+            Transform body = player.Find("Body");
+            Transform tpRend = grid[x, y].TpTarget.transform.Find("Teleporter");
             FMODUnity.RuntimeManager.PlayOneShot("event:/World/TP");
-            player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
+            doC.StartCoroutine(doC.tpScaling(tpRend, 0.7f, 0, 0.8f, 4));
+            doC.StartCoroutine(doC.PlayerCoroutine(player, body,grid[x,y].transform, grid[x, y].TpTarget.transform, player.position.y + 4.5f, player.position.y - 5.5f,1,1, pSRend));
+            //player.position = new Vector3(grid[x, y].TpTarget.transform.position.x, grid[x, y].TpTarget.transform.position.y + 1.5f, grid[x, y].TpTarget.transform.position.z);
         }
 
-        
+        if(grid[previousX, previousY].teleporter != 0)
+        {
+            //Transform tpRend = grid[previousX, previousY].TpTarget.transform.Find("Teleporter");
+            doC.StartCoroutine(doC.tpScaling(doC.previousTP, 0, 0.7f, 0, 2));
+        }
+
+
         if (grid[x, y].key != 0)
             KeyBehavior(grid[x, y]);
 
@@ -226,11 +236,21 @@ public class MoveBehavior : StateMachineBehaviour
                 KeyBehavior(grid[previousX, previousY]);
             }
         }
+
+        if(grid[previousX,previousY].key != 0)
+        {
+            grid[previousX, previousY].transform.Find("Key").position += new Vector3(0, 0.05f, 0);
+        }
     }
+
 
     void KeyBehavior(GridTiles tile)
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/GetKey");
+
+        tile.transform.Find("Key").position -= new Vector3(0, 0.05f, 0);
+
+
         //tile.transform.Find("Key").gameObject.SetActive(false);
         foreach (GridTiles t in grid)
         {

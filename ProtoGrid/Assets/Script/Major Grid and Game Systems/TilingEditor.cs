@@ -100,7 +100,6 @@ public class TilingEditor : MonoBehaviour
         EditorBlocRenderering();
         CreateDestroyMethodsHub();
         EditorBlocSnapping();
-        ItemColoring();
     }
 
     private void Start()
@@ -121,6 +120,10 @@ public class TilingEditor : MonoBehaviour
 
                 }
             }
+        }
+        if(key != 0)
+        {
+            transform.Find("Key").localPosition = new Vector3(0, .53f, 0);
         }
     }   
 
@@ -217,7 +220,6 @@ public class TilingEditor : MonoBehaviour
             EditorBlocRenderering();
             CreateDestroyMethodsHub();
             EditorBlocSnapping();
-            ItemColoring();
         }
 
     }
@@ -242,7 +244,7 @@ public class TilingEditor : MonoBehaviour
         world = tile.World;
         crumble = tile.crumble;
         originalPosition = tile.originalPosition;
-        //timerChangeInputValue = tile.timerChangeInputValue;
+
         levelTransiIndex = tile.levelTransiIndex;   
         tempoValue = tile.tempoTile;
         tpValue = tile.teleporter;
@@ -295,13 +297,10 @@ public class TilingEditor : MonoBehaviour
     void CreateDestroyMethodsHub()
     {
         CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.5f);
-        //CreateDestroyObjectIndex(timerChangeInputValue, "Timer+", TimerItem, 0.5f);
-        CreateDestroyObjectIndex(key, "Key", KeyItem, 1f);
-        //CreateDestroyObjectIndex(door, "Door", DoorItem, 1f);
+        CreateDestroyObjectIndex(key, "Key", KeyItem, .53f);
         CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
         CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
         CreateDestroyObjectIndex(world, "World", WorldItem, 0.5f);
-        //CreateDestroyObjectIndex(tpValue, "Line", TeleLine, 0f);
     }
 
     void EditorBlocSnapping()
@@ -382,86 +381,4 @@ public class TilingEditor : MonoBehaviour
 
         return inst;
     } 
-
-    #region ItemColoration
-    void ItemColoring()
-    {
-        //DoorColoration();
-        KeyColoration();
-        TempoTileColoration();
-    }
-
-    /*void DoorColoration()
-    {
-        if (door == 1)
-        {
-            var mesh = Color.red;
-            transform.Find("Door").GetComponent<MeshRenderer>().material = redM;
-        }
-
-        if (door == 2)
-        {
-            var mesh = Color.blue;
-            transform.Find("Door").GetComponent<MeshRenderer>().material = blueM;
-        }
-
-        if (door == 3)
-        {
-            var mesh = Color.black;
-            transform.Find("Door").GetComponent<MeshRenderer>().material = greenM;
-        }
-
-        if (doorRotation && door!=0)
-        {
-            transform.Find("Door").Rotate(0, 90, 0);
-            doorRotation = false;           
-        }
-    }*/
-
-    void KeyColoration()
-    {
-        if (key == 1)
-        {
-            var mesh = Color.red;
-            transform.Find("Key").GetComponent<MeshRenderer>().material = redM;
-        }
-
-        if (key == 2)
-        {
-            var mesh = Color.blue;
-            transform.Find("Key").GetComponent<MeshRenderer>().material = blueM;
-        }
-
-        if (key == 3)
-        {
-            var mesh = Color.black;
-            transform.Find("Key").GetComponent<MeshRenderer>().material = greenM;
-        }
-    }
-
-    void TempoTileColoration()
-    {
-/*        if (tempoValue == 1)
-        {
-            var mesh = Color.red;
-            rend.GetComponent<MeshRenderer>().material = tileRedM;
-        }
-
-        if (tempoValue == 2)
-        {
-            var mesh = Color.blue;
-            rend.GetComponent<MeshRenderer>().material = tileBlueM;
-        }
-
-        if (tempoValue== 3)
-        {
-            var mesh = Color.black;
-            rend.GetComponent<MeshRenderer>().material = tileGreenM;
-        }
-*/
-        //CreateDestroyObjectIndex(tempoValue, "DirectionTempoU", PSysTTU, 0.505f);
-        //CreateDestroyObjectIndex(tempoValue, "DirectionTempoD", PSysTTD, -0.505f);
-
-    }
-    #endregion
 }
