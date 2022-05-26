@@ -1390,8 +1390,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 921510612}
     m_Modifications:
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffD
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffR
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffU
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: levelTransiIndex
-      value: 3.2
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder
@@ -1690,15 +1702,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -1.2477598e-18
+      value: -8.1535656e-17
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1
+      value: 7.72e-43
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1.16e-43
+      value: 7.1e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}

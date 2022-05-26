@@ -130,8 +130,62 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  landAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  tpAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0.011993029
+      outSlope: 0.011993029
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.56028366
+    - serializedVersion: 3
+      time: 0.22163518
+      value: 0.56717914
+      inSlope: 0.71990335
+      outSlope: 0.71990335
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33952507
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4973545
+      value: 1
+      inSlope: -2.698385
+      outSlope: -2.698385
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13054797
+    - serializedVersion: 3
+      time: 1
+      value: 0.5
+      inSlope: 1.0892345
+      outSlope: 1.0892345
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12429017
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   begin: 5
   lerper: 0
+  lerpix: 0
+  tpLerper: 0
+  tpScaleLerper: 0
+  right: 0
+  left: 0
+  previousTP: {fileID: 0}
 --- !u!114 &2468726520109806168
 MonoBehaviour:
   m_ObjectHideFlags: 0

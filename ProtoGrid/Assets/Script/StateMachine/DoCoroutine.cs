@@ -6,16 +6,18 @@ public class DoCoroutine : MonoBehaviour
 {
     public AnimationCurve SpeedCurve;
     public AnimationCurve oGSpeedCurve;
+    public AnimationCurve landAnimation;
+    public AnimationCurve tpAnimation;
     float yo;
     SceneChange sChange;
     public float begin = 1.7f;
-    public float lerper, lerpix;
+    public float lerper, lerpix, tpLerper, tpScaleLerper;
     InGameUI inGameUI;
     GridTiles[,] grid;
     GridGenerator gridG;
     public bool right, left;
-    public AnimationCurve landAnimation;
     SkinnedMeshRenderer pSRend;
+    [HideInInspector] public Transform previousTP;
 
     public IEnumerator lerping()
     {
@@ -198,8 +200,15 @@ public class DoCoroutine : MonoBehaviour
 
     IEnumerator CloseTileMovement(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
     {
-        if(otherTile != null)
+        if(otherTile != null && otherTile.tile.tempoTile == 0)
+        {
             otherTile.SetDirectionalMaterial();
+        }
+        else if (otherTile != null && otherTile.tile.tempoTile != 0)
+        {
+            otherTile.TempoTileMaterial();
+        }
+
 
 
 
@@ -245,6 +254,11 @@ public class DoCoroutine : MonoBehaviour
         else if (tile.transform.position.y >= tile.targetOpen - 0.01f && Time.timeSinceLevelLoad < begin && tile.levelTransiIndex != 100)
         {
             //ogPos
+            if (otherTile.tile.World > 0)
+            {
+                print(1);
+                otherTile.transform.Find("World/CanvasCam").gameObject.SetActive(true);
+            }
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.opening = false;
@@ -260,8 +274,16 @@ public class DoCoroutine : MonoBehaviour
         else
         {
             //not yet
-            yield return new WaitForEndOfFrame();
-            StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+            if (!tile.opening)
+            {
+                yield return new WaitUntil(()=> !tile.opening);
+                StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+                StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+            }
         }
 
     }
@@ -293,8 +315,59 @@ public class DoCoroutine : MonoBehaviour
         }
         else
         {
+            
             yield return new WaitForEndOfFrame();
             StartCoroutine(Lerper(startPos, endPos));
+        }
+    }
+
+    public IEnumerator PlayerCoroutine(Transform playerOverLord , Transform player, Transform currentTile, Transform targetTile, float currentAnimPosY, float targetAnimPosY, float currentAnimPosY2, float targetAnimPosY2, SkinnedMeshRenderer playerSkin)
+    {
+        tpLerper += Time.deltaTime;
+        player.position = new Vector3(player.position.x, Mathf.Lerp(playerOverLord.position.y + 4.5f, playerOverLord.position.y - 5.5f, tpAnimation.Evaluate(tpLerper)), player.position.z);
+        playerSkin.SetBlendShapeWeight(1, tpAnimation.Evaluate(tpLerper));
+        if(tpLerper > .5f)
+        {
+           // player.position = new Vector3(player.position.x, Mathf.Lerp(currentAnimPosY, targetAnimPosY, tpAnimation.Evaluate(tpLerper)), player.position.z);
+            playerOverLord.position = new Vector3(targetTile.position.x, targetTile.position.y + 1.5f, targetTile.position.z);
+        }
+
+
+
+        if (tpLerper < 1)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(PlayerCoroutine(playerOverLord, player, currentTile, targetTile, currentAnimPosY, targetAnimPosY,currentAnimPosY2, targetAnimPosY2, playerSkin));
+        }
+        else if(tpLerper >= 1)
+        {
+            StartCoroutine(lerping());
+            tpLerper = 0;
+            player.localPosition =  new Vector3(0, -0.5f, 0);
+            
+        }
+    }
+
+    public IEnumerator tpScaling(Transform tpTransform, float currentSize, float targetSize, float timer, float speed)
+    {
+        if(tpScaleLerper == 0)
+        {
+            yield return new WaitForSeconds(timer);
+        }
+        tpScaleLerper += Time.deltaTime * speed;
+        tpTransform.localScale = new Vector3(Mathf.Lerp(currentSize, targetSize, tpScaleLerper), 0.02f, Mathf.Lerp(currentSize, targetSize, tpScaleLerper));
+
+        if(tpScaleLerper < 1)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(tpScaling(tpTransform, currentSize, targetSize, 0, speed));
+        }
+
+        if (tpScaleLerper >= 1)
+        {
+            tpTransform.localScale = new Vector3(targetSize, 0.02f, targetSize);
+            previousTP = tpTransform;
+            tpScaleLerper = 0;
         }
     }
 }

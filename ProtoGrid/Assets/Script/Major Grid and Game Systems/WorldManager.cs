@@ -18,7 +18,7 @@ public class WorldManager : MonoBehaviour
         parent = transform.parent.gameObject;
         text = this.transform.Find("Canvas/Name").gameObject.GetComponent<TextMeshProUGUI>();
         gridTiles = parent.GetComponent<GridTiles>();
-        text.text = "World " + gridTiles.World;
+        //text.text = "World " + gridTiles.World;
         worldLevelUi = transform.Find("CanvasCam/").gameObject;
         if (LevelsOfTheWorld.Length > 1)
         {

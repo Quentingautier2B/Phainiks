@@ -1170,8 +1170,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.y
       value: 2.3510647e-38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
@@ -7481,8 +7493,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffD
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffL
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffR
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffU
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffLU
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffRD
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
+      propertyPath: HeightDiffRU
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963485817208866328, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: levelTransiIndex
-      value: 5.3
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 963485817208866329, guid: c1200ec49af72874c9c780993fc2fc8f, type: 3}
       propertyPath: m_RootOrder

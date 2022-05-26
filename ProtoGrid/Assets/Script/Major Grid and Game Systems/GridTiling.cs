@@ -9,7 +9,7 @@ public class GridTiling : MonoBehaviour
     GridTiles[,] grid;
     GridGenerator gridG;
     TileVariables t;
-    GridTiles tile;
+    public GridTiles tile;
     GameObject TempoTile;
     public MeshRenderer[] tempoTilesMats = new MeshRenderer[6];
 
