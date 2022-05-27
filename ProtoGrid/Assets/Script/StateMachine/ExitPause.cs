@@ -67,7 +67,7 @@ public class ExitPause : StateMachineBehaviour
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.currentPosY, tile.target, tile.lerpSpeed), tile.transform.position.z);
         
         //Debug.Log(tile.target);
-        tile.lerpSpeed  +=  Time.deltaTime * Mathf.Lerp(1,.01f,tile.lerpSpeed);
+        tile.lerpSpeed  +=  10 * Time.deltaTime * Mathf.Lerp(1,.01f,tile.lerpSpeed);
 
 
         //Called on last loop
@@ -76,12 +76,14 @@ public class ExitPause : StateMachineBehaviour
             grid[x, y].GetComponent<GridTiling>().SetDirectionalMaterial();
             tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
             tile.pauseAnim = false;
+            tile.lerpSpeed = 0f;
             endFlag = true;
         }
 
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //Debug.Log(1);
         inGameUI.inGameUI.SetActive(true);
         foreach (GridTiles tile in grid)
         {
@@ -89,7 +91,7 @@ public class ExitPause : StateMachineBehaviour
             til.y = Mathf.RoundToInt(til.y);
             tile.transform.position = til;
 
-            tile.lerpSpeed = .1f;
+            tile.lerpSpeed = 0f;
 
         }
        // grid[x, y].GetComponent<GridTiling>().SetDirectionalMaterial();

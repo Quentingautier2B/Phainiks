@@ -10,7 +10,7 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve tpAnimation;
     float yo;
     SceneChange sChange;
-    public float begin = 1.7f;
+    public float begin = 1.37f;
     public float lerper, lerpix, tpLerper, tpScaleLerper;
     InGameUI inGameUI;
     GridTiles[,] grid;
@@ -45,6 +45,7 @@ public class DoCoroutine : MonoBehaviour
         yield return new WaitForEndOfFrame();
         if (x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
         {
+
             grid[x + 1, y].GetComponent<GridTiling>().SetDirectionalMaterial();
         }
 
@@ -110,64 +111,66 @@ public class DoCoroutine : MonoBehaviour
         if (tile.transform.position.y <= tile.target + 0.3f)
         {
             tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-
+            tile.pauseLerpSpeed = 0;
             tile.pauseAnim = false;
         }
 
     }
 
-    public void startClose(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
+    public void startClose(GridTiles tile, GridTiling tiling, float levelTransiIndex, GridTiling otherTile)
     {
-        StartCoroutine(Queue1(tile,levelTransiIndex, otherTile));
+        StartCoroutine(Queue1(tile, tiling, levelTransiIndex, otherTile));
     }
 
-    IEnumerator Queue1(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
+    IEnumerator Queue1(GridTiles tile, GridTiling tiling, float levelTransiIndex, GridTiling otherTile)
     {
-        if (Time.timeSinceLevelLoad < 1)
+        if (Time.timeSinceLevelLoad < .5f)
         {
-            float speed = 2.5f;
+            float speed = 3.5f;
             float queueWaitTime = Random.Range(0f, .4f);
             yield return new WaitForSeconds(queueWaitTime);
            
-            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile, queueWaitTime));
+            StartCoroutine(QueueForOpen(tile, tiling, speed, oGSpeedCurve, levelTransiIndex, otherTile, queueWaitTime));
 
         }
         else if (tile.levelTransiIndex == 100)
         {
             inGameUI.endTile = levelTransiIndex;
-            float speed = 2.5f;
+            float speed = 3.5f;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
             
-            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile, 0));
+            StartCoroutine(QueueForOpen(tile, tiling, speed, oGSpeedCurve, levelTransiIndex, otherTile, 0));
         }
         else if (tile.tempoTile != 0)
         {
-            float speed = 2;
+            float speed = 10;
             yield return new WaitForSeconds(1);
-            StartCoroutine(QueueForOpen(tile, speed, SpeedCurve, levelTransiIndex, otherTile, 0));
+            StartCoroutine(QueueForOpen(tile, tiling, speed, SpeedCurve, levelTransiIndex, otherTile, 0));
         }
         else
         {
+            float speed = 3;
             yield return new WaitForSeconds(0);
-            StartCoroutine(QueueForOpen(tile, 1, SpeedCurve, levelTransiIndex, otherTile, 0));
-
+            StartCoroutine(QueueForOpen(tile, tiling, speed, SpeedCurve, levelTransiIndex, otherTile, 0));
+            
         }
 
     }
 
-    IEnumerator QueueForOpen(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
+    IEnumerator QueueForOpen(GridTiles tile, GridTiling tiling,float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
     {
        
         yield return new WaitUntil(() => !tile.opening);
         if (Time.timeSinceLevelLoad < .5f)
         {
-            //inGameUI.inGameUI.SetActive(false);
+            //OG
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y + 20;
             tile.currentOpen = (int)tile.transform.position.y;
         }
         else if(tile.levelTransiIndex == 100)
         {
+            //lvlTransi
             inGameUI.inGameUI.SetActive(false);
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y - 20;
@@ -175,6 +178,7 @@ public class DoCoroutine : MonoBehaviour
         }
         else if (!tile.open)
         {
+            //!open
             tile.lerpSpeed = 0f;
             //t.open = false;
             
@@ -183,6 +187,7 @@ public class DoCoroutine : MonoBehaviour
         }
         else
         {
+            //open
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y - 20;
             tile.currentOpen = (int)tile.transform.position.y;
@@ -194,11 +199,11 @@ public class DoCoroutine : MonoBehaviour
         }
         else
         {
-           StartCoroutine(CloseTileMovement(tile,speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+           StartCoroutine(CloseTileMovement(tile, tiling,speed, curve, levelTransiIndex, otherTile, queueWaitTime));
         }
     }
 
-    IEnumerator CloseTileMovement(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
+    IEnumerator CloseTileMovement(GridTiles tile, GridTiling tiling, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
     {
         if(otherTile != null && otherTile.tile.tempoTile == 0)
         {
@@ -212,11 +217,12 @@ public class DoCoroutine : MonoBehaviour
 
 
 
-
         //tile.GetComponent<GridTiling>().SetDirectionalMaterial();
         tile.opening = true;
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.currentOpen, tile.targetOpen, tile.lerpSpeed), tile.transform.position.z);
         tile.lerpSpeed += Time.deltaTime * curve.Evaluate(tile.lerpSpeed) * speed;
+        tiling.SetDirectionalMaterial();
+        UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
 
         if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.levelTransiIndex == 100)
         {
@@ -233,7 +239,7 @@ public class DoCoroutine : MonoBehaviour
         {
             //open
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
-            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            tiling.SetDirectionalMaterial();
             UpdateAdjTiles( tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.open = false;
@@ -244,7 +250,7 @@ public class DoCoroutine : MonoBehaviour
         {
             //!open
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
-            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            tiling.SetDirectionalMaterial();
             UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.open = true;
@@ -276,12 +282,12 @@ public class DoCoroutine : MonoBehaviour
             if (!tile.opening)
             {
                 yield return new WaitUntil(()=> !tile.opening);
-                StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+                StartCoroutine(CloseTileMovement(tile, tiling, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
             }
             else
             {
                 yield return new WaitForEndOfFrame();
-                StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+                StartCoroutine(CloseTileMovement(tile, tiling, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
             }
         }
 
