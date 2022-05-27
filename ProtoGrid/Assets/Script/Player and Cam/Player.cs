@@ -9,32 +9,35 @@ public class Player : MonoBehaviour
     GridTiles[,] grid;
     SwipeInput sInput;
     public float roundingThreshhold = 0.7f;
-    
+    SceneChange sChange;
 
     public List<string> Inventory;
 
     private void Awake()
     {
-        
+        sChange = FindObjectOfType<SceneChange>();
         sInput = FindObjectOfType<Animator>().GetBehaviour<SwipeInput>();
         grid = FindObjectOfType<GridGenerator>().grid;       
     }
     private void Update()
     {
         var yPos = transform.position;
+        if (grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].walkable && !sChange.Hub)
+        {
+            if (sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 0)
+                yPos.y = grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
 
-        if(sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 0)
-            yPos.y = grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
+            if (sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 1)
+                yPos.y = grid[RoundDownToInt(transform.position.x), RoundUpToInt(transform.position.z)].transform.position.y + 1.5f;
 
-        if (sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 1)
-            yPos.y = grid[RoundDownToInt(transform.position.x), RoundUpToInt(transform.position.z)].transform.position.y + 1.5f;
+            if (sInput.roundingDirectionalYPosition.x == 1 && sInput.roundingDirectionalYPosition.y == 1)
+                yPos.y = grid[RoundUpToInt(transform.position.x), RoundUpToInt(transform.position.z)].transform.position.y + 1.5f;
 
-        if (sInput.roundingDirectionalYPosition.x == 1 && sInput.roundingDirectionalYPosition.y == 1)
-            yPos.y = grid[RoundUpToInt(transform.position.x), RoundUpToInt(transform.position.z)].transform.position.y + 1.5f;
+            if (sInput.roundingDirectionalYPosition.x == 1 && sInput.roundingDirectionalYPosition.y == 0)
+                yPos.y = grid[RoundUpToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
+            transform.position = yPos;
 
-        if (sInput.roundingDirectionalYPosition.x == 1 && sInput.roundingDirectionalYPosition.y == 0)
-            yPos.y = grid[RoundUpToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
-        transform.position = yPos;
+        }
     }
 
     int RoundDownToInt(float x)

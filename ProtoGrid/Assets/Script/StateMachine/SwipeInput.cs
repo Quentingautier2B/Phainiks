@@ -341,7 +341,7 @@ public class SwipeInput : StateMachineBehaviour
         directionIndex = 1;
         anim.SetBool("OntonormalTileMove", true);
         anim.SetBool("OntonormalTileTempo", true);
-        rewindPos.Add(new Vector2(pPosX, pPosY));
+       // rewindPos.Add(new Vector2(pPosX, pPosY));
     }
     void HubTestLeftDirections(Animator anim)
     {
@@ -353,6 +353,6 @@ public class SwipeInput : StateMachineBehaviour
         directionIndex = 1;
         anim.SetBool("OntonormalTileMove", true);
         anim.SetBool("OntonormalTileTempo", true);
-        rewindPos.Add(new Vector2(pPosX, pPosY));
+       // rewindPos.Add(new Vector2(pPosX, pPosY));
     }
 }
