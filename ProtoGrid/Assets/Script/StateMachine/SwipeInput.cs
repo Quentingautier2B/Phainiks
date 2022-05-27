@@ -50,9 +50,9 @@ public class SwipeInput : StateMachineBehaviour
             }
             foreach (GridTiles g in grid)
             {
-                if ((!g.originalPosition && g.open && g.door != 0) || (!g.originalPosition && g.door == 0))
+                if ((!g.originalPosition && g.open && g.door != 0 && g.walkable) || (!g.originalPosition && g.door == 0 && g.walkable))
                 {                  
-                    doC.startClose(g, g.levelTransiIndex, gTil);
+                    doC.startClose(g, g.tiling, g.levelTransiIndex, gTil);
                 }
                 /*if (g.door != 0 && g.open)
                     g.open = false;*/

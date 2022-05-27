@@ -31,6 +31,7 @@ public class TempoBehavior : StateMachineBehaviour
     InGameUI UI;
     public int x, y;
     DoCoroutine doC;
+    GridTiling gT;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
@@ -342,16 +343,19 @@ public class TempoBehavior : StateMachineBehaviour
                 {
                     if (grid[x, y].tempoBool)
                     {
+                        gT = grid[x, y].GetComponent<GridTiling>();
                         FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
                         grid[x, y].tempoBool = false;
                     }
-                
-                        grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
+                    gT.SetDirectionalMaterial();
+                    UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z);
+                    grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
 
                     if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
+                        gT.SetDirectionalMaterial();
                         grid[x, y].crumbleBool = false;
                         crumbleFlager = false;
                     }
@@ -361,17 +365,21 @@ public class TempoBehavior : StateMachineBehaviour
                 {
                     if (grid[x, y].tempoBool)
                     {
+                        gT = grid[x, y].GetComponent<GridTiling>();
                         FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
                         grid[x, y].tempoBool = false;
                     }
-                        grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
+                    gT.SetDirectionalMaterial();
+                    UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z);
+                    grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
                         /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
                         //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
+                        gT.SetDirectionalMaterial();
                         // greenTempoTileFlag = true;
                         grid[x, y].crumbleBool = false;
                         crumbleFlager = false;

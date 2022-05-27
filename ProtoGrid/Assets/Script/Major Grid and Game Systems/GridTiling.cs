@@ -138,7 +138,7 @@ public class GridTiling : MonoBehaviour
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
                     mesh.transform.rotation = Quaternion.identity;
-                    mesh.transform.Rotate(-90, 0, 0);
+                    //mesh.transform.Rotate(-90, 0, 0);
                     m.material = Cmat;
                     //m.material.Lerp(m.material,Cmat,Time.deltaTime);
                     gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
@@ -363,7 +363,7 @@ public class GridTiling : MonoBehaviour
                 mesh.material = mat2DO;
                 refreshRend = false;
                 mesh.transform.rotation = Quaternion.identity;
-                mesh.transform.Rotate(-90, 180, 0);
+                mesh.transform.Rotate(-90, 0, 0);
                 SetCubeSize();
                 AllColonneActivate();
             }

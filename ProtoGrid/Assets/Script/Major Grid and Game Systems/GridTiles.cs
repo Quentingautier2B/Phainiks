@@ -31,6 +31,7 @@ public class GridTiles : MonoBehaviour
     [HideInInspector] public int TeleporterC;
     [HideInInspector] public int TeleporterTargetC;
 
+    public GridTiling tiling;
     public bool walkable;
     public bool invisible;
     public bool originalPosition;
@@ -81,8 +82,8 @@ public class GridTiles : MonoBehaviour
         {
             transform.position += new Vector3(0,-20,0);
         }
-     
 
+        tiling = GetComponent<GridTiling>();
         //TimerValueSetUp();
 
         SetUpComponents();
@@ -179,7 +180,7 @@ public class GridTiles : MonoBehaviour
 
         if (door != 0 && !open) 
         {
-            walkable = false;
+            //walkable = false;
         }
 
 
