@@ -26,17 +26,9 @@ public class WorldManager : MonoBehaviour
             {
                 GameObject world = worldLevelUi.transform.Find("" + i).gameObject;
                 world.SetActive(true);
-                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;
-
-                
+                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;               
             }
         }
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     public void OpenWorld(GameObject button)

@@ -256,7 +256,6 @@ public class DoCoroutine : MonoBehaviour
             //ogPos
             if (otherTile.tile.World > 0)
             {
-                print(1);
                 otherTile.transform.Find("World/CanvasCam").gameObject.SetActive(true);
             }
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
