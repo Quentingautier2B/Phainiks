@@ -18,7 +18,7 @@ public class DoCoroutine : MonoBehaviour
     public bool right, left;
     SkinnedMeshRenderer pSRend;
     [HideInInspector] public Transform previousTP;
-
+    bool flag;
     public IEnumerator lerping()
     {
         lerpix += Time.deltaTime * 3;
@@ -72,6 +72,7 @@ public class DoCoroutine : MonoBehaviour
         sChange = FindObjectOfType<SceneChange>();
         pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
+        flag = true;
     }
 
     public void Right()
@@ -99,8 +100,10 @@ public class DoCoroutine : MonoBehaviour
     public void pauseTileMovement(GridTiles tile, GridTiling curTile)
     {
 
-       
-        curTile.SetDirectionalMaterial();
+        if (curTile.tile.tempoTile == 0)
+            curTile.SetDirectionalMaterial();
+        else
+            curTile.TempoTileMaterial();
 
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tile.pauseLerpSpeed * Time.deltaTime), tile.transform.position.z);
 
@@ -161,7 +164,7 @@ public class DoCoroutine : MonoBehaviour
     {
        
         yield return new WaitUntil(() => !tile.opening);
-        if (Time.timeSinceLevelLoad < .5f)
+        if (Time.timeSinceLevelLoad < .8f)
         {
             //OG
             tile.lerpSpeed = 0f;
@@ -172,6 +175,10 @@ public class DoCoroutine : MonoBehaviour
         {
             //lvlTransi
             inGameUI.inGameUI.SetActive(false);
+            if(tile.teleporter != 0)
+            {
+                tile.transform.Find("Teleporter/Arrow (1)").gameObject.SetActive(false);
+            }
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y - 20;
             tile.currentOpen = (int)tile.transform.position.y;
@@ -232,7 +239,11 @@ public class DoCoroutine : MonoBehaviour
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
-            sChange.startCoroutine(levelTransiIndex);
+            if (flag)
+            {
+                sChange.startCoroutine(levelTransiIndex);
+                flag = false;
+            }
             tile.opening = false;
         }
         else if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.open && Time.timeSinceLevelLoad > begin && tile.levelTransiIndex != 100)
@@ -267,7 +278,8 @@ public class DoCoroutine : MonoBehaviour
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.opening = false;
-            UpdateAdjTiles(otherTile.GetComponent<GridTiles>(), (int)otherTile.transform.position.x, (int)otherTile.transform.position.z);
+            //UpdateAdjTiles(otherTile.GetComponent<GridTiles>(), (int)otherTile.transform.position.x, (int)otherTile.transform.position.z);
+            tile.tiling.SetDirectionalMaterial();
             yield return new WaitForSeconds(queueWaitTime);
             inGameUI.inGameUI.SetActive(true);
             otherTile.SetDirectionalMaterial();

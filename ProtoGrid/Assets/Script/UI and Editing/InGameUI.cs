@@ -158,8 +158,8 @@ public class InGameUI : MonoBehaviour
     }
     public void UiEndDisable()
     {
-        starValue[0] = oneStar;
-        starValue[1] = twoStar;
+        starValue[0] = twoStar;
+        starValue[1] = threeStar;
         starValue[2] = threeStar;
         foreach (GameObject g in uiEndLevelDisable)
         {
@@ -172,7 +172,7 @@ public class InGameUI : MonoBehaviour
     {
         starLerper += Time.deltaTime * 2;
         Star.sizeDelta = Vector2.Lerp(Vector2.zero, Vector2.one * size, starLerper);
-        print(twoStar);
+        
         if(starLerper >= 1 && starIndex < 2 && timerValue <= starCap)
         {
             Star.sizeDelta = Vector2.one * size;

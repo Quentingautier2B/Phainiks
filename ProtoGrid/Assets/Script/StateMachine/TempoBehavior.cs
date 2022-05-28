@@ -347,6 +347,7 @@ public class TempoBehavior : StateMachineBehaviour
                         FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
                         grid[x, y].tempoBool = false;
+                        grid[x,y].opening = true;
                     }
                     gT.SetDirectionalMaterial();
                     UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
@@ -354,6 +355,7 @@ public class TempoBehavior : StateMachineBehaviour
 
                     if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
+                        grid[x, y].opening = false;
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         gT.SetDirectionalMaterial();
                         grid[x, y].crumbleBool = false;
@@ -369,6 +371,7 @@ public class TempoBehavior : StateMachineBehaviour
                         FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
                         grid[x, y].tempoBool = false;
+                        grid[x, y].opening = true;
                     }
                     gT.SetDirectionalMaterial();
                     UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
@@ -377,6 +380,7 @@ public class TempoBehavior : StateMachineBehaviour
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
+                        grid[x, y].opening = false;
                         //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         gT.SetDirectionalMaterial();

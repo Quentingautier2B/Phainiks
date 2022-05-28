@@ -57,7 +57,7 @@ public class PauseBehavior : StateMachineBehaviour
         foreach (GridTiles tile in grid)
         {
             if (tile.pauseAnim)
-                doC.pauseTileMovement(tile, grid[x,y].GetComponent<GridTiling>());         
+                doC.pauseTileMovement(tile, gT);         
         }
     }
 

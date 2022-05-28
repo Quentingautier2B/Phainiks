@@ -19,7 +19,6 @@ public class TilingEditor : MonoBehaviour
     bool crumble;
     bool originalPosition;
     int key;
-    //int timerChangeInputValue;
     float levelTransiIndex;
     int tempoValue;
     int tpValue;
@@ -29,11 +28,11 @@ public class TilingEditor : MonoBehaviour
     Vector3 tpTarget;
     GridTiles[,] grid;
     GridGenerator gridG;
+    Animator stateMachine;
     [Header("Materials for CubeTypes")]
     [Space]
     [SerializeField] Material disabledMat;
     [SerializeField] Material invisibleMat;
-    //[SerializeField] Material crumbleMat;
     [SerializeField] Mesh normalTile;
     [SerializeField] Mesh tempoTile;
 
@@ -45,8 +44,6 @@ public class TilingEditor : MonoBehaviour
     [SerializeField] GameObject originalPositionItem;
     [SerializeField] GameObject TimerItem;
     [SerializeField] GameObject LevelTransitionItem;
-    //[SerializeField] GameObject PSysTTU;
-    //[SerializeField] GameObject PSysTTD;
     [SerializeField] GameObject TpItem;
     [SerializeField] GameObject TeleLine;
 
@@ -62,6 +59,7 @@ public class TilingEditor : MonoBehaviour
     float trailTimer;
     bool trailBool;
     Transform Trail;
+    TrailRenderer TrailR;
     float interpolateAmount;
 
     [Header("Materials")]
@@ -89,12 +87,14 @@ public class TilingEditor : MonoBehaviour
         gridG = FindObjectOfType<GridGenerator>();
         playOn = true;
         rend = transform.Find("Renderer").GetComponent<Renderer>();
+
         if (Input.GetKeyDown(KeyCode.N) && !walkable)
             walkable = true;
 
         if (Input.GetKeyDown(KeyCode.B) && walkable)
             walkable = false;
 
+        stateMachine = FindObjectOfType<DoCoroutine>().GetComponent<Animator>();
         rend = transform.Find("Renderer").GetComponent<Renderer>();
         GetVariablesValue();
         EditorBlocRenderering();
@@ -129,8 +129,27 @@ public class TilingEditor : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeSinceLevelLoad > 2)
+
+
+        if(Time.timeSinceLevelLoad > 2 && !stateMachine.GetCurrentAnimatorStateInfo(0).IsName("Pause State"))
+        {
+
             trailSign();
+            if(TrailR != null)
+            {
+                TrailR.time = 1f;
+            }
+        }
+        else
+        {
+
+            if (TrailR != null)
+            {
+                Trail.parent = stateMachine.transform;
+                TrailR.time -= .1f;
+            }
+        }
+
     }
 
 
@@ -169,12 +188,16 @@ public class TilingEditor : MonoBehaviour
                 var inst = Instantiate(TeleLine, transform.position, Quaternion.identity);
                 inst.name = "Line";
                 inst.transform.parent = transform;
+                Trail = inst.transform;
+                TrailR = Trail.Find("Trail").GetComponent<TrailRenderer>();
             }
-            Trail = transform.Find("Line");
+            //Trail = transform.Find("Line");
             p1 = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
             p2 = new Vector3(tpTarget.x,tpTarget.y +0.1f, tpTarget.z);
             p3 = (p1 + p2) / 2 + new Vector3(0, Mathf.Abs(p1.y-p2.y) + 1, 0);
-            interpolateAmount = (interpolateAmount + Time.deltaTime) % 1f;
+
+            interpolateAmount = (interpolateAmount + Time.deltaTime) % 1;
+
             p1p3 = Vector3.Lerp(p1, p3, interpolateAmount);
             p3p2 = Vector3.Lerp(p3, p2, interpolateAmount);
             p1p2 = Vector3.Lerp(p1p3, p3p2, interpolateAmount);
@@ -184,6 +207,7 @@ public class TilingEditor : MonoBehaviour
 
             if (interpolateAmount >= .95 && !trailCreate)
             {
+                
                 trailCreate = true;
                 trailBool = false;
                 StartCoroutine(DestroyTrail(Trail.gameObject));
