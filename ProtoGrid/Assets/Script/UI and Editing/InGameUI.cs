@@ -22,12 +22,16 @@ public class InGameUI : MonoBehaviour
     public RectTransform Endlevel;
     public RectTransform PauseLevel;
     public float endPosX, startPosX, pauseEndPosX, pauseStartPosX;
-    public Image oneStarImage, twoStarImage, threeStarImage;
+    public RectTransform[] starImage = new RectTransform[3];
+    public float[] starSizeValue = new float[3];
+    private int[] starValue = new int[3];
+    int starIndex;
     public int oneStar,twoStar,threeStar;
     public GameObject inGameUI;
     [SerializeField] GameObject restart;
     [SerializeField] GameObject rotateLeft;
     [SerializeField] GameObject rotateRight;
+    float starLerper;
     #endregion
 
     public void OnPauseClick()
@@ -51,10 +55,6 @@ public class InGameUI : MonoBehaviour
 
 
         yield return new WaitForSeconds(.5f);
- /*       debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-
-        debugTools.mainMusic.release();*/
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -72,24 +72,11 @@ public class InGameUI : MonoBehaviour
 
     IEnumerator OnHubClick()
     {
-        /*        sceneChange.endLerper = 0;
-                if (PauseLevel.anchoredPosition.x > pauseStartPosX)
-                {           
-                    StartCoroutine(sceneChange.Lerper(pauseEndPosX, pauseStartPosX));
-                }
-                else if (Endlevel.anchoredPosition.x < endPosX)
-                {
-                    StartCoroutine(sceneChange.Lerper(endPosX, startPosX));
-                }*/
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Rouge", 0);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Bleu", 0);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
         yield return new WaitForSeconds(0.3f);
-/*        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-
-        debugTools.mainMusic.release();*/
 
         SceneManager.LoadScene("Lvl_1");
     }
@@ -126,29 +113,12 @@ public class InGameUI : MonoBehaviour
 
     private void Start()
     {
-        
-        /*oneStarImage.gameObject.SetActive(false);
-        twoStarImage.gameObject.SetActive(false);
-        twoStarImage.color = Color.white;
-        threeStarImage.gameObject.SetActive(false);
-        threeStarImage.color = Color.white;*/
-
-        //endLevelMenu.SetActive(false);
-        tps = FindObjectsOfType<LineRenderer>();
-        //nbStep = transform.Find("EndlevelMenu/NbStep").gameObject.GetComponent<TextMeshProUGUI>();
+        starValue[0] = oneStar;
+        starValue[1] = twoStar;
+        starValue[2] = threeStar;
     }
     void Update()
     {
-        /*       TimerText();
-                nbStep.text = "" + timerValue;
-                if(timerValue <= 0 || stateMachine.GetBool("Rewind"))
-                {
-                    revert.interactable = false;
-                }
-                else
-                {
-                    revert.interactable = true;
-                }*/
         if (sceneChange.Hub)
         {
             rotateLeft.SetActive(false);
@@ -188,23 +158,37 @@ public class InGameUI : MonoBehaviour
     }
     public void UiEndDisable()
     {
+        starValue[0] = twoStar;
+        starValue[1] = threeStar;
+        starValue[2] = threeStar;
         foreach (GameObject g in uiEndLevelDisable)
         {
             g.SetActive(false);
-            Stars();    
         }
+            StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));    
     }
 
-    void Stars()
+    IEnumerator Stars(RectTransform Star, float size, int starCap)
     {
-        if(timerValue > twoStar)
+        starLerper += Time.deltaTime * 2;
+        Star.sizeDelta = Vector2.Lerp(Vector2.zero, Vector2.one * size, starLerper);
+        
+        if(starLerper >= 1 && starIndex < 2 && timerValue <= starCap)
         {
-            twoStarImage.color = Color.black;
+            Star.sizeDelta = Vector2.one * size;
+            starLerper = 0;
+            starIndex++;
+            yield return new WaitForSeconds(.3f);
+            StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
         }
-
-        if (timerValue > threeStar)
+        else if(starLerper < 1)
         {
-            threeStarImage.color = Color.black;
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(Stars(Star, size, starCap));
+        }
+        else
+        {
+
         }
     }
 }

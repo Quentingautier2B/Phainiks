@@ -135,20 +135,24 @@ public class GridTiling : MonoBehaviour
         {
             if (tile.crumble)
             {
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
+                SetDirectionalMaterial();
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
-                    mesh.transform.rotation = Quaternion.identity;
+                    
                     //mesh.transform.Rotate(-90, 0, 0);
-                    m.material = Cmat;
+                    //m.material = Cmat;
                     //m.material.Lerp(m.material,Cmat,Time.deltaTime);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
-                    SetCubeSize();
-                    AllColonneActivate();
-                    refreshRendTempo = false;
+                   
                 }
+ /*               gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                SetCubeSize();
+                AllColonneActivate();*/
+                refreshRendTempo = false;
             }
 
             if (tile.tempoTile == 1)

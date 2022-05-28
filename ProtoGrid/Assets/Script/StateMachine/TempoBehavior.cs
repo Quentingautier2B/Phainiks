@@ -347,13 +347,15 @@ public class TempoBehavior : StateMachineBehaviour
                         FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y + 2;
                         grid[x, y].tempoBool = false;
+                        grid[x,y].opening = true;
                     }
                     gT.SetDirectionalMaterial();
-                    UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z);
+                    UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
                     grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
 
                     if (grid[x, y].transform.position.y >= grid[x, y].target - 0.01f)
                     {
+                        grid[x, y].opening = false;
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         gT.SetDirectionalMaterial();
                         grid[x, y].crumbleBool = false;
@@ -369,14 +371,16 @@ public class TempoBehavior : StateMachineBehaviour
                         FMODUnity.RuntimeManager.PlayOneShot("event:/World/Ascenseur");
                         grid[x, y].target = (int)grid[x, y].transform.position.y - 2;
                         grid[x, y].tempoBool = false;
+                        grid[x, y].opening = true;
                     }
                     gT.SetDirectionalMaterial();
-                    UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z);
+                    UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
                     grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
                         /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
                         tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
+                        grid[x, y].opening = false;
                         //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         gT.SetDirectionalMaterial();
@@ -412,24 +416,12 @@ public class TempoBehavior : StateMachineBehaviour
         //Called Every loop
             g.TempoTileMaterial();
             tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
-            UpdateAdjacentTileColonnes(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
+            UpdateAdjacentTileColonnes(tile, (int)tile.transform.position.x, (int)tile.transform.position.z, gT);
 
             //Called on last loop
             if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
                 {
                     tile.opening = false;
-/*                    if (colorFlag)
-                    {
-                        tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Stop();
-                        tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Play();
-                        
-                    }
-                    else
-                    {
-                        tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                        tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();
-                        
-                    }*/
 
                     tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
                     return false;
@@ -442,30 +434,37 @@ public class TempoBehavior : StateMachineBehaviour
        
     }
 
-    void UpdateAdjacentTileColonnes(GridTiles g, int x, int y)
+    void UpdateAdjacentTileColonnes(GridTiles g, int x, int y, GridTiling gT)
     {
         if(x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
         {
-            gridG.TestDirection(x + 1, y, 4);
-            grid[x + 1, y].GetComponent<GridTiling>().SetCubeSize();
+            /* gridG.TestDirection(x + 1, y, 4);
+             grid[x + 1, y].GetComponent<GridTiling>().SetCubeSize();*/
+            grid[x + 1, y].tiling.SetDirectionalMaterial();
         }
 
         if (y - 1 > -1 && grid[x, y - 1] != null && grid[x, y - 1].walkable && grid[x, y - 1].tempoTile == 0)
         {
-            gridG.TestDirection(x, y - 1, 3);
-            grid[x, y - 1].GetComponent<GridTiling>().SetCubeSize();
+            /*            gridG.TestDirection(x, y - 1, 3);
+                        grid[x, y - 1].GetComponent<GridTiling>().SetCubeSize();*/
+            grid[x, y - 1].tiling.SetDirectionalMaterial();
+
         }
 
         if (y + 1 < gridG.columns && grid[x, y + 1] != null && grid[x, y + 1].walkable && grid[x, y + 1].tempoTile == 0)
         {
-            gridG.TestDirection(x, y + 1, 2);
-            grid[x, y + 1].GetComponent<GridTiling>().SetCubeSize();
+            /*            gridG.TestDirection(x, y + 1, 2);
+                        grid[x, y + 1].GetComponent<GridTiling>().SetCubeSize();*/
+            grid[x, y + 1].tiling.SetDirectionalMaterial();
+
         }
 
         if (x - 1 > -1 && grid[x - 1, y] != null && grid[x - 1, y].walkable && grid[x - 1, y].tempoTile == 0)
         {
-            gridG.TestDirection(x - 1, y, 1);
-            grid[x - 1, y].GetComponent<GridTiling>().SetCubeSize();
+            /*            gridG.TestDirection(x - 1, y, 1);
+                        grid[x - 1, y].GetComponent<GridTiling>().SetCubeSize();*/
+            grid[x - 1, y].tiling.SetDirectionalMaterial();
+
         }
     }
 }
