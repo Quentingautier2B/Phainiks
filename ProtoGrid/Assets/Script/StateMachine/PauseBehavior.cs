@@ -51,8 +51,8 @@ public class PauseBehavior : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        gT.AllColonneActivate();
-        gT.SetCubeSize();
+        //gT.AllColonneActivate();
+        //gT.SetCubeSize();
         inGameUI.inGameUI.SetActive(false);
         foreach (GridTiles tile in grid)
         {
@@ -75,6 +75,7 @@ public class PauseBehavior : StateMachineBehaviour
             {
                 tile.pauseAnim = false;
                 tile.lerpSpeed = 0;
+                tile.pauseLerpSpeed = 0.1f;
                 tile.target = (int)tile.transform.position.y + (20 + (tile.target - (int)tile.transform.position.y));
             }
         }

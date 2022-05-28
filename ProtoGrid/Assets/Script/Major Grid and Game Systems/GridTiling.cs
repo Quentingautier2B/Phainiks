@@ -135,9 +135,12 @@ public class GridTiling : MonoBehaviour
         {
             if (tile.crumble)
             {
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
+                SetDirectionalMaterial();
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
-                    mesh.transform.rotation = Quaternion.identity;
+                    
                     //mesh.transform.Rotate(-90, 0, 0);
                     m.material = Cmat;
                     //m.material.Lerp(m.material,Cmat,Time.deltaTime);

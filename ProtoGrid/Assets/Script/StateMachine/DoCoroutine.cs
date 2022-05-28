@@ -104,14 +104,14 @@ public class DoCoroutine : MonoBehaviour
 
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tile.pauseLerpSpeed * Time.deltaTime), tile.transform.position.z);
 
-        tile.pauseLerpSpeed = Mathf.Lerp(tile.pauseLerpSpeed, 3, Time.deltaTime * tile.pauseLerpSpeed);
+        tile.pauseLerpSpeed = Mathf.Lerp(tile.pauseLerpSpeed, 3, 2 * Time.deltaTime * tile.pauseLerpSpeed);
 
 
         //Called on last loop
         if (tile.transform.position.y <= tile.target + 0.3f)
         {
             tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-            tile.pauseLerpSpeed = 0;
+            tile.pauseLerpSpeed = 0.1f;
             tile.pauseAnim = false;
         }
 
