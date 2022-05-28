@@ -30,9 +30,6 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-        
-
 
         if (awake)
         {
@@ -138,9 +135,6 @@ public class SwipeInput : StateMachineBehaviour
             TestFourDirections(animator);
         }
 
-
-
-
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -160,8 +154,6 @@ public class SwipeInput : StateMachineBehaviour
         animator.SetInteger("CurrentY", (int)player.position.z);
         
     }
-
-
 
     void pPosAssignement()
     {
