@@ -28,7 +28,7 @@ public class SwipeInput : StateMachineBehaviour
     static public List<Vector2> rewindPos = new List<Vector2>();
     InputSaver inputBuffer;
     float animIndexValue;
-    bool monte;
+    public bool monte;
     public bool flag;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -94,29 +94,32 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // Debug.Log(animIndexValue);
 
-        //animIndexValue += Time.deltaTime * 150;
         if (monte)
         {
-            animIndexValue += Time.deltaTime * 50;
+            Debug.Log(1);
+            animIndexValue += Time.deltaTime * 100;
         }
         else
         {
-            animIndexValue -= Time.deltaTime * 50;
+            Debug.Log(animIndexValue);
+
+            animIndexValue -= Time.deltaTime * 100;
         }
 
         if(animIndexValue < 0 && !monte)
         {
+
             animIndexValue = 1;
             monte = true;
         }
-        else if(animIndexValue > 50 && monte)
+        else if(animIndexValue > 100 && monte)
         {
-            animIndexValue = 49;
+
+            animIndexValue = 99;
             monte = false;
         }
-        //pSRend.SetBlendShapeWeight(1, animIndexValue);
+        pSRend.SetBlendShapeWeight(3, animIndexValue);
 
         if (doC.right)
         {
