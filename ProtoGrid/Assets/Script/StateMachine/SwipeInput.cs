@@ -78,7 +78,14 @@ public class SwipeInput : StateMachineBehaviour
         pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
-        
+/*        if(grid[pPosX,pPosY].originalPosition || grid[pPosX,pPosY].levelTransiIndex != 0)
+        {
+            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.38f, pSRend.transform.localPosition.z);
+        }
+        else
+        {
+            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.42f, pSRend.transform.localPosition.z);
+        }*/
         foreach(GridTiles g in grid)
         {
             
@@ -102,29 +109,29 @@ public class SwipeInput : StateMachineBehaviour
 
         if(animIndexValue < 0 && !monte)
         {
-            if (idleIndex == 2)
+/*            if (idleIndex == 2)
                 idleIndex = 3;
             else
-                idleIndex = 2;
+                idleIndex = 2;*/
 
 
             animIndexValue = 1;
             monte = true;
         }
-        else if(animIndexValue > 100 && monte)
+        else if(animIndexValue > 50 && monte)
         {
 
-            animIndexValue = 99;
+            animIndexValue = 49;
             monte = false;
         }
 
         if (monte)
         {
-            animIndexValue += Time.deltaTime * 200;
+            animIndexValue += Time.deltaTime * 50;
         }
         else
         {
-            animIndexValue -= Time.deltaTime * 200;
+            animIndexValue -= Time.deltaTime * 50;
         }
 
         pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
@@ -172,6 +179,7 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animIndexValue = 0;
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         monte = true;
         if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
             inputBuffer.SavedInput.RemoveAt(0);

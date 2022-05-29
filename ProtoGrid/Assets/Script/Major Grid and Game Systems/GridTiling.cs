@@ -48,6 +48,21 @@ public class GridTiling : MonoBehaviour
 
     private void Start()
     {
+        if (tile.originalPosition)
+        {
+            var vec = transform.Find("OriginalPos").localPosition;
+            vec.y = .455f;
+            transform.Find("OriginalPos").localPosition = vec;
+        }
+
+        if (tile.levelTransiIndex != 0)
+        {
+            var vec = transform.Find("LevelTransi").localPosition;
+            vec.y = .455f;
+            transform.Find("LevelTransi").localPosition = vec;
+        }
+
+
         TempoDecorMaterial();
         TempoTileMaterial();
         if (/*tile.tempoTile != 0 || */tile.crumble)

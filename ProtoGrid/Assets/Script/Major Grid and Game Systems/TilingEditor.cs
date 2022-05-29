@@ -320,9 +320,9 @@ public class TilingEditor : MonoBehaviour
     #region CreateDestroyMethods
     void CreateDestroyMethodsHub()
     {
-        CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.5f);
+        CreateDestroyObjectBoolean(originalPosition, "OriginalPos", originalPositionItem, 0.48f);
         CreateDestroyObjectIndex(key, "Key", KeyItem, .53f);
-        CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.5f);
+        CreateDestroyObjectFloat(levelTransiIndex, "LevelTransi", LevelTransitionItem, 0.48f);
         CreateDestroyObjectIndex(tpValue, "Teleporter", TpItem, 0.52f);
         CreateDestroyObjectIndex(world, "World", WorldItem, 0.5f);
     }

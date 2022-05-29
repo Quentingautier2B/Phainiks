@@ -101,19 +101,10 @@ public class MoveBehavior : StateMachineBehaviour
             }
 
             player.position = Vector3.Lerp(startPos, new Vector3(grid[x, y].transform.position.x, player.position.y, grid[x, y].transform.position.z), lerper);
-            //Vector3 moveDir = (new Vector3(x, /*1.5f + grid[x, y].transform.position.y*/player.position.y, y) - player.position).normalized;
-            
-            //player.position += moveDir * moveSpeed * Time.deltaTime;
-            if(lerper <.2f)
-                player.LookAt(new Vector3(x, player.position.y/*1.5f + grid[x, y].transform.position.y*/, y));
 
-            /*if (lerper >= 1)
-            {
-                lerper = 0;
-                player.position = new Vector3(x, player.position.y*//*1.5f + grid[x, y].transform.position.y*//*, y);
-                *//*if (anim.GetBool("Rewind"))
-                    Debug.Log(SwipeInput.rewindPos[SwipeInput.rewindPos.Count-1]);*//*
-            }*/
+            if(lerper <.2f)
+                player.LookAt(new Vector3(x, player.position.y, y));
+
         }
         else
         {
