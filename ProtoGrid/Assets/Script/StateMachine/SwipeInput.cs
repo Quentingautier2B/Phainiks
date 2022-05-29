@@ -30,6 +30,7 @@ public class SwipeInput : StateMachineBehaviour
     float animIndexValue;
     public bool monte;
     public bool flag;
+    int idleIndex;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -64,7 +65,7 @@ public class SwipeInput : StateMachineBehaviour
             }
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
-            
+            idleIndex = 2;
             temp = FindObjectOfType<TileVariables>();
             clickTimer = clickTimerValue;
             awake = false;
@@ -72,7 +73,9 @@ public class SwipeInput : StateMachineBehaviour
             rewindPos.Clear();
         }
         flag = true;
-
+        idleIndex = 2;
+        animIndexValue = 0;
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
         
@@ -95,20 +98,15 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (monte)
-        {
-            Debug.Log(1);
-            animIndexValue += Time.deltaTime * 100;
-        }
-        else
-        {
-            Debug.Log(animIndexValue);
 
-            animIndexValue -= Time.deltaTime * 100;
-        }
 
         if(animIndexValue < 0 && !monte)
         {
+            if (idleIndex == 2)
+                idleIndex = 3;
+            else
+                idleIndex = 2;
+
 
             animIndexValue = 1;
             monte = true;
@@ -119,7 +117,17 @@ public class SwipeInput : StateMachineBehaviour
             animIndexValue = 99;
             monte = false;
         }
-        pSRend.SetBlendShapeWeight(3, animIndexValue);
+
+        if (monte)
+        {
+            animIndexValue += Time.deltaTime * 200;
+        }
+        else
+        {
+            animIndexValue -= Time.deltaTime * 200;
+        }
+
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
 
         if (doC.right)
         {

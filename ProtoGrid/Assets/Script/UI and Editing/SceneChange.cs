@@ -28,7 +28,7 @@ public class SceneChange : MonoBehaviour
 
     public IEnumerator EndBehavior(float tile)
     {
-        stateMachine.SetActive(false);
+        //stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
 
         yield return new WaitForSeconds(0.1f);
