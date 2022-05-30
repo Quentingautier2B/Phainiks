@@ -9,17 +9,22 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve landAnimation;
     public AnimationCurve tpAnimation;
     public AnimationCurve pauseAnimation;
+
+    public AnimationCurve WrongDirectionAnimation;
     float yo;
     SceneChange sChange;
     public float begin = 1.37f;
-    public float lerper, lerpix, tpLerper, tpScaleLerper;
+    public float lerper, lerpix, tpLerper, tpScaleLerper, wLerper;
     InGameUI inGameUI;
     GridTiles[,] grid;
     GridGenerator gridG;
     public bool right, left;
     SkinnedMeshRenderer pSRend;
+    float ofLerper;
     [HideInInspector] public Transform previousTP;
     bool flag;
+    Player player;
+    
     public IEnumerator lerping()
     {
         lerpix += Time.deltaTime * 3;
@@ -73,6 +78,7 @@ public class DoCoroutine : MonoBehaviour
         sChange = FindObjectOfType<SceneChange>();
         pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
+        player = FindObjectOfType<Player>();
         flag = true;
     }
 
@@ -306,6 +312,23 @@ public class DoCoroutine : MonoBehaviour
 
     }
 
+    public IEnumerator ogPos(float startY, float endY, Transform ogTile)
+    {
+        ofLerper += Time.deltaTime;
+        ogTile.position = new Vector3(ogTile.position.x, Mathf.Lerp(startY, endY, ofLerper), ogTile.position.z);
+        player.PlayerStickTile();
+        if(ofLerper > 1)
+        {
+            ogTile.position = new Vector3(ogTile.position.x, endY, ogTile.position.z);
+            ofLerper = 0;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(ogPos(startY, endY, ogTile));
+        }
+    }
+
 
     public void startLerper()
     {
@@ -388,4 +411,45 @@ public class DoCoroutine : MonoBehaviour
             tpScaleLerper = 0;
         }
     }
+
+    public IEnumerator ScreenShake(float duration, float magnitude)
+    {
+        Vector3 originalPos = Camera.main.transform.localPosition;
+
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            Camera.main.transform.localPosition = new Vector3(x, y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+           /* yield return new WaitForEndOfFrame();
+
+            StartCoroutine(ScreenShake(duration, magnitude));*/
+        }
+        Camera.main.transform.localPosition = originalPos;
+    }
+
+    public IEnumerator WrongMoveLerp(Vector3 startPos, Vector3 endPos)
+    {
+        wLerper += Time.deltaTime;
+        player.transform.position = Vector3.Lerp(startPos, endPos, WrongDirectionAnimation.Evaluate(wLerper));
+
+        if(wLerper > 1)
+        {
+            player.transform.position = startPos;
+            wLerper = 0;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(WrongMoveLerp(startPos, endPos));
+        }
+    }
+
+
 }

@@ -26,6 +26,7 @@ public class MoveBehavior : StateMachineBehaviour
     SkinnedMeshRenderer pSRend;
     Quaternion startRot, endRot;
     bool yFlag;
+    bool endFlag;
     #endregion
 
 
@@ -34,6 +35,7 @@ public class MoveBehavior : StateMachineBehaviour
         lerper = 0;
         if (awake)
         {
+            endFlag = false;
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
             sceneChange = FindObjectOfType<SceneChange>();
             doC = animator.GetComponent<DoCoroutine>();
@@ -155,8 +157,6 @@ public class MoveBehavior : StateMachineBehaviour
 
     void TileEffectOnMove(int x, int y, Animator anim)
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
-        //timerValue++;
         if (sceneChange.Hub)
         {
             if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].World > 0)
@@ -175,10 +175,15 @@ public class MoveBehavior : StateMachineBehaviour
 
             foreach (GridTiles tile in grid)
             {
-                if(tile.levelTransiIndex != grid[x, y].levelTransiIndex)
+                if (!endFlag)
+                {
+                    endFlag = true;
+                    doC.StartCoroutine(doC.ogPos(grid[x, y].transform.position.y, 0, grid[x, y].transform));
+                }
+
+                if (tile.levelTransiIndex != grid[x, y].levelTransiIndex)
                 {
                     tile.levelTransiIndex = 100;
-                    
                     doC.startClose(tile, tile.tiling, grid[x,y].levelTransiIndex, grid[x,y].GetComponent<GridTiling>());
                 }
             }
