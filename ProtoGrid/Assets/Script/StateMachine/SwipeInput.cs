@@ -23,6 +23,7 @@ public class SwipeInput : StateMachineBehaviour
     TileVariables temp;
     CameraBehavior cam;
     SceneChange sceneChange;
+    LerpBackground lerpBackground;
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
@@ -31,6 +32,7 @@ public class SwipeInput : StateMachineBehaviour
     public bool monte;
     public bool flag;
     int idleIndex;
+<<<<<<< HEAD
     bool moveFlag;
     float ogPosY;
     float magnitude, duration;
@@ -40,6 +42,11 @@ public class SwipeInput : StateMachineBehaviour
         magnitude = 0.05f;
         duration = 0.15f;
         moveFlag = true;
+=======
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+>>>>>>> origin/stan
         if (awake)
         {
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
@@ -82,6 +89,12 @@ public class SwipeInput : StateMachineBehaviour
             awake = false;
             cam = FindObjectOfType<CameraBehavior>();
             rewindPos.Clear();
+            if (sceneChange.Hub)
+            {
+                lerpBackground = FindObjectOfType<LerpBackground>();
+                lerpBackground.lerpIn();
+
+            }
         }
         flag = true;
         idleIndex = 2;
@@ -91,7 +104,7 @@ public class SwipeInput : StateMachineBehaviour
         pPosAssignement();
         if (grid[pPosX,pPosY].levelTransiIndex != 0)
         {
-            moveFlag = false;
+            doC.moveFlag = false;
         }
         foreach(GridTiles g in grid)
         {
@@ -112,13 +125,22 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (!moveFlag)
+        if (!doC.moveFlag)
         {
             inputBuffer.SavedInput.Clear();
         }
 
         if(animIndexValue < 0 && !monte)
         {
+<<<<<<< HEAD
+=======
+          /*if (idleIndex == 2)
+                idleIndex = 3;
+            else
+                idleIndex = 2;*/
+
+
+>>>>>>> origin/stan
             animIndexValue = 1;
             monte = true;
         }
@@ -168,6 +190,7 @@ public class SwipeInput : StateMachineBehaviour
                     grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
                 }     
             }
+            inputBuffer.SavedInput.Clear();
         }
         
         if (inputBuffer.SavedInput.Count > 0 && !sceneChange.Hub)

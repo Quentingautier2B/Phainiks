@@ -23,8 +23,21 @@ public class DoCoroutine : MonoBehaviour
     float ofLerper;
     [HideInInspector] public Transform previousTP;
     bool flag;
+<<<<<<< HEAD
     Player player;
     
+=======
+    public bool moveFlag;
+    private void Awake()
+    {
+        moveFlag = true;
+        gridG = FindObjectOfType<GridGenerator>();
+        sChange = FindObjectOfType<SceneChange>();
+        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
+        inGameUI = FindObjectOfType<InGameUI>();
+        flag = true;
+    }
+>>>>>>> origin/stan
     public IEnumerator lerping()
     {
         lerpix += Time.deltaTime * 3;
@@ -72,6 +85,7 @@ public class DoCoroutine : MonoBehaviour
     }
 
 
+<<<<<<< HEAD
     private void Awake()
     {
         gridG = FindObjectOfType<GridGenerator>();
@@ -81,6 +95,8 @@ public class DoCoroutine : MonoBehaviour
         player = FindObjectOfType<Player>();
         flag = true;
     }
+=======
+>>>>>>> origin/stan
 
     public void Right()
     {
@@ -141,7 +157,7 @@ public class DoCoroutine : MonoBehaviour
             yield return new WaitForSeconds(queueWaitTime);
            
             StartCoroutine(QueueForOpen(tile, tiling, speed, oGSpeedCurve, levelTransiIndex, otherTile, queueWaitTime));
-
+            
         }
         else if (tile.levelTransiIndex == 100)
         {

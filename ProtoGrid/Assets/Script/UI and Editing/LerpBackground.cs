@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class LerpBackground : MonoBehaviour
 {
+    private Vector3 startpos;
     private float lerperFadeIn;
     private float lerperFadeOut;
-    [SerializeField] MeshRenderer backgroundTuto;
-    [SerializeField] MeshRenderer backgroundWorld1;
-    [SerializeField] MeshRenderer backgroundWorld2;
-    [SerializeField] MeshRenderer backgroundWorld3;
+    [SerializeField] MeshRenderer backgroundTuto, backgroundWorld1, backgroundWorld2, backgroundWorld3;
+    [SerializeField] Material MatbackgroundTuto, MatbackgroundWorld1, MatbackgroundWorld2, MatbackgroundWorld3;
     [SerializeField] Button falseTutoLeft, tutoRight, world1Left, world1Right, world2Left, world2right, world3Left, falseworld3Right;
+    private float lerper;
 
     private void Start()
     {
+        startpos = Camera.main.transform.localPosition;
         lerperFadeIn = 0;
         lerperFadeOut = 0;
     }
@@ -84,6 +85,35 @@ public class LerpBackground : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
             StartCoroutine(LerperFadeIn(mat, maxColor, Left, Right));
+        }
+    }
+    public void lerpIn()
+    {
+        StartCoroutine(LerperIn());
+
+    }
+    public void MatBackgroundChange()
+    {
+        backgroundTuto.material = MatbackgroundTuto;
+        backgroundWorld1.material = MatbackgroundWorld1;
+        backgroundWorld2.material = MatbackgroundWorld2;
+        backgroundWorld3.material = MatbackgroundWorld3;
+    }
+    IEnumerator LerperIn()
+    {
+        lerper += Time.deltaTime;
+        Camera.main.transform.localPosition = Vector3.Lerp(startpos, new Vector3(7.5f, -1.02f, -9.59f), lerper);
+        Camera.main.transform.localRotation = Quaternion.Lerp(Quaternion.identity, new Quaternion(-0.1731607f, -0.3162136f, 0.2146029f, 0.9077278f), lerper);
+        if (lerper >= 1)
+        {
+            Camera.main.transform.localPosition = new Vector3(7.5f, -1.02f, -9.59f);
+            MatBackgroundChange();
+            yield return new WaitForSeconds(0.3f);
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(LerperIn());
         }
     }
 }
