@@ -20,6 +20,16 @@ public class DoCoroutine : MonoBehaviour
     SkinnedMeshRenderer pSRend;
     [HideInInspector] public Transform previousTP;
     bool flag;
+    public bool moveFlag;
+    private void Awake()
+    {
+        moveFlag = true;
+        gridG = FindObjectOfType<GridGenerator>();
+        sChange = FindObjectOfType<SceneChange>();
+        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
+        inGameUI = FindObjectOfType<InGameUI>();
+        flag = true;
+    }
     public IEnumerator lerping()
     {
         lerpix += Time.deltaTime * 3;
@@ -67,16 +77,6 @@ public class DoCoroutine : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-        gridG = FindObjectOfType<GridGenerator>();
-        sChange = FindObjectOfType<SceneChange>();
-        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
-        inGameUI = FindObjectOfType<InGameUI>();
-        if (sChange.Hub)
-            GetComponent<Animator>().SetBool("Hub", true);
-        flag = true;
-    }
 
     public void Right()
     {

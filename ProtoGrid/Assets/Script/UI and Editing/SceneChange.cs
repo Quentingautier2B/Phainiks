@@ -11,6 +11,7 @@ public class SceneChange : MonoBehaviour
     GameObject stateMachine;
     float lerper;
     public AnimationCurve endAnimation;
+    [SerializeField] int World;
     [HideInInspector] public float endLerper;
     [HideInInspector] public bool loadScene = false;
     private void Awake()

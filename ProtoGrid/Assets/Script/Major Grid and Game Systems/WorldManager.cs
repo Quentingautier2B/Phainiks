@@ -16,7 +16,7 @@ public class WorldManager : MonoBehaviour
     GridTiles[,] grid;
     DoCoroutine doC;
     private Vector3 startpos;
-    private Quaternion startRot;
+    public Quaternion startRot;
     private float lerper;
     [SerializeField] GameObject plane;
 
@@ -27,8 +27,6 @@ public class WorldManager : MonoBehaviour
         parent = transform.parent.gameObject;
         text = this.transform.Find("Canvas/Name").gameObject.GetComponent<TextMeshProUGUI>();
         gridTiles = parent.GetComponent<GridTiles>();
-        startpos = Camera.main.transform.localPosition;
-        startRot = Camera.main.transform.localRotation;
         //text.text = "World " + gridTiles.World;
         worldLevelUi = transform.Find("CanvasCam/").gameObject;
         if (LevelsOfTheWorld.Length > 1)
@@ -45,6 +43,7 @@ public class WorldManager : MonoBehaviour
 
     public void OpenWorld(GameObject button)
     {
+        doC.moveFlag = false;
         foreach (GridTiles tile in grid)
         {
             if (tile.gameObject != grid[(int)gridTiles.transform.position.x, (int)gridTiles.transform.position.z].gameObject)
@@ -59,7 +58,9 @@ public class WorldManager : MonoBehaviour
 
     public void lerp()
     {
-        StartCoroutine(Lerper());
+        startpos = Camera.main.transform.localPosition;
+        startRot = Camera.main.transform.localRotation;
+        StartCoroutine(LerperOut());
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
         foreach (Transform child in Camera.main.transform)
@@ -67,7 +68,7 @@ public class WorldManager : MonoBehaviour
 
     }
 
-    IEnumerator Lerper()
+    IEnumerator LerperOut()
     {
         lerper += Time.deltaTime;
         Camera.main.transform.localPosition = Vector3.Lerp(startpos, new Vector3(0, 0, -15), lerper);
@@ -80,7 +81,7 @@ public class WorldManager : MonoBehaviour
         else
         {
             yield return new WaitForEndOfFrame();
-            StartCoroutine(Lerper());
+            StartCoroutine(LerperOut());
         }
     }
 }
