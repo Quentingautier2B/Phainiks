@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637894627431428964
+  lastModified: 637895103205691624
   FileSizes:
   - Name: Desktop
-    Value: 2804704
+    Value: 3197120
   Exists: 1
 --- !u!114 &-7613647227136013809
 MonoBehaviour:
@@ -97,6 +97,58 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &-5612486204083529194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Piano/GameState
+  m_EditorClassIdentifier: 
+  Name: GameState
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3735535704
+    data2: 1915475463
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Game
+  - Hub
+  Exists: 1
+--- !u!114 &-5572140574273791894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/GameState
+  m_EditorClassIdentifier: 
+  Name: GameState
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3735535704
+    data2: 1915475463
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Game
+  - Hub
   Exists: 1
 --- !u!114 &-5398361606512415277
 MonoBehaviour:
@@ -431,6 +483,32 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-1031041361524558160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/GameState
+  m_EditorClassIdentifier: 
+  Name: GameState
+  StudioPath: parameter:/GameState
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3735535704
+    data2: 1915475463
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Game
+  - Hub
+  Exists: 1
 --- !u!114 &-369194853466956351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,16 +618,18 @@ MonoBehaviour:
   - {fileID: 6651861600903338673}
   - {fileID: 6938490443375111135}
   - {fileID: -1949138644113013555}
+  - {fileID: 8465403235580440655}
   EditorParameters:
   - {fileID: 3393586134015897809}
   - {fileID: 5380251282109102058}
   - {fileID: -5398361606512415277}
   - {fileID: -1679749042502340712}
+  - {fileID: -1031041361524558160}
   MasterBanks:
   - {fileID: -7885380359915735208}
   StringsBanks:
   - {fileID: 1561068242197194036}
-  cacheTime: 637894627431448800
+  cacheTime: 637895103205701596
   cacheVersion: 10
 --- !u!114 &1133230108034068595
 MonoBehaviour:
@@ -593,10 +673,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637894627431448800
+  lastModified: 637895103205701596
   FileSizes:
   - Name: Desktop
-    Value: 1690
+    Value: 1764
   Exists: 1
 --- !u!114 &2297000516285016793
 MonoBehaviour:
@@ -625,6 +705,7 @@ MonoBehaviour:
   - {fileID: -1564704539331447472}
   - {fileID: -3066797965647094544}
   - {fileID: 3209488667439621391}
+  - {fileID: -5572140574273791894}
   MinDistance: 1
   MaxDistance: 20
   Length: 32000
@@ -802,9 +883,10 @@ MonoBehaviour:
   - {fileID: -3414960997867381204}
   - {fileID: 3699176121627279509}
   - {fileID: -7489733036602587893}
+  - {fileID: -5612486204083529194}
   MinDistance: 1
   MaxDistance: 20
-  Length: 44000
+  Length: 82000
 --- !u!114 &5380251282109102058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,6 +1067,33 @@ MonoBehaviour:
   Banks:
   - {fileID: -7885380359915735208}
   IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8465403235580440655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/World/Hub
+  m_EditorClassIdentifier: 
+  Path: event:/World/Hub
+  Guid:
+    Data1: -714463963
+    Data2: 1269102986
+    Data3: 1585519281
+    Data4: -952104702
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []

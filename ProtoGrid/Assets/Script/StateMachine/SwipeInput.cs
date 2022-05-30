@@ -106,8 +106,6 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-
-
         if(animIndexValue < 0 && !monte)
         {
 /*            if (idleIndex == 2)
@@ -152,19 +150,23 @@ public class SwipeInput : StateMachineBehaviour
 
         if (sceneChange.Hub && inputBuffer.SavedInput.Count > 0)
         {
-            directionSwipe = inputBuffer.SavedInput[0];
-
-            if(flag)
+            if (Time.timeSinceLevelLoad > 1.7f)
             {
-                if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                directionSwipe = inputBuffer.SavedInput[0];
+
+                if(flag)
                 {
-                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                    if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                    {
+                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                    }
+                    else if (directionSwipe.x < 0 && directionSwipe.y < 0)
+                    {
+                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
+                    }     
                 }
-                else if (directionSwipe.x < 0 && directionSwipe.y < 0)
-                {
-                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
-                }     
             }
+
         }
         
         if (inputBuffer.SavedInput.Count > 0 && !sceneChange.Hub)
@@ -367,28 +369,34 @@ public class SwipeInput : StateMachineBehaviour
 
     void HubTestRightDirections(Animator anim)
     {
-        flag = false;
-        roundingDirectionalYPosition = new Vector2(0, 0);
-        anim.SetInteger("TargetInfoX", pPosX + 3);
-        anim.SetInteger("TargetInfoY", pPosY);
-        anim.SetInteger("PreviousX", pPosX);
-        anim.SetInteger("PreviousY", pPosY);
-        directionIndex = 1;
-        anim.SetBool("OntonormalTileMove", true);
-        anim.SetBool("OntonormalTileTempo", true);
-       //rewindPos.Add(new Vector2(pPosX, pPosY));
+        if (Time.timeSinceLevelLoad > 1.7f)
+        {
+            flag = false;
+            roundingDirectionalYPosition = new Vector2(0, 0);
+            anim.SetInteger("TargetInfoX", pPosX + 3);
+            anim.SetInteger("TargetInfoY", pPosY);
+            anim.SetInteger("PreviousX", pPosX);
+            anim.SetInteger("PreviousY", pPosY);
+            directionIndex = 1;
+            anim.SetBool("OntonormalTileMove", true);
+            anim.SetBool("OntonormalTileTempo", true);
+           //rewindPos.Add(new Vector2(pPosX, pPosY));
+        }
     }
     void HubTestLeftDirections(Animator anim)
     {
-        flag = false;
-        roundingDirectionalYPosition = new Vector2(1, 1);
-        anim.SetInteger("TargetInfoX", pPosX - 3);
-        anim.SetInteger("TargetInfoY", pPosY);
-        anim.SetInteger("PreviousX", pPosX);
-        anim.SetInteger("PreviousY", pPosY);
-        directionIndex = 1;
-        anim.SetBool("OntonormalTileMove", true);
-        anim.SetBool("OntonormalTileTempo", true);
-       //rewindPos.Add(new Vector2(pPosX, pPosY));
+        if (Time.timeSinceLevelLoad > 1.7f)
+        {
+            flag = false;
+            roundingDirectionalYPosition = new Vector2(1, 1);
+            anim.SetInteger("TargetInfoX", pPosX - 3);
+            anim.SetInteger("TargetInfoY", pPosY);
+            anim.SetInteger("PreviousX", pPosX);
+            anim.SetInteger("PreviousY", pPosY);
+            directionIndex = 1;
+            anim.SetBool("OntonormalTileMove", true);
+            anim.SetBool("OntonormalTileTempo", true);
+           //rewindPos.Add(new Vector2(pPosX, pPosY));
+        }
     }
 }

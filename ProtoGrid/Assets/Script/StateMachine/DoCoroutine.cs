@@ -73,6 +73,8 @@ public class DoCoroutine : MonoBehaviour
         sChange = FindObjectOfType<SceneChange>();
         pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
+        if (sChange.Hub)
+            GetComponent<Animator>().SetBool("Hub", true);
         flag = true;
     }
 
@@ -135,7 +137,7 @@ public class DoCoroutine : MonoBehaviour
             yield return new WaitForSeconds(queueWaitTime);
            
             StartCoroutine(QueueForOpen(tile, tiling, speed, oGSpeedCurve, levelTransiIndex, otherTile, queueWaitTime));
-
+            
         }
         else if (tile.levelTransiIndex == 100)
         {
