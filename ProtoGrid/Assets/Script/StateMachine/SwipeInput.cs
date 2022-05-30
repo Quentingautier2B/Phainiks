@@ -166,6 +166,7 @@ public class SwipeInput : StateMachineBehaviour
                     }     
                 }
             }
+            inputBuffer.SavedInput.Clear();
 
         }
         
