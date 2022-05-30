@@ -8,6 +8,7 @@ public class DoCoroutine : MonoBehaviour
     public AnimationCurve oGSpeedCurve;
     public AnimationCurve landAnimation;
     public AnimationCurve tpAnimation;
+    public AnimationCurve pauseAnimation;
     float yo;
     SceneChange sChange;
     public float begin = 1.37f;
@@ -323,7 +324,7 @@ public class DoCoroutine : MonoBehaviour
 
         lerper += Time.deltaTime * 1;
         var vec = inGameUI.PauseLevel.anchoredPosition;
-        vec.x = Mathf.Lerp(startPos, endPos, lerper);
+        vec.x = Mathf.Lerp(startPos, endPos, pauseAnimation.Evaluate(lerper));
         inGameUI.PauseLevel.anchoredPosition = vec;
 
         if (lerper >= 1)

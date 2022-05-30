@@ -28,8 +28,9 @@ public class SwipeInput : StateMachineBehaviour
     static public List<Vector2> rewindPos = new List<Vector2>();
     InputSaver inputBuffer;
     float animIndexValue;
-    bool monte;
+    public bool monte;
     public bool flag;
+    int idleIndex;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -65,7 +66,7 @@ public class SwipeInput : StateMachineBehaviour
             }
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
-            
+            idleIndex = 2;
             temp = FindObjectOfType<TileVariables>();
             clickTimer = clickTimerValue;
             awake = false;
@@ -73,10 +74,19 @@ public class SwipeInput : StateMachineBehaviour
             rewindPos.Clear();
         }
         flag = true;
-
+        idleIndex = 2;
+        animIndexValue = 0;
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
-        
+/*        if(grid[pPosX,pPosY].originalPosition || grid[pPosX,pPosY].levelTransiIndex != 0)
+        {
+            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.38f, pSRend.transform.localPosition.z);
+        }
+        else
+        {
+            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.42f, pSRend.transform.localPosition.z);
+        }*/
         foreach(GridTiles g in grid)
         {
             
@@ -95,9 +105,27 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // Debug.Log(animIndexValue);
 
-        //animIndexValue += Time.deltaTime * 150;
+
+
+        if(animIndexValue < 0 && !monte)
+        {
+/*            if (idleIndex == 2)
+                idleIndex = 3;
+            else
+                idleIndex = 2;*/
+
+
+            animIndexValue = 1;
+            monte = true;
+        }
+        else if(animIndexValue > 50 && monte)
+        {
+
+            animIndexValue = 49;
+            monte = false;
+        }
+
         if (monte)
         {
             animIndexValue += Time.deltaTime * 50;
@@ -107,17 +135,7 @@ public class SwipeInput : StateMachineBehaviour
             animIndexValue -= Time.deltaTime * 50;
         }
 
-        if(animIndexValue < 0 && !monte)
-        {
-            animIndexValue = 1;
-            monte = true;
-        }
-        else if(animIndexValue > 50 && monte)
-        {
-            animIndexValue = 49;
-            monte = false;
-        }
-        //pSRend.SetBlendShapeWeight(1, animIndexValue);
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
 
         if (doC.right)
         {
@@ -162,6 +180,7 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animIndexValue = 0;
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         monte = true;
         if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
             inputBuffer.SavedInput.RemoveAt(0);

@@ -10,6 +10,7 @@ public class SceneChange : MonoBehaviour
     InGameUI inGameUI;
     GameObject stateMachine;
     float lerper;
+    public AnimationCurve endAnimation;
     [HideInInspector] public float endLerper;
     [HideInInspector] public bool loadScene = false;
     private void Awake()
@@ -27,7 +28,7 @@ public class SceneChange : MonoBehaviour
 
     public IEnumerator EndBehavior(float tile)
     {
-        stateMachine.SetActive(false);
+        //stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
 
         yield return new WaitForSeconds(0.1f);
@@ -49,7 +50,7 @@ public class SceneChange : MonoBehaviour
 
         endLerper += Time.deltaTime * 1;
         var vec = inGameUI.Endlevel.anchoredPosition;
-        vec.x = Mathf.Lerp(startLerp, endLerp, endLerper);
+        vec.x = Mathf.Lerp(startLerp, endLerp, endAnimation.Evaluate(endLerper)) ;
         inGameUI.Endlevel.anchoredPosition = vec;
 
         if(endLerper >= 1)
