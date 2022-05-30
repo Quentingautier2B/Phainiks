@@ -32,21 +32,16 @@ public class SwipeInput : StateMachineBehaviour
     public bool monte;
     public bool flag;
     int idleIndex;
-<<<<<<< HEAD
-    bool moveFlag;
+
     float ogPosY;
     float magnitude, duration;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        magnitude = 0.05f;
-        duration = 0.15f;
-        moveFlag = true;
-=======
+        magnitude = 0.01f;
+        duration = 0.25f;
 
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
->>>>>>> origin/stan
+
         if (awake)
         {
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
@@ -74,12 +69,7 @@ public class SwipeInput : StateMachineBehaviour
                     doC.startClose(g, g.tiling, g.levelTransiIndex, gTil);
                     doC.StartCoroutine(doC.ogPos(0, ogPosY, gTil.transform));
                 }
-                /*if (g.door != 0 && g.open)
-                    g.open = false;*/
-                /*if (g.door != 0 && !g.open)
-                    doC.startClose(g, g.levelTransiIndex);
-                else
-                    g.open = false;*/
+
             }
             
             gridG = FindObjectOfType<GridGenerator>();
@@ -132,15 +122,7 @@ public class SwipeInput : StateMachineBehaviour
 
         if(animIndexValue < 0 && !monte)
         {
-<<<<<<< HEAD
-=======
-          /*if (idleIndex == 2)
-                idleIndex = 3;
-            else
-                idleIndex = 2;*/
 
-
->>>>>>> origin/stan
             animIndexValue = 1;
             monte = true;
         }
@@ -269,7 +251,7 @@ public class SwipeInput : StateMachineBehaviour
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
                 {
                     inputBuffer.SavedInput.RemoveAt(0);
-                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y, pPosY), new Vector3(pPosX + 1, grid[pPosX, pPosY].transform.position.y, pPosY)));
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX + 1, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY)));
                     doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
                 }
             }
@@ -311,6 +293,7 @@ public class SwipeInput : StateMachineBehaviour
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
                 {
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX , grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY - 1)));
                     inputBuffer.SavedInput.RemoveAt(0);
                     doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
                 }
@@ -353,6 +336,7 @@ public class SwipeInput : StateMachineBehaviour
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
                 {
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY + 1)));
                     doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
                     inputBuffer.SavedInput.RemoveAt(0);
                 }
@@ -395,6 +379,7 @@ public class SwipeInput : StateMachineBehaviour
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
                 {
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX - 1, grid[pPosX, pPosY].transform.position.y+ 1.5f, pPosY)));
                     inputBuffer.SavedInput.RemoveAt(0);
                     doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
                 }

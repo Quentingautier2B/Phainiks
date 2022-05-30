@@ -23,10 +23,9 @@ public class DoCoroutine : MonoBehaviour
     float ofLerper;
     [HideInInspector] public Transform previousTP;
     bool flag;
-<<<<<<< HEAD
+
     Player player;
     
-=======
     public bool moveFlag;
     private void Awake()
     {
@@ -35,9 +34,10 @@ public class DoCoroutine : MonoBehaviour
         sChange = FindObjectOfType<SceneChange>();
         pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
+        player = FindObjectOfType<Player>();
         flag = true;
     }
->>>>>>> origin/stan
+
     public IEnumerator lerping()
     {
         lerpix += Time.deltaTime * 3;
@@ -85,18 +85,6 @@ public class DoCoroutine : MonoBehaviour
     }
 
 
-<<<<<<< HEAD
-    private void Awake()
-    {
-        gridG = FindObjectOfType<GridGenerator>();
-        sChange = FindObjectOfType<SceneChange>();
-        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
-        inGameUI = FindObjectOfType<InGameUI>();
-        player = FindObjectOfType<Player>();
-        flag = true;
-    }
-=======
->>>>>>> origin/stan
 
     public void Right()
     {
@@ -452,7 +440,7 @@ public class DoCoroutine : MonoBehaviour
 
     public IEnumerator WrongMoveLerp(Vector3 startPos, Vector3 endPos)
     {
-        wLerper += Time.deltaTime;
+        wLerper += Time.deltaTime * 5;
         player.transform.position = Vector3.Lerp(startPos, endPos, WrongDirectionAnimation.Evaluate(wLerper));
 
         if(wLerper > 1)
