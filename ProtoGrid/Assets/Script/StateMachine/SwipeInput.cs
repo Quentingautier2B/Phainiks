@@ -31,10 +31,11 @@ public class SwipeInput : StateMachineBehaviour
     public bool monte;
     public bool flag;
     int idleIndex;
+    bool moveFlag;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        moveFlag = true;
         if (awake)
         {
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
@@ -44,11 +45,14 @@ public class SwipeInput : StateMachineBehaviour
             sceneChange = FindObjectOfType<SceneChange>();
             directionIndex = 0;
             GridTiling gTil = null;
-            foreach(GridTiles g in grid)
+            player = FindObjectOfType<Player>().transform;
+            foreach (GridTiles g in grid)
             {
                 if (g.originalPosition)
                 {
                     gTil = g.GetComponent<GridTiling>();
+                    player.position = gTil.transform.position + new Vector3(0, 1.5f, 0);
+                    
                 }
             }
             foreach (GridTiles g in grid)
@@ -64,7 +68,7 @@ public class SwipeInput : StateMachineBehaviour
                 else
                     g.open = false;*/
             }
-            player = FindObjectOfType<Player>().transform;
+            
             gridG = FindObjectOfType<GridGenerator>();
             idleIndex = 2;
             temp = FindObjectOfType<TileVariables>();
@@ -79,6 +83,10 @@ public class SwipeInput : StateMachineBehaviour
         pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
+        if (grid[pPosX,pPosY].levelTransiIndex != 0)
+        {
+            moveFlag = false;
+        }
 /*        if(grid[pPosX,pPosY].originalPosition || grid[pPosX,pPosY].levelTransiIndex != 0)
         {
             pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.38f, pSRend.transform.localPosition.z);
@@ -105,6 +113,11 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
+        if (!moveFlag)
+        {
+            inputBuffer.SavedInput.Clear();
+        }
 
         if(animIndexValue < 0 && !monte)
         {
@@ -150,24 +163,19 @@ public class SwipeInput : StateMachineBehaviour
 
         if (sceneChange.Hub && inputBuffer.SavedInput.Count > 0)
         {
-            if (Time.timeSinceLevelLoad > 1.7f)
+            directionSwipe = inputBuffer.SavedInput[0];
+
+            if(flag)
             {
-                directionSwipe = inputBuffer.SavedInput[0];
-
-                if(flag)
+                if (directionSwipe.x > 0 && directionSwipe.y > 0)
                 {
-                    if (directionSwipe.x > 0 && directionSwipe.y > 0)
-                    {
-                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
-                    }
-                    else if (directionSwipe.x < 0 && directionSwipe.y < 0)
-                    {
-                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
-                    }     
+                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
                 }
+                else if (directionSwipe.x < 0 && directionSwipe.y < 0)
+                {
+                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
+                }     
             }
-            inputBuffer.SavedInput.Clear();
-
         }
         
         if (inputBuffer.SavedInput.Count > 0 && !sceneChange.Hub)
@@ -370,34 +378,28 @@ public class SwipeInput : StateMachineBehaviour
 
     void HubTestRightDirections(Animator anim)
     {
-        if (Time.timeSinceLevelLoad > 1.7f)
-        {
-            flag = false;
-            roundingDirectionalYPosition = new Vector2(0, 0);
-            anim.SetInteger("TargetInfoX", pPosX + 3);
-            anim.SetInteger("TargetInfoY", pPosY);
-            anim.SetInteger("PreviousX", pPosX);
-            anim.SetInteger("PreviousY", pPosY);
-            directionIndex = 1;
-            anim.SetBool("OntonormalTileMove", true);
-            anim.SetBool("OntonormalTileTempo", true);
-           //rewindPos.Add(new Vector2(pPosX, pPosY));
-        }
+        flag = false;
+        roundingDirectionalYPosition = new Vector2(0, 0);
+        anim.SetInteger("TargetInfoX", pPosX + 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+       //rewindPos.Add(new Vector2(pPosX, pPosY));
     }
     void HubTestLeftDirections(Animator anim)
     {
-        if (Time.timeSinceLevelLoad > 1.7f)
-        {
-            flag = false;
-            roundingDirectionalYPosition = new Vector2(1, 1);
-            anim.SetInteger("TargetInfoX", pPosX - 3);
-            anim.SetInteger("TargetInfoY", pPosY);
-            anim.SetInteger("PreviousX", pPosX);
-            anim.SetInteger("PreviousY", pPosY);
-            directionIndex = 1;
-            anim.SetBool("OntonormalTileMove", true);
-            anim.SetBool("OntonormalTileTempo", true);
-           //rewindPos.Add(new Vector2(pPosX, pPosY));
-        }
+        flag = false;
+        roundingDirectionalYPosition = new Vector2(1, 1);
+        anim.SetInteger("TargetInfoX", pPosX - 3);
+        anim.SetInteger("TargetInfoY", pPosY);
+        anim.SetInteger("PreviousX", pPosX);
+        anim.SetInteger("PreviousY", pPosY);
+        directionIndex = 1;
+        anim.SetBool("OntonormalTileMove", true);
+        anim.SetBool("OntonormalTileTempo", true);
+       //rewindPos.Add(new Vector2(pPosX, pPosY));
     }
 }
