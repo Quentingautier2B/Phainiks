@@ -31,10 +31,11 @@ public class SwipeInput : StateMachineBehaviour
     public bool monte;
     public bool flag;
     int idleIndex;
+    bool moveFlag;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        moveFlag = true;
         if (awake)
         {
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
@@ -44,11 +45,14 @@ public class SwipeInput : StateMachineBehaviour
             sceneChange = FindObjectOfType<SceneChange>();
             directionIndex = 0;
             GridTiling gTil = null;
-            foreach(GridTiles g in grid)
+            player = FindObjectOfType<Player>().transform;
+            foreach (GridTiles g in grid)
             {
                 if (g.originalPosition)
                 {
                     gTil = g.GetComponent<GridTiling>();
+                    player.position = gTil.transform.position + new Vector3(0, 1.5f, 0);
+                    
                 }
             }
             foreach (GridTiles g in grid)
@@ -64,7 +68,7 @@ public class SwipeInput : StateMachineBehaviour
                 else
                     g.open = false;*/
             }
-            player = FindObjectOfType<Player>().transform;
+            
             gridG = FindObjectOfType<GridGenerator>();
             idleIndex = 2;
             temp = FindObjectOfType<TileVariables>();
@@ -79,6 +83,10 @@ public class SwipeInput : StateMachineBehaviour
         pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
+        if (grid[pPosX,pPosY].levelTransiIndex != 0)
+        {
+            moveFlag = false;
+        }
 /*        if(grid[pPosX,pPosY].originalPosition || grid[pPosX,pPosY].levelTransiIndex != 0)
         {
             pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.38f, pSRend.transform.localPosition.z);
@@ -106,7 +114,10 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-
+        if (!moveFlag)
+        {
+            inputBuffer.SavedInput.Clear();
+        }
 
         if(animIndexValue < 0 && !monte)
         {
