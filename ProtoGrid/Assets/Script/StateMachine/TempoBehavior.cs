@@ -5,19 +5,15 @@ using UnityEngine;
 
 public class TempoBehavior : StateMachineBehaviour
 {
-    //public int redTimer = 0;
     int redOffValue = 1;
-    //public bool redFlag;
 
-   //public int blueTimer = 0;
-   int blueOffValue = 2;
-   //public bool blueFlag;
+    int blueOffValue = 2;
 
-   //public int greenTimer = 0;
     int greenOffValue = 3;
-   //public bool greenFlag;
 
     TileVariables t;
+
+    Player player;
 
 
     [SerializeField] public bool redFlager,blueFlager,greenFlager, crumbleFlager;
@@ -36,6 +32,7 @@ public class TempoBehavior : StateMachineBehaviour
     {
         if (awake)
         {
+            player = FindObjectOfType<Player>();
             gridG = FindObjectOfType<GridGenerator>();
             doC = FindObjectOfType<DoCoroutine>();
             debugTools = FindObjectOfType<DebugTools>();
@@ -395,6 +392,7 @@ public class TempoBehavior : StateMachineBehaviour
 
     bool LerpPos(GridTiles tile, bool Flager, bool colorFlag, GridTiling g, string musicName)
     {
+            player.PlayerStickTile();
             //Called on First Loop
             if (tile.tempoBool && colorFlag)
             {
@@ -413,8 +411,9 @@ public class TempoBehavior : StateMachineBehaviour
                 tile.tempoBool = false;
             }
 
-        //Called Every loop
+            //Called Every loop
             g.TempoTileMaterial();
+            //g.TempoTileTransi();
             tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
             UpdateAdjacentTileColonnes(tile, (int)tile.transform.position.x, (int)tile.transform.position.z, gT);
 
@@ -438,33 +437,22 @@ public class TempoBehavior : StateMachineBehaviour
     {
         if(x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
         {
-            /* gridG.TestDirection(x + 1, y, 4);
-             grid[x + 1, y].GetComponent<GridTiling>().SetCubeSize();*/
             grid[x + 1, y].tiling.SetDirectionalMaterial();
         }
 
         if (y - 1 > -1 && grid[x, y - 1] != null && grid[x, y - 1].walkable && grid[x, y - 1].tempoTile == 0)
         {
-            /*            gridG.TestDirection(x, y - 1, 3);
-                        grid[x, y - 1].GetComponent<GridTiling>().SetCubeSize();*/
             grid[x, y - 1].tiling.SetDirectionalMaterial();
-
         }
 
         if (y + 1 < gridG.columns && grid[x, y + 1] != null && grid[x, y + 1].walkable && grid[x, y + 1].tempoTile == 0)
         {
-            /*            gridG.TestDirection(x, y + 1, 2);
-                        grid[x, y + 1].GetComponent<GridTiling>().SetCubeSize();*/
             grid[x, y + 1].tiling.SetDirectionalMaterial();
-
         }
 
         if (x - 1 > -1 && grid[x - 1, y] != null && grid[x - 1, y].walkable && grid[x - 1, y].tempoTile == 0)
         {
-            /*            gridG.TestDirection(x - 1, y, 1);
-                        grid[x - 1, y].GetComponent<GridTiling>().SetCubeSize();*/
             grid[x - 1, y].tiling.SetDirectionalMaterial();
-
         }
     }
 }

@@ -25,6 +25,7 @@ public class MoveBehavior : StateMachineBehaviour
     SceneChange sceneChange;
     SkinnedMeshRenderer pSRend;
     Quaternion startRot, endRot;
+    bool yFlag;
     #endregion
 
 
@@ -43,6 +44,7 @@ public class MoveBehavior : StateMachineBehaviour
         }
         startPos = player.position;
         startRot = player.rotation;
+        yFlag = true;
         endRot = Quaternion.AngleAxis(90, player.forward);
         canMove = true;
         if (animator.GetBool("Rewind"))
@@ -90,6 +92,12 @@ public class MoveBehavior : StateMachineBehaviour
             lerper += Time.deltaTime * moveSpeed;
             pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
             pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
+            if (yFlag && ((startPos.y - 1.5f) - grid[x, y].transform.position.y == 1 || (startPos.y - 1.5f) - grid[x, y].transform.position.y == -1))
+            {
+                Debug.Log(1);
+                doC.StartCoroutine(player.GetComponent<Player>().Lerper(startPos.y + 1.5f, grid[x, y].transform.position.y + 1.5f)) ;
+                yFlag = false;
+            }
             if(lerper <= .5f)
             {
                 pSRend.SetBlendShapeWeight(0,Mathf.Lerp(0,100,lerper));
