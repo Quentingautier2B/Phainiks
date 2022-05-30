@@ -18,7 +18,7 @@ public class WorldManager : MonoBehaviour
         parent = transform.parent.gameObject;
         text = this.transform.Find("Canvas/Name").gameObject.GetComponent<TextMeshProUGUI>();
         gridTiles = parent.GetComponent<GridTiles>();
-        text.text = "World " + gridTiles.World;
+        //text.text = "World " + gridTiles.World;
         worldLevelUi = transform.Find("CanvasCam/").gameObject;
         if (LevelsOfTheWorld.Length > 1)
         {
@@ -26,17 +26,9 @@ public class WorldManager : MonoBehaviour
             {
                 GameObject world = worldLevelUi.transform.Find("" + i).gameObject;
                 world.SetActive(true);
-                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;
-
-                
+                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;               
             }
         }
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     public void OpenWorld(GameObject button)

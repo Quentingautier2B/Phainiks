@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 
@@ -21,18 +22,18 @@ public class SwipeInput : StateMachineBehaviour
     GridTiles[,] grid;
     TileVariables temp;
     CameraBehavior cam;
+    SceneChange sceneChange;
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
     InputSaver inputBuffer;
     float animIndexValue;
-    bool monte; 
+    public bool monte;
+    public bool flag;
+    int idleIndex;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-        
-
 
         if (awake)
         {
@@ -40,6 +41,7 @@ public class SwipeInput : StateMachineBehaviour
             inputBuffer = FindObjectOfType<InputSaver>();
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
+            sceneChange = FindObjectOfType<SceneChange>();
             GridTiling gTil = null;
             foreach(GridTiles g in grid)
             {
@@ -50,9 +52,9 @@ public class SwipeInput : StateMachineBehaviour
             }
             foreach (GridTiles g in grid)
             {
-                if ((!g.originalPosition && g.open && g.door != 0) || (!g.originalPosition && g.door == 0))
+                if ((!g.originalPosition && g.open && g.door != 0 && g.walkable) || (!g.originalPosition && g.door == 0 && g.walkable))
                 {                  
-                    doC.startClose(g, g.levelTransiIndex, gTil);
+                    doC.startClose(g, g.tiling, g.levelTransiIndex, gTil);
                 }
                 /*if (g.door != 0 && g.open)
                     g.open = false;*/
@@ -63,17 +65,27 @@ public class SwipeInput : StateMachineBehaviour
             }
             player = FindObjectOfType<Player>().transform;
             gridG = FindObjectOfType<GridGenerator>();
-            
+            idleIndex = 2;
             temp = FindObjectOfType<TileVariables>();
             clickTimer = clickTimerValue;
             awake = false;
             cam = FindObjectOfType<CameraBehavior>();
             rewindPos.Clear();
         }
-
+        flag = true;
+        idleIndex = 2;
+        animIndexValue = 0;
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
-        
+/*        if(grid[pPosX,pPosY].originalPosition || grid[pPosX,pPosY].levelTransiIndex != 0)
+        {
+            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.38f, pSRend.transform.localPosition.z);
+        }
+        else
+        {
+            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.42f, pSRend.transform.localPosition.z);
+        }*/
         foreach(GridTiles g in grid)
         {
             
@@ -92,9 +104,27 @@ public class SwipeInput : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // Debug.Log(animIndexValue);
 
-        //animIndexValue += Time.deltaTime * 150;
+
+
+        if(animIndexValue < 0 && !monte)
+        {
+/*            if (idleIndex == 2)
+                idleIndex = 3;
+            else
+                idleIndex = 2;*/
+
+
+            animIndexValue = 1;
+            monte = true;
+        }
+        else if(animIndexValue > 50 && monte)
+        {
+
+            animIndexValue = 49;
+            monte = false;
+        }
+
         if (monte)
         {
             animIndexValue += Time.deltaTime * 50;
@@ -104,32 +134,39 @@ public class SwipeInput : StateMachineBehaviour
             animIndexValue -= Time.deltaTime * 50;
         }
 
-        if(animIndexValue < 0 && !monte)
-        {
-            animIndexValue = 1;
-            monte = true;
-        }
-        else if(animIndexValue > 50 && monte)
-        {
-            animIndexValue = 49;
-            monte = false;
-        }
-        //pSRend.SetBlendShapeWeight(1, animIndexValue);
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
+
         if (doC.right)
         {
             pPosAssignement();
             HubTestRightDirections(animator);
             doC.right = false;
         }
-
-        if (doC.left)
+        else if (doC.left)
         {
             pPosAssignement();
             HubTestLeftDirections(animator);
             doC.left = false;
         }
 
-        if (inputBuffer.SavedInput.Count > 0)
+        if (sceneChange.Hub && inputBuffer.SavedInput.Count > 0)
+        {
+            directionSwipe = inputBuffer.SavedInput[0];
+
+            if(flag)
+            {
+                if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                {
+                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                }
+                else if (directionSwipe.x < 0 && directionSwipe.y < 0)
+                {
+                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
+                }     
+            }
+        }
+        
+        if (inputBuffer.SavedInput.Count > 0 && !sceneChange.Hub)
         {
             directionSwipe = inputBuffer.SavedInput[0];
             pPosAssignement();
@@ -138,11 +175,11 @@ public class SwipeInput : StateMachineBehaviour
 
 
 
-
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animIndexValue = 0;
+        pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         monte = true;
         if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
             inputBuffer.SavedInput.RemoveAt(0);
@@ -158,8 +195,6 @@ public class SwipeInput : StateMachineBehaviour
         animator.SetInteger("CurrentY", (int)player.position.z);
         
     }
-
-
 
     void pPosAssignement()
     {
@@ -331,6 +366,7 @@ public class SwipeInput : StateMachineBehaviour
 
     void HubTestRightDirections(Animator anim)
     {
+        flag = false;
         roundingDirectionalYPosition = new Vector2(0, 0);
         anim.SetInteger("TargetInfoX", pPosX + 3);
         anim.SetInteger("TargetInfoY", pPosY);
@@ -339,10 +375,11 @@ public class SwipeInput : StateMachineBehaviour
         directionIndex = 1;
         anim.SetBool("OntonormalTileMove", true);
         anim.SetBool("OntonormalTileTempo", true);
-        rewindPos.Add(new Vector2(pPosX, pPosY));
+       //rewindPos.Add(new Vector2(pPosX, pPosY));
     }
     void HubTestLeftDirections(Animator anim)
     {
+        flag = false;
         roundingDirectionalYPosition = new Vector2(1, 1);
         anim.SetInteger("TargetInfoX", pPosX - 3);
         anim.SetInteger("TargetInfoY", pPosY);
@@ -351,6 +388,6 @@ public class SwipeInput : StateMachineBehaviour
         directionIndex = 1;
         anim.SetBool("OntonormalTileMove", true);
         anim.SetBool("OntonormalTileTempo", true);
-        rewindPos.Add(new Vector2(pPosX, pPosY));
+       //rewindPos.Add(new Vector2(pPosX, pPosY));
     }
 }

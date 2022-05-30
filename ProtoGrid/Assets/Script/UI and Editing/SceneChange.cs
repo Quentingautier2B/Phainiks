@@ -10,6 +10,7 @@ public class SceneChange : MonoBehaviour
     InGameUI inGameUI;
     GameObject stateMachine;
     float lerper;
+    public AnimationCurve endAnimation;
     [HideInInspector] public float endLerper;
     [HideInInspector] public bool loadScene = false;
     private void Awake()
@@ -27,12 +28,8 @@ public class SceneChange : MonoBehaviour
 
     public IEnumerator EndBehavior(float tile)
     {
-        stateMachine.SetActive(false);
+        //stateMachine.SetActive(false);
         inGameUI.UiEndDisable();
-/*        debugTools.mainMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-
-        debugTools.mainMusic.release();*/
 
         yield return new WaitForSeconds(0.1f);
         if (tile < 1 || SceneManager.GetActiveScene().name == "Lvl_0,5" || Hub)
@@ -41,12 +38,7 @@ public class SceneChange : MonoBehaviour
         }
         else
         {
-            //StartCoroutine(Lerper(inGameUI.startPosX, inGameUI.endPosX));
             inGameUI.endTile = tile;
-            /*inGameUI.endLevelMenu.SetActive(true);
-            inGameUI.oneStarImage.gameObject.SetActive(true);
-            inGameUI.twoStarImage.gameObject.SetActive(true);
-            inGameUI.threeStarImage.gameObject.SetActive(true);*/
         }
 
             inGameUI.endTile = tile;
@@ -58,7 +50,7 @@ public class SceneChange : MonoBehaviour
 
         endLerper += Time.deltaTime * 1;
         var vec = inGameUI.Endlevel.anchoredPosition;
-        vec.x = Mathf.Lerp(startLerp, endLerp, endLerper);
+        vec.x = Mathf.Lerp(startLerp, endLerp, endAnimation.Evaluate(endLerper)) ;
         inGameUI.Endlevel.anchoredPosition = vec;
 
         if(endLerper >= 1)

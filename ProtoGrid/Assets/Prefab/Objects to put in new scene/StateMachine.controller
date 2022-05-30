@@ -255,9 +255,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.1
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -298,6 +298,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.07583773
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  landAnimation:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -732,6 +738,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  landAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   canMove: 0
 --- !u!1101 &6296755052383454912
 AnimatorStateTransition:
@@ -802,6 +814,8 @@ MonoBehaviour:
   deadZoneDiameter: 50
   clickTimerValue: 0.25
   roundingDirectionalYPosition: {x: 0, y: 0}
+  monte: 1
+  flag: 0
 --- !u!114 &7192722718803773093
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -837,6 +851,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.07583773
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  landAnimation:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

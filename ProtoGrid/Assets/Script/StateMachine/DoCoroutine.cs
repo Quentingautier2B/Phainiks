@@ -6,17 +6,20 @@ public class DoCoroutine : MonoBehaviour
 {
     public AnimationCurve SpeedCurve;
     public AnimationCurve oGSpeedCurve;
+    public AnimationCurve landAnimation;
+    public AnimationCurve tpAnimation;
+    public AnimationCurve pauseAnimation;
     float yo;
     SceneChange sChange;
-    public float begin = 1.7f;
-    public float lerper, lerpix;
+    public float begin = 1.37f;
+    public float lerper, lerpix, tpLerper, tpScaleLerper;
     InGameUI inGameUI;
     GridTiles[,] grid;
     GridGenerator gridG;
     public bool right, left;
-    public AnimationCurve landAnimation;
     SkinnedMeshRenderer pSRend;
-
+    [HideInInspector] public Transform previousTP;
+    bool flag;
     public IEnumerator lerping()
     {
         lerpix += Time.deltaTime * 3;
@@ -43,6 +46,7 @@ public class DoCoroutine : MonoBehaviour
         yield return new WaitForEndOfFrame();
         if (x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
         {
+
             grid[x + 1, y].GetComponent<GridTiling>().SetDirectionalMaterial();
         }
 
@@ -69,6 +73,7 @@ public class DoCoroutine : MonoBehaviour
         sChange = FindObjectOfType<SceneChange>();
         pSRend = FindObjectOfType<SkinnedMeshRenderer>();
         inGameUI = FindObjectOfType<InGameUI>();
+        flag = true;
     }
 
     public void Right()
@@ -96,83 +101,92 @@ public class DoCoroutine : MonoBehaviour
     public void pauseTileMovement(GridTiles tile, GridTiling curTile)
     {
 
-       
-        curTile.SetDirectionalMaterial();
+        if (curTile.tile.tempoTile == 0)
+            curTile.SetDirectionalMaterial();
+        else
+            curTile.TempoTileMaterial();
 
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tile.pauseLerpSpeed * Time.deltaTime), tile.transform.position.z);
 
-        tile.pauseLerpSpeed = Mathf.Lerp(tile.pauseLerpSpeed, 3, Time.deltaTime * tile.pauseLerpSpeed);
+        tile.pauseLerpSpeed = Mathf.Lerp(tile.pauseLerpSpeed, 3, 2 * Time.deltaTime * tile.pauseLerpSpeed);
 
 
         //Called on last loop
         if (tile.transform.position.y <= tile.target + 0.3f)
         {
             tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
-
+            tile.pauseLerpSpeed = 0.1f;
             tile.pauseAnim = false;
         }
 
     }
 
-    public void startClose(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
+    public void startClose(GridTiles tile, GridTiling tiling, float levelTransiIndex, GridTiling otherTile)
     {
-        StartCoroutine(Queue1(tile,levelTransiIndex, otherTile));
+        StartCoroutine(Queue1(tile, tiling, levelTransiIndex, otherTile));
     }
 
-    IEnumerator Queue1(GridTiles tile, float levelTransiIndex, GridTiling otherTile)
+    IEnumerator Queue1(GridTiles tile, GridTiling tiling, float levelTransiIndex, GridTiling otherTile)
     {
-        if (Time.timeSinceLevelLoad < 1)
+        if (Time.timeSinceLevelLoad < .5f)
         {
-            float speed = 2.5f;
+            float speed = 3.5f;
             float queueWaitTime = Random.Range(0f, .4f);
             yield return new WaitForSeconds(queueWaitTime);
            
-            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile, queueWaitTime));
+            StartCoroutine(QueueForOpen(tile, tiling, speed, oGSpeedCurve, levelTransiIndex, otherTile, queueWaitTime));
 
         }
         else if (tile.levelTransiIndex == 100)
         {
             inGameUI.endTile = levelTransiIndex;
-            float speed = 2.5f;
+            float speed = 3.5f;
             yield return new WaitForSeconds(Random.Range(0f, .4f));
             
-            StartCoroutine(QueueForOpen(tile, speed, oGSpeedCurve, levelTransiIndex, otherTile, 0));
+            StartCoroutine(QueueForOpen(tile, tiling, speed, oGSpeedCurve, levelTransiIndex, otherTile, 0));
         }
         else if (tile.tempoTile != 0)
         {
-            float speed = 2;
+            float speed = 10;
             yield return new WaitForSeconds(1);
-            StartCoroutine(QueueForOpen(tile, speed, SpeedCurve, levelTransiIndex, otherTile, 0));
+            StartCoroutine(QueueForOpen(tile, tiling, speed, SpeedCurve, levelTransiIndex, otherTile, 0));
         }
         else
         {
+            float speed = 3;
             yield return new WaitForSeconds(0);
-            StartCoroutine(QueueForOpen(tile, 1, SpeedCurve, levelTransiIndex, otherTile, 0));
-
+            StartCoroutine(QueueForOpen(tile, tiling, speed, SpeedCurve, levelTransiIndex, otherTile, 0));
+            
         }
 
     }
 
-    IEnumerator QueueForOpen(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
+    IEnumerator QueueForOpen(GridTiles tile, GridTiling tiling,float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
     {
        
         yield return new WaitUntil(() => !tile.opening);
-        if (Time.timeSinceLevelLoad < .5f)
+        if (Time.timeSinceLevelLoad < .8f)
         {
-            //inGameUI.inGameUI.SetActive(false);
+            //OG
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y + 20;
             tile.currentOpen = (int)tile.transform.position.y;
         }
         else if(tile.levelTransiIndex == 100)
         {
+            //lvlTransi
             inGameUI.inGameUI.SetActive(false);
+            if(tile.teleporter != 0)
+            {
+                tile.transform.Find("Teleporter/Arrow (1)").gameObject.SetActive(false);
+            }
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y - 20;
             tile.currentOpen = (int)tile.transform.position.y;
         }
         else if (!tile.open)
         {
+            //!open
             tile.lerpSpeed = 0f;
             //t.open = false;
             
@@ -181,6 +195,7 @@ public class DoCoroutine : MonoBehaviour
         }
         else
         {
+            //open
             tile.lerpSpeed = 0f;
             tile.targetOpen = (int)tile.transform.position.y - 20;
             tile.currentOpen = (int)tile.transform.position.y;
@@ -192,14 +207,20 @@ public class DoCoroutine : MonoBehaviour
         }
         else
         {
-           StartCoroutine(CloseTileMovement(tile,speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+           StartCoroutine(CloseTileMovement(tile, tiling,speed, curve, levelTransiIndex, otherTile, queueWaitTime));
         }
     }
 
-    IEnumerator CloseTileMovement(GridTiles tile, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
+    IEnumerator CloseTileMovement(GridTiles tile, GridTiling tiling, float speed, AnimationCurve curve, float levelTransiIndex, GridTiling otherTile, float queueWaitTime)
     {
-        if(otherTile != null)
+        if(otherTile != null && otherTile.tile.tempoTile == 0)
+        {
             otherTile.SetDirectionalMaterial();
+        }
+        else if (otherTile != null && otherTile.tile.tempoTile != 0)
+        {
+            otherTile.TempoTileMaterial();
+        }
 
 
 
@@ -208,6 +229,8 @@ public class DoCoroutine : MonoBehaviour
         tile.opening = true;
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.currentOpen, tile.targetOpen, tile.lerpSpeed), tile.transform.position.z);
         tile.lerpSpeed += Time.deltaTime * curve.Evaluate(tile.lerpSpeed) * speed;
+        tiling.SetDirectionalMaterial();
+        UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
 
         if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.levelTransiIndex == 100)
         {
@@ -217,14 +240,18 @@ public class DoCoroutine : MonoBehaviour
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Tile Vert", 0);
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
-            sChange.startCoroutine(levelTransiIndex);
+            if (flag)
+            {
+                sChange.startCoroutine(levelTransiIndex);
+                flag = false;
+            }
             tile.opening = false;
         }
         else if (tile.transform.position.y <= tile.targetOpen + 0.01f && tile.open && Time.timeSinceLevelLoad > begin && tile.levelTransiIndex != 100)
         {
             //open
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
-            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            tiling.SetDirectionalMaterial();
             UpdateAdjTiles( tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.open = false;
@@ -235,7 +262,7 @@ public class DoCoroutine : MonoBehaviour
         {
             //!open
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
-            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
+            tiling.SetDirectionalMaterial();
             UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.open = true;
@@ -245,10 +272,15 @@ public class DoCoroutine : MonoBehaviour
         else if (tile.transform.position.y >= tile.targetOpen - 0.01f && Time.timeSinceLevelLoad < begin && tile.levelTransiIndex != 100)
         {
             //ogPos
+            if (otherTile.tile.World > 0)
+            {
+                otherTile.transform.Find("World/CanvasCam").gameObject.SetActive(true);
+            }
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.opening = false;
-            UpdateAdjTiles(otherTile.GetComponent<GridTiles>(), (int)otherTile.transform.position.x, (int)otherTile.transform.position.z);
+            //UpdateAdjTiles(otherTile.GetComponent<GridTiles>(), (int)otherTile.transform.position.x, (int)otherTile.transform.position.z);
+            tile.tiling.SetDirectionalMaterial();
             yield return new WaitForSeconds(queueWaitTime);
             inGameUI.inGameUI.SetActive(true);
             otherTile.SetDirectionalMaterial();
@@ -260,8 +292,16 @@ public class DoCoroutine : MonoBehaviour
         else
         {
             //not yet
-            yield return new WaitForEndOfFrame();
-            StartCoroutine(CloseTileMovement(tile, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+            if (!tile.opening)
+            {
+                yield return new WaitUntil(()=> !tile.opening);
+                StartCoroutine(CloseTileMovement(tile, tiling, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+                StartCoroutine(CloseTileMovement(tile, tiling, speed, curve, levelTransiIndex, otherTile, queueWaitTime));
+            }
         }
 
     }
@@ -284,7 +324,7 @@ public class DoCoroutine : MonoBehaviour
 
         lerper += Time.deltaTime * 1;
         var vec = inGameUI.PauseLevel.anchoredPosition;
-        vec.x = Mathf.Lerp(startPos, endPos, lerper);
+        vec.x = Mathf.Lerp(startPos, endPos, pauseAnimation.Evaluate(lerper));
         inGameUI.PauseLevel.anchoredPosition = vec;
 
         if (lerper >= 1)
@@ -293,8 +333,59 @@ public class DoCoroutine : MonoBehaviour
         }
         else
         {
+            
             yield return new WaitForEndOfFrame();
             StartCoroutine(Lerper(startPos, endPos));
+        }
+    }
+
+    public IEnumerator PlayerCoroutine(Transform playerOverLord , Transform player, Transform currentTile, Transform targetTile, float currentAnimPosY, float targetAnimPosY, float currentAnimPosY2, float targetAnimPosY2, SkinnedMeshRenderer playerSkin)
+    {
+        tpLerper += Time.deltaTime;
+        player.position = new Vector3(player.position.x, Mathf.Lerp(playerOverLord.position.y + 4.5f, playerOverLord.position.y - 5.5f, tpAnimation.Evaluate(tpLerper)), player.position.z);
+        playerSkin.SetBlendShapeWeight(1, tpAnimation.Evaluate(tpLerper));
+        if(tpLerper > .5f)
+        {
+           // player.position = new Vector3(player.position.x, Mathf.Lerp(currentAnimPosY, targetAnimPosY, tpAnimation.Evaluate(tpLerper)), player.position.z);
+            playerOverLord.position = new Vector3(targetTile.position.x, targetTile.position.y + 1.5f, targetTile.position.z);
+        }
+
+
+
+        if (tpLerper < 1)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(PlayerCoroutine(playerOverLord, player, currentTile, targetTile, currentAnimPosY, targetAnimPosY,currentAnimPosY2, targetAnimPosY2, playerSkin));
+        }
+        else if(tpLerper >= 1)
+        {
+            StartCoroutine(lerping());
+            tpLerper = 0;
+            player.localPosition =  new Vector3(0, -0.5f, 0);
+            
+        }
+    }
+
+    public IEnumerator tpScaling(Transform tpTransform, float currentSize, float targetSize, float timer, float speed)
+    {
+        if(tpScaleLerper == 0)
+        {
+            yield return new WaitForSeconds(timer);
+        }
+        tpScaleLerper += Time.deltaTime * speed;
+        tpTransform.localScale = new Vector3(Mathf.Lerp(currentSize, targetSize, tpScaleLerper), 0.02f, Mathf.Lerp(currentSize, targetSize, tpScaleLerper));
+
+        if(tpScaleLerper < 1)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(tpScaling(tpTransform, currentSize, targetSize, 0, speed));
+        }
+
+        if (tpScaleLerper >= 1)
+        {
+            tpTransform.localScale = new Vector3(targetSize, 0.02f, targetSize);
+            previousTP = tpTransform;
+            tpScaleLerper = 0;
         }
     }
 }

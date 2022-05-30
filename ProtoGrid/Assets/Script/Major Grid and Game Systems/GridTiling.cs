@@ -9,7 +9,7 @@ public class GridTiling : MonoBehaviour
     GridTiles[,] grid;
     GridGenerator gridG;
     TileVariables t;
-    GridTiles tile;
+    public GridTiles tile;
     GameObject TempoTile;
     public MeshRenderer[] tempoTilesMats = new MeshRenderer[6];
 
@@ -48,6 +48,21 @@ public class GridTiling : MonoBehaviour
 
     private void Start()
     {
+        if (tile.originalPosition)
+        {
+            var vec = transform.Find("OriginalPos").localPosition;
+            vec.y = .455f;
+            transform.Find("OriginalPos").localPosition = vec;
+        }
+
+        if (tile.levelTransiIndex != 0)
+        {
+            var vec = transform.Find("LevelTransi").localPosition;
+            vec.y = .455f;
+            transform.Find("LevelTransi").localPosition = vec;
+        }
+
+
         TempoDecorMaterial();
         TempoTileMaterial();
         if (/*tile.tempoTile != 0 || */tile.crumble)
@@ -135,20 +150,24 @@ public class GridTiling : MonoBehaviour
         {
             if (tile.crumble)
             {
+                mesh.transform.rotation = Quaternion.identity;
+                mesh.transform.Rotate(-90, 0, 0);
+                SetDirectionalMaterial();
                 foreach (MeshRenderer m in tempoTilesMats)
                 {
-                    mesh.transform.rotation = Quaternion.identity;
-                    mesh.transform.Rotate(-90, 0, 0);
-                    m.material = Cmat;
+                    
+                    //mesh.transform.Rotate(-90, 0, 0);
+                    //m.material = Cmat;
                     //m.material.Lerp(m.material,Cmat,Time.deltaTime);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
-                    gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
-                    SetCubeSize();
-                    AllColonneActivate();
-                    refreshRendTempo = false;
+                   
                 }
+ /*               gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+                gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+                SetCubeSize();
+                AllColonneActivate();*/
+                refreshRendTempo = false;
             }
 
             if (tile.tempoTile == 1)
@@ -363,7 +382,7 @@ public class GridTiling : MonoBehaviour
                 mesh.material = mat2DO;
                 refreshRend = false;
                 mesh.transform.rotation = Quaternion.identity;
-                mesh.transform.Rotate(-90, 180, 0);
+                mesh.transform.Rotate(-90, 0, 0);
                 SetCubeSize();
                 AllColonneActivate();
             }

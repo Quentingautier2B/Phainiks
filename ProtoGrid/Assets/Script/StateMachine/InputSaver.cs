@@ -64,7 +64,7 @@ public class InputSaver : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Prob avce l'angle de swipe, modulo pas correct");
+                Debug.LogError("Prob avec l'angle de swipe, modulo pas correct");
             }
             SavedInput.Add(directionSwipe);
         }
@@ -82,5 +82,10 @@ public class InputSaver : MonoBehaviour
             }
         }
 
+    }
+
+    public void clearInputSaver()
+    {
+        SavedInput.Clear();
     }
 }
