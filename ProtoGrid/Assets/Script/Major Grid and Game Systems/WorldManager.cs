@@ -53,10 +53,6 @@ public class WorldManager : MonoBehaviour
 
                 doC.startClose(tile, tile.tiling, LevelsOfTheWorld[int.Parse(button.name) - 1], grid[(int)gridTiles.transform.position.x, (int)gridTiles.transform.position.z].GetComponent<GridTiling>());
             }
-            else
-            {
-                print(tile.name);
-            }
         }
         //SceneManager.LoadScene("Lvl_" + Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)- 1]) + "," + (Mathf.RoundToInt((LevelsOfTheWorld[int.Parse(button.name)- 1] - Mathf.Floor(LevelsOfTheWorld[int.Parse(button.name)- 1])) * 10)), LoadSceneMode.Single);
     }
