@@ -11,7 +11,7 @@ public class SwipeInput : StateMachineBehaviour
     int pPosX, pPosY;
     int targetPosx, targetPosy;
     public float deadZoneDiameter;
-    int directionIndex = 0;
+    int directionIndex;
     public float clickTimerValue;
     float clickTimer;
     bool clickBool;
@@ -42,6 +42,7 @@ public class SwipeInput : StateMachineBehaviour
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
             sceneChange = FindObjectOfType<SceneChange>();
+            directionIndex = 0;
             GridTiling gTil = null;
             foreach(GridTiles g in grid)
             {
