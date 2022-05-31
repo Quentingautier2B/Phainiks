@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: ArakaCompagny
-  productName: ArAkA
+  companyName: Stan
+  productName: ProtoGrid
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -41,6 +41,8 @@ PlayerSettings:
     height: 1
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: f9c03474c8d0f424480660bbccc7311f, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: 79a73c25f496b3e438daaef97895399d, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -155,7 +157,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.ArakaCompagny.ProtoGrid
+    Android: com.Stan.ProtoGrid
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -163,7 +165,7 @@ PlayerSettings:
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 28
-  AndroidTargetSdkVersion: 0
+  AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -248,7 +250,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Downloads/ArAkA.keystore'
+  AndroidKeystoreName: D:/PACMAN_User/Document/KeyStore/ArAkA (1).keystore
   AndroidKeyaliasName: stan
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
