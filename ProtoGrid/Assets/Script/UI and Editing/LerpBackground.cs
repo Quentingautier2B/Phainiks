@@ -43,16 +43,19 @@ public class LerpBackground : MonoBehaviour
         StartCoroutine(LerperFadeOut(backgroundWorld3,255f, world3Left, falseworld3Right));
         StartCoroutine(LerperFadeIn(backgroundWorld2,255f, world2Left, world2right));
     }
+
     public void World2ToWorld1()
     {
         StartCoroutine(LerperFadeOut(backgroundWorld2,255f, world2Left, world2right));
         StartCoroutine(LerperFadeIn(backgroundWorld1, 180f, world1Left, world1Right));
     }
+
     public void World1ToTuto()
     {
         StartCoroutine(LerperFadeOut(backgroundWorld1, 180f, world1Left, world1Right));
         StartCoroutine(LerperFadeIn(backgroundTuto, 168f, falseTutoLeft, tutoRight));
     }
+
     IEnumerator LerperFadeOut(MeshRenderer mat, float maxColor, Button Left, Button Right)
     {
         lerperFadeOut += Time.deltaTime * 2;
@@ -70,6 +73,7 @@ public class LerpBackground : MonoBehaviour
             StartCoroutine(LerperFadeOut(mat, maxColor, Left, Right));
         }
     }
+
     IEnumerator LerperFadeIn(MeshRenderer mat,float maxColor, Button Left, Button Right)
     {
         lerperFadeIn += Time.deltaTime * 2;
@@ -87,18 +91,60 @@ public class LerpBackground : MonoBehaviour
             StartCoroutine(LerperFadeIn(mat, maxColor, Left, Right));
         }
     }
+
     public void lerpIn()
     {
         StartCoroutine(LerperIn());
-
     }
+
     public void MatBackgroundChange()
     {
+
         backgroundTuto.material = MatbackgroundTuto;
+        backgroundTuto.enabled = true;
+        if(SceneChange.currentWorld == 0)
+        {
+            print(backgroundTuto.material.color);
+            var transicol = backgroundTuto.material.color;
+            transicol.a = 1;
+            backgroundTuto.material.color = transicol;
+            print(backgroundTuto.material.color);
+        }
+            
+
         backgroundWorld1.material = MatbackgroundWorld1;
+        backgroundWorld1.enabled = true;
+        if (SceneChange.currentWorld == 1)
+        {
+            var transicol = backgroundWorld1.material.color;
+            transicol.a = 1;
+            backgroundWorld1.material.color = transicol;
+
+        }
+
+
         backgroundWorld2.material = MatbackgroundWorld2;
+        backgroundWorld2.enabled = true;
+        if (SceneChange.currentWorld == 2)
+        {
+            var transicol = backgroundWorld2.material.color;
+            transicol.a = 1;
+            backgroundWorld2.material.color = transicol;
+
+        }
+
         backgroundWorld3.material = MatbackgroundWorld3;
+        backgroundWorld3.enabled = true;
+        if (SceneChange.currentWorld == 3)
+        {
+            var transicol = backgroundWorld3.material.color;
+            transicol.a = 1;
+            backgroundWorld3.material.color = transicol;
+
+        }
+
     }
+
     IEnumerator LerperIn()
     {
         lerper += Time.deltaTime;

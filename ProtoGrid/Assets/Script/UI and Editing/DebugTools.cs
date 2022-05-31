@@ -20,7 +20,7 @@ public class DebugTools : MonoBehaviour
     static bool isPlaying = false;
     private void Awake()
     {
-/*        FMOD.Studio.PLAYBACK_STATE playbackState;
+/*       FMOD.Studio.PLAYBACK_STATE playbackState;
         mainMusic.getPlaybackState(out playbackState);
         bool isPlaying = playbackState != FMOD.Studio.PLAYBACK_STATE.STOPPED;*/
 
