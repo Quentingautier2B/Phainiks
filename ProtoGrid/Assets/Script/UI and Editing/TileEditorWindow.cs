@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class TileEditorWindow : EditorWindow
 {
-    GridGenerator gridG;
+   /* GridGenerator gridG;
     bool tileSelected;
 
     bool walkable;
@@ -347,11 +347,11 @@ public class TileEditorWindow : EditorWindow
                     g.crumble = Crumble;
                 }
 
-               /* if (g.LevelTransiIndexC != LevelTransiIndex)
+               *//* if (g.LevelTransiIndexC != LevelTransiIndex)
                 {
                     g.LevelTransiIndexC = LevelTransiIndex;
                     g.levelTransiIndex = LevelTransiIndex / 10;
-                }*/
+                }*//*
 
                 if (g.TempoTileC != TempoTile)
                 {
@@ -387,7 +387,7 @@ public class TileEditorWindow : EditorWindow
                 tileSelected = false;
             }
         }
-    }
+    }*/
 }
 #endif
 

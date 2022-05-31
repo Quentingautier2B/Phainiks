@@ -1384,6 +1384,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5720460999537975470, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
+      propertyPath: World
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720460999537975470, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
+      propertyPath: levelIndex
+      value: 4.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5720460999537975471, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6665,15 +6673,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: -1.9062384e-17
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 7.23e-43
       objectReference: {fileID: 0}
     - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.3510647e-38
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}

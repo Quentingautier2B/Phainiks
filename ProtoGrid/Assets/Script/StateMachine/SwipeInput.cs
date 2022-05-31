@@ -60,12 +60,12 @@ public class SwipeInput : StateMachineBehaviour
                     
                 }
             }
+            doC.StartCoroutine(doC.ogPos(0, ogPosY, gTil.transform));
             foreach (GridTiles g in grid)
             {
                 if ((!g.originalPosition && g.open && g.door != 0 && g.walkable) || (!g.originalPosition && g.door == 0 && g.walkable))
                 {                  
                     doC.startClose(g, g.tiling, g.levelTransiIndex, gTil);
-                    doC.StartCoroutine(doC.ogPos(0, ogPosY, gTil.transform));
                 }
 
             }
@@ -193,6 +193,7 @@ public class SwipeInput : StateMachineBehaviour
         directionSwipe = Vector2.zero;
         if (animator.GetBool("Rewind"))
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Rewind");
             animator.SetInteger("PreviousX", pPosX);
             animator.SetInteger("PreviousY", pPosY);
         }
@@ -389,6 +390,8 @@ public class SwipeInput : StateMachineBehaviour
     void HubTestRightDirections(Animator anim)
     {
         flag = false;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
+
         roundingDirectionalYPosition = new Vector2(0, 0);
         anim.SetInteger("TargetInfoX", pPosX + 3);
         anim.SetInteger("TargetInfoY", pPosY);
@@ -402,6 +405,8 @@ public class SwipeInput : StateMachineBehaviour
     void HubTestLeftDirections(Animator anim)
     {
         flag = false;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
+
         roundingDirectionalYPosition = new Vector2(1, 1);
         anim.SetInteger("TargetInfoX", pPosX - 3);
         anim.SetInteger("TargetInfoY", pPosY);

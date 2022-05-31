@@ -125,7 +125,7 @@ public class MoveBehavior : StateMachineBehaviour
             player.position = new Vector3(x, player.position.y , y);
             if (anim.GetBool("Rewind"))
             {
-                UI.timerValue++;
+                //UI.timerValue++;
             }
             else
             {

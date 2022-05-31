@@ -44,6 +44,8 @@ public class WorldManager : MonoBehaviour
     public void OpenWorld(GameObject button)
     {
         doC.moveFlag = false;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
+
         foreach (GridTiles tile in grid)
         {
             if (tile.gameObject != grid[(int)gridTiles.transform.position.x, (int)gridTiles.transform.position.z].gameObject)
