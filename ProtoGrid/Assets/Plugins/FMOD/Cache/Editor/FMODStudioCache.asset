@@ -239,33 +239,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 72000
---- !u!114 &-2219485694142041044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/Star
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/Star
-  Guid:
-    Data1: 1197140511
-    Data2: 1213612942
-    Data3: -788775246
-    Data4: -388995128
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2132130795550039276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,10 +355,10 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637895882088047373
+  lastModified: 637895948230013326
   FileSizes:
   - Name: Desktop
-    Value: 1764
+    Value: 1754
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -406,7 +379,6 @@ MonoBehaviour:
   - {fileID: 8863729730991543845}
   - {fileID: -1240304706644868175}
   - {fileID: 9183632076472393063}
-  - {fileID: -2219485694142041044}
   - {fileID: 3674107900248283660}
   - {fileID: -5778249202755678311}
   - {fileID: 2233589114731409320}
@@ -422,6 +394,7 @@ MonoBehaviour:
   - {fileID: 4785056785448556800}
   - {fileID: 4097802889178490861}
   - {fileID: 8548790522791185733}
+  - {fileID: 161676616557076234}
   EditorParameters:
   - {fileID: 5428730263967688263}
   - {fileID: -6158672308501817452}
@@ -432,8 +405,35 @@ MonoBehaviour:
   - {fileID: 2557677352944948356}
   StringsBanks:
   - {fileID: -399050817239581243}
-  cacheTime: 637895882088047373
+  cacheTime: 637895948230013326
   cacheVersion: 10
+--- !u!114 &161676616557076234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Menuing/Star 1
+  m_EditorClassIdentifier: 
+  Path: event:/Menuing/Star 1
+  Guid:
+    Data1: 1197140511
+    Data2: 1213612942
+    Data3: -788775246
+    Data4: -388995128
+  Banks:
+  - {fileID: 2557677352944948356}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &398596952918808577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,7 +524,7 @@ MonoBehaviour:
   Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637895882088037413
+  lastModified: 637895948229983414
   FileSizes:
   - Name: Desktop
     Value: 3196992

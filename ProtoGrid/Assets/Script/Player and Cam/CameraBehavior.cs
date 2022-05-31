@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class CameraBehavior : MonoBehaviour
 {
     #region variables    
@@ -21,9 +21,11 @@ public class CameraBehavior : MonoBehaviour
     //[SerializeField] bool camMode;
     //[SerializeField] float camMoveSpeed;  
     //[SerializeField] float camRotateSpeed;
-    
-    #endregion
 
+    #endregion
+    public Slider zoomSlider;
+    float zoomLerp;
+    bool zoomBool;
     private void Awake()
     {
         //target = FindObjectOfType<Target>().transform;
@@ -33,6 +35,7 @@ public class CameraBehavior : MonoBehaviour
         camTransform = transform.Find("Main Camera");
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
         flagLerp = true;
+        zoomBool = false;
     }
 
     private void Start()
@@ -44,8 +47,53 @@ public class CameraBehavior : MonoBehaviour
             camBehavior.orthographicSize = 3.8f;
     }
 
-    private void Update()
+
+    public void onZoomValueChanged()
     {
+        if (!zoomBool)
+        {
+            zoomBool = true;
+            StartCoroutine(valueChanged(camTransform.localPosition.z, zoomSlider.value));
+        }
+    }
+
+
+
+    IEnumerator valueChanged(float startPos, float endPos)
+    {
+        zoomLerp += Time.deltaTime;
+        camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, Mathf.Lerp(startPos, zoomSlider.value, zoomLerp));
+
+        if(zoomLerp >= 1)
+        {
+            zoomLerp = 0;
+            zoomBool = false;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(valueChanged(startPos, endPos));
+        }
+    }
+
+
+    private void Update()
+    {/*
+        if (Input.GetKey(KeyCode.P))
+        {
+
+                var c = camTransform.localPosition;
+                c.z = -60;
+                camTransform.localPosition = Vector3.SmoothDamp(camTransform.localPosition, c, ref velocity, smoothTime);
+            
+        }
+        else if (Input.GetKey(KeyCode.O) )
+        {
+            var c = camTransform.localPosition;
+            c.z = -15;
+            camTransform.localPosition = Vector3.SmoothDamp(camTransform.localPosition, c, ref velocity, smoothTime);
+        }
+*/
         ForPicture();
         AngleCheck();
         RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);

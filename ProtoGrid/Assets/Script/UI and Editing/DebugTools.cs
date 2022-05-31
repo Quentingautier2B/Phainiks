@@ -6,6 +6,8 @@ using UnityEditor;
 #endif
 public class DebugTools : MonoBehaviour
 {
+    public float levelIndex;
+    public int World;
     public bool debugModOn;
     public FMOD.Studio.EventInstance mainMusic;
 

@@ -32,17 +32,20 @@ public class InGameUI : MonoBehaviour
     [SerializeField] GameObject rotateLeft;
     [SerializeField] GameObject rotateRight;
     float starLerper;
+    bool flag;
     #endregion
 
     public void OnPauseClick()
     {
         FindObjectOfType<Animator>().SetBool("Paused", true);
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
     }
 
     public void OnUnPauseClick()
     {
         FindObjectOfType<Animator>().SetTrigger("ExitPause");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
+
     }
 
     IEnumerator ResetLevelButtonEffect()
@@ -67,7 +70,9 @@ public class InGameUI : MonoBehaviour
 
     public void HubClick()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
         StartCoroutine(OnHubClick());
+
     }
 
     IEnumerator OnHubClick()
@@ -103,6 +108,7 @@ public class InGameUI : MonoBehaviour
 
     private void Awake()
     {
+        flag = false;
         stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
         //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
@@ -165,7 +171,13 @@ public class InGameUI : MonoBehaviour
         {
             g.SetActive(false);
         }
-            StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));    
+        if (!flag)
+        {
+            flag = true;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Star " + (starIndex + 1));
+            StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
+        }
+
     }
 
     IEnumerator Stars(RectTransform Star, float size, int starCap)
@@ -178,12 +190,15 @@ public class InGameUI : MonoBehaviour
             Star.sizeDelta = Vector2.one * size;
             starLerper = 0;
             starIndex++;
+            
             yield return new WaitForSeconds(.3f);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Star " + (starIndex + 1));
             StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
         }
         else if(starLerper < 1)
         {
             yield return new WaitForEndOfFrame();
+
             StartCoroutine(Stars(Star, size, starCap));
         }
         else

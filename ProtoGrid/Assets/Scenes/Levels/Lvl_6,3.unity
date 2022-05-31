@@ -331,6 +331,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -2.1047816e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656945837017273163, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
 --- !u!4 &43904173 stripped
@@ -5980,6 +5988,14 @@ PrefabInstance:
     - target: {fileID: 5720460999537975469, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720460999537975470, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
+      propertyPath: World
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720460999537975470, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
+      propertyPath: levelIndex
+      value: 6.3
       objectReference: {fileID: 0}
     - target: {fileID: 5720460999537975471, guid: 332bf8edc8a793747b8172d20bc7166a, type: 3}
       propertyPath: m_RootOrder
