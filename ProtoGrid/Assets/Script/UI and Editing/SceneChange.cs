@@ -11,6 +11,7 @@ public class SceneChange : MonoBehaviour
     GameObject stateMachine;
     float lerper;
     public AnimationCurve endAnimation;
+    public static int currentWorld;
     [SerializeField] int World;
     [HideInInspector] public float endLerper;
     [HideInInspector] public bool loadScene = false;
@@ -19,6 +20,10 @@ public class SceneChange : MonoBehaviour
         stateMachine = GameObject.Find("StateMachine");
         debugTools = GetComponent<DebugTools>();
         inGameUI = FindObjectOfType<InGameUI>();
+    }
+    private void Start()
+    {
+      
     }
 
 
