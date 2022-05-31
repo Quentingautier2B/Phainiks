@@ -1,106 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8138456088905984077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main/GameState
-  m_EditorClassIdentifier: 
-  Name: GameState
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 1
-  ID:
-    data1: 3735535704
-    data2: 1915475463
-  Type: 2
-  IsGlobal: 1
-  Labels:
-  - Game
-  - Hub
-  Exists: 1
---- !u!114 &-8110551271034770507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blue/Tile Rouge
-  m_EditorClassIdentifier: 
-  Name: Tile Rouge
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3895251027
-    data2: 1220634271
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &-6180814525939615139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Red/Tile Vert
-  m_EditorClassIdentifier: 
-  Name: Tile Vert
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1075072150
-    data2: 3199465573
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &-6158672308501817452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/GameState
-  m_EditorClassIdentifier: 
-  Name: GameState
-  StudioPath: parameter:/GameState
-  Min: 0
-  Max: 1
-  Default: 1
-  ID:
-    data1: 3735535704
-    data2: 1915475463
-  Type: 2
-  IsGlobal: 1
-  Labels:
-  - Game
-  - Hub
-  Exists: 1
---- !u!114 &-5778249202755678311
+--- !u!114 &-9103141710301383975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,43 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/World/Hub
+  m_Name: event:/Menuing/Star 1
   m_EditorClassIdentifier: 
-  Path: event:/World/Hub
+  Path: event:/Menuing/Star 1
   Guid:
-    Data1: -714463963
-    Data2: 1269102986
-    Data3: 1585519281
-    Data4: -952104702
+    Data1: 1197140511
+    Data2: 1213612942
+    Data3: -788775246
+    Data4: -388995128
   Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-5557671654523701322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/PauseMenu
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/PauseMenu
-  Guid:
-    Data1: 146639586
-    Data2: 1240278676
-    Data3: -1389775711
-    Data4: -557778492
-  Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -154,140 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-4863822792997451611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Tiles/Main
-  m_EditorClassIdentifier: 
-  Path: event:/Tiles/Main
-  Guid:
-    Data1: -46438993
-    Data2: 1218249937
-    Data3: -20400254
-    Data4: -1410157003
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 8445349228082784058}
-  - {fileID: 8131534245892602607}
-  - {fileID: 6544550004958856428}
-  - {fileID: -8138456088905984077}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 32000
---- !u!114 &-3670299189769268985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Green/Tile Vert
-  m_EditorClassIdentifier: 
-  Name: Tile Vert
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1075072150
-    data2: 3199465573
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &-3646640504928762440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Tiles/Red
-  m_EditorClassIdentifier: 
-  Path: event:/Tiles/Red
-  Guid:
-    Data1: -59974335
-    Data2: 1096077042
-    Data3: -198661973
-    Data4: -1388580007
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 7568606471260679012}
-  - {fileID: -6180814525939615139}
-  - {fileID: 8253959427142640333}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 72000
---- !u!114 &-2132130795550039276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Piano/Tile Vert
-  m_EditorClassIdentifier: 
-  Name: Tile Vert
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1075072150
-    data2: 3199465573
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &-2118625678567932963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blue/Tile Bleu
-  m_EditorClassIdentifier: 
-  Name: Tile Bleu
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4165166894
-    data2: 3884819345
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &-1240304706644868175
+--- !u!114 &-8144845349046595524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,7 +46,7 @@ MonoBehaviour:
     Data3: -604713815
     Data4: 1069801554
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -314,7 +54,78 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-933822014527838497
+--- !u!114 &-7885380359915735208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637896069640051836
+  FileSizes:
+  - Name: Desktop
+    Value: 3196992
+  Exists: 1
+--- !u!114 &-7613647227136013809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Menuing/ResetLevel
+  m_EditorClassIdentifier: 
+  Path: event:/Menuing/ResetLevel
+  Guid:
+    Data1: -1894095684
+    Data2: 1227313267
+    Data3: 724623500
+    Data4: -332354271
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7489733036602587893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Piano/Tile Bleu
+  m_EditorClassIdentifier: 
+  Name: Tile Bleu
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4165166894
+    data2: 3884819345
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-5612486204083529194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,101 +151,7 @@ MonoBehaviour:
   - Game
   - Hub
   Exists: 1
---- !u!114 &-399050817239581243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637895948230013326
-  FileSizes:
-  - Name: Desktop
-    Value: 1754
-  Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -399050817239581243}
-  - {fileID: 2557677352944948356}
-  EditorEvents:
-  - {fileID: 8863729730991543845}
-  - {fileID: -1240304706644868175}
-  - {fileID: 9183632076472393063}
-  - {fileID: 3674107900248283660}
-  - {fileID: -5778249202755678311}
-  - {fileID: 2233589114731409320}
-  - {fileID: 6953247011032025063}
-  - {fileID: -3646640504928762440}
-  - {fileID: 3238799069170146381}
-  - {fileID: 9206670182562313981}
-  - {fileID: -4863822792997451611}
-  - {fileID: 3332155869705295456}
-  - {fileID: 6304560665705678114}
-  - {fileID: -5557671654523701322}
-  - {fileID: 6386162693338729749}
-  - {fileID: 4785056785448556800}
-  - {fileID: 4097802889178490861}
-  - {fileID: 8548790522791185733}
-  - {fileID: 161676616557076234}
-  EditorParameters:
-  - {fileID: 5428730263967688263}
-  - {fileID: -6158672308501817452}
-  - {fileID: 8114221891711634182}
-  - {fileID: 5320153728592006298}
-  - {fileID: 8278647819970077142}
-  MasterBanks:
-  - {fileID: 2557677352944948356}
-  StringsBanks:
-  - {fileID: -399050817239581243}
-  cacheTime: 637895948230013326
-  cacheVersion: 10
---- !u!114 &161676616557076234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/Star 1
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/Star 1
-  Guid:
-    Data1: 1197140511
-    Data2: 1213612942
-    Data3: -788775246
-    Data4: -388995128
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &398596952918808577
+--- !u!114 &-5572140574273791894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -444,275 +161,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Piano/Tile Rouge
+  m_Name: parameter:/Main/GameState
   m_EditorClassIdentifier: 
-  Name: Tile Rouge
+  Name: GameState
   StudioPath: 
   Min: 0
   Max: 1
-  Default: 0
+  Default: 1
   ID:
-    data1: 3895251027
-    data2: 1220634271
-  Type: 0
+    data1: 3735535704
+    data2: 1915475463
+  Type: 2
   IsGlobal: 1
-  Labels: []
+  Labels:
+  - Game
+  - Hub
   Exists: 1
---- !u!114 &1125089657677151467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Blue/Tile Vert
-  m_EditorClassIdentifier: 
-  Name: Tile Vert
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1075072150
-    data2: 3199465573
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &2233589114731409320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/RotateCam
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/RotateCam
-  Guid:
-    Data1: -69414870
-    Data2: 1205017004
-    Data3: 143057307
-    Data4: -1520113727
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2557677352944948356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637895948229983414
-  FileSizes:
-  - Name: Desktop
-    Value: 3196992
-  Exists: 1
---- !u!114 &3238799069170146381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/Star 3
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/Star 3
-  Guid:
-    Data1: -1558257062
-    Data2: 1277405627
-    Data3: -1239570257
-    Data4: -743958135
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3332155869705295456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/ResetLevel
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/ResetLevel
-  Guid:
-    Data1: -1894095684
-    Data2: 1227313267
-    Data3: 724623500
-    Data4: -332354271
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3674107900248283660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/Rewind
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/Rewind
-  Guid:
-    Data1: 1163419168
-    Data2: 1211313769
-    Data3: 821669510
-    Data4: 510557547
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &4097802889178490861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/World/Ascenseur
-  m_EditorClassIdentifier: 
-  Path: event:/World/Ascenseur
-  Guid:
-    Data1: -1788720393
-    Data2: 1154031430
-    Data3: -13405308
-    Data4: 984363508
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &4104588190076277603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Piano/Tile Bleu
-  m_EditorClassIdentifier: 
-  Name: Tile Bleu
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4165166894
-    data2: 3884819345
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &4785056785448556800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/GeneralButton
-  m_EditorClassIdentifier: 
-  Path: event:/Menuing/GeneralButton
-  Guid:
-    Data1: -1128771090
-    Data2: 1287445341
-    Data3: 340572320
-    Data4: 2011247017
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &4949864262172542742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Green/Tile Rouge
-  m_EditorClassIdentifier: 
-  Name: Tile Rouge
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3895251027
-    data2: 1220634271
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &5320153728592006298
+--- !u!114 &-5398361606512415277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -736,7 +201,64 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &5384843162919474040
+--- !u!114 &-5302368406741237826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Green
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Green
+  Guid:
+    Data1: 841286276
+    Data2: 1153869218
+    Data3: -310352483
+    Data4: 339221949
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -126698740193196175}
+  - {fileID: 2998531210420406388}
+  - {fileID: -268919636028701403}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 72000
+--- !u!114 &-5181702887601079108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/World/LevelEnd
+  m_EditorClassIdentifier: 
+  Path: event:/World/LevelEnd
+  Guid:
+    Data1: -2131893503
+    Data2: 1104051456
+    Data3: 468140987
+    Data4: 528728251
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5029298558447742391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -746,7 +268,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Green/Tile Bleu
+  m_Name: parameter:/Blue/Tile Bleu
   m_EditorClassIdentifier: 
   Name: Tile Bleu
   StudioPath: 
@@ -760,31 +282,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &5428730263967688263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Tile Rouge
-  m_EditorClassIdentifier: 
-  Name: Tile Rouge
-  StudioPath: parameter:/Tile Rouge
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3895251027
-    data2: 1220634271
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &6304560665705678114
+--- !u!114 &-4433386792415173305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -794,24 +292,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Character/Walk
+  m_Name: event:/Menuing/RotateCam
   m_EditorClassIdentifier: 
-  Path: event:/Character/Walk
+  Path: event:/Menuing/RotateCam
   Guid:
-    Data1: -2812193
-    Data2: 1120687091
-    Data3: -1556986182
-    Data4: -618457848
+    Data1: -69414870
+    Data2: 1205017004
+    Data3: 143057307
+    Data4: -1520113727
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 270
---- !u!114 &6386162693338729749
+  Length: 0
+--- !u!114 &-4187579373735805885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -830,18 +328,18 @@ MonoBehaviour:
     Data3: 69922689
     Data4: 1764054512
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -2118625678567932963}
-  - {fileID: 1125089657677151467}
-  - {fileID: -8110551271034770507}
+  - {fileID: -5029298558447742391}
+  - {fileID: 8978653132822607565}
+  - {fileID: -2661853504115049355}
   MinDistance: 1
   MaxDistance: 20
   Length: 72000
---- !u!114 &6544550004958856428
+--- !u!114 &-3414960997867381204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -851,7 +349,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main/Tile Rouge
+  m_Name: parameter:/Piano/Tile Rouge
   m_EditorClassIdentifier: 
   Name: Tile Rouge
   StudioPath: 
@@ -865,82 +363,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &6953247011032025063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/World/TP
-  m_EditorClassIdentifier: 
-  Path: event:/World/TP
-  Guid:
-    Data1: 700488252
-    Data2: 1264262821
-    Data3: -243467086
-    Data4: 1876170924
-  Banks:
-  - {fileID: 2557677352944948356}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &7568606471260679012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Red/Tile Rouge
-  m_EditorClassIdentifier: 
-  Name: Tile Rouge
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3895251027
-    data2: 1220634271
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &8114221891711634182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/VolumeBlue
-  m_EditorClassIdentifier: 
-  Name: VolumeBlue
-  StudioPath: parameter:/VolumeBlue
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 706256616
-    data2: 1014483630
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &8131534245892602607
+--- !u!114 &-3066797965647094544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -964,7 +387,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &8253959427142640333
+--- !u!114 &-2661853504115049355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -974,21 +397,72 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Red/Tile Bleu
+  m_Name: parameter:/Blue/Tile Rouge
   m_EditorClassIdentifier: 
-  Name: Tile Bleu
+  Name: Tile Rouge
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 4165166894
-    data2: 3884819345
+    data1: 3895251027
+    data2: 1220634271
   Type: 0
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &8278647819970077142
+--- !u!114 &-1949138644113013555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Menuing/Star 2
+  m_EditorClassIdentifier: 
+  Path: event:/Menuing/Star 2
+  Guid:
+    Data1: 590768379
+    Data2: 1098551965
+    Data3: -633054052
+    Data4: -1899279260
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1891308915867942082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Red/Tile Rouge
+  m_EditorClassIdentifier: 
+  Name: Tile Rouge
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3895251027
+    data2: 1220634271
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-1679749042502340712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1012,7 +486,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &8445349228082784058
+--- !u!114 &-1564704539331447472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1036,7 +510,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &8548790522791185733
+--- !u!114 &-1031041361524558160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/GameState
+  m_EditorClassIdentifier: 
+  Name: GameState
+  StudioPath: parameter:/GameState
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3735535704
+    data2: 1915475463
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Game
+  - Hub
+  Exists: 1
+--- !u!114 &-369194853466956351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1046,16 +546,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menuing/Star 2
+  m_Name: event:/World/TP
   m_EditorClassIdentifier: 
-  Path: event:/Menuing/Star 2
+  Path: event:/World/TP
   Guid:
-    Data1: 590768379
-    Data2: 1098551965
-    Data3: -633054052
-    Data4: -1899279260
+    Data1: 700488252
+    Data2: 1264262821
+    Data3: -243467086
+    Data4: 1876170924
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1063,7 +563,102 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &8863729730991543845
+--- !u!114 &-268919636028701403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Green/Tile Rouge
+  m_EditorClassIdentifier: 
+  Name: Tile Rouge
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3895251027
+    data2: 1220634271
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-126698740193196175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Green/Tile Vert
+  m_EditorClassIdentifier: 
+  Name: Tile Vert
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1075072150
+    data2: 3199465573
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 1561068242197194036}
+  - {fileID: -7885380359915735208}
+  EditorEvents:
+  - {fileID: -5181702887601079108}
+  - {fileID: -8144845349046595524}
+  - {fileID: 4403270074929343544}
+  - {fileID: -4433386792415173305}
+  - {fileID: -369194853466956351}
+  - {fileID: 6401820875715835028}
+  - {fileID: -5302368406741237826}
+  - {fileID: 2297000516285016793}
+  - {fileID: -7613647227136013809}
+  - {fileID: 3564170157934913274}
+  - {fileID: 8550915186733033222}
+  - {fileID: -4187579373735805885}
+  - {fileID: 6103881232638408996}
+  - {fileID: 1133230108034068595}
+  - {fileID: 6651861600903338673}
+  - {fileID: 6938490443375111135}
+  - {fileID: -1949138644113013555}
+  - {fileID: 8465403235580440655}
+  - {fileID: -9103141710301383975}
+  EditorParameters:
+  - {fileID: 3393586134015897809}
+  - {fileID: 5380251282109102058}
+  - {fileID: -5398361606512415277}
+  - {fileID: -1679749042502340712}
+  - {fileID: -1031041361524558160}
+  MasterBanks:
+  - {fileID: -7885380359915735208}
+  StringsBanks:
+  - {fileID: 1561068242197194036}
+  cacheTime: 637896069640061817
+  cacheVersion: 10
+--- !u!114 &1133230108034068595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1073,16 +668,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/World/LevelEnd
+  m_Name: event:/World/Ascenseur
   m_EditorClassIdentifier: 
-  Path: event:/World/LevelEnd
+  Path: event:/World/Ascenseur
   Guid:
-    Data1: -2131893503
-    Data2: 1104051456
-    Data3: 468140987
-    Data4: 528728251
+    Data1: -1788720393
+    Data2: 1154031430
+    Data3: -13405308
+    Data4: 984363508
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1090,7 +685,205 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &9183632076472393063
+--- !u!114 &1561068242197194036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../Phainiks_Sounds/Phainiks/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637896069640061817
+  FileSizes:
+  - Name: Desktop
+    Value: 1754
+  Exists: 1
+--- !u!114 &2297000516285016793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Main
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Main
+  Guid:
+    Data1: -46438993
+    Data2: 1218249937
+    Data3: -20400254
+    Data4: -1410157003
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1564704539331447472}
+  - {fileID: -3066797965647094544}
+  - {fileID: 3209488667439621391}
+  - {fileID: -5572140574273791894}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 32000
+--- !u!114 &2952750183382341010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Red/Tile Vert
+  m_EditorClassIdentifier: 
+  Name: Tile Vert
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1075072150
+    data2: 3199465573
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &2998531210420406388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Green/Tile Bleu
+  m_EditorClassIdentifier: 
+  Name: Tile Bleu
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4165166894
+    data2: 3884819345
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &3209488667439621391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/Tile Rouge
+  m_EditorClassIdentifier: 
+  Name: Tile Rouge
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3895251027
+    data2: 1220634271
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &3393586134015897809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tile Rouge
+  m_EditorClassIdentifier: 
+  Name: Tile Rouge
+  StudioPath: parameter:/Tile Rouge
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3895251027
+    data2: 1220634271
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &3564170157934913274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Walk
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Walk
+  Guid:
+    Data1: -2812193
+    Data2: 1120687091
+    Data3: -1556986182
+    Data4: -618457848
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 270
+--- !u!114 &3699176121627279509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Piano/Tile Vert
+  m_EditorClassIdentifier: 
+  Name: Tile Vert
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1075072150
+    data2: 3199465573
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &4403270074929343544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1109,19 +902,43 @@ MonoBehaviour:
     Data3: 1062792875
     Data4: -1245715969
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 398596952918808577}
-  - {fileID: -933822014527838497}
-  - {fileID: -2132130795550039276}
-  - {fileID: 4104588190076277603}
+  - {fileID: -3414960997867381204}
+  - {fileID: 3699176121627279509}
+  - {fileID: -7489733036602587893}
+  - {fileID: -5612486204083529194}
   MinDistance: 1
   MaxDistance: 20
   Length: 82000
---- !u!114 &9206670182562313981
+--- !u!114 &5380251282109102058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/VolumeBlue
+  m_EditorClassIdentifier: 
+  Name: VolumeBlue
+  StudioPath: parameter:/VolumeBlue
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 706256616
+    data2: 1014483630
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &6103881232638408996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1131,23 +948,206 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Tiles/Green
+  m_Name: event:/Menuing/GeneralButton
   m_EditorClassIdentifier: 
-  Path: event:/Tiles/Green
+  Path: event:/Menuing/GeneralButton
   Guid:
-    Data1: 841286276
-    Data2: 1153869218
-    Data3: -310352483
-    Data4: 339221949
+    Data1: -1128771090
+    Data2: 1287445341
+    Data3: 340572320
+    Data4: 2011247017
   Banks:
-  - {fileID: 2557677352944948356}
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6401820875715835028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tiles/Red
+  m_EditorClassIdentifier: 
+  Path: event:/Tiles/Red
+  Guid:
+    Data1: -59974335
+    Data2: 1096077042
+    Data3: -198661973
+    Data4: -1388580007
+  Banks:
+  - {fileID: -7885380359915735208}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -3670299189769268985}
-  - {fileID: 5384843162919474040}
-  - {fileID: 4949864262172542742}
+  - {fileID: -1891308915867942082}
+  - {fileID: 2952750183382341010}
+  - {fileID: 8112111546653393145}
   MinDistance: 1
   MaxDistance: 20
   Length: 72000
+--- !u!114 &6651861600903338673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Menuing/Rewind
+  m_EditorClassIdentifier: 
+  Path: event:/Menuing/Rewind
+  Guid:
+    Data1: 1163419168
+    Data2: 1211313769
+    Data3: 821669510
+    Data4: 510557547
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6938490443375111135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Menuing/Star 3
+  m_EditorClassIdentifier: 
+  Path: event:/Menuing/Star 3
+  Guid:
+    Data1: -1558257062
+    Data2: 1277405627
+    Data3: -1239570257
+    Data4: -743958135
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8112111546653393145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Red/Tile Bleu
+  m_EditorClassIdentifier: 
+  Name: Tile Bleu
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4165166894
+    data2: 3884819345
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &8465403235580440655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/World/Hub
+  m_EditorClassIdentifier: 
+  Path: event:/World/Hub
+  Guid:
+    Data1: -714463963
+    Data2: 1269102986
+    Data3: 1585519281
+    Data4: -952104702
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8550915186733033222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Menuing/PauseMenu
+  m_EditorClassIdentifier: 
+  Path: event:/Menuing/PauseMenu
+  Guid:
+    Data1: 146639586
+    Data2: 1240278676
+    Data3: -1389775711
+    Data4: -557778492
+  Banks:
+  - {fileID: -7885380359915735208}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8978653132822607565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Blue/Tile Vert
+  m_EditorClassIdentifier: 
+  Name: Tile Vert
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1075072150
+    data2: 3199465573
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
