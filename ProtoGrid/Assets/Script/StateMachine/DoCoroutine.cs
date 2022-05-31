@@ -25,7 +25,6 @@ public class DoCoroutine : MonoBehaviour
     bool flag;
 
     Player player;
-    
     public bool moveFlag;
     private void Awake()
     {

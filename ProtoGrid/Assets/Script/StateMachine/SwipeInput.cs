@@ -32,7 +32,6 @@ public class SwipeInput : StateMachineBehaviour
     public bool monte;
     public bool flag;
     int idleIndex;
-
     float ogPosY;
     float magnitude, duration;
 
@@ -40,7 +39,6 @@ public class SwipeInput : StateMachineBehaviour
     {
         magnitude = 0.01f;
         duration = 0.25f;
-
 
         if (awake)
         {
@@ -122,7 +120,6 @@ public class SwipeInput : StateMachineBehaviour
 
         if(animIndexValue < 0 && !monte)
         {
-
             animIndexValue = 1;
             monte = true;
         }
