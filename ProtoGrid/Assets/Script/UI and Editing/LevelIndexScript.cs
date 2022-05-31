@@ -14,9 +14,7 @@ public class LevelIndexScript : MonoBehaviour
         debT = FindObjectOfType<DebugTools>();
         text = GetComponent<TextMeshProUGUI>();
 
-        levelIndexEntier = Mathf.FloorToInt(debT.levelIndex);
-        levelIndexDecimal = Mathf.RoundToInt((debT.levelIndex - Mathf.FloorToInt(debT.levelIndex))*10);
 
-        text.text = levelIndexEntier + " - " + levelIndexDecimal;
+        text.text = debT.World + " - " + debT.levelIndex;
     }
 }
