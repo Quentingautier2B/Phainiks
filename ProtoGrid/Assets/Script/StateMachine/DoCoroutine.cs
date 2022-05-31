@@ -392,6 +392,7 @@ public class DoCoroutine : MonoBehaviour
         }
     }
 
+
     public IEnumerator tpScaling(Transform tpTransform, float currentSize, float targetSize, float timer, float speed)
     {
         if(tpScaleLerper == 0)
