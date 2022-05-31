@@ -90,10 +90,12 @@ public class SwipeInput : StateMachineBehaviour
         pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
+
         if (grid[pPosX,pPosY].levelTransiIndex != 0)
         {
             doC.moveFlag = false;
         }
+
         foreach(GridTiles g in grid)
         {
             
@@ -156,18 +158,20 @@ public class SwipeInput : StateMachineBehaviour
 
         if (sceneChange.Hub && inputBuffer.SavedInput.Count > 0)
         {
-            directionSwipe = inputBuffer.SavedInput[0];
-
-            if(flag)
+            if (Time.timeSinceLevelLoad > 1.7f)
             {
-                if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                directionSwipe = inputBuffer.SavedInput[0];
+                if(flag)
                 {
-                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                    if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                    {
+                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                    }
+                    else if (directionSwipe.x < 0 && directionSwipe.y < 0)
+                    {
+                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
+                    }     
                 }
-                else if (directionSwipe.x < 0 && directionSwipe.y < 0)
-                {
-                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
-                }     
             }
             inputBuffer.SavedInput.Clear();
         }

@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     DebugTools debugTools;
-    [SerializeField]public bool Hub;
+    [SerializeField] public bool Hub;
+    [SerializeField] GameObject HubBackgroundTuto, HubBackgroundWorld1, HubBackgroundWorld2, HubBackgroundWorld3;
     InGameUI inGameUI;
     GameObject stateMachine;
+
     float lerper;
     public AnimationCurve endAnimation;
-    public static int currentWorld;
-    [SerializeField] int World;
+    public static int currentWorld = 0;
     [HideInInspector] public float endLerper;
     [HideInInspector] public bool loadScene = false;
     private void Awake()
@@ -20,10 +21,32 @@ public class SceneChange : MonoBehaviour
         stateMachine = GameObject.Find("StateMachine");
         debugTools = GetComponent<DebugTools>();
         inGameUI = FindObjectOfType<InGameUI>();
-    }
-    private void Start()
-    {
-      
+        if (!Hub)
+            currentWorld = debugTools.World;
+
+        if (Hub)
+        {
+            if (currentWorld == 0)
+            {
+                HubBackgroundTuto.GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("tiles 0 1").GetComponent<GridTiles>().originalPosition = true;
+            }
+            else if (currentWorld == 1)
+            {
+                HubBackgroundWorld1.GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("tiles 3 1").GetComponent<GridTiles>().originalPosition = true;
+            }
+            else if (currentWorld == 2)
+            {
+                HubBackgroundWorld2.GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("tiles 6 1").GetComponent<GridTiles>().originalPosition = true;
+            }
+            else if (currentWorld == 3)
+            {
+                HubBackgroundWorld3.GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("tiles 9 1").GetComponent<GridTiles>().originalPosition = true;
+            }
+        }
     }
 
 
