@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class TileEditorWindow : EditorWindow
 {
-   /* GridGenerator gridG;
+   GridGenerator gridG;
     bool tileSelected;
 
     bool walkable;
@@ -73,13 +73,13 @@ public class TileEditorWindow : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Raws");
-        Raws = EditorGUILayout.IntSlider(Raws, 1, 10);
+        Raws = EditorGUILayout.IntSlider(Raws, 1, 100);
         EditorGUILayout.EndHorizontal();
 
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Columns");
-        Columns = EditorGUILayout.IntSlider(Columns, 1, 10);
+        Columns = EditorGUILayout.IntSlider(Columns, 1, 100);
         EditorGUILayout.EndHorizontal();
 
         gridG.raws = Raws;
@@ -347,11 +347,11 @@ public class TileEditorWindow : EditorWindow
                     g.crumble = Crumble;
                 }
 
-               *//* if (g.LevelTransiIndexC != LevelTransiIndex)
+               /* if (g.LevelTransiIndexC != LevelTransiIndex)
                 {
                     g.LevelTransiIndexC = LevelTransiIndex;
                     g.levelTransiIndex = LevelTransiIndex / 10;
-                }*//*
+                }*/
 
                 if (g.TempoTileC != TempoTile)
                 {
@@ -387,7 +387,7 @@ public class TileEditorWindow : EditorWindow
                 tileSelected = false;
             }
         }
-    }*/
+    }
 }
 #endif
 
