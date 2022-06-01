@@ -104,11 +104,9 @@ public class LerpBackground : MonoBehaviour
         backgroundTuto.enabled = true;
         if(SceneChange.currentWorld == 0)
         {
-            print(backgroundTuto.material.color);
             var transicol = backgroundTuto.material.color;
             transicol.a = 1;
             backgroundTuto.material.color = transicol;
-            print(backgroundTuto.material.color);
         }
             
 
