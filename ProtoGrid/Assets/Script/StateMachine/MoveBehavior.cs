@@ -212,9 +212,12 @@ public class MoveBehavior : StateMachineBehaviour
             doC.StartCoroutine(doC.tpScaling(doC.previousTP, 0, 0.7f, 0, 2));
         }
 
-
-        if (grid[x, y].key != 0)
-            KeyBehavior(grid[x, y]);
+        if (anim.GetBool("Rewind") && grid[previousX, previousY].key != 0)
+        {
+            KeyBehavior(grid[previousX, previousY], anim);
+        }  
+        else if (grid[x, y].key != 0)
+            KeyBehavior(grid[x, y], anim);
 
         if (anim.GetBool("Rewind") && grid[previousX, previousY].crumble)
         {
@@ -233,34 +236,36 @@ public class MoveBehavior : StateMachineBehaviour
                 grid[x, y].crumbleUp = true;
         }
 
-        if (anim.GetBool("Rewind"))
+        /*if (anim.GetBool("Rewind"))
         { 
             if (grid[previousX, previousY].key !=0)
             {
                 KeyBehavior(grid[previousX, previousY]);
             }
-        }
+        }*/
 
-        if(grid[previousX,previousY].key != 0)
-        {
+        if (grid[previousX,previousY].key != 0)
+        {   
             grid[previousX, previousY].transform.Find("Key").position += new Vector3(0, 0.05f, 0);
         }
     }
 
 
-    void KeyBehavior(GridTiles tile)
+    void KeyBehavior(GridTiles tile, Animator anim)
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/GetKey");
+       if ((anim.GetBool("Rewind") && grid[x,y].key !=0) || !anim.GetBool("Rewind"))
+            tile.transform.Find("Key").position -= new Vector3(0, 0.05f, 0);
 
-        tile.transform.Find("Key").position -= new Vector3(0, 0.05f, 0);
-
-
-        //tile.transform.Find("Key").gameObject.SetActive(false);
-        foreach (GridTiles t in grid)
+        if (!anim.GetBool("Rewind") || !(grid[x, y].key != 0))
         {
-            if(t.door == tile.key && t.door > 0)
+            //tile.transform.Find("Key").gameObject.SetActive(false);
+            foreach (GridTiles t in grid)
             {
-               doC.startClose(t, t.tiling, t.levelTransiIndex, t.GetComponent<GridTiling>());
+                if(t.door == tile.key && t.door > 0)
+                {
+                   doC.startClose(t, t.tiling, t.levelTransiIndex, t.GetComponent<GridTiling>());
+                }
             }
         }
     }
