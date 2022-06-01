@@ -12,17 +12,20 @@ public class Player : MonoBehaviour
     SceneChange sChange;
 
     public List<string> Inventory;
-
+    float previousYpos;
+    float lerp;
+    bool flag;
     private void Awake()
     {
         sChange = FindObjectOfType<SceneChange>();
         sInput = FindObjectOfType<Animator>().GetBehaviour<SwipeInput>();
         grid = FindObjectOfType<GridGenerator>().grid;       
     }
-    private void Update()
+    public void PlayerStickTile()
     {
         var yPos = transform.position;
-        if (grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].walkable && !sChange.Hub)
+        previousYpos = transform.position.y;
+        if (grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].walkable && !sChange.Hub && !flag)
         {
             if (sInput.roundingDirectionalYPosition.x == 0 && sInput.roundingDirectionalYPosition.y == 0)
                 yPos.y = grid[RoundDownToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
@@ -35,8 +38,26 @@ public class Player : MonoBehaviour
 
             if (sInput.roundingDirectionalYPosition.x == 1 && sInput.roundingDirectionalYPosition.y == 0)
                 yPos.y = grid[RoundUpToInt(transform.position.x), RoundDownToInt(transform.position.z)].transform.position.y + 1.5f;
-            transform.position = yPos;
 
+            transform.position = yPos;
+        }
+    }
+
+    public IEnumerator Lerper(float prevPosY, float yPos)
+    {
+        flag = true;
+        lerp += Time.deltaTime * 3;
+        transform.position = new Vector3(transform.position.x, Mathf.Lerp(prevPosY, yPos, lerp), transform.position.z);
+        if (lerp >= 1)
+        {
+            lerp = 0;
+            transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
+            flag = false;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(Lerper(prevPosY, yPos));
         }
     }
 

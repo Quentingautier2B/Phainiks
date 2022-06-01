@@ -6,6 +6,8 @@ using UnityEditor;
 #endif
 public class DebugTools : MonoBehaviour
 {
+    public float levelIndex;
+    public int World;
     public bool debugModOn;
     public FMOD.Studio.EventInstance mainMusic;
 
@@ -18,7 +20,7 @@ public class DebugTools : MonoBehaviour
     static bool isPlaying = false;
     private void Awake()
     {
-/*        FMOD.Studio.PLAYBACK_STATE playbackState;
+/*       FMOD.Studio.PLAYBACK_STATE playbackState;
         mainMusic.getPlaybackState(out playbackState);
         bool isPlaying = playbackState != FMOD.Studio.PLAYBACK_STATE.STOPPED;*/
 
@@ -33,6 +35,8 @@ public class DebugTools : MonoBehaviour
             isPlaying = true;
         }
         
+
+
     }
 
 

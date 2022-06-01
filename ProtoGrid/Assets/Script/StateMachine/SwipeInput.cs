@@ -11,7 +11,7 @@ public class SwipeInput : StateMachineBehaviour
     int pPosX, pPosY;
     int targetPosx, targetPosy;
     public float deadZoneDiameter;
-    int directionIndex = 0;
+    int directionIndex;
     public float clickTimerValue;
     float clickTimer;
     bool clickBool;
@@ -23,6 +23,7 @@ public class SwipeInput : StateMachineBehaviour
     TileVariables temp;
     CameraBehavior cam;
     SceneChange sceneChange;
+    LerpBackground lerpBackground;
     bool awake = true;
     [HideInInspector]public Vector2 roundingDirectionalYPosition;
     static public List<Vector2> rewindPos = new List<Vector2>();
@@ -31,9 +32,13 @@ public class SwipeInput : StateMachineBehaviour
     public bool monte;
     public bool flag;
     int idleIndex;
+    float ogPosY;
+    float magnitude, duration;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        magnitude = 0.01f;
+        duration = 0.25f;
 
         if (awake)
         {
@@ -42,28 +47,29 @@ public class SwipeInput : StateMachineBehaviour
             doC = animator.GetComponent<DoCoroutine>();
             grid = FindObjectOfType<GridGenerator>().grid;
             sceneChange = FindObjectOfType<SceneChange>();
+            directionIndex = 0;
             GridTiling gTil = null;
-            foreach(GridTiles g in grid)
+            player = FindObjectOfType<Player>().transform;
+            foreach (GridTiles g in grid)
             {
                 if (g.originalPosition)
                 {
                     gTil = g.GetComponent<GridTiling>();
+                    ogPosY = gTil.transform.position.y;
+                    player.position = gTil.transform.position + new Vector3(0, 1.5f, 0);
+                    
                 }
             }
+            doC.StartCoroutine(doC.ogPos(0, ogPosY, gTil.transform));
             foreach (GridTiles g in grid)
             {
                 if ((!g.originalPosition && g.open && g.door != 0 && g.walkable) || (!g.originalPosition && g.door == 0 && g.walkable))
                 {                  
                     doC.startClose(g, g.tiling, g.levelTransiIndex, gTil);
                 }
-                /*if (g.door != 0 && g.open)
-                    g.open = false;*/
-                /*if (g.door != 0 && !g.open)
-                    doC.startClose(g, g.levelTransiIndex);
-                else
-                    g.open = false;*/
+
             }
-            player = FindObjectOfType<Player>().transform;
+            
             gridG = FindObjectOfType<GridGenerator>();
             idleIndex = 2;
             temp = FindObjectOfType<TileVariables>();
@@ -71,6 +77,12 @@ public class SwipeInput : StateMachineBehaviour
             awake = false;
             cam = FindObjectOfType<CameraBehavior>();
             rewindPos.Clear();
+            if (sceneChange.Hub)
+            {
+                lerpBackground = FindObjectOfType<LerpBackground>();
+                lerpBackground.lerpIn();
+
+            }
         }
         flag = true;
         idleIndex = 2;
@@ -78,14 +90,12 @@ public class SwipeInput : StateMachineBehaviour
         pSRend.SetBlendShapeWeight(idleIndex, animIndexValue);
         grid = gridG.grid;
         pPosAssignement();
-/*        if(grid[pPosX,pPosY].originalPosition || grid[pPosX,pPosY].levelTransiIndex != 0)
+
+        if (grid[pPosX,pPosY].levelTransiIndex != 0)
         {
-            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.38f, pSRend.transform.localPosition.z);
+            doC.moveFlag = false;
         }
-        else
-        {
-            pSRend.transform.localPosition = new Vector3(pSRend.transform.localPosition.x, -.42f, pSRend.transform.localPosition.z);
-        }*/
+
         foreach(GridTiles g in grid)
         {
             
@@ -105,16 +115,13 @@ public class SwipeInput : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-
+        if (!doC.moveFlag)
+        {
+            inputBuffer.SavedInput.Clear();
+        }
 
         if(animIndexValue < 0 && !monte)
         {
-/*            if (idleIndex == 2)
-                idleIndex = 3;
-            else
-                idleIndex = 2;*/
-
-
             animIndexValue = 1;
             monte = true;
         }
@@ -151,19 +158,22 @@ public class SwipeInput : StateMachineBehaviour
 
         if (sceneChange.Hub && inputBuffer.SavedInput.Count > 0)
         {
-            directionSwipe = inputBuffer.SavedInput[0];
-
-            if(flag)
+            if (Time.timeSinceLevelLoad > 1.7f)
             {
-                if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                directionSwipe = inputBuffer.SavedInput[0];
+                if(flag)
                 {
-                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                    if (directionSwipe.x > 0 && directionSwipe.y > 0)
+                    {
+                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Right").GetComponent<Button>().onClick.Invoke();
+                    }
+                    else if (directionSwipe.x < 0 && directionSwipe.y < 0)
+                    {
+                        grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
+                    }     
                 }
-                else if (directionSwipe.x < 0 && directionSwipe.y < 0)
-                {
-                    grid[(int)player.position.x, (int)player.position.z].transform.Find("World/CanvasCam/Left").GetComponent<Button>().onClick.Invoke();
-                }     
             }
+            inputBuffer.SavedInput.Clear();
         }
         
         if (inputBuffer.SavedInput.Count > 0 && !sceneChange.Hub)
@@ -187,6 +197,7 @@ public class SwipeInput : StateMachineBehaviour
         directionSwipe = Vector2.zero;
         if (animator.GetBool("Rewind"))
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Rewind");
             animator.SetInteger("PreviousX", pPosX);
             animator.SetInteger("PreviousY", pPosY);
         }
@@ -240,7 +251,11 @@ public class SwipeInput : StateMachineBehaviour
             else
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                {
                     inputBuffer.SavedInput.RemoveAt(0);
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX + 1, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY)));
+                    doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
+                }
             }
         }
 
@@ -279,7 +294,11 @@ public class SwipeInput : StateMachineBehaviour
             else
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                {
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX , grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY - 1)));
                     inputBuffer.SavedInput.RemoveAt(0);
+                    doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
+                }
             }
         }
 
@@ -318,7 +337,11 @@ public class SwipeInput : StateMachineBehaviour
             else
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                {
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY + 1)));
+                    doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
                     inputBuffer.SavedInput.RemoveAt(0);
+                }
             }
         }
 
@@ -357,7 +380,11 @@ public class SwipeInput : StateMachineBehaviour
             else
             {
                 if (inputBuffer.SavedInput.Count > 0 && inputBuffer.SavedInput[0] != null)
+                {
+                    doC.StartCoroutine(doC.WrongMoveLerp(new Vector3(pPosX, grid[pPosX, pPosY].transform.position.y + 1.5f, pPosY), new Vector3(pPosX - 1, grid[pPosX, pPosY].transform.position.y+ 1.5f, pPosY)));
                     inputBuffer.SavedInput.RemoveAt(0);
+                    doC.StartCoroutine(doC.ScreenShake(duration, magnitude));
+                }
             }
         }
 
@@ -367,6 +394,8 @@ public class SwipeInput : StateMachineBehaviour
     void HubTestRightDirections(Animator anim)
     {
         flag = false;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
+
         roundingDirectionalYPosition = new Vector2(0, 0);
         anim.SetInteger("TargetInfoX", pPosX + 3);
         anim.SetInteger("TargetInfoY", pPosY);
@@ -380,6 +409,8 @@ public class SwipeInput : StateMachineBehaviour
     void HubTestLeftDirections(Animator anim)
     {
         flag = false;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
+
         roundingDirectionalYPosition = new Vector2(1, 1);
         anim.SetInteger("TargetInfoX", pPosX - 3);
         anim.SetInteger("TargetInfoY", pPosY);

@@ -25,6 +25,8 @@ public class MoveBehavior : StateMachineBehaviour
     SceneChange sceneChange;
     SkinnedMeshRenderer pSRend;
     Quaternion startRot, endRot;
+    bool yFlag;
+    bool endFlag;
     #endregion
 
 
@@ -33,6 +35,7 @@ public class MoveBehavior : StateMachineBehaviour
         lerper = 0;
         if (awake)
         {
+            endFlag = false;
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
             sceneChange = FindObjectOfType<SceneChange>();
             doC = animator.GetComponent<DoCoroutine>();
@@ -43,6 +46,7 @@ public class MoveBehavior : StateMachineBehaviour
         }
         startPos = player.position;
         startRot = player.rotation;
+        yFlag = true;
         endRot = Quaternion.AngleAxis(90, player.forward);
         canMove = true;
         if (animator.GetBool("Rewind"))
@@ -90,6 +94,12 @@ public class MoveBehavior : StateMachineBehaviour
             lerper += Time.deltaTime * moveSpeed;
             pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
             pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
+            if (yFlag && ((startPos.y - 1.5f) - grid[x, y].transform.position.y == 1 || (startPos.y - 1.5f) - grid[x, y].transform.position.y == -1))
+            {
+                Debug.Log(1);
+                doC.StartCoroutine(player.GetComponent<Player>().Lerper(startPos.y + 1.5f, grid[x, y].transform.position.y + 1.5f)) ;
+                yFlag = false;
+            }
             if(lerper <= .5f)
             {
                 pSRend.SetBlendShapeWeight(0,Mathf.Lerp(0,100,lerper));
@@ -115,7 +125,7 @@ public class MoveBehavior : StateMachineBehaviour
             player.position = new Vector3(x, player.position.y , y);
             if (anim.GetBool("Rewind"))
             {
-                UI.timerValue++;
+                //UI.timerValue++;
             }
             else
             {
@@ -147,8 +157,6 @@ public class MoveBehavior : StateMachineBehaviour
 
     void TileEffectOnMove(int x, int y, Animator anim)
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
-        //timerValue++;
         if (sceneChange.Hub)
         {
             if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].World > 0)
@@ -167,10 +175,15 @@ public class MoveBehavior : StateMachineBehaviour
 
             foreach (GridTiles tile in grid)
             {
-                if(tile.levelTransiIndex != grid[x, y].levelTransiIndex)
+                if (!endFlag)
+                {
+                    endFlag = true;
+                    doC.StartCoroutine(doC.ogPos(grid[x, y].transform.position.y, 0, grid[x, y].transform));
+                }
+
+                if (tile.levelTransiIndex != grid[x, y].levelTransiIndex)
                 {
                     tile.levelTransiIndex = 100;
-                    
                     doC.startClose(tile, tile.tiling, grid[x,y].levelTransiIndex, grid[x,y].GetComponent<GridTiling>());
                 }
             }

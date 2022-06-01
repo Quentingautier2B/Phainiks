@@ -26,6 +26,7 @@ public class GridTiling : MonoBehaviour
     public Material TmatG2;
     public Material TmatG3;
     public Material Cmat;
+    public Material transiR, transiB, transiG;
     public GameObject colonne1, colonne2, colonne3, colonne4;
     public Material Orange, Purple, Green;
     float lerpMatTimer;
@@ -77,6 +78,8 @@ public class GridTiling : MonoBehaviour
             SetDirectionalMaterial();
         //transform.Find("Renderer").GetComponent<MeshFilter>().mesh = meshF;
     }
+
+
 
     private void OnDrawGizmos()
     {
@@ -143,7 +146,49 @@ public class GridTiling : MonoBehaviour
         }
     }
 
+    public void TempoTileTransi()
+    {
+        if (tile.tempoTile == 1)
+        {
+            mesh.transform.rotation = Quaternion.identity;
+            mesh.transform.Rotate(-90, 0, 0);
+            mesh.material = transiR;
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+            SetCubeSize();
+            AllColonneActivate();
+        }
 
+        if (tile.tempoTile == 2)
+        {
+            mesh.transform.rotation = Quaternion.identity;
+            mesh.transform.Rotate(-90, 0, 0);
+            mesh.material = transiB;
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+            SetCubeSize();
+            AllColonneActivate();
+
+
+        }
+
+        if (tile.tempoTile == 3)
+        {
+            mesh.transform.rotation = Quaternion.identity;
+            mesh.transform.Rotate(-90, 0, 0);
+            mesh.material = transiG;
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 1);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 2);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 3);
+            gridG.TestDirection((int)transform.position.x, (int)transform.position.z, 4);
+            SetCubeSize();
+            AllColonneActivate();
+        }
+    }
     public void TempoTileMaterial()
     {
         if (tile.tempoTile != 0 || tile.crumble)
