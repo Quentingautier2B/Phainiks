@@ -20,6 +20,7 @@ public class WorldManager : MonoBehaviour
     public Quaternion startRot;
     private float lerper;
     [SerializeField] GameObject plane;
+    [SerializeField] int worldname;
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class WorldManager : MonoBehaviour
             {
                 GameObject world = worldLevelUi.transform.Find("" + i).gameObject;
                 world.SetActive(true);
-                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;               
+                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + worldname + "-" + i;               
             }
         }
         
