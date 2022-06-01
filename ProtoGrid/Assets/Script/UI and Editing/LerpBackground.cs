@@ -110,7 +110,6 @@ public class LerpBackground : MonoBehaviour
             var transicol = backgroundTuto.material.color;
             transicol.a = 1;
             backgroundTuto.material.color = transicol;
-            print(backgroundTuto.material.color);
         }
             
 

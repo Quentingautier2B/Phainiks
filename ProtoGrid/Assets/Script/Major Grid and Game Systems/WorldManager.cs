@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class WorldManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class WorldManager : MonoBehaviour
     public Quaternion startRot;
     private float lerper;
     [SerializeField] GameObject plane;
+    [SerializeField] int worldname;
 
     void Start()
     {
@@ -35,7 +37,7 @@ public class WorldManager : MonoBehaviour
             {
                 GameObject world = worldLevelUi.transform.Find("" + i).gameObject;
                 world.SetActive(true);
-                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + i;               
+                world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + worldname + "-" + i;               
             }
         }
         
@@ -43,6 +45,7 @@ public class WorldManager : MonoBehaviour
 
     public void OpenWorld(GameObject button)
     {
+        Camera.main.GetComponent<PostProcessVolume>().weight = 1;
         doC.moveFlag = false;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
 

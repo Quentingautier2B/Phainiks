@@ -46,7 +46,13 @@ public class SceneChange : MonoBehaviour
                 HubBackgroundWorld3.GetComponent<MeshRenderer>().enabled = true;
                 GameObject.Find("tiles 9 1").GetComponent<GridTiles>().originalPosition = true;
             }
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("GameState", "Hub");
         }
+        else
+        {
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("GameState", "Game");
+        }       
+
     }
 
 

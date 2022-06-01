@@ -22,7 +22,15 @@ public class LoadScene : MonoBehaviour
 
 
         yo = GetComponent<TMP_InputField>().text;
-        SceneManager.LoadScene("Lvl_" + yo);
+        if (yo == "PACMAN")
+        {
+            SceneManager.LoadScene("PACMAN");
+        }
+        else
+        {
+            SceneManager.LoadScene("Lvl_" + yo);
+
+        }
 
     }
     

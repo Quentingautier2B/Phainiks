@@ -175,13 +175,15 @@ public class InGameUI : MonoBehaviour
         {
             flag = true;
             FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Star " + (starIndex + 1));
-            StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
+            if (!sceneChange.Hub)
+                StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
         }
 
     }
 
     IEnumerator Stars(RectTransform Star, float size, int starCap)
     {
+        
         starLerper += Time.deltaTime * 2;
         Star.sizeDelta = Vector2.Lerp(Vector2.zero, Vector2.one * size, starLerper);
         
