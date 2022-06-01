@@ -16,7 +16,21 @@ public class MainMenu : MonoBehaviour
     [SerializeField] RawImage[] fadeOut;
     [SerializeField] MeshRenderer mat;
     [SerializeField] Animator pushForPlay;
-    
+    public static bool isPlaying;
+    public FMOD.Studio.EventInstance mainMusic;
+    private void Awake()
+    {
+        if (isPlaying)
+        {
+
+        }
+        else
+        {
+            mainMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Main");
+            mainMusic.start();
+            isPlaying = true;
+        }
+    }
     private void Start()
     {
         timelineEnd = false;

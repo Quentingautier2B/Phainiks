@@ -18,6 +18,8 @@ public class SceneChange : MonoBehaviour
     [HideInInspector] public bool loadScene = false;
     private void Awake()
     {
+
+
         stateMachine = GameObject.Find("StateMachine");
         debugTools = GetComponent<DebugTools>();
         inGameUI = FindObjectOfType<InGameUI>();

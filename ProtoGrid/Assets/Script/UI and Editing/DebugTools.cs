@@ -9,7 +9,7 @@ public class DebugTools : MonoBehaviour
     public float levelIndex;
     public int World;
     public bool debugModOn;
-    public FMOD.Studio.EventInstance mainMusic;
+    //public FMOD.Studio.EventInstance mainMusic;
 
     public GameObject System;
     public GameObject SecondarySystem;
@@ -17,14 +17,13 @@ public class DebugTools : MonoBehaviour
     public GameObject Terrain;
     public GameObject Decor;
     bool SceneLoaded;
-    static bool isPlaying = false;
+    public FMOD.Studio.EventInstance mainMusic;
+
+    //static bool isPlaying = false;
     private void Awake()
     {
-/*       FMOD.Studio.PLAYBACK_STATE playbackState;
-        mainMusic.getPlaybackState(out playbackState);
-        bool isPlaying = playbackState != FMOD.Studio.PLAYBACK_STATE.STOPPED;*/
 
-        if (isPlaying)
+        if (MainMenu.isPlaying)
         {
 
         }
@@ -32,9 +31,9 @@ public class DebugTools : MonoBehaviour
         {
             mainMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Tiles/Main");
             mainMusic.start();
-            isPlaying = true;
+            MainMenu.isPlaying = true;
         }
-        
+
 
 
     }

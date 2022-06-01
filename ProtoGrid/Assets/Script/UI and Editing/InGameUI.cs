@@ -174,9 +174,11 @@ public class InGameUI : MonoBehaviour
         if (!flag)
         {
             flag = true;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Star " + (starIndex + 1));
-            if (!sceneChange.Hub)
+            if (!sceneChange.Hub && debugTools.World != 0)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Star " + (starIndex + 1));
                 StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
+            }
         }
 
     }
