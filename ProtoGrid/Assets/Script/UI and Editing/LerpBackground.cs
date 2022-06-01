@@ -11,11 +11,14 @@ public class LerpBackground : MonoBehaviour
     [SerializeField] MeshRenderer backgroundTuto, backgroundWorld1, backgroundWorld2, backgroundWorld3;
     [SerializeField] Material MatbackgroundTuto, MatbackgroundWorld1, MatbackgroundWorld2, MatbackgroundWorld3;
     [SerializeField] Button falseTutoLeft, tutoRight, world1Left, world1Right, world2Left, world2right, world3Left, falseworld3Right;
+    CameraBehavior cam;
     private float lerper;
 
     private void Start()
     {
+        cam = FindObjectOfType<CameraBehavior>();
         startpos = Camera.main.transform.localPosition;
+        cam.zoomSlider.value = 0;
         lerperFadeIn = 0;
         lerperFadeOut = 0;
     }
@@ -104,7 +107,6 @@ public class LerpBackground : MonoBehaviour
         backgroundTuto.enabled = true;
         if(SceneChange.currentWorld == 0)
         {
-            print(backgroundTuto.material.color);
             var transicol = backgroundTuto.material.color;
             transicol.a = 1;
             backgroundTuto.material.color = transicol;
