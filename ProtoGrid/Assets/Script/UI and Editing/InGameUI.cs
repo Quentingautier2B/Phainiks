@@ -27,12 +27,15 @@ public class InGameUI : MonoBehaviour
     private int[] starValue = new int[3];
     int starIndex;
     public int oneStar,twoStar,threeStar;
+    public TextMeshProUGUI starText1, starText2;
     public GameObject inGameUI;
     [SerializeField] GameObject restart;
     [SerializeField] GameObject rotateLeft;
     [SerializeField] GameObject rotateRight;
     float starLerper;
+    int saveScoreValue;
     bool flag;
+    SaveSystem saveSys;
     #endregion
 
     public void OnPauseClick()
@@ -109,6 +112,7 @@ public class InGameUI : MonoBehaviour
     private void Awake()
     {
         flag = false;
+        saveSys = FindObjectOfType<SaveSystem>();
         stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
         //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
@@ -119,6 +123,8 @@ public class InGameUI : MonoBehaviour
 
     private void Start()
     {
+        starText1.text = twoStar.ToString();
+        starText2.text = threeStar.ToString();
         starValue[0] = oneStar;
         starValue[1] = twoStar;
         starValue[2] = threeStar;
@@ -176,6 +182,19 @@ public class InGameUI : MonoBehaviour
             flag = true;
             if (!sceneChange.Hub && debugTools.World != 0)
             {
+                if(timerValue <= oneStar)
+                {
+                    saveScoreValue = 1;
+                }
+                if(timerValue <= twoStar)
+                {
+                    saveScoreValue = 2;
+                }
+                if(timerValue <= threeStar)
+                {
+                    saveScoreValue = 3;
+                }
+                saveSys.SaveScore(saveScoreValue);
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/Star " + (starIndex + 1));
                 StartCoroutine(Stars(starImage[starIndex], starSizeValue[starIndex], starValue[starIndex]));
             }
@@ -185,7 +204,6 @@ public class InGameUI : MonoBehaviour
 
     IEnumerator Stars(RectTransform Star, float size, int starCap)
     {
-        
         starLerper += Time.deltaTime * 2;
         Star.sizeDelta = Vector2.Lerp(Vector2.zero, Vector2.one * size, starLerper);
         

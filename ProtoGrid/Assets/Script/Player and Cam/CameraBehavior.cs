@@ -52,8 +52,7 @@ public class CameraBehavior : MonoBehaviour
             transform.position = playerPos.position;
             zoomSlider.value = sliderValue;
             m_DOF.focusDistance.value = (sliderValue * 10) + 10;
-            camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, (sliderValue * -45) - 15);
-        
+            camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, (sliderValue * -45) - 15);     
     }
 
 
@@ -67,8 +66,12 @@ public class CameraBehavior : MonoBehaviour
         }
         else
         {
-            m_DOF.focusDistance.value = (sliderValue * 10) + 10;
-            camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, (sliderValue * -45) - 15);
+            //zoomBool = false;
+            //zoomLerp = 0;
+            StopCoroutine(valueChanged(camTransform.localPosition.z, m_DOF.focusDistance.value));
+            StartCoroutine(valueChanged(camTransform.localPosition.z, m_DOF.focusDistance.value));
+            //m_DOF.focusDistance.value = (sliderValue * 10) + 10;
+            //camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, (sliderValue * -45) - 15);
         }
     }
 
@@ -82,7 +85,7 @@ public class CameraBehavior : MonoBehaviour
         m_DOF.focusDistance.value = Mathf.Lerp(DOFstart, (zoomSlider.value * 10) + 10, zoomLerp);
         if (zoomLerp >= 1)
         {
-            zoomLerp = 0;
+            //zoomLerp = 0;
             zoomBool = false;
         }
         else

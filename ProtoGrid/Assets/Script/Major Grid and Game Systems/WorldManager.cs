@@ -10,7 +10,7 @@ public class WorldManager : MonoBehaviour
     GameObject parent;
     [SerializeField] TextMeshProUGUI text;
     GridTiles gridTiles;
-    [SerializeField] float[] LevelsOfTheWorld;
+    [SerializeField]public float[] LevelsOfTheWorld;
     [SerializeField] Material worldMat;
     GameObject worldLevelUi;
     List<Scene> previewScene;
@@ -21,7 +21,7 @@ public class WorldManager : MonoBehaviour
     private float lerper;
     [SerializeField] GameObject plane;
     [SerializeField] int worldname;
-
+    public Texture ActivatedStar, UnactivatedStar;
     void Start()
     {
         grid = FindObjectOfType<GridGenerator>().grid;

@@ -78,7 +78,6 @@ public class MoveBehavior : StateMachineBehaviour
 
     }
 
-
     void Move(Animator anim, AnimatorStateInfo stateInfo)
     {
         if (anim.GetBool("Rewind") && flag == true)
@@ -89,14 +88,14 @@ public class MoveBehavior : StateMachineBehaviour
         }
 
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
-        if (/*distance > 0*/ lerper < 1 && grid[x, y].walkable)
+        if (lerper < 1 && grid[x, y].walkable)
         {
             lerper += Time.deltaTime * moveSpeed;
             pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
             pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
             if (yFlag && ((startPos.y - 1.5f) - grid[x, y].transform.position.y == 1 || (startPos.y - 1.5f) - grid[x, y].transform.position.y == -1))
             {
-                Debug.Log(1);
+
                 doC.StartCoroutine(player.GetComponent<Player>().Lerper(startPos.y + 1.5f, grid[x, y].transform.position.y + 1.5f)) ;
                 yFlag = false;
             }
@@ -163,7 +162,7 @@ public class MoveBehavior : StateMachineBehaviour
             {
                 grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);
             }
-            if (grid[x, y].World > 0)
+            if (grid[x, y].World > 0 && grid[x, y].gameObject.transform.Find("World/CanvasCam"))
             {
                 grid[x, y].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(true);
             }
@@ -178,7 +177,7 @@ public class MoveBehavior : StateMachineBehaviour
                 if (!endFlag)
                 {
                     endFlag = true;
-                    doC.StartCoroutine(doC.ogPos(grid[x, y].transform.position.y, 0, grid[x, y].transform));
+                    doC.StartCoroutine(doC.QueueForOg(grid[x, y].transform.position.y, 0, grid[x, y].transform, grid[x,y]));
                 }
 
                 if (tile.levelTransiIndex != grid[x, y].levelTransiIndex)
@@ -249,7 +248,6 @@ public class MoveBehavior : StateMachineBehaviour
             grid[previousX, previousY].transform.Find("Key").position += new Vector3(0, 0.05f, 0);
         }
     }
-
 
     void KeyBehavior(GridTiles tile, Animator anim)
     {

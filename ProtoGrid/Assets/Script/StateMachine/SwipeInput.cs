@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SwipeInput : StateMachineBehaviour
 {
+    #region variables
     Vector2 startTouchPos, currentTouchPos, endTouchPos;
     public Vector2 directionSwipe;
     int pPosX, pPosY;
@@ -34,7 +35,7 @@ public class SwipeInput : StateMachineBehaviour
     int idleIndex;
     float ogPosY;
     float magnitude, duration;
-
+    #endregion
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         magnitude = 0.01f;
@@ -186,6 +187,7 @@ public class SwipeInput : StateMachineBehaviour
 
 
     }
+
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animIndexValue = 0;
@@ -406,6 +408,7 @@ public class SwipeInput : StateMachineBehaviour
         anim.SetBool("OntonormalTileTempo", true);
        //rewindPos.Add(new Vector2(pPosX, pPosY));
     }
+
     void HubTestLeftDirections(Animator anim)
     {
         flag = false;

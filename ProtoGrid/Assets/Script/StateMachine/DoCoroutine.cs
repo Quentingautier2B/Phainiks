@@ -315,6 +315,12 @@ public class DoCoroutine : MonoBehaviour
 
     }
 
+    public IEnumerator QueueForOg(float startY, float endY, Transform ogTile, GridTiles tile)
+    {
+        yield return new WaitUntil(() => !tile.opening);
+        StartCoroutine(ogPos(startY, endY, ogTile));
+    }
+
     public IEnumerator ogPos(float startY, float endY, Transform ogTile)
     {
         ofLerper += Time.deltaTime;

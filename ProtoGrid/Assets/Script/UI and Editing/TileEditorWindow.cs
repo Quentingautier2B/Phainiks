@@ -8,7 +8,8 @@ using UnityEditor;
 
 public class TileEditorWindow : EditorWindow
 {
-   GridGenerator gridG;
+    #region variables
+    GridGenerator gridG;
     bool tileSelected;
 
     bool walkable;
@@ -24,9 +25,7 @@ public class TileEditorWindow : EditorWindow
     int TeleporterTarget;
     int Raws;
     int Columns;
-
-
-
+    #endregion
 
     [MenuItem("Window/Tiling")]
     public static void ShowWindow()

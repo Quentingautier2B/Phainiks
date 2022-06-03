@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TempoBehavior : StateMachineBehaviour
 {
+    #region variables
     int redOffValue = 1;
 
     int blueOffValue = 2;
@@ -14,7 +15,6 @@ public class TempoBehavior : StateMachineBehaviour
     TileVariables t;
 
     Player player;
-
 
     [SerializeField] public bool redFlager,blueFlager,greenFlager, crumbleFlager;
     float redTarget, blueTarget, greenTarget;
@@ -28,6 +28,8 @@ public class TempoBehavior : StateMachineBehaviour
     public int x, y;
     DoCoroutine doC;
     GridTiling gT;
+    #endregion
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (awake)
@@ -121,8 +123,6 @@ public class TempoBehavior : StateMachineBehaviour
             
         }
     }
-
-
 
     void NewTempoTile(Animator anim)
     {
@@ -399,6 +399,7 @@ public class TempoBehavior : StateMachineBehaviour
                 doC.UpdateAdjTiles(tile, (int)tile.transform.position.x, (int)tile.transform.position.z);
                 tile.target = (int)tile.transform.position.y + 2;
                 tile.opening = true;
+            
                 FMODUnity.RuntimeManager.StudioSystem.setParameterByName(musicName, 1);
                 tile.tempoBool = false;
             }
@@ -412,19 +413,24 @@ public class TempoBehavior : StateMachineBehaviour
             }
 
             //Called Every loop
+            if (tile.transform.position.x == player.transform.position.x && tile.transform.position.z == player.transform.position.z && tile.levelTransiIndex != 0)
+            {
+                tile.opening = false;
+                return false;
+            }
             g.TempoTileMaterial();
-            //g.TempoTileTransi();
             tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.transform.position.y, tile.target, tempoTileSpeed * Time.deltaTime), tile.transform.position.z);
             UpdateAdjacentTileColonnes(tile, (int)tile.transform.position.x, (int)tile.transform.position.z, gT);
 
             //Called on last loop
-            if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
-                {
-                    tile.opening = false;
 
-                    tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
-                    return false;
-                }
+            if ((tile.transform.position.y >= tile.target - 0.01f && colorFlag) || (tile.transform.position.y <= tile.target + 0.01f && !colorFlag))
+            {
+                tile.opening = false;
+
+                tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);               
+                return false;
+            }
             else
             {
                 return true;
