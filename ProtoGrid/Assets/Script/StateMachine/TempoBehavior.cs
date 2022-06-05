@@ -346,6 +346,12 @@ public class TempoBehavior : StateMachineBehaviour
                         grid[x, y].tempoBool = false;
                         grid[x,y].opening = true;
                     }
+                    if (grid[(int)player.transform.position.x, (int)player.transform.position.z].levelTransiIndex != 0)
+                    {
+                        grid[x, y].opening = false;
+                        grid[x, y].crumbleBool = false;
+                        crumbleFlager = false; ;
+                    }
                     gT.SetDirectionalMaterial();
                     UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
                     grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
@@ -370,6 +376,13 @@ public class TempoBehavior : StateMachineBehaviour
                         grid[x, y].tempoBool = false;
                         grid[x, y].opening = true;
                     }
+                    if (grid[(int)player.transform.position.x, (int)player.transform.position.z].levelTransiIndex != 0)
+                    {
+                        grid[x, y].opening = false;
+                        grid[x, y].crumbleBool = false;
+                        crumbleFlager = false; ;
+                    }
+
                     gT.SetDirectionalMaterial();
                     UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
                     grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
@@ -413,7 +426,7 @@ public class TempoBehavior : StateMachineBehaviour
             }
 
             //Called Every loop
-            if (tile.transform.position.x == player.transform.position.x && tile.transform.position.z == player.transform.position.z && tile.levelTransiIndex != 0)
+            if ( grid[(int)player.transform.position.x, (int)player.transform.position.z].levelTransiIndex != 0)
             {
                 tile.opening = false;
                 return false;

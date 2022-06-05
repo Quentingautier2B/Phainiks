@@ -49,7 +49,6 @@ public class SaveSystem : MonoBehaviour
     public void LoadScore()
     {
         ScoreData data = Saver.LoadScore();
-        print(data.score);
         levelScore = data.score;
 
 

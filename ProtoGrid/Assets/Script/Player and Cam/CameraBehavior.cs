@@ -99,20 +99,6 @@ public class CameraBehavior : MonoBehaviour
     private void Update()
     {
         AngleCheck();
-/*        RaycastHit[] hits = Physics.SphereCastAll(camTransform.position, .2f, playerPos.position - camTransform.position, Vector3.Distance(camTransform.position, playerPos.position), LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
-        if ( hits.Length >= 1)
-        {
-            foreach (RaycastHit h in hits)
-            {
-                if (h.collider.gameObject.GetComponent<GridTiles>() != null && h.collider.gameObject.GetComponent<GridTiles>().open)
-                {
-                        h.collider.GetComponent<GridTiles>().hitByCam = true;
-                        h.collider.GetComponent<GridTiles>().numberFrameHit += 1;
-
-                }
-
-            }
-        }*/
 
         if (lerp == true)
         {
@@ -163,24 +149,6 @@ public class CameraBehavior : MonoBehaviour
         flag = true;
     }
 
-/*    private void OnGUI()
-    {
-
-        if (GUI.Button(new Rect(110, 440, 150, 150), "left"))
-        {
-            //transform.Rotate(0, 90, 0, Space.World);
-            angleLerp = 90;
-            lerp = true;
-            
-        }
-
-        if (GUI.Button(new Rect(1650, 440, 150, 150), "right"))
-        {
-            //transform.Rotate(0, -90, 0, Space.World);
-            angleLerp = -90;
-            lerp = true;
-        }
-    }*/
 
     void Lerp(int angle)
     {

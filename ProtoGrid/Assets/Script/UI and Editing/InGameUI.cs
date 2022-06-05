@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+
 public class InGameUI : MonoBehaviour
 {
     #region variables
@@ -32,10 +33,12 @@ public class InGameUI : MonoBehaviour
     [SerializeField] GameObject restart;
     [SerializeField] GameObject rotateLeft;
     [SerializeField] GameObject rotateRight;
+    GameObject inGstars;
     float starLerper;
     int saveScoreValue;
     bool flag;
     SaveSystem saveSys;
+
     #endregion
 
     public void OnPauseClick()
@@ -112,9 +115,11 @@ public class InGameUI : MonoBehaviour
     private void Awake()
     {
         flag = false;
+ 
         saveSys = FindObjectOfType<SaveSystem>();
         stateMachine = FindObjectOfType<Animator>();
         debugTools = FindObjectOfType<DebugTools>();
+
         //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
         timerText = inGameUI.transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         sceneChange = FindObjectOfType<SceneChange>();

@@ -4,6 +4,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
+using UnityEngine.SceneManagement;
 
 
 public class TileEditorWindow : EditorWindow
@@ -41,25 +42,28 @@ public class TileEditorWindow : EditorWindow
     private void OnGUI()
     {
         
+        if(SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontStyle = FontStyle.Bold;
+            style.fontSize = 22;
+            style.normal.textColor = Color.yellow;
+            GUILayout.Label("Grid Generation", style);
 
-        GUIStyle style = new GUIStyle();
-        style.fontStyle = FontStyle.Bold;
-        style.fontSize = 22;
-        style.normal.textColor = Color.yellow;  
-        GUILayout.Label("Grid Generation", style);
+            GridGeneration();
 
-        GridGeneration();
+            EditorGUILayout.Space(30);
 
-        EditorGUILayout.Space(30);
+            GUILayout.Label("Tile Management", style);
 
-        GUILayout.Label("Tile Management", style);
-        
-        MatRefresh();
+            MatRefresh();
+        }
 
-        AssignVariableValue();
+
+/*        AssignVariableValue();
         DrawVariablesInWindow();
-        UpdateValues();
-        EditorUtility.SetDirty(gridG);
+        UpdateValues();*/
+       // EditorUtility.SetDirty(gridG);
     }
 
     void GridGeneration()
@@ -102,7 +106,7 @@ public class TileEditorWindow : EditorWindow
             }
         }
     }
-
+/*
     void AssignVariableValue()
     {
         foreach (GameObject obj in Selection.gameObjects)
@@ -346,11 +350,11 @@ public class TileEditorWindow : EditorWindow
                     g.crumble = Crumble;
                 }
 
-               /* if (g.LevelTransiIndexC != LevelTransiIndex)
+               *//* if (g.LevelTransiIndexC != LevelTransiIndex)
                 {
                     g.LevelTransiIndexC = LevelTransiIndex;
                     g.levelTransiIndex = LevelTransiIndex / 10;
-                }*/
+                }*//*
 
                 if (g.TempoTileC != TempoTile)
                 {
@@ -387,6 +391,8 @@ public class TileEditorWindow : EditorWindow
             }
         }
     }
+*/
+
 }
 #endif
 
