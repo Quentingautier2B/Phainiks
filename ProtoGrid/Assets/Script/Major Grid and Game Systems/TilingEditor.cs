@@ -84,7 +84,7 @@ public class TilingEditor : MonoBehaviour
         {
             Destroy(transform.Find("DirectionTempoD").gameObject);
         }
-        gridG = FindObjectOfType<GridGenerator>();
+        gridG = GridGenerator.Instance;
         playOn = true;
         rend = transform.Find("Renderer").GetComponent<Renderer>();
 
@@ -94,7 +94,7 @@ public class TilingEditor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B) && walkable)
             walkable = false;
 
-        stateMachine = FindObjectOfType<DoCoroutine>().GetComponent<Animator>();
+        stateMachine = gridG.animator;
         rend = transform.Find("Renderer").GetComponent<Renderer>();
         GetVariablesValue();
         EditorBlocRenderering();
@@ -185,9 +185,8 @@ public class TilingEditor : MonoBehaviour
             if (interpolateAmount <= .05 && trailCreate)
             {
                 trailCreate = false;
-                var inst = Instantiate(TeleLine, transform.position, Quaternion.identity);
+                var inst = Instantiate(TeleLine, transform.position, Quaternion.identity, transform);
                 inst.name = "Line";
-                inst.transform.parent = transform;
                 Trail = inst.transform;
                 TrailR = Trail.Find("Trail").GetComponent<TrailRenderer>();
             }

@@ -38,18 +38,19 @@ public class InGameUI : MonoBehaviour
     int saveScoreValue;
     bool flag;
     SaveSystem saveSys;
+    Animator anim;
 
     #endregion
 
     public void OnPauseClick()
     {
-        FindObjectOfType<Animator>().SetBool("Paused", true);
+        anim.SetBool("Paused", true);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/PauseMenu");
     }
 
     public void OnUnPauseClick()
     {
-        FindObjectOfType<Animator>().SetTrigger("ExitPause");
+        anim.SetTrigger("ExitPause");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Menuing/GeneralButton");
 
     }
@@ -115,14 +116,14 @@ public class InGameUI : MonoBehaviour
     private void Awake()
     {
         flag = false;
- 
-        saveSys = FindObjectOfType<SaveSystem>();
-        stateMachine = FindObjectOfType<Animator>();
-        debugTools = FindObjectOfType<DebugTools>();
 
-        //endLevelMenu = transform.Find("EndlevelMenu").gameObject;
+        anim = GridGenerator.Instance.animator;
+        saveSys = GridGenerator.Instance.saveSystem;
+        stateMachine = GridGenerator.Instance.animator;
+        debugTools = GridGenerator.Instance.debugTools;
+        sceneChange = GridGenerator.Instance.sceneChange;
+
         timerText = inGameUI.transform.Find("Timer").GetComponent<TextMeshProUGUI>();
-        sceneChange = FindObjectOfType<SceneChange>();
         revert = inGameUI.transform.Find("RevertTime").GetComponent<Button>();
     }
 

@@ -11,7 +11,24 @@ public class GridGenerator : MonoBehaviour
     public GridTiles[,] grid;
     [SerializeField] public bool instantiateGrid = false;
     public GameObject Tile;
-    Transform player;
+    Transform playerT;
+    public static GridGenerator Instance { get; private set; }
+    
+    [Header("Components References")]
+    [HideInInspector] public Player player;
+    [HideInInspector] public DoCoroutine doCoroutine;
+    [HideInInspector] public InGameUI inGameUI;
+    [HideInInspector] public DebugTools debugTools;
+    [HideInInspector] public TileVariables tileVariables;
+    [HideInInspector] public SceneChange sceneChange;
+    [HideInInspector] public SkinnedMeshRenderer skinnedMeshRenderer;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public SaveSystem saveSystem;
+    [HideInInspector] public CameraBehavior cameraBehavior;
+    
+
+
+
     [Header("Input Values")]
     
     [SerializeField] public int raws;
@@ -19,12 +36,37 @@ public class GridGenerator : MonoBehaviour
     [HideInInspector] public Vector3 ogPos;
     public float maxDepth = 50f;
 
+    void GetReferences()
+    {
+        player = FindObjectOfType<Player>();
+        doCoroutine = FindObjectOfType<DoCoroutine>();
+        inGameUI = FindObjectOfType<InGameUI>();
+        debugTools = FindObjectOfType<DebugTools>();
+        tileVariables = GetComponent<TileVariables>();
+        sceneChange = debugTools.GetComponent<SceneChange>();
+        animator = doCoroutine.GetComponent<Animator>();
+        saveSystem = debugTools.GetComponent<SaveSystem>();
+        cameraBehavior = FindObjectOfType<CameraBehavior>();
+        playerT = player.transform;
+        skinnedMeshRenderer = playerT.GetComponentInChildren<SkinnedMeshRenderer>();
+    }
+  
     #endregion
     void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        GetReferences();
+
         instantiateGrid = false;
-        player = FindObjectOfType<Player>().transform;
+
         GridTiles[] list = FindObjectsOfType<GridTiles>();
 
         grid = new GridTiles[raws, columns];
@@ -43,8 +85,8 @@ public class GridGenerator : MonoBehaviour
         {
             if (obj.originalPosition)
             {
-                ogPos = new Vector3(obj.transform.position.x, player.position.y, obj.transform.position.z);
-                player.position = ogPos;
+                ogPos = new Vector3(obj.transform.position.x, playerT.position.y, obj.transform.position.z);
+                playerT.position = ogPos;
             }
         }
     }
@@ -91,7 +133,6 @@ public class GridGenerator : MonoBehaviour
                 {
                     DestroyImmediate(obj.gameObject);
                 }*/
-
             }
 
             GridTiles[] list = FindObjectsOfType<GridTiles>();

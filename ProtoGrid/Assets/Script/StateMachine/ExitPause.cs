@@ -20,10 +20,10 @@ public class ExitPause : StateMachineBehaviour
     {
         if (awake)
         {
-            grid = FindObjectOfType<GridGenerator>().grid;
-            player = FindObjectOfType<Player>().transform;
-            doC = FindObjectOfType<DoCoroutine>();
-            inGameUI = FindObjectOfType<InGameUI>();
+            grid = GridGenerator.Instance.grid;
+            player = GridGenerator.Instance.player.transform;
+            doC = GridGenerator.Instance.doCoroutine;
+            inGameUI = GridGenerator.Instance.inGameUI;
             awake = false;
 
         }
@@ -38,6 +38,7 @@ public class ExitPause : StateMachineBehaviour
             {
                 //tile.lerpSpeed = 0.1f;
                 //tile.target = (int)tile.transform.position.y + 20;
+                Debug.Log(5);
                 animator.GetComponent<DoCoroutine>().startCoroutine(tile);
                 tile.currentPosY = tile.transform.position.y;
             }
@@ -73,6 +74,7 @@ public class ExitPause : StateMachineBehaviour
         //Called on last loop
         if (tile.transform.position.y >= tile.target - 0.01f)
         {
+            Debug.Log(4);
             grid[x, y].GetComponent<GridTiling>().SetDirectionalMaterial();
             tile.transform.position = new Vector3(tile.transform.position.x, tile.target, tile.transform.position.z);
             tile.pauseAnim = false;
@@ -83,7 +85,6 @@ public class ExitPause : StateMachineBehaviour
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log(1);
         inGameUI.inGameUI.SetActive(true);
         foreach (GridTiles tile in grid)
         {
@@ -94,6 +95,5 @@ public class ExitPause : StateMachineBehaviour
             tile.lerpSpeed = 0f;
 
         }
-       // grid[x, y].GetComponent<GridTiling>().SetDirectionalMaterial();
     }
 }

@@ -13,7 +13,7 @@ public class StarIndicator : MonoBehaviour
 
     private void Awake()
     {
-        inGameUi = FindObjectOfType<InGameUI>();
+        inGameUi = GridGenerator.Instance.inGameUI;
     }
 
     private void Start()

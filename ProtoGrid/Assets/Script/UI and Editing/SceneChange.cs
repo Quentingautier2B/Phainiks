@@ -20,9 +20,9 @@ public class SceneChange : MonoBehaviour
     {
 
 
-        stateMachine = GameObject.Find("StateMachine");
-        debugTools = GetComponent<DebugTools>();
-        inGameUI = FindObjectOfType<InGameUI>();
+        stateMachine = GameObject.Find("StateMachine").gameObject;
+        debugTools = FindObjectOfType<DebugTools>();
+        inGameUI = FindObjectOfType<InGameUI>(); ;
         if (!Hub)
             currentWorld = debugTools.World;
 

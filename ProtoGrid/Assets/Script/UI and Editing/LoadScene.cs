@@ -10,7 +10,7 @@ public class LoadScene : MonoBehaviour
 
     private void Start()
     {
-        debugTools = FindObjectOfType<DebugTools>();
+        debugTools = GridGenerator.Instance.debugTools;
     }
     public void SceneLoader(string yo)
     {

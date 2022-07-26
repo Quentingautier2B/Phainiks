@@ -37,7 +37,7 @@ public class CameraBehavior : MonoBehaviour
         m_Volume = Camera.main.GetComponent<PostProcessVolume>();
         m_Volume.profile.TryGetSettings<DepthOfField>(out m_DOF);
         camBehavior = transform.Find("Main Camera").GetComponent<Camera>();
-        playerPos = FindObjectOfType<Player>().transform;
+        playerPos = GridGenerator.Instance.player.transform;
         camTransform = transform.Find("Main Camera");
         Camera.main.transparencySortMode = TransparencySortMode.Orthographic;
         
@@ -47,8 +47,6 @@ public class CameraBehavior : MonoBehaviour
 
     private void Start()
     {
-/*        if (!FindObjectOfType<SceneChange>().Hub)
-        {*/
             transform.position = playerPos.position;
             zoomSlider.value = sliderValue;
             m_DOF.focusDistance.value = (sliderValue * 10) + 10;

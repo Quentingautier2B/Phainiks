@@ -9,7 +9,8 @@ public class MoveBehavior : StateMachineBehaviour
     [SerializeField] float moveSpeed;    
     [HideInInspector] public int timerValue;
     int x,y;
-    public AnimationCurve moveAnimation, landAnimation;  
+    public AnimationCurve moveAnimation, landAnimation;
+    GridGenerator gridG;
     Transform player;
     SceneChange sChange;
     GridTiles[,] grid;
@@ -36,13 +37,14 @@ public class MoveBehavior : StateMachineBehaviour
         if (awake)
         {
             endFlag = false;
-            pSRend = FindObjectOfType<SkinnedMeshRenderer>();
-            sceneChange = FindObjectOfType<SceneChange>();
-            doC = animator.GetComponent<DoCoroutine>();
-            UI = FindObjectOfType<InGameUI>();
-            grid = FindObjectOfType<GridGenerator>().grid;
-            player = FindObjectOfType<Player>().transform;
-            sChange = FindObjectOfType<SceneChange>();
+            gridG = GridGenerator.Instance;
+            pSRend = gridG.skinnedMeshRenderer;
+            sceneChange = gridG.sceneChange;
+            doC = gridG.doCoroutine;
+            UI = gridG.inGameUI;
+            grid = gridG.grid;
+            player = gridG.player.transform;
+            sChange = gridG.sceneChange;
         }
         startPos = player.position;
         startRot = player.rotation;
@@ -95,7 +97,6 @@ public class MoveBehavior : StateMachineBehaviour
             pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
             if (yFlag && ((startPos.y - 1.5f) - grid[x, y].transform.position.y == 1 || (startPos.y - 1.5f) - grid[x, y].transform.position.y == -1))
             {
-
                 doC.StartCoroutine(player.GetComponent<Player>().Lerper(startPos.y + 1.5f, grid[x, y].transform.position.y + 1.5f)) ;
                 yFlag = false;
             }

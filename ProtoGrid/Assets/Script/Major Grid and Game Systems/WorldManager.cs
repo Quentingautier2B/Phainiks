@@ -24,8 +24,9 @@ public class WorldManager : MonoBehaviour
     public Texture ActivatedStar, UnactivatedStar;
     void Start()
     {
-        grid = FindObjectOfType<GridGenerator>().grid;
-        doC = FindObjectOfType<DoCoroutine>();
+        grid = GridGenerator.Instance.grid;
+
+        doC = GridGenerator.Instance.doCoroutine;
         parent = transform.parent.gameObject;
         text = this.transform.Find("Canvas/Name").gameObject.GetComponent<TextMeshProUGUI>();
         gridTiles = parent.GetComponent<GridTiles>();
@@ -40,7 +41,6 @@ public class WorldManager : MonoBehaviour
                 world.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "" + worldname + "-" + i;               
             }
         }
-        
     }
 
     public void OpenWorld(GameObject button)
@@ -54,7 +54,6 @@ public class WorldManager : MonoBehaviour
             if (tile.gameObject != grid[(int)gridTiles.transform.position.x, (int)gridTiles.transform.position.z].gameObject)
             {
                 tile.levelTransiIndex = 100;
-
                 doC.startClose(tile, tile.tiling, LevelsOfTheWorld[int.Parse(button.name) - 1], grid[(int)gridTiles.transform.position.x, (int)gridTiles.transform.position.z].GetComponent<GridTiling>());
             }
         }
@@ -69,7 +68,9 @@ public class WorldManager : MonoBehaviour
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
         foreach (Transform child in Camera.main.transform)
+        {
             child.gameObject.GetComponent<MeshRenderer>().material = worldMat;
+        }
 
     }
 

@@ -25,10 +25,10 @@ public class PauseBehavior : StateMachineBehaviour
     {
         if (awake)
         {
-            doC = animator.GetComponent<DoCoroutine>();
-            grid = FindObjectOfType<GridGenerator>().grid;
-            player = FindObjectOfType<Player>().transform;
-            inGameUI = FindObjectOfType<InGameUI>();
+            doC = GridGenerator.Instance.doCoroutine;
+            grid = GridGenerator.Instance.grid;
+            player = GridGenerator.Instance.player.transform;
+            inGameUI = GridGenerator.Instance.inGameUI;
             awake = false;
         }
         x = (int)player.position.x;
@@ -36,7 +36,7 @@ public class PauseBehavior : StateMachineBehaviour
         Target = new Vector3(x, grid[x, y].transform.position.y + 20, y);
         LerpSpeed = slowLerpSpeed;
         gT = grid[x, y].GetComponent<GridTiling>();
-        grid[x,y].transform.Find("Renderer").GetComponent<MeshRenderer>().material =gT.mat0D;
+        grid[x,y].transform.Find("Renderer").GetComponent<MeshRenderer>().material = gT.mat0D;
         doC.startLerper();
         foreach (GridTiles tile in grid)
         {            

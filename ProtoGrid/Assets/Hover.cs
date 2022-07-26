@@ -16,7 +16,7 @@ public class Hover : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
     {
         lerping = true;
         starsVisu = Stars.transform.Find("stars").GetComponent<RectTransform>();
-        sChange = FindObjectOfType<SceneChange>();
+        sChange = GridGenerator.Instance.sceneChange;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

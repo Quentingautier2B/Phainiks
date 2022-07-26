@@ -29,11 +29,11 @@ public class DoCoroutine : MonoBehaviour
     private void Awake()
     {
         moveFlag = true;
-        gridG = FindObjectOfType<GridGenerator>();
-        sChange = FindObjectOfType<SceneChange>();
-        pSRend = FindObjectOfType<SkinnedMeshRenderer>();
-        inGameUI = FindObjectOfType<InGameUI>();
-        player = FindObjectOfType<Player>();
+        gridG = GridGenerator.Instance;
+        sChange = gridG.sceneChange;
+        pSRend = gridG.skinnedMeshRenderer;
+        inGameUI = gridG.inGameUI;
+        player = gridG.player;
         flag = true;
     }
 
@@ -63,23 +63,22 @@ public class DoCoroutine : MonoBehaviour
         yield return new WaitForEndOfFrame();
         if (x + 1 < gridG.raws && grid[x + 1, y] != null && grid[x + 1, y].walkable && grid[x + 1, y].tempoTile == 0)
         {
-
-            grid[x + 1, y].GetComponent<GridTiling>().SetDirectionalMaterial();
+            grid[x + 1, y].tiling.SetDirectionalMaterial();
         }
 
         if (y - 1 > - 1 && grid[x, y - 1] != null && grid[x, y - 1].walkable && grid[x, y - 1].tempoTile == 0)
         {
-            grid[x, y - 1].GetComponent<GridTiling>().SetDirectionalMaterial();
+            grid[x, y - 1].tiling.SetDirectionalMaterial();
         }
 
         if (y + 1 < gridG.columns && grid[x, y + 1] != null && grid[x, y + 1].walkable && grid[x, y + 1].tempoTile == 0)
         {
-            grid[x, y + 1].GetComponent<GridTiling>().SetDirectionalMaterial();
+            grid[x, y + 1].tiling.SetDirectionalMaterial();
         }
 
         if (x - 1 > -1 && grid[x - 1, y] != null && grid[x - 1, y].walkable && grid[x - 1, y].tempoTile == 0)
         {
-            grid[x - 1, y].GetComponent<GridTiling>().SetDirectionalMaterial();
+            grid[x - 1, y].tiling.SetDirectionalMaterial();
         }
     }
 
@@ -232,9 +231,6 @@ public class DoCoroutine : MonoBehaviour
         }
 
 
-
-
-        //tile.GetComponent<GridTiling>().SetDirectionalMaterial();
         tile.opening = true;
         tile.transform.position = new Vector3(tile.transform.position.x, Mathf.Lerp(tile.currentOpen, tile.targetOpen, tile.lerpSpeed), tile.transform.position.z);
         tile.lerpSpeed += Time.deltaTime * curve.Evaluate(tile.lerpSpeed) * speed;
@@ -288,15 +284,12 @@ public class DoCoroutine : MonoBehaviour
             tile.transform.position = new Vector3(tile.transform.position.x, tile.targetOpen, tile.transform.position.z);
             tile.lerpSpeed = 0f;
             tile.opening = false;
-            //UpdateAdjTiles(otherTile.GetComponent<GridTiles>(), (int)otherTile.transform.position.x, (int)otherTile.transform.position.z);
+
             tile.tiling.SetDirectionalMaterial();
             yield return new WaitForSeconds(queueWaitTime);
             inGameUI.inGameUI.SetActive(true);
             otherTile.SetDirectionalMaterial();
-            /*            if (tile.walkable)
-                        {
-                            tile.GetComponent<GridTiling>().SetDirectionalMaterial();
-                        }*/
+
         }
         else
         {

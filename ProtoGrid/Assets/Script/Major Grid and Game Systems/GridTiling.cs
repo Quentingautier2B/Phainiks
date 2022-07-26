@@ -40,8 +40,8 @@ public class GridTiling : MonoBehaviour
     private void Awake()
     {
         TempoTile = transform.Find("TempoTile").gameObject;
-        gridG = FindObjectOfType<GridGenerator>();
-        t = FindObjectOfType<TileVariables>();
+        gridG = GridGenerator.Instance;
+        t = gridG.tileVariables;
         grid = gridG.grid;
         tile = GetComponent<GridTiles>();
         mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
@@ -85,6 +85,7 @@ public class GridTiling : MonoBehaviour
     {
         TempoTile = transform.Find("TempoTile").gameObject;
         tile = GetComponent<GridTiles>();
+        //print(3);
         t = FindObjectOfType<TileVariables>();
 
 
@@ -92,19 +93,20 @@ public class GridTiling : MonoBehaviour
         {
             TempoTile.SetActive(true);
         }
-        else 
+        else
         {
             TempoTile.SetActive(false);
         }
 
         if (tile.walkable && refreshRend)
         {
+            //print(1);
             gridG = FindObjectOfType<GridGenerator>();
             gridG.generateGrid();
             grid = gridG.grid;
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();
             //meshF = transform.Find("Renderer").GetComponent<MeshFilter>().mesh;
-            if(tile.tempoTile == 0)
+            if (tile.tempoTile == 0)
                 SetDirectionalMaterial();
 
             TempoDecorMaterial();
@@ -113,9 +115,11 @@ public class GridTiling : MonoBehaviour
         else
             refreshRend = false;
 
-        if (tile.walkable && (tile.tempoTile != 0 || tile.crumble)  && refreshRendTempo)
+        if (tile.walkable && (tile.tempoTile != 0 || tile.crumble) && refreshRendTempo)
         {
-            gridG = FindObjectOfType<GridGenerator>();
+            
+            gridG = GridGenerator.Instance;
+
             gridG.generateGrid();
             grid = gridG.grid;
             mesh = transform.Find("Renderer").GetComponent<MeshRenderer>();

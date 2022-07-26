@@ -42,7 +42,9 @@ public class SaveSystem : MonoBehaviour
             levelScore = new Dictionary<string, int>();
             levelScore.Add(SceneManager.GetActiveScene().name, 0);
         }
-        levelScore[SceneManager.GetActiveScene().name] = score;
+        else if(score > levelScore[SceneManager.GetActiveScene().name])
+            levelScore[SceneManager.GetActiveScene().name] = score;
+
         Saver.SaveScore(this);
     }
 

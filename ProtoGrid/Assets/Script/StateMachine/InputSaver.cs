@@ -15,8 +15,8 @@ public class InputSaver : MonoBehaviour
     SceneChange sceneChange;
     private void Awake()
     {
-        cam = FindObjectOfType<CameraBehavior>();
-        sceneChange = FindObjectOfType<SceneChange>();
+        cam = GridGenerator.Instance.cameraBehavior;
+        sceneChange = GridGenerator.Instance.sceneChange;
     }
 
     private void Start()

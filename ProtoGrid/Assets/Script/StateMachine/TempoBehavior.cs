@@ -34,13 +34,13 @@ public class TempoBehavior : StateMachineBehaviour
     {
         if (awake)
         {
-            player = FindObjectOfType<Player>();
-            gridG = FindObjectOfType<GridGenerator>();
-            doC = FindObjectOfType<DoCoroutine>();
-            debugTools = FindObjectOfType<DebugTools>();
-            grid = FindObjectOfType<GridGenerator>().grid;
-            t = FindObjectOfType<TileVariables>();
-            UI = FindObjectOfType<InGameUI>();
+            gridG = GridGenerator.Instance;
+            player = gridG.player;
+            doC = gridG.doCoroutine;
+            debugTools = gridG.debugTools;
+            grid = gridG.grid;
+            t = gridG.tileVariables;
+            UI = gridG.inGameUI;
             awake = false;
         }
  
@@ -308,7 +308,9 @@ public class TempoBehavior : StateMachineBehaviour
             foreach (GridTiles tile in grid)
             {
                 if (tile.tempoTile == 1)
-                    redFlager = LerpPos(tile, redFlager, t.redFlag, tile.GetComponent<GridTiling>(), "Tile Rouge");                
+                {
+                    redFlager = LerpPos(tile, redFlager, t.redFlag, tile.tiling, "Tile Rouge");                
+                }
             }
            
         }
@@ -386,15 +388,11 @@ public class TempoBehavior : StateMachineBehaviour
                     gT.SetDirectionalMaterial();
                     UpdateAdjacentTileColonnes(grid[x, y], (int)grid[x, y].transform.position.x, (int)grid[x, y].transform.position.z, gT);
                     grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, Mathf.Lerp(grid[x, y].transform.position.y, grid[x, y].target, tempoTileSpeed * Time.deltaTime), grid[x, y].transform.position.z);
-                        /* tile.transform.Find("DirectionTempoD").GetComponent<ParticleSystem>().Stop();
-                        tile.transform.Find("DirectionTempoU").GetComponent<ParticleSystem>().Play();*/
                     if (grid[x, y].transform.position.y <= grid[x, y].target + 0.01f)
                     {
                         grid[x, y].opening = false;
-                        //debugTools.greenMusic.setVolume(0);
                         grid[x, y].transform.position = new Vector3(grid[x, y].transform.position.x, grid[x, y].target, grid[x, y].transform.position.z);
                         gT.SetDirectionalMaterial();
-                        // greenTempoTileFlag = true;
                         grid[x, y].crumbleBool = false;
                         crumbleFlager = false;
                     }
