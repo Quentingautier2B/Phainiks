@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PauseBehavior : StateMachineBehaviour
 {
+    #region
     bool awake = true;
     InGameUI inGameUI;
     GameObject PauseMenu;
@@ -18,6 +19,7 @@ public class PauseBehavior : StateMachineBehaviour
     bool lerping;
     DoCoroutine doC;
     RectTransform pauseUI;
+    #endregion
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -60,11 +62,6 @@ public class PauseBehavior : StateMachineBehaviour
                 doC.pauseTileMovement(tile, gT);         
         }
     }
-
-
-    
-
-
 
     public void OnStateExit(Animator animator, int stateMachinePathHash)
     {

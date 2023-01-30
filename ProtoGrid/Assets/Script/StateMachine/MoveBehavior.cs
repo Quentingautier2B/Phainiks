@@ -25,6 +25,8 @@ public class MoveBehavior : StateMachineBehaviour
     SceneChange sceneChange;
     SkinnedMeshRenderer pSRend;
     Quaternion startRot, endRot;
+    bool yFlag;
+    bool endFlag;
     #endregion
 
 
@@ -33,6 +35,7 @@ public class MoveBehavior : StateMachineBehaviour
         lerper = 0;
         if (awake)
         {
+            endFlag = false;
             pSRend = FindObjectOfType<SkinnedMeshRenderer>();
             sceneChange = FindObjectOfType<SceneChange>();
             doC = animator.GetComponent<DoCoroutine>();
@@ -43,6 +46,7 @@ public class MoveBehavior : StateMachineBehaviour
         }
         startPos = player.position;
         startRot = player.rotation;
+        yFlag = true;
         endRot = Quaternion.AngleAxis(90, player.forward);
         canMove = true;
         if (animator.GetBool("Rewind"))
@@ -74,7 +78,6 @@ public class MoveBehavior : StateMachineBehaviour
 
     }
 
-
     void Move(Animator anim, AnimatorStateInfo stateInfo)
     {
         if (anim.GetBool("Rewind") && flag == true)
@@ -85,11 +88,17 @@ public class MoveBehavior : StateMachineBehaviour
         }
 
         float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(x, y));
-        if (/*distance > 0*/ lerper < 1 && grid[x, y].walkable)
+        if (lerper < 1 && grid[x, y].walkable)
         {
             lerper += Time.deltaTime * moveSpeed;
             pSRend.transform.localPosition = new Vector3(0,moveAnimation.Evaluate(lerper) * 1, 0);
             pSRend.transform.rotation = Quaternion.Lerp(startRot, endRot, lerper);
+            if (yFlag && ((startPos.y - 1.5f) - grid[x, y].transform.position.y == 1 || (startPos.y - 1.5f) - grid[x, y].transform.position.y == -1))
+            {
+
+                doC.StartCoroutine(player.GetComponent<Player>().Lerper(startPos.y + 1.5f, grid[x, y].transform.position.y + 1.5f)) ;
+                yFlag = false;
+            }
             if(lerper <= .5f)
             {
                 pSRend.SetBlendShapeWeight(0,Mathf.Lerp(0,100,lerper));
@@ -115,7 +124,7 @@ public class MoveBehavior : StateMachineBehaviour
             player.position = new Vector3(x, player.position.y , y);
             if (anim.GetBool("Rewind"))
             {
-                UI.timerValue++;
+                //UI.timerValue++;
             }
             else
             {
@@ -147,15 +156,13 @@ public class MoveBehavior : StateMachineBehaviour
 
     void TileEffectOnMove(int x, int y, Animator anim)
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Walk");
-        //timerValue++;
         if (sceneChange.Hub)
         {
             if (grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].World > 0)
             {
                 grid[anim.GetInteger("PreviousX"), anim.GetInteger("PreviousY")].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(false);
             }
-            if (grid[x, y].World > 0)
+            if (grid[x, y].World > 0 && grid[x, y].gameObject.transform.Find("World/CanvasCam"))
             {
                 grid[x, y].gameObject.transform.Find("World/CanvasCam").gameObject.SetActive(true);
             }
@@ -167,10 +174,15 @@ public class MoveBehavior : StateMachineBehaviour
 
             foreach (GridTiles tile in grid)
             {
-                if(tile.levelTransiIndex != grid[x, y].levelTransiIndex)
+                if (!endFlag)
+                {
+                    endFlag = true;
+                    doC.StartCoroutine(doC.QueueForOg(grid[x, y].transform.position.y, 0, grid[x, y].transform, grid[x,y]));
+                }
+
+                if (tile.levelTransiIndex != grid[x, y].levelTransiIndex)
                 {
                     tile.levelTransiIndex = 100;
-                    
                     doC.startClose(tile, tile.tiling, grid[x,y].levelTransiIndex, grid[x,y].GetComponent<GridTiling>());
                 }
             }
@@ -199,9 +211,12 @@ public class MoveBehavior : StateMachineBehaviour
             doC.StartCoroutine(doC.tpScaling(doC.previousTP, 0, 0.7f, 0, 2));
         }
 
-
-        if (grid[x, y].key != 0)
-            KeyBehavior(grid[x, y]);
+        if (anim.GetBool("Rewind") && grid[previousX, previousY].key != 0)
+        {
+            KeyBehavior(grid[previousX, previousY], anim);
+        }  
+        else if (grid[x, y].key != 0)
+            KeyBehavior(grid[x, y], anim);
 
         if (anim.GetBool("Rewind") && grid[previousX, previousY].crumble)
         {
@@ -220,34 +235,35 @@ public class MoveBehavior : StateMachineBehaviour
                 grid[x, y].crumbleUp = true;
         }
 
-        if (anim.GetBool("Rewind"))
+        /*if (anim.GetBool("Rewind"))
         { 
             if (grid[previousX, previousY].key !=0)
             {
                 KeyBehavior(grid[previousX, previousY]);
             }
-        }
+        }*/
 
-        if(grid[previousX,previousY].key != 0)
-        {
+        if (grid[previousX,previousY].key != 0)
+        {   
             grid[previousX, previousY].transform.Find("Key").position += new Vector3(0, 0.05f, 0);
         }
     }
 
-
-    void KeyBehavior(GridTiles tile)
+    void KeyBehavior(GridTiles tile, Animator anim)
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/World/GetKey");
+       if ((anim.GetBool("Rewind") && grid[x,y].key !=0) || !anim.GetBool("Rewind"))
+            tile.transform.Find("Key").position -= new Vector3(0, 0.05f, 0);
 
-        tile.transform.Find("Key").position -= new Vector3(0, 0.05f, 0);
-
-
-        //tile.transform.Find("Key").gameObject.SetActive(false);
-        foreach (GridTiles t in grid)
+        if (!anim.GetBool("Rewind") || !(grid[x, y].key != 0))
         {
-            if(t.door == tile.key && t.door > 0)
+            //tile.transform.Find("Key").gameObject.SetActive(false);
+            foreach (GridTiles t in grid)
             {
-               doC.startClose(t, t.tiling, t.levelTransiIndex, t.GetComponent<GridTiling>());
+                if(t.door == tile.key && t.door > 0)
+                {
+                   doC.startClose(t, t.tiling, t.levelTransiIndex, t.GetComponent<GridTiling>());
+                }
             }
         }
     }

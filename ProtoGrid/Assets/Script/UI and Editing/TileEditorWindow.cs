@@ -4,10 +4,12 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
+using UnityEngine.SceneManagement;
 
 
 public class TileEditorWindow : EditorWindow
 {
+    #region variables
     GridGenerator gridG;
     bool tileSelected;
 
@@ -24,9 +26,7 @@ public class TileEditorWindow : EditorWindow
     int TeleporterTarget;
     int Raws;
     int Columns;
-
-
-
+    #endregion
 
     [MenuItem("Window/Tiling")]
     public static void ShowWindow()
@@ -42,25 +42,28 @@ public class TileEditorWindow : EditorWindow
     private void OnGUI()
     {
         
+        if(SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontStyle = FontStyle.Bold;
+            style.fontSize = 22;
+            style.normal.textColor = Color.yellow;
+            GUILayout.Label("Grid Generation", style);
 
-        GUIStyle style = new GUIStyle();
-        style.fontStyle = FontStyle.Bold;
-        style.fontSize = 22;
-        style.normal.textColor = Color.yellow;  
-        GUILayout.Label("Grid Generation", style);
+            GridGeneration();
 
-        GridGeneration();
+            EditorGUILayout.Space(30);
 
-        EditorGUILayout.Space(30);
+            GUILayout.Label("Tile Management", style);
 
-        GUILayout.Label("Tile Management", style);
-        
-        MatRefresh();
+            MatRefresh();
+        }
 
-        AssignVariableValue();
+
+/*        AssignVariableValue();
         DrawVariablesInWindow();
-        UpdateValues();
-        EditorUtility.SetDirty(gridG);
+        UpdateValues();*/
+       // EditorUtility.SetDirty(gridG);
     }
 
     void GridGeneration()
@@ -73,13 +76,13 @@ public class TileEditorWindow : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Raws");
-        Raws = EditorGUILayout.IntSlider(Raws, 1, 10);
+        Raws = EditorGUILayout.IntSlider(Raws, 1, 100);
         EditorGUILayout.EndHorizontal();
 
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Columns");
-        Columns = EditorGUILayout.IntSlider(Columns, 1, 10);
+        Columns = EditorGUILayout.IntSlider(Columns, 1, 100);
         EditorGUILayout.EndHorizontal();
 
         gridG.raws = Raws;
@@ -103,7 +106,7 @@ public class TileEditorWindow : EditorWindow
             }
         }
     }
-
+/*
     void AssignVariableValue()
     {
         foreach (GameObject obj in Selection.gameObjects)
@@ -347,11 +350,11 @@ public class TileEditorWindow : EditorWindow
                     g.crumble = Crumble;
                 }
 
-               /* if (g.LevelTransiIndexC != LevelTransiIndex)
+               *//* if (g.LevelTransiIndexC != LevelTransiIndex)
                 {
                     g.LevelTransiIndexC = LevelTransiIndex;
                     g.levelTransiIndex = LevelTransiIndex / 10;
-                }*/
+                }*//*
 
                 if (g.TempoTileC != TempoTile)
                 {
@@ -388,6 +391,8 @@ public class TileEditorWindow : EditorWindow
             }
         }
     }
+*/
+
 }
 #endif
 

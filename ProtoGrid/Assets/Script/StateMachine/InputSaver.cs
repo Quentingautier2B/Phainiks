@@ -68,9 +68,125 @@ public class InputSaver : MonoBehaviour
             }
             SavedInput.Add(directionSwipe);
         }
-       
 
-      
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            directionSwipe = new Vector2(1, -1);
+            if (sceneChange.Hub)
+            {
+                directionSwipe = Quaternion.AngleAxis(-45, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 0)
+            {
+                //directionSwipe = directionSwipe;
+            }
+            else if (cam.rotateMode == 1)
+            {
+                directionSwipe = Quaternion.AngleAxis(90, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 2)
+            {
+                directionSwipe = Quaternion.AngleAxis(180, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 3)
+            {
+                directionSwipe = Quaternion.AngleAxis(270, -Vector3.forward) * directionSwipe;
+            }
+            else
+            {
+                Debug.LogError("Prob avec l'angle de swipe, modulo pas correct");
+            }
+            SavedInput.Add(directionSwipe);
+
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            directionSwipe = new Vector2(-1, 1);
+            if (sceneChange.Hub)
+            {
+                directionSwipe = Quaternion.AngleAxis(-45, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 0)
+            {
+                //directionSwipe = directionSwipe;
+            }
+            else if (cam.rotateMode == 1)
+            {
+                directionSwipe = Quaternion.AngleAxis(90, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 2)
+            {
+                directionSwipe = Quaternion.AngleAxis(180, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 3)
+            {
+                directionSwipe = Quaternion.AngleAxis(270, -Vector3.forward) * directionSwipe;
+            }
+            else
+            {
+                Debug.LogError("Prob avec l'angle de swipe, modulo pas correct");
+            }
+            SavedInput.Add(directionSwipe);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            directionSwipe = new Vector2(1, 1);
+            if (sceneChange.Hub)
+            {
+                directionSwipe = Quaternion.AngleAxis(-45, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 0)
+            {
+                //directionSwipe = directionSwipe;
+            }
+            else if (cam.rotateMode == 1)
+            {
+                directionSwipe = Quaternion.AngleAxis(90, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 2)
+            {
+                directionSwipe = Quaternion.AngleAxis(180, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 3)
+            {
+                directionSwipe = Quaternion.AngleAxis(270, -Vector3.forward) * directionSwipe;
+            }
+            else
+            {
+                Debug.LogError("Prob avec l'angle de swipe, modulo pas correct");
+            }
+            SavedInput.Add(directionSwipe);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            directionSwipe = new Vector2(-1, -1);
+            if (sceneChange.Hub)
+            {
+                directionSwipe = Quaternion.AngleAxis(-45, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 0)
+            {
+                //directionSwipe = directionSwipe;
+            }
+            else if (cam.rotateMode == 1)
+            {
+                directionSwipe = Quaternion.AngleAxis(90, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 2)
+            {
+                directionSwipe = Quaternion.AngleAxis(180, -Vector3.forward) * directionSwipe;
+            }
+            else if (cam.rotateMode == 3)
+            {
+                directionSwipe = Quaternion.AngleAxis(270, -Vector3.forward) * directionSwipe;
+            }
+            else
+            {
+                Debug.LogError("Prob avec l'angle de swipe, modulo pas correct");
+            }
+            SavedInput.Add(directionSwipe);
+        }
+
 
         if (clickBool)
         {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5720460999537975471}
   - component: {fileID: 5720460999537975470}
   - component: {fileID: 3686151566429806557}
+  - component: {fileID: 7938148210896157002}
   m_Layer: 6
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2013b0f727eb8478c44b2e8c33fd33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelIndex: 0
+  World: 0
   debugModOn: 0
   System: {fileID: 5144612415546772587, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
   SecondarySystem: {fileID: 836482750424393024, guid: 93ed585577b1267489bd8b8ce2aac945, type: 3}
@@ -63,6 +66,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hub: 0
+  HubBackgroundTuto: {fileID: 0}
+  HubBackgroundWorld1: {fileID: 0}
+  HubBackgroundWorld2: {fileID: 0}
+  HubBackgroundWorld3: {fileID: 0}
   endAnimation:
     serializedVersion: 2
     m_Curve:
@@ -89,3 +96,15 @@ MonoBehaviour:
     m_RotationOrder: 4
   endLerper: 0
   loadScene: 0
+--- !u!114 &7938148210896157002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720460999537975469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cf8ebe94010a74d890a52e0473e149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
