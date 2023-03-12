@@ -10,6 +10,7 @@ public class Temporaire : MonoBehaviour
     [SerializeField] List<GameObject> CacheText;
 
     bool OnOff;
+    bool CursorVisible;
 
     void Start()
     {
@@ -18,7 +19,17 @@ public class Temporaire : MonoBehaviour
 
     void Update()
     {
-        Cursor.visible = false;
+        if (Input.GetKeyDown(KeyCode.P) && !CursorVisible)
+        {
+            Cursor.visible = true;
+            CursorVisible = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.P) && CursorVisible)
+        {
+            Cursor.visible = false;
+            CursorVisible = false;
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.O) && !OnOff)
         {
