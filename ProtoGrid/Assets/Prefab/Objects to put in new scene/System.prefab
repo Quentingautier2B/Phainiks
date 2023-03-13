@@ -2525,7 +2525,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aebafea4796aee34bbad5043c9320dc6, type: 2}
+  - {fileID: 2100000, guid: 5e19c2cc21b9a0347a74306675aa933e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5254,7 +5254,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0.0035722852, z: 4.5905e-41, w: 1e-45}
+  m_BoundingSphereOverride: {x: 0, y: 2.3510647e-38, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -7189,11 +7189,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 691397173153258454, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
       propertyPath: raws
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 691397173153258454, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
       propertyPath: columns
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 691397173153258454, guid: 6d4f130f7eeda424c97d85417e81a6ce, type: 3}
       propertyPath: instantiateGrid
@@ -7307,19 +7307,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8535535
+      value: -0.35355324
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.35355338
+      value: -0.14644654
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.35355338
+      value: 0.8535535
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1464466
+      value: -0.3535534
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7327,7 +7327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686016, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -7340,6 +7340,10 @@ PrefabInstance:
     - target: {fileID: 2379388772534686018, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2379388772534686019, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
+      propertyPath: cheatAllow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2379388772534686019, guid: 11e72c2ffbd558c4aab0b9c99a44efef, type: 3}
       propertyPath: zoomSlider
