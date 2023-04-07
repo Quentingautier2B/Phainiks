@@ -235,10 +235,12 @@ public class CameraBehavior : MonoBehaviour
             else if (ZoomLerp) 
             {
                 zoomSlider.value += 0.1f * SpeedOfLerp * Time.deltaTime;
+                if (ZoomSlider.value == 1) ZoomLerp = false; CaZoom = false;
             }
             else if (DezoomLerp)
             {
                 zoomSlider.value -= 0.1f * SpeedOfLerp * Time.deltaTime;
+                if (ZoomSlider.value == 0) DezoomLerp = false; CaZoom = false;
             }
 
         }
