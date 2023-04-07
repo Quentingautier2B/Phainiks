@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641472, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.49641466, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5114,6 +5114,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5029013787020717017, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5144612415546772587, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_Name
       value: System
@@ -5187,6 +5191,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7270791700130788441, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376927831592714212, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
+      propertyPath: cheatAllow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589281724937859538, guid: bd20c9336ddf9d2429b24b282af4564a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

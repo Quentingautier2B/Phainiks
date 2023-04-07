@@ -54,10 +54,10 @@ public class CameraBehavior : MonoBehaviour
 
     private void Start()
     {
-            transform.position = playerPos.position;
-            zoomSlider.value = sliderValue;
-            m_DOF.focusDistance.value = (sliderValue * 10) + 10;
-            camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, (sliderValue * -45) - 15);     
+        transform.position = playerPos.position;
+        zoomSlider.value = sliderValue;
+        m_DOF.focusDistance.value = (sliderValue * 10) + 10;
+        camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, (sliderValue * -45) - 15);     
     }
 
 
