@@ -244,12 +244,17 @@ public class GridTiles : MonoBehaviour
         {
             if(tempoTile != 0)
             {
-
+                
                 
             }
             var col = rend.material.color;
             col.a = Mathf.Lerp(col.a, 0, Time.deltaTime*fadeInSpeed);
             rend.material.color = col;
+        }
+
+        if (invisible)
+        {
+            rend.enabled = false;
         }
     }
     #endregion

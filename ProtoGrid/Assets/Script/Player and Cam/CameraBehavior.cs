@@ -25,7 +25,7 @@ public class CameraBehavior : MonoBehaviour
 
     #endregion
     public Slider zoomSlider;
-    float zoomLerp;
+    float zoomLerpValue;
     bool zoomBool;
     PostProcessVolume m_Volume;
     DepthOfField m_DOF;
@@ -36,7 +36,11 @@ public class CameraBehavior : MonoBehaviour
 
     public bool CaTourne = false;
     public bool LeftLerp, RightLerp;
+    public bool CaZoom = false;
+    public bool ZoomLerp, DezoomLerp;
     public float SpeedOfLerp = 1;
+
+    public Slider ZoomSlider;
 
 
     private void Awake()
@@ -84,11 +88,11 @@ public class CameraBehavior : MonoBehaviour
 
     IEnumerator valueChanged(float startPos, float DOFstart)
     {
-        zoomLerp += Time.deltaTime;
-        camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, Mathf.Lerp(startPos, (zoomSlider.value * -45) - 15, zoomLerp));
+        zoomLerpValue += Time.deltaTime;
+        camTransform.localPosition = new Vector3(camTransform.localPosition.x, camTransform.localPosition.y, Mathf.Lerp(startPos, (zoomSlider.value * -45) - 15, zoomLerpValue));
         
-        m_DOF.focusDistance.value = Mathf.Lerp(DOFstart, (zoomSlider.value * 10) + 10, zoomLerp);
-        if (zoomLerp >= 1)
+        m_DOF.focusDistance.value = Mathf.Lerp(DOFstart, (zoomSlider.value * 10) + 10, zoomLerpValue);
+        if (zoomLerpValue >= 1)
         {
             //zoomLerp = 0;
             zoomBool = false;
@@ -139,37 +143,41 @@ public class CameraBehavior : MonoBehaviour
 
         if (cheatAllow)
         {
-            if (Input.GetKeyDown(KeyCode.Keypad4))
-            {
-                if (CaTourne && LeftLerp == true)
+
+            if (!CaZoom)
+            { 
+                if (Input.GetKeyDown(KeyCode.Keypad4))
                 {
-                    CaTourne = false;
-                    LeftLerp = false;
-                }
-                else
-                {
-                    RightLerp = false;
-                    LeftLerp = true;
-                    CaTourne = true;
-                }
+                    if (CaTourne && LeftLerp == true)
+                    {
+                        CaTourne = false;
+                        LeftLerp = false;
+                    }
+                    else
+                    {
+                        RightLerp = false;
+                        LeftLerp = true;
+                        CaTourne = true;
+                    }
                 
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad6))
-            {
-                if (CaTourne && RightLerp == true)
-                {
-                    CaTourne = false;
-                    RightLerp = false;
                 }
-                else
+                else if (Input.GetKeyDown(KeyCode.Keypad6))
                 {
-                    LeftLerp = false;
-                    RightLerp = true;
-                    CaTourne = true;
+                    if (CaTourne && RightLerp == true)
+                    {
+                        CaTourne = false;
+                        RightLerp = false;
+                    }
+                    else
+                    {
+                        LeftLerp = false;
+                        RightLerp = true;
+                        CaTourne = true;
+                    }
                 }
             }
 
-            if (CaTourne)
+            if (CaTourne || CaZoom)
             {
                 if(Input.GetKeyDown(KeyCode.KeypadPlus))
                 {
@@ -183,16 +191,56 @@ public class CameraBehavior : MonoBehaviour
                     }
                 }
             }
+
+            if(!CaTourne)
+            {
+                if(Input.GetKeyDown(KeyCode.Keypad8))
+                {
+                    if (CaZoom && ZoomLerp == true)
+                    {
+                        CaTourne = false;
+                        ZoomLerp = false;
+                    }
+                    else
+                    {
+                        DezoomLerp = false;
+                        ZoomLerp = true;
+                        CaZoom = true;
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    if (CaZoom && DezoomLerp == true)
+                    {
+                        CaTourne = false;
+                        DezoomLerp = false;
+                    }
+                    else
+                    {
+                        ZoomLerp = false;
+                        DezoomLerp = true;
+                        CaZoom = true;
+                    }
+                }
+            }
             
             if (LeftLerp)
             {
                 CamLerp(1);
             }
-
-            if (RightLerp)
+            else if (RightLerp)
             {
                 CamLerp(-1);
             }
+            else if (ZoomLerp) 
+            {
+                zoomSlider.value += 0.1f * SpeedOfLerp * Time.deltaTime;
+            }
+            else if (DezoomLerp)
+            {
+                zoomSlider.value -= 0.1f * SpeedOfLerp * Time.deltaTime;
+            }
+
         }
 
     }
